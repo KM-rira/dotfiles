@@ -236,7 +236,7 @@ endif
 
 " 行番号表示
 set number
-highlight LineNr ctermfg=black ctermbg=none
+highlight LineNr ctermfg=34 ctermbg=240
 "カーソルの色変更
 "highlight Cursor guifg=white guibg=red
 highlight Cursor ctermfg=white ctermbg=red
