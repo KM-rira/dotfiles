@@ -65,25 +65,28 @@
                 "guid": "{6582cd59-b8bf-5d85-834c-fce6af461b8d}",
                 "hidden": false,
                 "name": "Ubuntu-23.04-gui1",
+                "cursorColor": "#FE9B9B",
+                "background": "#FAEBAB",
+                "foreground": "#070707",
                 "source": "Windows.Terminal.Wsl"
             },
             {
-                "backgroundImage": "C:\\Users\\tomat\\OneDrive\\\u753b\u50cf\\\u30b9\u30af\u30ea\u30fc\u30f3\u30b7\u30e7\u30c3\u30c8\\\u30b9\u30af\u30ea\u30fc\u30f3\u30b7\u30e7\u30c3\u30c8 2023-08-06 195258.png",
-                "colorScheme": "Solarized Dark",
-                "cursorColor": "#f6bd67",
+                "background": "#FAEBAB",
+                "backgroundImage": null,
+                "cursorColor": "#FE9B9B",
                 "cursorShape": "filledBox",
                 "experimental.retroTerminalEffect": false,
                 "font": 
                 {
                     "face": "HG\u660e\u671dB"
                 },
+                "foreground": "#070707",
                 "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
                 "hidden": false,
                 "name": "Git Bash",
-                "opacity": 90,
+                "opacity": 100,
                 "source": "Git",
-                "useAcrylic": true,
-                "foreground": "#070707"
+                "useAcrylic": false
             }
         ]
     },
@@ -106,6 +109,29 @@
             "foreground": "#CCCCCC",
             "green": "#13A10E",
             "name": "Campbell",
+            "purple": "#881798",
+            "red": "#C50F1F",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#C19C00"
+        },
+        {
+            "background": "#0C0C0C",
+            "black": "#0C0C0C",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#3B78FF",
+            "brightCyan": "#61D6D6",
+            "brightGreen": "#16C60C",
+            "brightPurple": "#B4009E",
+            "brightRed": "#E74856",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#7d710c",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#CCCCCC",
+            "green": "#13A10E",
+            "name": "Campbell2",
             "purple": "#881798",
             "red": "#C50F1F",
             "selectionBackground": "#FFFFFF",

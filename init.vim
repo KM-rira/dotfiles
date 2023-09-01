@@ -85,7 +85,7 @@ set listchars=tab:^\ ,trail:~
 " コマンドラインの履歴を10000件保存する
 set history=10000
 " コメントの色を水色
-hi Comment ctermfg=3
+hi Comment ctermfg=None
 " 入力モードでTabキー押下時に半角スペースを挿入
 set expandtab
 " インデント幅
@@ -138,10 +138,6 @@ set ambiwidth=double
 set breakindent
 " 折り返したときの追加のインデントの深さを指定する
 set breakindentopt=shift:0
-" アンダーラインを引く(color terminal)
-highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
-" アンダーラインを引く(gui)
-highlight CursorLine gui=underline guifg=NONE guibg=NONE
 
 " auto reload .vimrc
 augroup source-vimrc
@@ -211,7 +207,7 @@ command! Pu PlugUpdate
 command! Pc PlugClean
 command! Tr terminal
 command! Nt NERDTree
-command! Vimrc source $MYVIMRC
+command! Re source $MYVIMRC
 nnoremap dx dd
 nnoremap dd "_dd
 tnoremap <C-j> <C-\><C-n>
@@ -243,7 +239,7 @@ function! s:RunCurrentFile()
     endif
 endfunction
 "---------------------------------------
-" カラースキーム
+" カラースキーム　　
 "---------------------------------------
 hi clear
 if exists("syntax_on")
@@ -262,54 +258,62 @@ highlight LineNr ctermfg=34 ctermbg=240
 "カーソルの色変更
 "highlight Cursor guifg=white guibg=red
 highlight Cursor ctermfg=white ctermbg=red
-"hi default Normal ctermfg=red ctermbg=red
-highlight CursorLine ctermbg=Black
-highlight CursorLine ctermfg=Blue
+set cursorline
+highlight CursorLine cterm=NONE ctermbg=white ctermfg=NONE gui=NONE guibg=lightgrey guifg=NONE
 
 " 初期状態はcursorlineを表示しない
 " 以下の一行は必ずcolorschemeの設定後に追加すること
-hi clear CursorLine
-
-" 'cursorline' を必要な時にだけ有効にする
-" http://d.hatena.ne.jp/thinca/20090530/1243615055
-" を少し改造、number の highlight は常に有効にする
-augroup vimrc-auto-cursorline
-  autocmd!
-  autocmd CursorMoved,CursorMovedI * call s:auto_cursorline('CursorMoved')
-  autocmd CursorHold,CursorHoldI * call s:auto_cursorline('CursorHold')
-  autocmd WinEnter * call s:auto_cursorline('WinEnter')
-  autocmd WinLeave * call s:auto_cursorline('WinLeave')
-
-  setlocal cursorline
-  hi clear CursorLine
-
-  let s:cursorline_lock = 0
-  function! s:auto_cursorline(event)
-    if a:event ==# 'WinEnter'
-      setlocal cursorline
-      hi CursorLine term=underline cterm=underline guibg=Grey90 " ADD
-      let s:cursorline_lock = 2
-    elseif a:event ==# 'WinLeave'
-      setlocal nocursorline
-      hi clear CursorLine " ADD
-    elseif a:event ==# 'CursorMoved'
-      if s:cursorline_lock
-        if 1 < s:cursorline_lock
-          let s:cursorline_lock = 1
-        else
-          " setlocal nocursorline
-          hi clear CursorLine " ADD
-          let s:cursorline_lock = 0
-        endif
-      endif
-    elseif a:event ==# 'CursorHold'
-      " setlocal cursorline
-      hi CursorLine term=underline cterm=underline guibg=Grey90 " ADD
-      let s:cursorline_lock = 1
-    endif
-  endfunction
-augroup END
+"#hi clear CursorLine
+"
+"" 'cursorline' を必要な時にだけ有効にする
+"" http://d.hatena.ne.jp/thinca/20090530/1243615055
+"" を少し改造、number の highlight は常に有効にする
+"#augroup vimrc-auto-cursorline
+"#  autocmd!
+"#  autocmd CursorMoved,CursorMovedI * call s:auto_cursorline('CursorMoved')
+"#  autocmd CursorHold,CursorHoldI * call s:auto_cursorline('CursorHold')
+"#  autocmd WinEnter * call s:auto_cursorline('WinEnter')
+"#  autocmd WinLeave * call s:auto_cursorline('WinLeave')
+"#
+"#  setlocal cursorline
+"#  hi clear CursorLine
+"#
+"#  let s:cursorline_lock = 0
+"#  function! s:auto_cursorline(event)
+"#    if a:event ==# 'WinEnter'
+"#      setlocal cursorline
+"#      hi CursorLine term=underline cterm=underline guibg=Grey90 " ADD
+"#      let s:cursorline_lock = 2
+"#    elseif a:event ==# 'WinLeave'
+"#      setlocal nocursorline
+"#      hi clear CursorLine " ADD
+"#    elseif a:event ==# 'CursorMoved'
+"#      if s:cursorline_lock
+"#        if 1 < s:cursorline_lock
+"#          let s:cursorline_lock = 1
+"#        else
+"#          " setlocal nocursorline
+"#          hi clear CursorLine " ADD
+"#          let s:cursorline_lock = 0
+"#        endif
+"#      endif
+"#    elseif a:event ==# 'CursorHold'
+"#      " setlocal cursorline
+"#      hi CursorLine term=underline cterm=underline guibg=Grey90 " ADD
+"#      let s:cursorline_lock = 1
+"#    endif
+"#  endfunction
+"#augroup END
 
 hi CursorLineNr term=bold   cterm=NONE ctermfg=228 ctermbg=240
 " 列を強調表示
 set cursorcolumn
+highlight ZenkakuSpace cterm=underline ctermfg=red guibg=blue
+match ZenkakuSpace /　/
+
+set hlsearch
+highlight Search ctermfg=NONE ctermbg=215 cterm=NONE guifg=NONE guibg=#FFA500
+autocmd CursorMoved * if &hlsearch | silent! execute 'nohlsearch' | let @/ = '\<' . expand('<cword>') . '\>' | set hlsearch | endif
+
+
+autocmd VimEnter * NERDTree | wincmd l
