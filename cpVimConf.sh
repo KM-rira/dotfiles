@@ -6,7 +6,7 @@
 # 環境によって適宜変更
 # cp ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json ~/settings.json
 
-#OS=$(uname)
+OS=$(uname)
 
 case $OS in
     'Linux')

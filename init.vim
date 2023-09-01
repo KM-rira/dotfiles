@@ -116,6 +116,8 @@ set title
 set number
 " ヤンクでクリップボードにコピー
 "set clipboard=unnamed,autoselect
+" オートインデント
+set autoindent
 " Escの2回押しでハイライト消去
 nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
 " シンタックスハイライト
@@ -128,6 +130,18 @@ set whichwrap=b,s,h,l,<,>,[,],~
 set mouse=a
 " CRLFに改行コードを変更
 set fileformat=unix
+" インデントがスマートになる（らしい）
+set smartindent
+" 全角文字をちゃんと表示する
+set ambiwidth=double
+" 折り返したときにインデントする
+set breakindent
+" 折り返したときの追加のインデントの深さを指定する
+set breakindentopt=shift:0
+" アンダーラインを引く(color terminal)
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+" アンダーラインを引く(gui)
+highlight CursorLine gui=underline guifg=NONE guibg=NONE
 
 " auto reload .vimrc
 augroup source-vimrc
@@ -185,6 +199,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " ヘルプ日本語化
 Plug 'vim-jp/vimdoc-ja'
 
+Plug 'nathanaelkane/vim-indent-guides'
+
 call plug#end()
 
 "----------------------------------------
@@ -234,6 +250,12 @@ if exists("syntax_on")
   syntax reset
 endif
 
+" インデントが最初からカラーリング
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=3   ctermbg=224
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=214 ctermbg=223
+let g:indent_guides_enable_on_vim_startup = 1
+
 " 行番号表示
 set number
 highlight LineNr ctermfg=34 ctermbg=240
@@ -243,3 +265,51 @@ highlight Cursor ctermfg=white ctermbg=red
 "hi default Normal ctermfg=red ctermbg=red
 highlight CursorLine ctermbg=Black
 highlight CursorLine ctermfg=Blue
+
+" 初期状態はcursorlineを表示しない
+" 以下の一行は必ずcolorschemeの設定後に追加すること
+hi clear CursorLine
+
+" 'cursorline' を必要な時にだけ有効にする
+" http://d.hatena.ne.jp/thinca/20090530/1243615055
+" を少し改造、number の highlight は常に有効にする
+augroup vimrc-auto-cursorline
+  autocmd!
+  autocmd CursorMoved,CursorMovedI * call s:auto_cursorline('CursorMoved')
+  autocmd CursorHold,CursorHoldI * call s:auto_cursorline('CursorHold')
+  autocmd WinEnter * call s:auto_cursorline('WinEnter')
+  autocmd WinLeave * call s:auto_cursorline('WinLeave')
+
+  setlocal cursorline
+  hi clear CursorLine
+
+  let s:cursorline_lock = 0
+  function! s:auto_cursorline(event)
+    if a:event ==# 'WinEnter'
+      setlocal cursorline
+      hi CursorLine term=underline cterm=underline guibg=Grey90 " ADD
+      let s:cursorline_lock = 2
+    elseif a:event ==# 'WinLeave'
+      setlocal nocursorline
+      hi clear CursorLine " ADD
+    elseif a:event ==# 'CursorMoved'
+      if s:cursorline_lock
+        if 1 < s:cursorline_lock
+          let s:cursorline_lock = 1
+        else
+          " setlocal nocursorline
+          hi clear CursorLine " ADD
+          let s:cursorline_lock = 0
+        endif
+      endif
+    elseif a:event ==# 'CursorHold'
+      " setlocal cursorline
+      hi CursorLine term=underline cterm=underline guibg=Grey90 " ADD
+      let s:cursorline_lock = 1
+    endif
+  endfunction
+augroup END
+
+hi CursorLineNr term=bold   cterm=NONE ctermfg=228 ctermbg=240
+" 列を強調表示
+set cursorcolumn
