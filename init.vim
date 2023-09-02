@@ -150,18 +150,6 @@ augroup MyXML
   autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 augroup END
 
-" 編集箇所のカーソルを記憶
-if has("autocmd")
-  augroup redhat
-    " In text files, always limit the width of text to 78 characters
-    autocmd BufRead *.txt set tw=78
-    " When editing a file, always jump to the last cursor position
-    autocmd BufReadPost *
-    \ if line("'\"") > 0 && line ("'\"") <= line:!grep -r pattern *("$") |
-    \   exe "normal! g'\"" |
-    \ endif
-  augroup END
-endif
 "----------------------------------------
 " プラグインを追加
 "----------------------------------------
@@ -176,8 +164,9 @@ Plug 'preservim/nerdtree'
 " coc.nvim プラグイン
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Python プラグイン
-Plug 'python-mode/python-mode', { 'for': 'python' }
+" python プラグイン
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-jedi'
 
 " Goプラグイン
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -189,6 +178,10 @@ Plug 'vim-jp/vimdoc-ja'
 Plug 'nathanaelkane/vim-indent-guides'
 
 call plug#end()
+
+" python plugin 有効化
+let g:deoplete#enable_at_startup = 1
+let g:python3_host_prog = 'C:\Users\tomat\AppData\Local\Programs\Python\Python311\python.exe'
 
 "----------------------------------------
 " コマンドマッピング
@@ -205,30 +198,39 @@ tnoremap <C-j> <C-\><C-n>
 cnoreabbrev he help
 nnoremap <F2> <C-v>
 vnoremap <F2> <C-v>
-command! W call s:RunCurrentFile()
 
 " 編集中ファイル保存＆実行コマンド
 function! s:RunCurrentFile()
+    " Check if buffer is a normal file
+    if &buftype != ''
+        echo "Cannot run this buffer type"
+        return
+    endif
+
     " Save the current file
     write
-
-    " Get Path
-    let pwd = expand('!pwd')
 
     " Get the current file extension
     let l:filetype = expand('%:e')
 
+    " Get the current file full path
+    let l:fullpath = expand('%:p')
+
+    " Convert Windows path to Unix style (WSL)
+    let l:unixpath = substitute(l:fullpath, '\', '/', 'g')
+    let l:unixpath = substitute(l:unixpath, '^C:', '/mnt/c', '')
+
     " run the appropriate command based on the file extension
     if l:filetype == 'py'
-        !python %
-    elseif l:filetype == 'go'
-        !go run %
-    elseif l:filetype == 'sh'
-        !bash %
+        execute '!python3' l:unixpath
     else
         echo "No run command for this file type."
     endif
 endfunction
+
+command! -nargs=0 W call s:RunCurrentFile()
+
+
 "---------------------------------------
 " カラースキーム　　
 "---------------------------------------
@@ -259,14 +261,23 @@ highlight CursorColumn cterm=none ctermbg=236
 " 全角強調
 highlight ZenkakuSpace cterm=underline ctermfg=red guibg=blue ctermbg=blue
 match ZenkakuSpace /　/
-
+highlight Comment cterm=italic
 set hlsearch
 highlight Search ctermfg=NONE ctermbg=215 cterm=NONE guifg=NONE guibg=#FFA500
 
-autocmd VimEnter * NERDTree | wincmd l
+" コメントの字体変更
+highlight Comment cterm=italic
+
 " CRLFにする
 set mouse=a
 set fileformat=dos
 set breakindent
+" NERDTree を自動で開く
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
 " vim終了時Nerdtreeを閉じる
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" NERDTree を開いた後、カーソルをファイルウィンドウに移動
+autocmd VimEnter * wincmd p
