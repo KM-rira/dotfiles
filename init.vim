@@ -22,15 +22,9 @@ endif
 "----------------------------------------
 " ノーマルモードに移行
 inoremap jj <Esc>
-" 
 
 " 行番号表示
 set number
-highlight LineNr ctermfg=black ctermbg=none
-"カーソルの色変更
-"highlight Cursor guifg=white guibg=red
-highlight Cursor ctermfg=white ctermbg=red
-"hi default Normal ctermfg=red ctermbg=red
 " ファイルを上書きする前にバックアップを作ることを無効化
 set nowritebackup
 " ファイルを上書きする前にバックアップを作ることを無効化
@@ -84,8 +78,6 @@ set list
 set listchars=tab:^\ ,trail:~
 " コマンドラインの履歴を10000件保存する
 set history=10000
-" コメントの色を水色
-hi Comment ctermfg=None
 " 入力モードでTabキー押下時に半角スペースを挿入
 set expandtab
 " インデント幅
@@ -115,13 +107,11 @@ set title
 " 行番号の表示
 set number
 " ヤンクでクリップボードにコピー
-"set clipboard=unnamed,autoselect
+set clipboard=unnamedplus
 " オートインデント
 set autoindent
 " Escの2回押しでハイライト消去
 nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
-" シンタックスハイライト
-syntax on
 " すべての数を10進数として扱う
 set nrformats=
 " 行をまたいで移動
@@ -167,7 +157,7 @@ if has("autocmd")
     autocmd BufRead *.txt set tw=78
     " When editing a file, always jump to the last cursor position
     autocmd BufReadPost *
-    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \ if line("'\"") > 0 && line ("'\"") <= line:!grep -r pattern *("$") |
     \   exe "normal! g'\"" |
     \ endif
   augroup END
@@ -195,6 +185,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " ヘルプ日本語化
 Plug 'vim-jp/vimdoc-ja'
 
+" インデントの階層色設定
 Plug 'nathanaelkane/vim-indent-guides'
 
 call plug#end()
@@ -246,74 +237,36 @@ if exists("syntax_on")
   syntax reset
 endif
 
+" カラースキームON
+colorscheme industry
+
 " インデントが最初からカラーリング
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=3   ctermbg=224
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=214 ctermbg=223
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=None   ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=12 ctermbg=235
 let g:indent_guides_enable_on_vim_startup = 1
 
 " 行番号表示
 set number
-highlight LineNr ctermfg=34 ctermbg=240
-"カーソルの色変更
-"highlight Cursor guifg=white guibg=red
-highlight Cursor ctermfg=white ctermbg=red
+highlight LineNr ctermfg=196
+highlight CursorLineNr ctermfg=46
+" 行を強調表示
 set cursorline
-highlight CursorLine cterm=NONE ctermbg=white ctermfg=NONE gui=NONE guibg=lightgrey guifg=NONE
-
-" 初期状態はcursorlineを表示しない
-" 以下の一行は必ずcolorschemeの設定後に追加すること
-"#hi clear CursorLine
-"
-"" 'cursorline' を必要な時にだけ有効にする
-"" http://d.hatena.ne.jp/thinca/20090530/1243615055
-"" を少し改造、number の highlight は常に有効にする
-"#augroup vimrc-auto-cursorline
-"#  autocmd!
-"#  autocmd CursorMoved,CursorMovedI * call s:auto_cursorline('CursorMoved')
-"#  autocmd CursorHold,CursorHoldI * call s:auto_cursorline('CursorHold')
-"#  autocmd WinEnter * call s:auto_cursorline('WinEnter')
-"#  autocmd WinLeave * call s:auto_cursorline('WinLeave')
-"#
-"#  setlocal cursorline
-"#  hi clear CursorLine
-"#
-"#  let s:cursorline_lock = 0
-"#  function! s:auto_cursorline(event)
-"#    if a:event ==# 'WinEnter'
-"#      setlocal cursorline
-"#      hi CursorLine term=underline cterm=underline guibg=Grey90 " ADD
-"#      let s:cursorline_lock = 2
-"#    elseif a:event ==# 'WinLeave'
-"#      setlocal nocursorline
-"#      hi clear CursorLine " ADD
-"#    elseif a:event ==# 'CursorMoved'
-"#      if s:cursorline_lock
-"#        if 1 < s:cursorline_lock
-"#          let s:cursorline_lock = 1
-"#        else
-"#          " setlocal nocursorline
-"#          hi clear CursorLine " ADD
-"#          let s:cursorline_lock = 0
-"#        endif
-"#      endif
-"#    elseif a:event ==# 'CursorHold'
-"#      " setlocal cursorline
-"#      hi CursorLine term=underline cterm=underline guibg=Grey90 " ADD
-"#      let s:cursorline_lock = 1
-"#    endif
-"#  endfunction
-"#augroup END
-
-hi CursorLineNr term=bold   cterm=NONE ctermfg=228 ctermbg=240
+highlight CursorLine ctermbg=236
 " 列を強調表示
 set cursorcolumn
-highlight ZenkakuSpace cterm=underline ctermfg=red guibg=blue
+highlight CursorColumn cterm=none ctermbg=236
+" 全角強調
+highlight ZenkakuSpace cterm=underline ctermfg=red guibg=blue ctermbg=blue
 match ZenkakuSpace /　/
 
 set hlsearch
 highlight Search ctermfg=NONE ctermbg=215 cterm=NONE guifg=NONE guibg=#FFA500
-autocmd CursorMoved * if &hlsearch | silent! execute 'nohlsearch' | let @/ = '\<' . expand('<cword>') . '\>' | set hlsearch | endif
-
 
 autocmd VimEnter * NERDTree | wincmd l
+" CRLFにする
+set mouse=a
+set fileformat=dos
+set breakindent
+" vim終了時Nerdtreeを閉じる
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
