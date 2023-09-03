@@ -58,8 +58,6 @@ set hlsearch
 set background=light
 " エラーメッセージの表示時にビープを鳴らさない
 set noerrorbells
-" Windowsでパスの区切り文字をスラッシュで扱う
-set shellslash
 " 対応する括弧やブレースを表示
 set showmatch matchtime=1
 " インデント方法の変更
@@ -129,6 +127,8 @@ set breakindent
 " 折り返したときの追加のインデントの深さを指定する
 set breakindentopt=shift:0
 
+set shellslash
+
 " auto reload .vimrc
 augroup source-vimrc
   autocmd!
@@ -161,6 +161,9 @@ call plug#begin('~/.vim/plugged')
 " NERDTree プラグイン
 Plug 'preservim/nerdtree'
 
+" アイコンをインストール
+Plug 'ryanoasis/vim-devicons'
+
 " coc.nvim プラグイン
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -177,12 +180,21 @@ Plug 'vim-jp/vimdoc-ja'
 " インデントの階層色設定
 Plug 'nathanaelkane/vim-indent-guides'
 
+" ステータスラインを表示
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 call plug#end()
 
+" NerdTreeでアイコン有効化
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
 " python plugin 有効化
 let g:deoplete#enable_at_startup = 1
 let g:python3_host_prog = 'C:\Users\tomat\AppData\Local\Programs\Python\Python311\python.exe'
 
+" tabスラインを表示
+let g:airline#extensions#tabline#enabled = 1
 "----------------------------------------
 " コマンドマッピング
 "----------------------------------------
@@ -190,14 +202,16 @@ command! Pi PlugInstall
 command! Pu PlugUpdate
 command! Pc PlugClean
 command! Tr terminal
-command! Nt NERDTree
-command! Re source $MYVIMRC
 nnoremap dx dd
 nnoremap dd "_dd
 tnoremap <C-j> <C-\><C-n>
 cnoreabbrev he help
 nnoremap <F2> <C-v>
 vnoremap <F2> <C-v>
+" NerdTree開く
+nnoremap <C-e> :NERDTreeToggle<CR>
+
+nnoremap <F5> :source $MYVIMRC<CR>
 
 " 編集中ファイル保存＆実行コマンド
 function! s:RunCurrentFile()
@@ -250,34 +264,70 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 " 行番号表示
 set number
-highlight LineNr ctermfg=196
-highlight CursorLineNr ctermfg=46
+highlight LineNr ctermfg=8 ctermbg=235
+" 現在の行番号の色設定
+highlight CursorLineNr ctermfg=154 ctermbg=2
 " 行を強調表示
 set cursorline
-highlight CursorLine ctermbg=236
+highlight CursorLine ctermbg=235
 " 列を強調表示
 set cursorcolumn
-highlight CursorColumn cterm=none ctermbg=236
+highlight CursorColumn cterm=none ctermbg=235
 " 全角強調
 highlight ZenkakuSpace cterm=underline ctermfg=red guibg=blue ctermbg=blue
 match ZenkakuSpace /　/
-highlight Comment cterm=italic
 set hlsearch
-highlight Search ctermfg=NONE ctermbg=215 cterm=NONE guifg=NONE guibg=#FFA500
-
+highlight Search ctermfg=NONE ctermbg=91 cterm=NONE guifg=NONE guibg=#FFA500
 " コメントの字体変更
-highlight Comment cterm=italic
-
+highlight Comment cterm=italic ctermfg=44
+" Goの色設定
+autocmd VimEnter,Colorscheme * :highlight goBuiltins ctermfg=201
+autocmd VimEnter,Colorscheme * :highlight goKeyword ctermfg=196定
 " CRLFにする
 set mouse=a
 set fileformat=dos
 set breakindent
-" NERDTree を自動で開く
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Nerdtree自動終了
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'nerdtree') | q | endif
 
-" vim終了時Nerdtreeを閉じる
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" 正規表現を使用せずに置換する
+function! Ch(word1, word2)
+    let @/ = '\V' . escape(a:word1, '/')
+    %s//\=a:word2/g
+endfunction
 
-" NERDTree を開いた後、カーソルをファイルウィンドウに移動
-autocmd VimEnter * wincmd p
+function! ConfirmReplace(args)
+    let parts = split(a:args)
+    let find = parts[0]
+    let replace = parts[1]
+    while 1
+        let found = search('\V' . find, 'W')
+        if !found
+            echo "Not found!!"
+            break
+        endif
+        let line_number = line('.')
+        let column_number = col('.')
+        call matchadd('Search', '\V' . find)
+        redraw
+        let user_input = ''
+        while user_input != 'y' && user_input != 'n'
+            let user_input = input('change ok?(y/n) ')
+            if user_input == 'y'
+                call matchdelete(matchadd('Search', '\V' . find))
+                execute 's/\V' . find . '/' . replace . '/'
+                echo "Done"
+            elseif user_input == 'n'
+                call matchdelete(matchadd('Search', '\V' . find))
+                echo "Chi command end..."
+                return
+            else
+                echo "Invalid input! Please enter y or n."
+            endif
+        endwhile
+        call cursor(line_number, column_number)
+    endwhile
+endfunction
+
+command! -nargs=1 Chi call ConfirmReplace(<q-args>)
+
