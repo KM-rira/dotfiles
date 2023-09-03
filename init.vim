@@ -161,18 +161,12 @@ call plug#begin('~/.vim/plugged')
 " NERDTree プラグイン
 Plug 'preservim/nerdtree'
 
-" アイコンをインストール
-Plug 'ryanoasis/vim-devicons'
-
 " coc.nvim プラグイン
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " python プラグイン
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
-
-" Goプラグイン
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " ヘルプ日本語化
 Plug 'vim-jp/vimdoc-ja'
@@ -184,11 +178,11 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Language Server Protocol
+Plug 'neovim/nvim-lspconfig'
+
 call plug#end()
 
-" NerdTreeでアイコン有効化
-let g:webdevicons_enable_nerdtree = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
 " python plugin 有効化
 let g:deoplete#enable_at_startup = 1
 let g:python3_host_prog = 'C:\Users\tomat\AppData\Local\Programs\Python\Python311\python.exe'
@@ -209,7 +203,7 @@ cnoreabbrev he help
 nnoremap <F2> <C-v>
 vnoremap <F2> <C-v>
 " NerdTree開く
-nnoremap <C-e> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 nnoremap <F5> :source $MYVIMRC<CR>
 
@@ -269,10 +263,10 @@ highlight LineNr ctermfg=8 ctermbg=235
 highlight CursorLineNr ctermfg=154 ctermbg=2
 " 行を強調表示
 set cursorline
-highlight CursorLine ctermbg=235
+highlight CursorLine ctermbg=17
 " 列を強調表示
 set cursorcolumn
-highlight CursorColumn cterm=none ctermbg=235
+highlight CursorColumn cterm=none ctermbg=17
 " 全角強調
 highlight ZenkakuSpace cterm=underline ctermfg=red guibg=blue ctermbg=blue
 match ZenkakuSpace /　/
@@ -282,7 +276,7 @@ highlight Search ctermfg=NONE ctermbg=91 cterm=NONE guifg=NONE guibg=#FFA500
 highlight Comment cterm=italic ctermfg=44
 " Goの色設定
 autocmd VimEnter,Colorscheme * :highlight goBuiltins ctermfg=201
-autocmd VimEnter,Colorscheme * :highlight goKeyword ctermfg=196定
+autocmd VimEnter,Colorscheme * :highlight goKeyword ctermfg=196
 " CRLFにする
 set mouse=a
 set fileformat=dos
@@ -296,6 +290,7 @@ function! Ch(word1, word2)
     %s//\=a:word2/g
 endfunction
 
+" 正規表現を使用せずに一か所ずつ置換する
 function! ConfirmReplace(args)
     let parts = split(a:args)
     let find = parts[0]
@@ -330,4 +325,13 @@ function! ConfirmReplace(args)
 endfunction
 
 command! -nargs=1 Chi call ConfirmReplace(<q-args>)
+
+lua << EOF
+require'lspconfig'.gopls.setup{}
+EOF
+
+augroup mycolors
+    autocmd!
+    autocmd ColorScheme * hi Keyword ctermfg=red guifg=red
+augroup END
 
