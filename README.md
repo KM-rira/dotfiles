@@ -5,6 +5,9 @@ Password for 'https://KM-rira@github.com': <ここにパーソナルアクセス
 
 # mvHome.shで、vimrcとbashrcをホームディレクトリ上にコピーする
 
+# pureline for bashrc
+source ~/vimConf/pureline/pureline ~/.pureline.conf
+
 # vim-plugのインストール
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
