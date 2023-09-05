@@ -162,10 +162,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
 
 " coc.nvim プラグイン
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" 非同期補完プラグイン
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " python プラグイン
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'deoplete-plugins/deoplete-jedi'
 
 " ヘルプ日本語化
@@ -180,6 +181,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Language Server Protocol
 Plug 'neovim/nvim-lspconfig'
+
+" ファイル検索
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Go development
 " go get golang.org/x/tools/gopls@latestを忘れずに
@@ -228,6 +232,9 @@ let g:compe.source.nvim_lua = v:true
 let g:compe.source.spell = v:true
 let g:compe.source.tags = v:true
 let g:compe.source.snippets_nvim = v:false
+
+"deoplete有効化
+let g:deoplete#enable_at_startup = 1
 
 "----------------------------------------
 " コマンドマッピング
@@ -375,4 +382,6 @@ endfunction
 
 command! -nargs=+ SearchAndGrep call SearchAndGrep(<f-args>)
 
-
+" クリップボードが使用可能
+set clipboard&
+set clipboard^=unnamedplus
