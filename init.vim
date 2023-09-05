@@ -242,6 +242,8 @@ let g:deoplete#enable_at_startup = 1
 command! Pi PlugInstall
 command! Pu PlugUpdate
 command! Pc PlugClean
+command! Gr GoReferrers
+command! Gd GoDef
 command! Tr terminal
 nnoremap dx dd
 nnoremap dd "_dd
