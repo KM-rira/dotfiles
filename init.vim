@@ -181,6 +181,12 @@ Plug 'vim-airline/vim-airline-themes'
 " Language Server Protocol
 Plug 'neovim/nvim-lspconfig'
 
+" Go development
+" go get golang.org/x/tools/gopls@latestを忘れずに
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " Goの開発に必須のプラグイン
+Plug 'neovim/nvim-lspconfig' " NeovimのLSPサポート
+Plug 'hrsh7th/nvim-compe' " オートコンプリート
+
 call plug#end()
 
 " python plugin 有効化
@@ -189,6 +195,44 @@ let g:python3_host_prog = 'C:\Users\tomat\AppData\Local\Programs\Python\Python31
 
 " tabスラインを表示
 let g:airline#extensions#tabline#enabled = 1
+
+" LSPとvim-goの設定
+autocmd FileType go setlocal ts=4 sw=4 expandtab
+let g:go_def_mode='gopls' " vim-goの定義ジャンプをgoplsで行う
+let g:go_auto_type_info = 1 " カーソル下の型情報を自動的に表示
+
+" LSP設定
+lua << EOF
+require'lspconfig'.gopls.setup{
+  cmd = {"gopls", "--remote=auto"};
+}
+EOF
+
+" Compe設定
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.autocomplete = v:true
+let g:compe.debug = v:false
+let g:compe.min_length = 1
+let g:compe.preselect = 'enable'
+let g:compe.throttle_time = 80
+let g:compe.source_timeout = 200
+let g:compe.incomplete_delay = 400
+let g:compe.max_abbr_width = 100
+let g:compe.max_kind_width = 100
+let g:compe.max_menu_width = 100
+let g:compe.documentation = v:true
+let g:compe.source = {}
+let g:compe.source.path = v:true
+let g:compe.source.buffer = v:true
+let g:compe.source.calc = v:true
+let g:compe.source.vsnip = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.nvim_lua = v:true
+let g:compe.source.spell = v:true
+let g:compe.source.tags = v:true
+let g:compe.source.snippets_nvim = v:false
+
 "----------------------------------------
 " コマンドマッピング
 "----------------------------------------
@@ -203,7 +247,7 @@ cnoreabbrev he help
 nnoremap <F2> <C-v>
 vnoremap <F2> <C-v>
 " NerdTree開く
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-e> :NERDTreeToggle<CR>
 
 nnoremap <F5> :source $MYVIMRC<CR>
 
@@ -325,10 +369,6 @@ function! ConfirmReplace(args)
 endfunction
 
 command! -nargs=1 Chi call ConfirmReplace(<q-args>)
-
-lua << EOF
-require'lspconfig'.gopls.setup{}
-EOF
 
 augroup mycolors
     autocmd!
