@@ -165,8 +165,8 @@ Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " python プラグイン
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-jedi'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'deoplete-plugins/deoplete-jedi'
 
 " ヘルプ日本語化
 Plug 'vim-jp/vimdoc-ja'
@@ -188,9 +188,6 @@ Plug 'neovim/nvim-lspconfig' " NeovimのLSPサポート
 Plug 'hrsh7th/nvim-compe' " オートコンプリート
 
 call plug#end()
-
-" python plugin 有効化
-let g:deoplete#enable_at_startup = 1
 
 " tabスラインを表示
 let g:airline#extensions#tabline#enabled = 1
@@ -302,6 +299,8 @@ let g:indent_guides_enable_on_vim_startup = 1
 " 行番号表示
 set number
 highlight LineNr ctermfg=8 ctermbg=235
+" 相対行表示
+:set relativenumber
 " 現在の行番号の色設定
 highlight CursorLineNr ctermfg=154 ctermbg=2
 " 行を強調表示
@@ -322,7 +321,6 @@ autocmd VimEnter,Colorscheme * :highlight goBuiltins ctermfg=201
 autocmd VimEnter,Colorscheme * :highlight goKeyword ctermfg=196
 " CRLFにする
 set mouse=a
-set fileformat=dos
 set breakindent
 " Nerdtree自動終了
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'nerdtree') | q | endif
@@ -369,8 +367,12 @@ endfunction
 
 command! -nargs=1 Chi call ConfirmReplace(<q-args>)
 
-augroup mycolors
-    autocmd!
-    autocmd ColorScheme * hi Keyword ctermfg=red guifg=red
-augroup END
+function! SearchAndGrep(search_word, search_path)
+    " グレップコマンドを使用して検索を行います。
+    execute 'grep -rn ' . a:search_word . ' ' . a:search_path
+    copen
+endfunction
+
+command! -nargs=+ SearchAndGrep call SearchAndGrep(<f-args>)
+
 
