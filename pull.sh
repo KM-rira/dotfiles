@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # .bashrcに下記を追記
-# nohup bash ~/vimConf/pull.sh &
+# nohup bash ~/vimConf/pull.sh > /dev/null 2>&1 &
 # その後実行
 # chmod +x ~/vimConf/pull.sh
 
