@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # .bashrcに下記を追記
-# ~/vimConf/pull.sh
+# nohup bash ~/vimConf/pull.sh &
 # その後実行
-# chmod +x ~/vimConf/push.sh
+# chmod +x ~/vimConf/pull.sh
 
 # vimConf移動
 cd ~/vimConf
