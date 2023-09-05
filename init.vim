@@ -191,7 +191,6 @@ call plug#end()
 
 " python plugin 有効化
 let g:deoplete#enable_at_startup = 1
-let g:python3_host_prog = 'C:\Users\tomat\AppData\Local\Programs\Python\Python311\python.exe'
 
 " tabスラインを表示
 let g:airline#extensions#tabline#enabled = 1
