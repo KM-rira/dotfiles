@@ -164,8 +164,8 @@ Plug 'preservim/nerdtree'
 " coc.nvim プラグイン
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" 非同期補完プラグイン
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" 非同期補完プラグイン(<Plug>_廃止)
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " python プラグイン
 "Plug 'deoplete-plugins/deoplete-jedi'
 
@@ -198,15 +198,15 @@ let g:airline#extensions#tabline#enabled = 1
 
 " LSPとvim-goの設定
 autocmd FileType go setlocal ts=4 sw=4 expandtab
-let g:go_def_mode='gopls' " vim-goの定義ジャンプをgoplsで行う
+"let g:go_def_mode='gopls' " vim-goの定義ジャンプをgoplsで行う gopls廃止
 let g:go_auto_type_info = 1 " カーソル下の型情報を自動的に表示
 
-" LSP設定
-lua << EOF
-require'lspconfig'.gopls.setup{
-  cmd = {"gopls", "--remote=auto"};
-}
-EOF
+" LSP設定 （廃止）
+"lua << EOF
+"require'lspconfig'.gopls.setup{
+"  cmd = {"gopls", "--remote=auto"};
+"}
+"EOF
 
 " Compe設定
 let g:compe = {}
@@ -316,8 +316,10 @@ highlight CursorLineNr ctermfg=154 ctermbg=2
 set cursorline
 highlight CursorLine ctermbg=17
 " 列を強調表示
-set cursorcolumn
-highlight CursorColumn cterm=none ctermbg=17
+"set cursorcolumn
+"highlight CursorColumn cterm=none ctermbg=17
+" 列強調OFF
+set nocursorcolumn
 " 全角強調
 highlight ZenkakuSpace cterm=underline ctermfg=red guibg=blue ctermbg=blue
 match ZenkakuSpace /　/
