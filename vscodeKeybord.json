@@ -1,0 +1,34 @@
+// 既定値を上書きするには、このファイル内にキー バインドを挿入します
+[
+    {
+        "command": "-vscode-neovim.send",
+        "key": "ctrl+h"
+    },
+    {
+        "command": "vscode-neovim.compositeEscape1",
+        "key": "j",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "j"
+    },
+    {
+        "command": "workbench.view.remote",
+        "key": "ctrl+shift+r"
+    },
+    // number/relativenumberの切り替え
+    {
+        "key": "f3",
+        "command": "settings.cycle",
+        "when": "editorTextFocus",
+        "args": {
+            "id": "relativeLineNumbers",
+            "values": [
+                {
+                    "editor.lineNumbers": "on"
+                },
+                {
+                    "editor.lineNumbers": "relative"
+                }
+            ]
+        }
+    }
+]
