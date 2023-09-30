@@ -11,7 +11,7 @@ BASHRC="$HOME/.bashrc"
 
 # 追加したいエイリアスをこの配列に列挙
 declare -A aliases
-aliases["historygrep"]="history | grep"
+aliases["historyg"]="history | grep"
 aliases["open"]="nvim ~/.bashrc"
 aliases[".."]="cd .."
 aliases["..."]="cd ../.."
@@ -40,10 +40,8 @@ for key in "${!aliases[@]}"; do
     grep -q "alias $key='${aliases[$key]}'" $BASHRC
     if [ $? -ne 0 ]; then
         echo "alias $key='${aliases[$key]}'" >> $BASHRC
-        echo "alias $key='${aliases[$key]}' was added to .bashrc."
-    else
-        echo "alias $key='${aliases[$key]}' already exists in .bashrc."
+        echo "add Alias > alias $key='${aliases[$key]}'"
     fi
 done
 
-echo "Done updating .bashrc."
+echo "Done updating alias"
