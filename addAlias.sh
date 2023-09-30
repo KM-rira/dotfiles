@@ -30,6 +30,7 @@ aliases["branch"]="git branch"
 aliases["fetch"]="git fetch"
 aliases["log"]="git log --oneline"
 aliases["fixup"]="git commit --fixup "
+aliases["vimConf"]="cd ~/vimConf"
 
 # 各エイリアスをチェック
 for key in "${!aliases[@]}"; do
