@@ -12,6 +12,24 @@ BASHRC="$HOME/.bashrc"
 # 追加したいエイリアスをこの配列に列挙
 declare -A aliases
 aliases["historygrep"]="history | grep"
+aliases["open"]="nvim ~/.bashrc"
+aliases[".."]="cd .."
+aliases["..."]="cd ../.."
+aliases["ll"]="ls -lt"
+aliases["re"]="source ~/.bashrc"
+aliases["bashrc"]="nv ~/.bashrc"
+aliases["rc"]="nvim ~/AppData/Local/nvim/init.vim"
+aliases["nv"]="nvim"
+aliases["ll"]="ls -l --color=auto"
+aliases["historygrep"]="history | grep"
+aliases["got"]="go test -v -cover -run "
+aliases["status"]="git status"
+aliases["push"]="git push"
+aliases["checkout"]="git checkout"
+aliases["branch"]="git branch"
+aliases["fetch"]="git fetch"
+aliases["log"]="git log --oneline"
+aliases["fixup"]="git commit --fixup "
 
 # 各エイリアスをチェック
 for key in "${!aliases[@]}"; do
