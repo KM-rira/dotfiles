@@ -14,6 +14,16 @@
         "command": "workbench.view.remote",
         "key": "ctrl+shift+r"
     },
+    {
+        "key": "ctrl+shift+u",
+        "command": "editor.action.transformToUppercase",
+        "when": "editorHasSelection && editorTextFocus"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "editor.action.transformToLowercase",
+        "when": "editorHasSelection && editorTextFocus"
+    },
     // number/relativenumberの切り替え
     {
         "key": "f3",
