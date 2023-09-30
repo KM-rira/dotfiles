@@ -247,6 +247,9 @@ command! Gd GoDef
 command! Tr terminal
 nnoremap dx dd
 nnoremap dd "_dd
+nnoremap d "_d
+xnoremap d "_d
+
 tnoremap <C-j> <C-\><C-n>
 cnoreabbrev he help
 nnoremap <F2> <C-v>
