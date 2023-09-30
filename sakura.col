@@ -1,4 +1,4 @@
-﻿; テキストエディタ色設定 Ver3
+﻿テキストエディタ色設定 Ver3
 
 [SakuraColor]
 C[BRC]=1,1,000080,f0fbff,0
@@ -31,7 +31,7 @@ C[KW8]=1,0,0080ff,f0fbff,0
 C[KW9]=1,0,0080ff,f0fbff,0
 C[KWA]=1,0,0080ff,f0fbff,0
 C[LNO]=1,0,ff0000,efefef,0
-C[MOD]=1,1,ff0000,efefef,0
+C[MOD]=1,1,0000ff,efefef,0
 C[MRK]=1,0,f0fbff,c08000,0
 C[NOT]=0,0,ffc0c0,f0fbff,0
 C[NUM]=1,0,0000eb,f0fbff,0
@@ -58,4 +58,3 @@ C[URL]=1,0,ff0000,f0fbff,1
 C[VER]=0,0,c0c0c0,f0fbff,0
 C[WQT]=1,0,400080,f0fbff,0
 C[ZEN]=1,0,c0c0c0,f0fbff,0
-
