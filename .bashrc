@@ -12,10 +12,11 @@ HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
 nohup bash ~/vimConf/pull.sh > /dev/null 2>&1 &
 
 # alias command
+unalias -a
+
 alias open='nvim ~/.bashrc'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ll='ls -lt'
 alias re='source ~/.bashrc'
 alias bashrc='nv ~/.bashrc'
 alias rc='nvim ~/AppData/Local/nvim/init.vim'
@@ -31,4 +32,4 @@ alias checkout='git checkout'
 alias branch='git branch'
 alias fetch='git fetch'
 alias log='git log --oneline'
-alias fixup='git commit --fixup '
+alias fixup='git commit --fixup'
