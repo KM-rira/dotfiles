@@ -1,4 +1,4 @@
-!/bin/sh
+#!/bin/sh
 
 # VScodeのキーボード設定をvimConfのvscodeKeybord.jsonに反映させるためのコード
 # 環境によって適宜変更
