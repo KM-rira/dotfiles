@@ -1,3 +1,33 @@
+{
+    "editor.mouseWheelZoom": true,
+    "window.zoomLevel": -1,
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "terminal.integrated.copyOnSelection": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "workbench.remote.experimental.showStartListEntry": true,
+    "remote.SSH.showLoginTerminal": true,
+    "remote.SSH.remotePlatform": {
+        "debian": "linux",
+        "UbuntuServer22.04.3": "linux"
+    },
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "workbench.startupEditor": "none",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "workbench.settings.applyToAllProfiles": [
+        
+
+
+    ],
+    "editor.lineNumbers": "on",
+    "workbench.colorTheme": "Andromeda Bordered",
+    "settings.cycle": [
+
+    ],
     "workbench.colorCustomizations": {
         "editor.lineHighlightBackground": "#304a7c",
         "editor.selectionBackground": "#f37e43",
@@ -21,4 +51,6 @@
         "terminal.ansiRed":"#DB2D20",
         "terminal.ansiWhite":"#A5A2A2",
         "terminal.ansiYellow":"#FDED02"
-    }
+    },
+    "window.restoreWindows": "none",
+}
