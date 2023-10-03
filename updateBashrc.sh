@@ -18,9 +18,9 @@ add_line() {
 }
 
 # 必要な行を.bashrcに追加
-add_line "# nohup bash ~/vimConf/pull.sh > /dev/null 2>&1 &"
-add_line 'nohup bash ~/vimConf/addAlias.sh > /dev/null 2>&1 &'
-add_line 'nohup bash ~/vimConf/updateBashrc.sh > /dev/null 2>&1 &'
+add_line "nohup bash ~/vimConf/pull.sh > /dev/null 2>&1 &"
+add_line '# nohup bash ~/vimConf/addAlias.sh > /dev/null 2>&1 &'
+add_line '# nohup bash ~/vimConf/updateBashrc.sh > /dev/null 2>&1 &'
 add_line "source ~/vimConf/pureline/pureline ~/.pureline.conf"
 add_line "# unalias -a"
 add_line "# git setting"

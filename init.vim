@@ -250,6 +250,8 @@ nnoremap dx dd
 nnoremap dd "_dd
 nnoremap d "_d
 xnoremap d "_d
+nnoremap c "_c
+xnoremap c "_c
 
 tnoremap <C-j> <C-\><C-n>
 cnoreabbrev he help
