@@ -245,7 +245,7 @@ command! Pc PlugClean
 command! Gr GoReferrers
 command! Gd GoDef
 command! Tr terminal
-nnoremap vv gg0VG$
+nnoremap vv G$Vgg0
 nnoremap dx dd
 nnoremap dd "_dd
 nnoremap d "_d
