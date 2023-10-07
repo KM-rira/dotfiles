@@ -10,38 +10,29 @@
 BASHRC="$HOME/.bashrc"
 
 # 追加したいエイリアスをこの配列に列挙
-declare -A aliases
-aliases["historyg"]="history | grep"
-aliases["open"]="nvim ~/.bashrc"
-aliases[".."]="cd .."
-aliases["..."]="cd ../.."
-aliases["ll"]="ls -lt"
-aliases["re"]="source ~/.bashrc"
-aliases["bashrc"]="nv ~/.bashrc"
-aliases["rc"]="nvim ~/AppData/Local/nvim/init.vim"
-aliases["nv"]="nvim"
-aliases["l"]="ls -l --color=auto"
-aliases["historygrep"]="history | grep"
-aliases["got"]="go test -v -cover -run "
-aliases["status"]="git status"
-aliases["push"]="git push"
-aliases["checkout"]="git checkout"
-aliases["branch"]="git branch"
-aliases["fetch"]="git fetch"
-aliases["log"]="git log --oneline"
-aliases["fixup"]="git commit --fixup "
-aliases["vimConf"]="cd ~/vimConf"
-aliases["pull"]="git pull"
-aliases["findall"]="sudo find / -name"
+unalias -a
 
-# 各エイリアスをチェック
-for key in "${!aliases[@]}"; do
-    # aliasが存在するかチェック
-    grep -q "alias $key='${aliases[$key]}'" $BASHRC
-    if [ $? -ne 0 ]; then
-        echo "alias $key='${aliases[$key]}'" >> $BASHRC
-        echo "add Alias > alias $key='${aliases[$key]}'"
-    fi
-done
+alias historyg='history | grep'
+alias open='nvim ~/.bashrc'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ll='ls -lt'
+alias re='source ~/.bashrc'
+alias bashrc='nv ~/.bashrc'
+alias rc='nvim ~/AppData/Local/nvim/init.vim'
+alias nv='nvim'
+alias l='ls -l --color=auto'
+alias historygrep='history | grep'
+alias got='go test -v -cover -run '
+alias status='git status'
+alias push='git push'
+alias checkout='git checkout'
+alias branch='git branch'
+alias fetch='git fetch'
+alias log='git log --oneline'
+alias fixup='git commit --fixup '
+alias vimConf='cd ~/vimConf'
+alias pull='git pull'
+alias findall='sudo find / -name'
 
 echo "Done updating alias"
