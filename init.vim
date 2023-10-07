@@ -21,7 +21,7 @@ endif
 "キーバインド設定
 "----------------------------------------
 " ノーマルモードに移行
-inoremap jj <Esc>
+inoremap jk <Esc>
 
 " 行番号表示
 set number
@@ -252,6 +252,9 @@ nnoremap d "_d
 xnoremap d "_d
 nnoremap c "_c
 xnoremap c "_c
+vnoremap D "_D
+vnoremap C "_C
+vnoremap S "_S
 
 tnoremap <C-j> <C-\><C-n>
 cnoreabbrev he help
