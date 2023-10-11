@@ -264,6 +264,7 @@ vnoremap <F2> <C-v>
 nnoremap <C-e> :NERDTreeToggle<CR>
 
 nnoremap <F5> :source $MYVIMRC<CR>
+command! Re source $MYVIMRC
 
 " 編集中ファイル保存＆実行コマンド
 function! s:RunCurrentFile()
