@@ -23,16 +23,17 @@
         "key": "ctrl+shift+r"
     },
     {
-        "key": "ctrl+shift+u",
-        "command": "editor.action.transformToUppercase",
-        "when": "editorHasSelection && editorTextFocus"
+        "command": "vscode-neovim.compositeEscape1",
+        "key": "j",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "j"
     },
     {
-        "key": "ctrl+u",
-        "command": "editor.action.transformToLowercase",
-        "when": "editorHasSelection && editorTextFocus"
+        "command": "vscode-neovim.compositeEscape2",
+        "key": "k",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "k"
     },
-    // number/relativenumberの切り替え
     {
         "key": "f3",
         "command": "settings.cycle",
