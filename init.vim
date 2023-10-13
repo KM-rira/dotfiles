@@ -255,6 +255,8 @@ xnoremap c "_c
 vnoremap D "_D
 vnoremap C "_C
 vnoremap S "_S
+nnoremap + ^
+nnoremap ^ +
 
 tnoremap <C-j> <C-\><C-n>
 cnoreabbrev he help
