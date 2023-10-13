@@ -11,6 +11,7 @@ BASHRC="$HOME/.bashrc"
 
 # 追加したいエイリアスをこの配列に列挙
 # unalias -a
+# source addAlias.sh
 
 alias historyg='history | grep'
 alias open='nvim ~/.bashrc'
@@ -36,5 +37,6 @@ alias pull='git pull'
 alias findall='sudo find / -name'
 alias e='exa -l'
 alias batfzf='fzf | xargs bat'
+alias nvfzf='fzf | xargs nv'
 
 echo "Done updating alias"
