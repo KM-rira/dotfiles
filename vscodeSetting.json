@@ -53,4 +53,5 @@
         "terminal.ansiYellow":"#FDED02"
     },
     "window.restoreWindows": "none",
+    "files.hotExit": "off"
 }
