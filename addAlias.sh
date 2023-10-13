@@ -37,6 +37,6 @@ alias pull='git pull'
 alias findall='sudo find / -name'
 alias e='exa -l'
 alias batfzf='fzf | xargs bat'
-alias nvfzf='fzf | xargs nv'
+alias nvfzf='fzf | xargs nvim'
 
 echo "Done updating alias"
