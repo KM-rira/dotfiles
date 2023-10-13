@@ -20,9 +20,6 @@ endif
 "---------------------------------------
 "キーバインド設定
 "----------------------------------------
-" ノーマルモードに移行
-inoremap jk <Esc>
-
 " 行番号表示
 set number
 " ファイルを上書きする前にバックアップを作ることを無効化
@@ -114,8 +111,8 @@ nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
 set nrformats=
 " 行をまたいで移動
 set whichwrap=b,s,h,l,<,>,[,],~
-" バッファスクロール
-set mouse=a
+" バッファスクロール （諸悪の根源）
+" set mouse=a
 " CRLFに改行コードを変更
 set fileformat=unix
 " インデントがスマートになる（らしい）
@@ -261,6 +258,8 @@ nnoremap ^ +
 vnoremap ^ +
 nnoremap <Space> $
 vnoremap <Space> $
+" ノーマルモードに移行
+inoremap jk <Esc>
 
 tnoremap <C-j> <C-\><C-n>
 cnoreabbrev he help
@@ -347,7 +346,7 @@ highlight Comment cterm=italic ctermfg=44
 autocmd VimEnter,Colorscheme * :highlight goBuiltins ctermfg=201
 autocmd VimEnter,Colorscheme * :highlight goKeyword ctermfg=196
 " CRLFにする
-set mouse=a
+"set mouse=a
 set breakindent
 " Nerdtree自動終了
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'nerdtree') | q | endif
