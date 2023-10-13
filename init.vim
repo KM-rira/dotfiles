@@ -256,7 +256,11 @@ vnoremap D "_D
 vnoremap C "_C
 vnoremap S "_S
 nnoremap + ^
+vnoremap + ^
 nnoremap ^ +
+vnoremap ^ +
+nnoremap <Space> $
+vnoremap <Space> $
 
 tnoremap <C-j> <C-\><C-n>
 cnoreabbrev he help
