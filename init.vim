@@ -242,6 +242,7 @@ command! Pc PlugClean
 command! Gr GoReferrers
 command! Gd GoDef
 command! Tr terminal
+cabbrev Ner NERDTreeToggle
 nnoremap vv G$Vgg0
 nnoremap dx dd
 nnoremap dd "_dd
