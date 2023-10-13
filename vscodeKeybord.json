@@ -11,6 +11,14 @@
         "args": "j"
     },
     {
+        "key": "shift+j",
+        "command": "workbench.action.previousEditorInGroup"
+    },
+    {
+        "key": "shift+k",
+        "command": "workbench.action.nextEditorInGroup"
+    },
+    {
         "command": "workbench.view.remote",
         "key": "ctrl+shift+r"
     },
