@@ -10,7 +10,7 @@
 BASHRC="$HOME/.bashrc"
 
 # 追加したいエイリアスをこの配列に列挙
-unalias -a
+# unalias -a
 
 alias historyg='history | grep'
 alias open='nvim ~/.bashrc'
