@@ -308,21 +308,21 @@ nnoremap <Space><Space> ^
 xnoremap <Space><Space> ^
 onoremap <Space><Space> ^
 
-nnoremap <Space>j 5j
-xnoremap <Space>j 5j
-onoremap <Space>j 5j
+nnoremap <Space>j 10j
+xnoremap <Space>j 10j
+onoremap <Space>j 10j
 
-nnoremap <Space>k 5k
-xnoremap <Space>k 5k
-onoremap <Space>k 5k
+nnoremap <Space>k 10k
+xnoremap <Space>k 10k
+onoremap <Space>k 10k
 
-nnoremap <Space>h 5h
-xnoremap <Space>h 5h
-onoremap <Space>h 5h
+nnoremap <Space>h 10h
+xnoremap <Space>h 10h
+onoremap <Space>h 10h
 
-nnoremap <Space>l 5l
-xnoremap <Space>l 5l
-onoremap <Space>l 5l
+nnoremap <Space>l 10l
+xnoremap <Space>l 10l
+onoremap <Space>l 10l
 
 " ノーマルモードに移行
 inoremap jk <Esc>
