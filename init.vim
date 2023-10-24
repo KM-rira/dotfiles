@@ -316,6 +316,14 @@ nnoremap <Space>k 5k
 xnoremap <Space>k 5k
 onoremap <Space>k 5k
 
+nnoremap <Space>h 5h
+xnoremap <Space>h 5h
+onoremap <Space>h 5h
+
+nnoremap <Space>l 5l
+xnoremap <Space>l 5l
+onoremap <Space>l 5l
+
 " ノーマルモードに移行
 inoremap jk <Esc>
 
