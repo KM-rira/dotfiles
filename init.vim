@@ -259,8 +259,10 @@ nnoremap ^ +
 vnoremap ^ +
 nnoremap <Space> $
 vnoremap <Space> $
-nnoremap <Space><S-Space> ^
-vnoremap <Space><S-Space> ^
+nnoremap m $
+vnoremap m $
+nnoremap M ^
+vnoremap M ^
 " ノーマルモードに移行
 inoremap jk <Esc>
 
