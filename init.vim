@@ -251,8 +251,13 @@ xnoremap d "_d
 nnoremap c "_c
 xnoremap c "_c
 vnoremap D "_D
+xnoremap D "_D
 vnoremap C "_C
+xnoremap C "_C
 vnoremap S "_S
+xnoremap S "_S
+vnoremap s "_s
+xnoremap s "_s
 nnoremap + ^
 vnoremap + ^
 nnoremap ^ +
