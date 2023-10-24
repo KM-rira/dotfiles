@@ -276,11 +276,8 @@ xnoremap ^ +
 nnoremap <Space> $
 xnoremap <Space> $
 
-nnoremap m $
-xnoremap m $
-
-nnoremap <C-M> ^
-xnoremap <C-M> ^
+nnoremap <Space><Space> ^
+xnoremap <Space><Space> ^
 
 nnoremap J 5j
 xnoremap J 5j
