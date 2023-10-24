@@ -246,28 +246,48 @@ cabbrev Ner NERDTreeToggle
 nnoremap vv G$Vgg0
 nnoremap dx dd
 nnoremap dd "_dd
+
 nnoremap d "_d
 xnoremap d "_d
+onoremap d "_d
+
 nnoremap c "_c
 xnoremap c "_c
-vnoremap D "_D
+
+nnoremap D "_D
 xnoremap D "_D
-vnoremap C "_C
+
+nnoremap C "_C
 xnoremap C "_C
-vnoremap S "_S
+
+nnoremap S "_S
 xnoremap S "_S
+
+nnoremap s "_s
 vnoremap s "_s
-xnoremap s "_s
+onoremap s "_s
+
 nnoremap + ^
-vnoremap + ^
+xnoremap + ^
+
 nnoremap ^ +
-vnoremap ^ +
+xnoremap ^ +
+
 nnoremap <Space> $
-vnoremap <Space> $
+xnoremap <Space> $
+
 nnoremap m $
-vnoremap m $
-nnoremap M ^
-vnoremap M ^
+xnoremap m $
+
+nnoremap <C-M> ^
+xnoremap <C-M> ^
+
+nnoremap J 5j
+xnoremap J 5j
+
+nnoremap K 5k
+xnoremap K 5k
+
 " ノーマルモードに移行
 inoremap jk <Esc>
 
