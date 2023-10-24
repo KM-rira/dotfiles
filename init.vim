@@ -296,10 +296,6 @@ nnoremap ) a<Space><Esc>
 xnoremap ) a<Space><Esc> 
 onoremap ) a<Space><Esc> 
 
-nnoremap O O<Esc>
-xnoremap O O<Esc>
-onoremap O O<Esc>
-
 nnoremap <Space> $
 xnoremap <Space> $
 onoremap <Space> $
