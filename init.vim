@@ -279,7 +279,7 @@ xnoremap <Space> $
 nnoremap <Space><Space> ^
 xnoremap <Space><Space> ^
 
-nnoremap J 5j
+nnoremap <Space>j 5j
 xnoremap J 5j
 
 nnoremap K 5k
