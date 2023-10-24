@@ -253,15 +253,20 @@ onoremap d "_d
 
 nnoremap c "_c
 xnoremap c "_c
+onoremap c "_c
 
 nnoremap D "_D
 xnoremap D "_D
+onoremap D "_D
 
 nnoremap C "_C
 xnoremap C "_C
+onoremap C "_C
+
 
 nnoremap S "_S
 xnoremap S "_S
+onoremap S "_S
 
 nnoremap s "_s
 vnoremap s "_s
@@ -269,21 +274,47 @@ onoremap s "_s
 
 nnoremap + ^
 xnoremap + ^
+onoremap + ^
 
 nnoremap ^ +
 xnoremap ^ +
+onoremap ^ +
+
+nnoremap o o<Esc>
+xnoremap o o<Esc>
+onoremap o o<Esc>
+
+nnoremap O O<Esc>
+xnoremap O O<Esc>
+onoremap O O<Esc>
+
+nnoremap ( i<Space><Esc> 
+xnoremap ( i<Space><Esc> 
+onoremap ( i<Space><Esc> 
+
+nnoremap ) a<Space><Esc> 
+xnoremap ) a<Space><Esc> 
+onoremap ) a<Space><Esc> 
+
+nnoremap O O<Esc>
+xnoremap O O<Esc>
+onoremap O O<Esc>
 
 nnoremap <Space> $
 xnoremap <Space> $
+onoremap <Space> $
 
 nnoremap <Space><Space> ^
 xnoremap <Space><Space> ^
+onoremap <Space><Space> ^
 
 nnoremap <Space>j 5j
-xnoremap J 5j
+xnoremap <Space>j 5j
+onoremap <Space>j 5j
 
-nnoremap K 5k
-xnoremap K 5k
+nnoremap <Space>k 5k
+xnoremap <Space>k 5k
+onoremap <Space>k 5k
 
 " ノーマルモードに移行
 inoremap jk <Esc>
