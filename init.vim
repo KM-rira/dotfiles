@@ -300,9 +300,9 @@ nnoremap <Space>l $
 xnoremap <Space>l $
 onoremap <Space>l $
 
-nnoremap <Space>h ^h
-xnoremap <Space>h ^h
-onoremap <Space>h ^h
+nnoremap <Space><Space> ^
+xnoremap <Space><Space> ^
+onoremap <Space><Space> ^
 
 nnoremap <Space>j 10j
 xnoremap <Space>j 10j
