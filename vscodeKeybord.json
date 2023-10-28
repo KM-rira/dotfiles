@@ -11,11 +11,11 @@
         "args": "j"
     },
     {
-        "key": "shift+j",
+        "key": "ctrl+shift+j",
         "command": "workbench.action.previousEditorInGroup"
     },
     {
-        "key": "shift+k",
+        "key": "ctrl+shift+k",
         "command": "workbench.action.nextEditorInGroup"
     },
     {
@@ -35,6 +35,14 @@
         "args": "k"
     },
     {
+        "key": "ctrl+m",
+        "command": "editor.action.insertCursorAtEndOfEachLineSelected",
+        "when": "editorTextFocus",
+        "args": {
+            "to": "wrappedLineCenter"
+        }
+    },
+    {
         "key": "f3",
         "command": "settings.cycle",
         "when": "editorTextFocus",
@@ -49,5 +57,26 @@
                 }
             ]
         }
-    }
+    },
+    {
+      "key": "shift+j",
+      "command": "type",
+      "args": {
+        "text": "10j"
+      }
+    },
+    {
+      "key": "shift+k",
+      "command": "type",
+      "args": {
+        "text": "10j"
+      }
+    },
+    {
+    "key": "shift+space",
+    "command": "type",
+    "args": {
+    "text": "+"
+      }
+    },
 ]
