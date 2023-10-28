@@ -300,9 +300,9 @@ nnoremap <Space>k $
 xnoremap <Space>k $
 onoremap <Space>k $
 
-nnoremap <Space>k ^
-xnoremap <Space>k ^
-onoremap <Space>k ^
+nnoremap <Space>j ^
+xnoremap <Space>j ^
+onoremap <Space>j ^
 
 " ノーマルモードに移行
 inoremap jk <Esc>
