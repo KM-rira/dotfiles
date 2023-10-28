@@ -296,13 +296,13 @@ nnoremap ) a<Space><Esc>
 xnoremap ) a<Space><Esc> 
 onoremap ) a<Space><Esc> 
 
-nnoremap <Space>l $
-xnoremap <Space>l $
-onoremap <Space>l $
+nnoremap <Space>, $
+xnoremap <Space>, $
+onoremap <Space>, $
 
-nnoremap <Space><Space> ^
-xnoremap <Space><Space> ^
-onoremap <Space><Space> ^
+nnoremap <Space>m ^
+xnoremap <Space>m ^
+onoremap <Space>m ^
 
 nnoremap <Space>j 10j
 xnoremap <Space>j 10j
