@@ -304,9 +304,9 @@ nnoremap <Space>j ^
 xnoremap <Space>j ^
 onoremap <Space>j ^
 
-nnoremap Z zz
-xnoremap Z zz
-onoremap Z zz
+nnoremap Q zz
+xnoremap Q zz
+onoremap Q zz
 
 " ノーマルモードに移行
 inoremap jk <Esc>
