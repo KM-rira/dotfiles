@@ -296,13 +296,9 @@ nnoremap ) a<Space><Esc>
 xnoremap ) a<Space><Esc> 
 onoremap ) a<Space><Esc> 
 
-nnoremap <Space>k $
-xnoremap <Space>k $
-onoremap <Space>k $
-
-nnoremap <Space>j ^
-xnoremap <Space>j ^
-onoremap <Space>j ^
+nnoremap <Space> $
+xnoremap <Space> $
+onoremap <Space> $
 
 " ノーマルモードに移行
 inoremap jk <Esc>
