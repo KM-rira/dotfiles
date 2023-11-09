@@ -11,6 +11,10 @@ HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
 # 非同期実行
 nohup bash ~/vimConf/pull.sh > /dev/null 2>&1 &
 
+# 他タブのhistoryを反映する
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+shopt -s histappend
+
 # alias command
 unalias -a
 
