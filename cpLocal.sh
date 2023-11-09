@@ -1,8 +1,5 @@
 #!/bin/sh
 
-#cp ./settings.json C:\Users\tomat\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
-
-
 OS=$(uname)
 
 case $OS in
