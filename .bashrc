@@ -9,7 +9,7 @@ HISTSIZE=100000
 HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
 
 # 非同期実行
-nohup bash ~/vimConf/pull.sh > /dev/null 2>&1 &
+nohup bash ~/vimConf/pull_vimConf.sh > /dev/null 2>&1 &
 
 # 他タブのhistoryを反映する
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
@@ -17,6 +17,10 @@ shopt -s histappend
 
 # alias command
 unalias -a
+
+# 非同期実行
+nohup bash ~/vimConf/add_alias.sh > /dev/null 2>&1 &
+bkf
 
 alias open='nvim ~/.bashrc'
 alias ..='cd ..'
