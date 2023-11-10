@@ -26,7 +26,7 @@ add_line "source ~/vimConf/add_alias.sh"
 add_line "HISTSIZE=100000"
 add_line "HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '"
 add_line "nohup bash ~/vimConf/pull_vimConf.sh > /dev/null 2>&1 &"
-add_line "nohup bash ~/vimConf/add_alias.sh > /dev/null 2>&1 &"
+add_line "source ~/vimConf/add_alias.sh"
 add_line "bkf"
 
 echo "=== Updated $BASHRC if necessary. ==="
