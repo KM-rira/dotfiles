@@ -25,5 +25,8 @@ add_line "# unalias -a"
 add_line "# source addAlias.sh"
 add_line "HISTSIZE=100000"
 add_line "HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '"
+nohup bash ~/vimConf/pull_vimConf.sh > /dev/null 2>&1 &
+nohup bash ~/vimConf/add_alias.sh > /dev/null 2>&1 &
+bkf
 
-echo "Updated $BASHRC if necessary."
+echo "=== Updated $BASHRC if necessary. ==="
