@@ -19,7 +19,7 @@ shopt -s histappend
 unalias -a
 
 # 非同期実行
-nohup bash ~/vimConf/add_alias.sh > /dev/null 2>&1 &
+source ~/vimConf/add_alias.sh
 bkf
 
 alias open='nvim ~/.bashrc'

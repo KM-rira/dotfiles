@@ -22,7 +22,7 @@ add_line "nohup bash ~/vimConf/pull.sh > /dev/null 2>&1 &"
 # add_line '# nohup bash ~/vimConf/updateBashrc.sh > /dev/null 2>&1 &'
 add_line "source ~/vimConf/pureline/pureline ~/.pureline.conf"
 add_line "# unalias -a"
-add_line "# source addAlias.sh"
+add_line "source ~/vimConf/add_alias.sh"
 add_line "HISTSIZE=100000"
 add_line "HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '"
 add_line "nohup bash ~/vimConf/pull_vimConf.sh > /dev/null 2>&1 &"
