@@ -64,3 +64,5 @@ for folder_name, folder_data in root_folder.items():
                 replace_name = sanitize_filename(name)
                 with open(os.path.join(output_folder, replace_name + ".txt"), "w") as file:
                     file.write(url)
+                
+print("===== Done format bookmark json =====")
