@@ -62,7 +62,7 @@ for folder_name, folder_data in root_folder.items():
                 name = bookmark["name"]
                 url = bookmark["url"]
                 replace_name = sanitize_filename(name)
-                with open(os.path.join(output_folder, replace_name + ".txt"), "w") as file:
+                with open(os.path.join(output_folder, replace_name), "w") as file:
                     file.write(url)
                 
 print("===== Done format bookmark json =====")
