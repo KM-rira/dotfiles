@@ -4,7 +4,7 @@ import shutil
 
 def sanitize_filename(filename):
     # Windowsファイル名で許可されていない文字
-    invalid_chars = ['<', '>', ':', '"', '/', '\\', '|', '?', '*']
+    invalid_chars = ['<', '>', ':', '"', '/', '\\', '|', '?', '*', ' ']
     
     # 無効な文字を '_' に置換
     for char in invalid_chars:
