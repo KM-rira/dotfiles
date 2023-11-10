@@ -59,10 +59,19 @@
         }
     },
     {
+        "key": "shift+oem_102",
+        "command": "editor.action.showHover",
+        "when": "neovim.mode == normal && editorTextFocus",
+    },
+    {
     "key": "shift+space",
     "command": "type",
     "args": {
     "text": "+"
       }
     },
+    {
+        "key": "alt+f7",
+        "command": "merge-conflict.next"
+    }
 ]
