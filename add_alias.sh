@@ -46,6 +46,6 @@ alias amend='git commit --amend -m'
 alias rebasei='bash ~/vimConf/tools/rebase_helper.sh'
 alias commit='git commit -m'
 alias bkf='nohup python ~/vimConf/tools/book_mark_format.py > /dev/null 2>&1 &'
-alias bkfzf='start $(cat $(ls ~/bookmark | fzf))'
+alias bkfzf='start "$(cat $(ls ~/bookmark | fzf))"'
 
 echo "===== Done updating alias ====="
