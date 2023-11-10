@@ -44,5 +44,7 @@ alias continue='git rebase --continue'
 alias abort='git rebase --abort'
 alias amend='git commit --amend -m'
 alias rebasei='bash ~/vimConf/tools/rebase-helper.sh'
+alias commit='git commit -m'
+alias bkf='nohup python ~/vimConf/book_mark_format.py > /dev/null 2>&1 &'
 
-echo "Done updating alias"
+echo "===== Done updating alias ====="
