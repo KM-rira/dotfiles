@@ -25,6 +25,8 @@ bkf
 alias open='nvim ~/.bashrc'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 alias re='source ~/.bashrc'
 alias bashrc='nv ~/.bashrc'
 alias rc='nvim ~/AppData/Local/nvim/init.vim'
