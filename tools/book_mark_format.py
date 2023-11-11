@@ -1,6 +1,6 @@
 import os
 import json
-import shutil
+import time
 
 def sanitize_filename(filename):
     # Windowsファイル名で許可されていない文字
@@ -13,6 +13,7 @@ def sanitize_filename(filename):
     return filename
 
 # JSONファイルのパス
+start = time.time()
 home_dir = os.path.expanduser("~")
 json_file_path = home_dir + "/AppData/Local/Google/Chrome/User Data/Default/Bookmarks"
 
@@ -66,3 +67,7 @@ for folder_name, folder_data in root_folder.items():
                     file.write(url)
                 
 print("===== Done format bookmark json =====")
+end = time.time()
+total = end - start
+print("total")
+print(total)
