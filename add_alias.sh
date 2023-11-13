@@ -48,5 +48,6 @@ alias commit='git commit -m'
 alias bmf='nohup ~/vimConf/tools/book_mark_format.exe > /dev/null 2>&1 &'
 alias bmfzf='start "$(cat $(ls ~/bookmark | fzf))"'
 alias log='git log --oneline | nl | head -n 30'
+alias oneline='git log --oneline'
 
 echo "===== Done updating alias ====="
