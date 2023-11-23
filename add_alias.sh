@@ -13,6 +13,13 @@
 # .bashrcのパス
 BASHRC="$HOME/.bashrc"
 
+# user定義
+#user=""
+#while IFS= read -r line; do
+#    user="${user}${line}"
+#done < ~/user.txt
+#echo -e "$user" | cat -v
+
 # 追加したいエイリアスをこの配列に列挙
 alias historyg='history | grep'
 alias open='nvim ~/.bashrc'
@@ -50,5 +57,16 @@ alias bmformat='nohup ~/vimConf/tools/book_mark_format.exe > /dev/null 2>&1 &'
 alias bmf='~/vimConf/tools/book_mark_fzf.sh'
 alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline'
+
+# ghコマンド
+alias prl="~/vimConf/tools/prl.sh"
+alias isl="~/vimConf/tools/isl.sh"
+alias prs="~/vimConf/tools/prs.sh"
+alias iss="~/vimConf/tools/iss.sh"
+alias prc="~/vimConf/tools/prc.sh"
+alias isc="~/vimConf/tools/isc.sh"
+
+alias prci="~/vimConf/tools/prci.sh"
+alias prch="~/vimConf/tools/prch.sh"
 
 echo "===== Done updating alias ====="
