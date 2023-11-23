@@ -1,7 +1,9 @@
 ## cloneする
+```bash
 git clone https://github.com/KM-rira/vimConf.git
 Username for 'https://github.com': KM-rira
 Password for 'https://KM-rira@github.com': <ここにパーソナルアクセストークンを入力>
+```
 
 ## cp_local.shで、init.vimをコピーする
 
