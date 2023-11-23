@@ -29,3 +29,5 @@ sudo apt-get install fzf
 
 ### windows
 https://github.com/junegunn/fzf-bin/releases
+
+### add github cli
