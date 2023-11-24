@@ -5,7 +5,7 @@ Username for 'https://github.com': KM-rira
 Password for 'https://KM-rira@github.com': <ここにパーソナルアクセストークンを入力>
 ```
 
-## cp_local.shで、init.vimをコピーする
+## cp_local.shで、init.vimを配置する
 
 ## Neovim
 ```bash
