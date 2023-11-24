@@ -15,10 +15,6 @@ if [ $# -gt 0 ]; then
     # optionを設定する
     option=$(~/vimConf/tools/get_status.sh "$arg")
 fi
-cmd="gh pr list $option --repo $repo_name"
 
-# pr/issue 番号取得
-num=$(eval $cmd | fzf | awk '{gsub("#", "", $1); print $1}')
-
-# CIステータス出力
-gh pr checks "$num" --repo "$repo_name"
+cmd="gh issue list $option --json title,url --repo $repo_name"
+eval $cmd

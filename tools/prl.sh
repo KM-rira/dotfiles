@@ -6,25 +6,15 @@ selected_repo=$(gh repo list ${gh_user} | fzf)
 # 選択されたリポジトリからリポジトリ名を抜き取る
 repo_name=$(echo "$selected_repo" | awk '{print $1}')
 
-# 第一引数を変数に格納
-option="$1"
+option=""
+# 引数の有無をチェック
+if [ $# -gt 0 ]; then
+    # 第一引数を変数に格納
+    arg="$1"
 
-# case文を使用して引数に応じた処理を行う
-case $option in
-    a)
-        gh pr list --state all --repo "$repo_name"
-        ;;
-    o)
-        gh pr list --state open --repo "$repo_name"
-        ;;
-    c)
-        gh pr list --state closed --repo "$repo_name"
-        ;;
-    d)
-        gh pr list --draft --repo "$repo_name"
-        ;;
-    *)
-        gh pr list --repo "$repo_name"
-        ;;
-esac
+    # optionを設定する
+    option=$(~/vimConf/tools/get_status.sh "$arg")
+fi
 
+cmd="gh pr list $option --repo $repo_name"
+eval $cmd

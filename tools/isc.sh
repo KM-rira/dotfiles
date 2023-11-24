@@ -6,8 +6,21 @@ selected_repo=$(gh repo list ${gh_user} | fzf)
 # 選択されたリポジトリからリポジトリ名を抜き取る
 repo_name=$(echo "$selected_repo" | awk '{print $1}')
 
+option=""
+# 引数の有無をチェック
+if [ $# -gt 0 ]; then
+    # 第一引数を変数に格納
+    arg="$1"
+
+    # optionを設定する
+    option=$(~/vimConf/tools/get_status.sh "$arg")
+fi
+
+cmd="gh issue list $option --repo $repo_name"
+eval $cmd
+
 # pr/issue 番号取得
-num=$(gh issue list --repo "$repo_name" | fzf | awk '{gsub("#", "", $1); print $1}')
+num=$(eval $cmd | fzf | awk '{gsub("#", "", $1); print $1}')
 
 # コメントリスト出力
 gh issue view "$num" --repo "$repo_name" --comments
