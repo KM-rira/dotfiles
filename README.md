@@ -29,7 +29,7 @@ sudo apt-get update
 sudo apt-get install bat
 ```
 
-## exa instal (Ubuntu 20.04以降であれば、exaは公式のリポジトリに含まれているので、次のコマンドでインストールできます。)
+## exa
 ```bash
 sudo apt update
 sudo apt install exa
