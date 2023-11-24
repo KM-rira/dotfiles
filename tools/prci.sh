@@ -11,5 +11,3 @@ num=$(gh pr list --repo "$repo_name" | fzf | awk '{gsub("#", "", $1); print $1}'
 
 # CIステータス出力
 gh pr checks "$num" --repo "$repo_name"
-gh pr view "$num" --repo "$repo_name"
-
