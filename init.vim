@@ -366,7 +366,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 set number
 highlight LineNr ctermfg=8 ctermbg=235
 " 相対行表示
-#:set relativenumber
+":set relativenumber
 " 現在の行番号の色設定
 highlight CursorLineNr ctermfg=154 ctermbg=2
 " 行を強調表示

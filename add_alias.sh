@@ -68,5 +68,6 @@ alias isc="~/vimConf/tools/isc.sh"
 
 alias prci="~/vimConf/tools/prci.sh"
 alias prch="~/vimConf/tools/prch.sh"
+alias prurl="~/vimConf/tools/prurl.sh"
 
 echo "===== Done updating alias ====="
