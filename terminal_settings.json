@@ -3,9 +3,40 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": 
     [
+        { "command": { "action": "moveFocus", "direction": "down" }, "keys": "alt+j" },
+        { "command": { "action": "moveFocus", "direction": "left" }, "keys": "alt+h" },
+        { "command": { "action": "moveFocus", "direction": "right" }, "keys": "alt+l" },
+        { "command": { "action": "moveFocus", "direction": "up" }, "keys": "alt+k" },
+        { "command": { "action": "moveFocus", "direction": "previous" }, "keys": "ctrl+o" },
+        { "command": "scrollUp", "keys": "ctrl+shift+k" },
+        { "command": "scrollDown", "keys": "ctrl+shift+j" },
+        { "command": "scrollUpPage", "keys": "ctrl+shift+u" },
+        { "command": "scrollDownPage", "keys": "ctrl+shift+d" },
+        { "command": "closeOtherTabs", "keys": "ctrl+shift+o"},
+        { "command": "nextTab", "keys": "ctrl+alt+j" },
+        { "command": "prevTab", "keys": "ctrl+alt+k" },
+        { "command": { "action": "switchToTab", "index": 0 }, "keys": "ctrl+numpad_1" },
+        { "command": { "action": "switchToTab", "index": 1 }, "keys": "ctrl+numpad_2" },
+        { "command": { "action": "switchToTab", "index": 2 }, "keys": "ctrl+numpad_3" },
+        { "command": { "action": "switchToTab", "index": 3 }, "keys": "ctrl+numpad_4" },
+        { "command": { "action": "switchToTab", "index": 4 }, "keys": "ctrl+numpad_5" },
+        { "command": { "action": "switchToTab", "index": 5 }, "keys": "ctrl+numpad_6" },
+        { "command": { "action": "switchToTab", "index": 6 }, "keys": "ctrl+numpad_7" },
+        { "command": { "action": "switchToTab", "index": 7 }, "keys": "ctrl+numpad_8" },
+        { "command": { "action": "switchToTab", "index": 8 }, "keys": "ctrl+numpad_9" },
+        { "command": "switchSelectionEndpoint","keys": "space"},
         {
             "command": "find",
             "keys": "ctrl+shift+f"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "keys": "alt+shift+d"
         },
         {
             "command": "paste",
@@ -18,15 +49,6 @@
                 "singleLine": false
             },
             "keys": "ctrl+c"
-        },
-        {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
-            },
-            "keys": "alt+shift+d"
         }
     ],
     "copyFormatting": "none",
@@ -62,18 +84,8 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "background": "#000000",
-                "cursorColor": "#FE9B9B",
-                "foreground": "#05f8e4",
-                "guid": "{6582cd59-b8bf-5d85-834c-fce6af461b8d}",
-                "hidden": false,
-                "name": "Ubuntu-23.04-gui1",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
-                // "background": "#000000",
-                "foreground": "#05f8e4",
                 "backgroundImage": null,
+                "bellStyle": "none",
                 "cursorColor": "#B4009E",
                 "cursorShape": "filledBox",
                 "experimental.retroTerminalEffect": false,
@@ -81,12 +93,32 @@
                 {
                     "face": "Consolas"
                 },
+                "foreground": "#05F8E4",
                 "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
                 "hidden": false,
                 "name": "Git Bash",
                 "opacity": 100,
                 "source": "Git",
                 "useAcrylic": false
+            },
+            {
+                "background": "#000000",
+                "bellStyle": "none",
+                "colorScheme": "Ubuntu-22.04-ColorScheme",
+                "commandline": "ubuntu2204.exe",
+                "cursorColor": "#B4009E",
+                "cursorShape": "filledBox",
+                "font": 
+                {
+                    "face": "Cascadia Mono",
+                    "size": 13.0
+                },
+                "foreground": "#05F8E4",
+                "guid": "{67effb52-e8f6-4b22-ae22-d4e42b3026c5}",
+                "hidden": false,
+                "icon": "https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png",
+                "name": "Ubuntu 22.04.2 LTS",
+                "tabTitle": "Ubuntu 22.04.2 LTS"
             }
         ]
     },
@@ -392,49 +424,5 @@
             "yellow": "#808000"
         }
     ],
-    "themes": 
-    [
-        {
-            "name": "legacyDark",
-            "tab": 
-            {
-                "background": null,
-                "showCloseButton": "always",
-                "unfocusedBackground": null
-            },
-            "window": 
-            {
-                "applicationTheme": "dark",
-                "useMica": false
-            }
-        },
-        {
-            "name": "legacyLight",
-            "tab": 
-            {
-                "background": null,
-                "showCloseButton": "always",
-                "unfocusedBackground": null
-            },
-            "window": 
-            {
-                "applicationTheme": "light",
-                "useMica": false
-            }
-        },
-        {
-            "name": "legacySystem",
-            "tab": 
-            {
-                "background": null,
-                "showCloseButton": "always",
-                "unfocusedBackground": null
-            },
-            "window": 
-            {
-                "applicationTheme": "system",
-                "useMica": false
-            }
-        }
-    ]
+    "themes": []
 }
