@@ -28,5 +28,6 @@ add_line "HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '"
 add_line "nohup bash ~/vimConf/pull_vimConf.sh > /dev/null 2>&1 &"
 add_line "source ~/vimConf/add_alias.sh"
 add_line "# bmformat"
+add_line 'export BAT_STYLE="header,grid"'
 
 echo "=== Updated $BASHRC if necessary. ==="
