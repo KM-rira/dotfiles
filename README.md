@@ -37,7 +37,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco -v
 powershell reboot
 ```
-#### bat install
+#### bat
 ```bash
 choco install bat
 ```
