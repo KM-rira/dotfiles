@@ -31,7 +31,6 @@ alias re='source ~/.bashrc'
 alias bashrc='nv ~/.bashrc'
 # alias rc='nvim ~/AppData/Local/nvim/init.vim'
 alias nv='nvim'
-alias l='ls -l --color=auto'
 alias historygrep='history | grep'
 alias got='go test -v -cover -run '
 alias status='git status'
@@ -44,7 +43,6 @@ alias fixup='git commit --fixup '
 alias vimConf='cd ~/vimConf'
 alias pull='git pull'
 alias findall='sudo find / -name'
-alias e='exa -l'
 alias batf='fzf | xargs bat'
 alias catf='fzf | xargs cat'
 alias nvf='fzf | xargs nvim'
@@ -70,5 +68,22 @@ alias prci="~/vimConf/tools/prci.sh"
 alias prch="~/vimConf/tools/prch.sh"
 alias prurl="~/vimConf/tools/prurl.sh"
 alias isurl="~/vimConf/tools/isurl.sh"
+
+# OS分岐
+OS=$(uname)
+case $OS in
+    'Linux')
+        alias l='exa -l'
+        ;;
+    'Darwin')
+        echo "Mac"
+        ;;
+    'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
+        alias l='ls -l --color=auto'
+        ;;
+    *)
+        echo "Unknown OS: $OS"
+        ;;
+esac
 
 echo "===== Done updating alias ====="

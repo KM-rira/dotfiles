@@ -24,9 +24,22 @@ https://vimawesome.com/plugin/coc-nvim
 ```
 
 ## bat install
+### linux
 ```bash
 sudo apt-get update
 sudo apt-get install bat
+```
+
+### windows
+#### choco install by powershell
+```bash
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+choco -v
+powershell reboot
+```
+#### bat install
+```bash
+choco install bat
 ```
 
 ## exa
