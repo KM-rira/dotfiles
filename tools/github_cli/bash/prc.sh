@@ -6,7 +6,7 @@ selected_repo=$(gh repo list ${gh_user} | fzf)
 # 選択されたリポジトリからリポジトリ名を抜き取る
 repo_name=$(echo "$selected_repo" | awk '{print $1}')
 
-source ./config.sh
+source ~/vimConf/tools/github_cli/bash/config.sh
 # 引数の数をチェック
 case "$#" in
     *)
