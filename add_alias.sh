@@ -58,6 +58,17 @@ alias bmf='~/vimConf/tools/book_mark_fzf.sh'
 alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline'
 
+# gh
+alias prl="bash ~/vimConf/tools/github_cli/bash/prl.sh"
+alias isl="bash ~/vimConf/tools/github_cli/bash/isl.sh"
+alias prs="bash ~/vimConf/tools/github_cli/bash/prs.sh"
+alias iss="bash ~/vimConf/tools/github_cli/bash/iss.sh"
+alias prc="bash ~/vimConf/tools/github_cli/bash/prc.sh"
+alias isc="bash ~/vimConf/tools/github_cli/bash/isc.sh"
+alias prci="bash ~/vimConf/tools/github_cli/bash/prci.sh"
+alias prch="bash ~/vimConf/tools/github_cli/bash/prch.sh"
+alias prurl="bash ~/vimConf/tools/github_cli/bash/prurl.sh"
+alias isurl="bash ~/vimConf/tools/github_cli/bash/isurl.sh"
 
 # OS分岐
 OS=$(uname)
@@ -65,17 +76,6 @@ case $OS in
     'Linux')
         # ls
         alias l='exa -l'
-        # gh
-        alias prl="python3  ~/vimConf/tools/github_cli/prl.py"
-        alias isl="python3 ~/vimConf/tools/github_cli/isl.py"
-        alias prs="python3 ~/vimConf/tools/github_cli/prs.py"
-        alias iss="python3 ~/vimConf/tools/github_cli/iss.py"
-        alias prc="python3 ~/vimConf/tools/github_cli/prc.py"
-        alias isc="python3 ~/vimConf/tools/github_cli/isc.py"
-        alias prci="python3 ~/vimConf/tools/github_cli/prci.py"
-        alias prch="python3 ~/vimConf/tools/github_cli/prch.py"
-        alias prurl="python3 ~/vimConf/tools/github_cli/prurl.py"
-        alias isurl="python3 ~/vimConf/tools/github_cli/isurl.py"
         ;;
     'Darwin')
         echo "Mac"
@@ -85,17 +85,6 @@ case $OS in
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         # ls
         alias l='ls -l --color=auto'
-        # gh
-        alias prl="python ~/vimConf/tools/github_cli/prl.py"
-        alias isl="python ~/vimConf/tools/github_cli/isl.py"
-        alias prs="python ~/vimConf/tools/github_cli/prs.py"
-        alias iss="python ~/vimConf/tools/github_cli/iss.py"
-        alias prc="python ~/vimConf/tools/github_cli/prc.py"
-        alias isc="python ~/vimConf/tools/github_cli/isc.py"
-        alias prci="python ~/vimConf/tools/github_cli/prci.py"
-        alias prch="python ~/vimConf/tools/github_cli/prch.py"
-        alias prurl="python ~/vimConf/tools/github_cli/prurl.py"
-        alias isurl="python ~/vimConf/tools/github_cli/isurl.py"
         ;;
     *)
         echo "Unknown OS: $OS"

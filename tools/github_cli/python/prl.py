@@ -9,7 +9,8 @@ def run_command(command):
 
 # GitHubのリポジトリ一覧を取得し、fzfで選択させる
 gh_user = os.environ.get('gh_user', 'not export gh_user')
-selected_repo = run_command(f"gh repo list {gh_user} | fzf")
+os.system(f"gh repo list {gh_user} | fzf")
+selected_repo = os.system(f"gh repo list {gh_user} | fzf")
 
 # 選択されたリポジトリからリポジトリ名を抜き取る
 repo_name = selected_repo.split()[0]
