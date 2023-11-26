@@ -67,8 +67,10 @@ alias prc="bash ~/vimConf/tools/github_cli/bash/prc.sh"
 alias isc="bash ~/vimConf/tools/github_cli/bash/isc.sh"
 alias prci="bash ~/vimConf/tools/github_cli/bash/prci.sh"
 alias prch="bash ~/vimConf/tools/github_cli/bash/prch.sh"
-alias prurl="bash ~/vimConf/tools/github_cli/bash/prurl.sh"
-alias isurl="bash ~/vimConf/tools/github_cli/bash/isurl.sh"
+alias pru="bash ~/vimConf/tools/github_cli/bash/prurl.sh"
+alias isu="bash ~/vimConf/tools/github_cli/bash/isurl.sh"
+alias prw="bash ~/vimConf/tools/github_cli/bash/prw.sh"
+alias isw="bash ~/vimConf/tools/github_cli/bash/isw.sh"
 
 # OS分岐
 OS=$(uname)
