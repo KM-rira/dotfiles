@@ -59,6 +59,10 @@
         }
     },
     {
+        "key": "ctrl+alt+f4",
+        "command": "workbench.action.closeOtherEditors"
+    },
+    {
         "key": "shift+oem_102",
         "command": "editor.action.showHover",
         "when": "neovim.mode == normal && editorTextFocus",
