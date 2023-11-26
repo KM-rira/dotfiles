@@ -56,6 +56,7 @@ alias commit='git commit -m'
 alias bmf='~/vimConf/tools/book_mark_format/book_mark_format.exe;~/vimConf/tools/book_mark_format/book_mark_fzf.sh'
 alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline'
+alias gs='bash ~/vimConf/tools/google_search.sh'
 
 # gh
 alias prl="bash ~/vimConf/tools/github_cli/bash/prl.sh"
