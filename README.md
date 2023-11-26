@@ -33,12 +33,14 @@ sudo apt-get install bat
 ### windows
 #### choco install by powershell
 ```bash
+# 管理者権限で
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 choco -v
 powershell reboot
 ```
 #### bat
 ```bash
+# 管理者権限で
 choco install bat
 ```
 
@@ -73,3 +75,14 @@ https://cli.github.com/
 gh auth login
 ```
 
+## jq
+```bash
+sudo apt update
+sudo apt install jq
+```
+
+### windows
+```bash
+# 管理者権限で
+choco install jq
+```
