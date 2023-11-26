@@ -26,6 +26,7 @@ alias open='nvim ~/.bashrc'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias -='cd -'
 alias ll='ls -lt'
 alias re='source ~/.bashrc'
 alias bashrc='nv ~/.bashrc'
@@ -58,17 +59,17 @@ alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline'
 
 # ghコマンド
-alias prl="~/vimConf/tools/prl.sh"
-alias isl="~/vimConf/tools/isl.sh"
-alias prs="~/vimConf/tools/prs.sh"
-alias iss="~/vimConf/tools/iss.sh"
-alias prc="~/vimConf/tools/prc.sh"
-alias isc="~/vimConf/tools/isc.sh"
+alias prl="python ~/vimConf/tools/github_cli/prl.sh"
+alias isl="python ~/vimConf/tools/github_cli/isl.sh"
+alias prs="python ~/vimConf/tools/github_cli/prs.sh"
+alias iss="python ~/vimConf/tools/github_cli/iss.sh"
+alias prc="python ~/vimConf/tools/github_cli/prc.sh"
+alias isc="python ~/vimConf/tools/github_cli/isc.sh"
 
-alias prci="~/vimConf/tools/prci.sh"
-alias prch="~/vimConf/tools/prch.sh"
-alias prurl="~/vimConf/tools/prurl.sh"
-alias isurl="~/vimConf/tools/isurl.sh"
+alias prci="python ~/vimConf/tools/github_cli/prci.sh"
+alias prch="python ~/vimConf/tools/github_cli/prch.sh"
+alias prurl="python ~/vimConf/tools/github_cli/prurl.sh"
+alias isurl="python ~/vimConf/tools/github_cli/isurl.sh"
 
 # OS分岐
 OS=$(uname)
@@ -78,6 +79,7 @@ case $OS in
         ;;
     'Darwin')
         echo "Mac"
+        alias l='exa -l'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='ls -l --color=auto'
