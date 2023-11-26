@@ -59,17 +59,17 @@ alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline'
 
 # ghコマンド
-alias prl="python ~/vimConf/tools/github_cli/prl.sh"
-alias isl="python ~/vimConf/tools/github_cli/isl.sh"
-alias prs="python ~/vimConf/tools/github_cli/prs.sh"
-alias iss="python ~/vimConf/tools/github_cli/iss.sh"
-alias prc="python ~/vimConf/tools/github_cli/prc.sh"
-alias isc="python ~/vimConf/tools/github_cli/isc.sh"
+alias prl="python ~/vimConf/tools/github_cli/prl.py"
+alias isl="python ~/vimConf/tools/github_cli/isl.py"
+alias prs="python ~/vimConf/tools/github_cli/prs.py"
+alias iss="python ~/vimConf/tools/github_cli/iss.py"
+alias prc="python ~/vimConf/tools/github_cli/prc.py"
+alias isc="python ~/vimConf/tools/github_cli/isc.py"
 
-alias prci="python ~/vimConf/tools/github_cli/prci.sh"
-alias prch="python ~/vimConf/tools/github_cli/prch.sh"
-alias prurl="python ~/vimConf/tools/github_cli/prurl.sh"
-alias isurl="python ~/vimConf/tools/github_cli/isurl.sh"
+alias prci="python ~/vimConf/tools/github_cli/prci.py"
+alias prch="python ~/vimConf/tools/github_cli/prch.py"
+alias prurl="python ~/vimConf/tools/github_cli/prurl.py"
+alias isurl="python ~/vimConf/tools/github_cli/isurl.py"
 
 # OS分岐
 OS=$(uname)
