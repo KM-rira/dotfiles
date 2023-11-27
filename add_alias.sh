@@ -79,6 +79,7 @@ alias pru="bash ~/vimConf/tools/github_cli/bash/pru.sh"
 alias isu="bash ~/vimConf/tools/github_cli/bash/isu.sh"
 alias prw="bash ~/vimConf/tools/github_cli/bash/prw.sh"
 alias isw="bash ~/vimConf/tools/github_cli/bash/isw.sh"
+alias prco="bash ~/vimConf/tools/github_cli/bash/prco.sh"
 
 # OS分岐
 OS=$(uname)
