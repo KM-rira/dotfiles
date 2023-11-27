@@ -15,12 +15,15 @@ nohup bash ~/vimConf/pull_vimConf.sh > /dev/null 2>&1 &
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 shopt -s histappend
 
+# 非同期実行
+source ~/vimConf/add_alias.sh
+
+# export variable
+export BAT_STYLE="header,grid"
+
 # alias command
 unalias -a
 
-# 非同期実行
-source ~/vimConf/add_alias.sh
-bkf
 
 alias open='nvim ~/.bashrc'
 alias ..='cd ..'
