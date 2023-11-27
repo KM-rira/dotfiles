@@ -16,11 +16,9 @@ search_word=$(echo $search_word | sed 's/ $//')  # 末尾のスペースを削�
 # URLエンコード
 encoded_word=$(echo $search_word | jq -sRr @uri)
 
-# Free Dictionary API を使用して単語の意味を取得
 url="https://www.google.com/search?q=$encoded_word"
 
 # 結果を表示
-echo "search: '${search_word}'"
-echo "$response"
+echo "===== Google search: '${search_word}' ====="
 
 start "$url"

@@ -22,6 +22,8 @@ BASHRC="$HOME/.bashrc"
 
 # export variable
 export BAT_STYLE="header,grid"
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+shopt -s histappend
 
 # 追加したいエイリアスをこの配列に列挙
 alias historyg='history | grep'
@@ -61,6 +63,7 @@ alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline'
 alias gs='bash ~/vimConf/tools/google_search.sh'
 alias gr='bash ~/vimConf/tools/google_research.sh'
+alias hs='bash ~/vimConf/tools/history_search.sh'
 alias un='uname'
 
 # gh
