@@ -20,6 +20,9 @@ BASHRC="$HOME/.bashrc"
 #done < ~/user.txt
 #echo -e "$user" | cat -v
 
+# export variable
+export BAT_STYLE="header,grid"
+
 # 追加したいエイリアスをこの配列に列挙
 alias historyg='history | grep'
 alias open='nvim ~/.bashrc'
