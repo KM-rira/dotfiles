@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Chrome履歴ファイルのパス
-CHROME_HISTORY="$HOME/Library/Application Support/Google/Chrome/Default/History"
+CHROME_HISTORY="$HOME/AppData/Local/Google/Chrome/User Data//History"
 
 # 履歴ファイルのコピーを作成（Chromeが使用中の場合のため）
 HISTORY_DB="$HOME/chrome_history_copy.db"
