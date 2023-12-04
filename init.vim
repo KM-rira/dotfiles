@@ -1,6 +1,37 @@
 set encoding=utf-8
 scriptencoding utf-8
 
+"----------------------------------------
+" プラグインを追加
+"----------------------------------------
+"neovim特有の設定"
+set shellcmdflag=-c
+
+call plug#begin('~/.vim/plugged')
+
+" NERDTree プラグイン
+Plug 'preservim/nerdtree'
+
+" ヘルプ日本語化
+Plug 'vim-jp/vimdoc-ja'
+
+" インデントの階層色設定
+Plug 'nathanaelkane/vim-indent-guides'
+
+" ステータスラインを表示
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" ファイル検索
+Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'neovim/nvim-lspconfig'
+Plug 'ray-x/go.nvim'
+Plug 'ray-x/guihua.lua' ; recommended if need floating window support
+
+call plug#end()
+
 "----------------------------------------------------------
 " クリップボードからのペースト
 "----------------------------------------------------------
@@ -146,92 +177,6 @@ augroup MyXML
   autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
   autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 augroup END
-
-"----------------------------------------
-" プラグインを追加
-"----------------------------------------
-"neovim特有の設定"
-set shellcmdflag=-c
-
-call plug#begin('~/.vim/plugged')
-
-" NERDTree プラグイン
-Plug 'preservim/nerdtree'
-
-" coc.nvim プラグイン
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" 非同期補完プラグイン(<Plug>_廃止)
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" python プラグイン
-"Plug 'deoplete-plugins/deoplete-jedi'
-
-" ヘルプ日本語化
-Plug 'vim-jp/vimdoc-ja'
-
-" インデントの階層色設定
-Plug 'nathanaelkane/vim-indent-guides'
-
-" ステータスラインを表示
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Language Server Protocol
-Plug 'neovim/nvim-lspconfig'
-
-" ファイル検索
-Plug 'ctrlpvim/ctrlp.vim'
-
-" Go development
-" go get golang.org/x/tools/gopls@latestを忘れずに
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " Goの開発に必須のプラグイン
-Plug 'neovim/nvim-lspconfig' " NeovimのLSPサポート
-Plug 'hrsh7th/nvim-compe' " オートコンプリート
-
-call plug#end()
-
-" tabスラインを表示
-let g:airline#extensions#tabline#enabled = 1
-
-" LSPとvim-goの設定
-autocmd FileType go setlocal ts=4 sw=4 expandtab
-"let g:go_def_mode='gopls' " vim-goの定義ジャンプをgoplsで行う gopls廃止
-let g:go_auto_type_info = 1 " カーソル下の型情報を自動的に表示
-
-" LSP設定 （廃止）
-"lua << EOF
-"require'lspconfig'.gopls.setup{
-"  cmd = {"gopls", "--remote=auto"};
-"}
-"EOF
-
-" Compe設定
-let g:compe = {}
-let g:compe.enabled = v:true
-let g:compe.autocomplete = v:true
-let g:compe.debug = v:false
-let g:compe.min_length = 1
-let g:compe.preselect = 'enable'
-let g:compe.throttle_time = 80
-let g:compe.source_timeout = 200
-let g:compe.incomplete_delay = 400
-let g:compe.max_abbr_width = 100
-let g:compe.max_kind_width = 100
-let g:compe.max_menu_width = 100
-let g:compe.documentation = v:true
-let g:compe.source = {}
-let g:compe.source.path = v:true
-let g:compe.source.buffer = v:true
-let g:compe.source.calc = v:true
-let g:compe.source.vsnip = v:true
-let g:compe.source.nvim_lsp = v:true
-let g:compe.source.nvim_lua = v:true
-let g:compe.source.spell = v:true
-let g:compe.source.tags = v:true
-let g:compe.source.snippets_nvim = v:false
-
-"deoplete有効化
-let g:deoplete#enable_at_startup = 1
 
 "----------------------------------------
 " コマンドマッピング
