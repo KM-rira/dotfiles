@@ -32,6 +32,8 @@ Plug 'ray-x/guihua.lua' ; recommended if need floating window support
 
 call plug#end()
 
+require('go').setup()
+require'lspconfig'.gopls.setup{}
 "----------------------------------------------------------
 " クリップボードからのペースト
 "----------------------------------------------------------
