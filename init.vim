@@ -25,9 +25,11 @@ Plug 'vim-airline/vim-airline-themes'
 " ファイル検索
 Plug 'ctrlpvim/ctrlp.vim'
 
+" coc.nvim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'neovim/nvim-lspconfig'
-Plug 'ray-x/go.nvim'
 Plug 'ray-x/guihua.lua' ; recommended if need floating window support
 
 call plug#end()

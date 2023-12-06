@@ -164,3 +164,14 @@ git config --global color.diff.new "green bold"
 git config --global color.diff.whitespace "red reverse"
 ```
 
+## node.js
+### linux
+```bash
+# update
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+re
+nvm install node
+node -v
+```
+
+
