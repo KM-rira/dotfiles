@@ -7,12 +7,39 @@ Password for 'https://KM-rira@github.com': <ここにパーソナルアクセス
 
 ## cp_local.shで、init.vimを配置する
 
+## Go
+### linux
+```bash
+# 最新バージョン確認
+https://go.dev/dl/
+
+curl -O https://dl.google.com/go/go1.x.x.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.x.x.linux-amd64.tar.gz
+
+# bashrcに追加
+export PATH=$PATH:/usr/local/go/bin
+source ~/.bashrc
+go version
+```
+
 ## Neovim
+### linux
+#### install
 ```bash
 sudo apt update
 sudo apt install neovim
+nvim --version
 ```
 
+#### update
+```bash
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt update
+sudo apt install neovim
+nvim --version
+```
+
+```bash
 ### vim-plugのインストール
 ```bash
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
