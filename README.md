@@ -93,6 +93,10 @@ sudo apt update
 # install npm
 sudo apt install nodejs npm
 
+# proxyの設定が必要かも
+# npm config set proxy http://proxy.xxx:8080
+# npm config set https-proxy http://proxy.xxx:8080
+
 # install diff-so-fancy by npm
 sudo npm install -g diff-so-fancy
 
@@ -116,7 +120,7 @@ git config --global color.diff.whitespace "red reverse"
 # nodejs install
 
 # install diff-so-fancy by npm
-sudo npm install -g diff-so-fancy
+npm install -g diff-so-fancy
 
 # color
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"

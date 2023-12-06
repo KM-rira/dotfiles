@@ -67,6 +67,11 @@ alias hs='bash ~/vimConf/tools/history_search.sh'
 alias un='uname'
 alias diffsofancy="bash ~/vimConf/tools/diff_so_fancy_change.sh"
 alias diffs="git diff --staged"
+alias diff="git diff"
+alias restore="git restore --staged"
+alias restorea="git restore --staged ."
+alias add="git add"
+alias adda="git add ."
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/prl.sh"
