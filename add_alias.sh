@@ -65,21 +65,23 @@ alias gs='bash ~/vimConf/tools/google_search.sh'
 alias gr='bash ~/vimConf/tools/google_research.sh'
 alias hs='bash ~/vimConf/tools/history_search.sh'
 alias un='uname'
+alias diffsofancy="bash ~/vimConf/tools/diff_so_fancy_change.sh"
+alias diffs="git diff --staged"
 
 # gh
-alias gprl="bash ~/vimConf/tools/github_cli/bash/prl.sh"
-alias gisl="bash ~/vimConf/tools/github_cli/bash/isl.sh"
-alias gprs="bash ~/vimConf/tools/github_cli/bash/prs.sh"
-alias giss="bash ~/vimConf/tools/github_cli/bash/iss.sh"
-alias gprc="bash ~/vimConf/tools/github_cli/bash/prc.sh"
-alias gisc="bash ~/vimConf/tools/github_cli/bash/isc.sh"
-alias gprci="bash ~/vimConf/tools/github_cli/bash/prci.sh"
-alias gprch="bash ~/vimConf/tools/github_cli/bash/prch.sh"
-alias gpru="bash ~/vimConf/tools/github_cli/bash/pru.sh"
-alias gisu="bash ~/vimConf/tools/github_cli/bash/isu.sh"
-alias gprw="bash ~/vimConf/tools/github_cli/bash/prw.sh"
-alias gisw="bash ~/vimConf/tools/github_cli/bash/isw.sh"
-alias gprco="bash ~/vimConf/tools/github_cli/bash/prco.sh"
+alias gpl="bash ~/vimConf/tools/github_cli/bash/prl.sh"
+alias gil="bash ~/vimConf/tools/github_cli/bash/isl.sh"
+alias gps="bash ~/vimConf/tools/github_cli/bash/prs.sh"
+alias gis="bash ~/vimConf/tools/github_cli/bash/iss.sh"
+alias gpc="bash ~/vimConf/tools/github_cli/bash/prc.sh"
+alias gic="bash ~/vimConf/tools/github_cli/bash/isc.sh"
+alias gpci="bash ~/vimConf/tools/github_cli/bash/prci.sh"
+alias gpch="bash ~/vimConf/tools/github_cli/bash/prch.sh"
+alias gpu="bash ~/vimConf/tools/github_cli/bash/pru.sh"
+alias giu="bash ~/vimConf/tools/github_cli/bash/isu.sh"
+alias gpw="bash ~/vimConf/tools/github_cli/bash/prw.sh"
+alias giw="bash ~/vimConf/tools/github_cli/bash/isw.sh"
+alias gpco="bash ~/vimConf/tools/github_cli/bash/prco.sh"
 
 # OS分岐
 OS=$(uname)

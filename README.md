@@ -78,7 +78,6 @@ gh auth login
 ## jq
 ```bash
 sudo apt update
-sudo apt install jq
 ```
 
 ### windows
@@ -86,3 +85,51 @@ sudo apt install jq
 # 管理者権限で
 choco install jq
 ```
+
+## diff-so-fancy
+### linux
+```bash
+sudo apt update
+# install npm
+sudo apt install nodejs npm
+
+# install diff-so-fancy by npm
+sudo npm install -g diff-so-fancy
+
+# color
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global color.ui true
+git config --global color.diff-highlight.oldNormal "red bold"
+git config --global color.diff-highlight.oldHighlight "red bold 52"
+git config --global color.diff-highlight.newNormal "green bold"
+git config --global color.diff-highlight.newHighlight "green bold 22"
+git config --global color.diff.meta "11"
+git config --global color.diff.frag "magenta bold"
+git config --global color.diff.commit "yellow bold"
+git config --global color.diff.old "red bold"
+git config --global color.diff.new "green bold"
+git config --global color.diff.whitespace "red reverse"
+```
+
+### windows
+```bash
+# nodejs install
+
+# install diff-so-fancy by npm
+sudo npm install -g diff-so-fancy
+
+# color
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+git config --global color.ui true
+git config --global color.diff-highlight.oldNormal "red bold"
+git config --global color.diff-highlight.oldHighlight "red bold 52"
+git config --global color.diff-highlight.newNormal "green bold"
+git config --global color.diff-highlight.newHighlight "green bold 22"
+git config --global color.diff.meta "11"
+git config --global color.diff.frag "magenta bold"
+git config --global color.diff.commit "yellow bold"
+git config --global color.diff.old "red bold"
+git config --global color.diff.new "green bold"
+git config --global color.diff.whitespace "red reverse"
+```
+
