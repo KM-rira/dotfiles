@@ -31,6 +31,11 @@ sudo apt install neovim
 nvim --version
 ```
 
+## coc.nvim
+```bash
+:CocInstall coc-go
+```
+
 #### update
 ```bash
 sudo add-apt-repository ppa:neovim-ppa/stable

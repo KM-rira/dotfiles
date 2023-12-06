@@ -6,7 +6,7 @@ case $OS in
     'Linux')
         echo "Linux"
         mkdir -p ~/.config/nvim
-        cp init.vim ~/.config/nvim/init.vim
+        cp -R ~/vimConf/nvim/* ~/.config/nvim
         ;;
     'Darwin')
         echo "Mac"
@@ -14,7 +14,7 @@ case $OS in
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         echo "Windows"
         mkdir -p ~/AppData/Local/nvim
-        cp init.vim ~/AppData/Local/nvim/init.vim
+        cp -R ~/vimConf/nvim/* ~/AppData/Local/nvim
         ;;
     *)
         echo "Unknown OS: $OS"

@@ -36,6 +36,7 @@ call plug#end()
 
 require('go').setup()
 require'lspconfig'.gopls.setup{}
+nmap <silent> gd <Plug>(coc-definition)
 "----------------------------------------------------------
 " クリップボードからのペースト
 "----------------------------------------------------------
