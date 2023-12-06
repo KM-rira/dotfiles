@@ -28,6 +28,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 " coc.nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" カラースキーム
+Plug 'EdenEast/nightfox.nvim'
+Plug 'joshdick/onedark.vim'
+
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'neovim/nvim-lspconfig'
 Plug 'ray-x/guihua.lua' ; recommended if need floating window support
@@ -307,8 +311,9 @@ if exists("syntax_on")
 endif
 
 " カラースキームON
-colorscheme industry
+"colorscheme industry
 
+colorscheme nightfox
 " インデントが最初からカラーリング
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=None   ctermbg=234
@@ -318,8 +323,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 " 行番号表示
 set number
 highlight LineNr ctermfg=8 ctermbg=235
-" 相対行表示
-":set relativenumber
 " 現在の行番号の色設定
 highlight CursorLineNr ctermfg=154 ctermbg=2
 " 行を強調表示
@@ -399,4 +402,6 @@ command! -nargs=+ SearchAndGrep call SearchAndGrep(<f-args>)
 " クリップボードが使用可能
 set clipboard&
 set clipboard^=unnamedplus
+
+"colorscheme onedark
 
