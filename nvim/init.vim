@@ -32,6 +32,9 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'neovim/nvim-lspconfig'
 Plug 'ray-x/guihua.lua' ; recommended if need floating window support
 
+# golang
+Plug 'mattn/vim-goimports'
+
 call plug#end()
 
 require('go').setup()
