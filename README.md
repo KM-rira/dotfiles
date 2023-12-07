@@ -38,6 +38,7 @@ nvim --version
 
 #### update
 ```bash
+sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt update
 sudo apt install neovim
@@ -180,6 +181,7 @@ node -v
 ```
 
 ## Go install
+### gopls
 ```
 go install golang.org/x/tools/gopls@latest
 go install golang.org/x/tools/cmd/goimports@latest
