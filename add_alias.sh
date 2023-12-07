@@ -92,17 +92,17 @@ alias gpco="bash ~/vimConf/tools/github_cli/bash/prco.sh"
 OS=$(uname)
 case $OS in
     'Linux')
-        # ls
         alias l='exa -l'
+        alias rc='nvim ~/.config/nvim/init.vim'
         ;;
     'Darwin')
         echo "Mac"
-        # ls
         alias l='exa -l'
+        alias rc='nvim ~/.config/nvim/init.vim'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
-        # ls
         alias l='ls -l --color=auto'
+        alias rc='nvim ~/AppData/Local/nvim/init.vim'
         ;;
     *)
         echo "Unknown OS: $OS"
