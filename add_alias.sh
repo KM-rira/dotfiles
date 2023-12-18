@@ -26,7 +26,6 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 shopt -s histappend
 
 # 追加したいエイリアスをこの配列に列挙
-alias historyg='history | grep'
 alias open='nvim ~/.bashrc'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -37,7 +36,7 @@ alias re='source ~/.bashrc'
 alias bashrc='nv ~/.bashrc'
 # alias rc='nvim ~/AppData/Local/nvim/init.vim'
 alias nv='nvim'
-alias historygrep='history | grep'
+alias hg='history | grep'
 alias got='go test -v -cover -run '
 alias status='git status'
 alias push='git push'
