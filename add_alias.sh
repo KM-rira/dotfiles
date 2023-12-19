@@ -71,6 +71,7 @@ alias restore="git restore --staged"
 alias restorea="git restore --staged ."
 alias add="git add"
 alias adda="git add ."
+alias reseth="git fetch;git reset --hard"
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/prl.sh"
