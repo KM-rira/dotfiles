@@ -11,7 +11,8 @@ selected_repo=$(echo $repo_url | sed -e 's/.*://' -e 's/\.git$//')
 # リポジトリ名の抽出失敗した場合
 if [ -z "$selected_repo" ]; then
     # GitHubのリポジトリ一覧を取得し、fzfで選択させる
-    selected_repo=$(gh repo list ${gh_user} --limit ${Limit1} | fzf)
+    selected_repo=$(gh repo list ${gh_user} --limit ${Limit1} | 
+    fzf --no-sort --reverse --prompt='select REPOSITORY: ' --no-multi)
 fi
 
 # 選択されたリポジトリからリポジトリ名を抜き取る
@@ -35,7 +36,7 @@ case "$#" in
                     Type='--draft'
                     ;;
                 [1-9]*)
-                    Limit=$arg
+                    Limit2=$arg
                     ;;
             esac
         done
@@ -49,7 +50,7 @@ json_data=$(eval $cmd)
 
 titles=$(echo $json_data | jq -r '.[].title')
 
-selected_title=$(echo "$titles" | fzf)
+selected_title=$(echo "$titles" | fzf --no-sort --reverse --prompt='select PR: ' --no-multi)
 
 # 選択されたtitleに対応するurlを取得
 selected_url=$(echo "$json_data" | jq -r --arg title "$selected_title" '.[] | select(.title == $title) | .url')
