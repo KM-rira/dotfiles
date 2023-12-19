@@ -33,7 +33,7 @@ case "$#" in
         ;;
 esac
 
-cmd="gh issue list $Type --repo $repo_name --limit $Limit"
+cmd="gh issue list $Type --repo $repo_name --limit $Limit2"
 
 # pr/issue 番号取得
 num=$(eval $cmd | fzf | awk '{gsub("#", "", $1); print $1}')

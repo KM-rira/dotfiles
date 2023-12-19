@@ -32,5 +32,5 @@ case "$#" in
         done
         ;;
 esac
-cmd="gh issue list $Type --repo $repo_name --limit $Limit"
+cmd="gh issue list $Type --repo $repo_name --limit $Limit2"
 eval $cmd

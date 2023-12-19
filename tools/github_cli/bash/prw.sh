@@ -33,7 +33,7 @@ case "$#" in
         ;;
 esac
 
-cmd="gh pr list $Type --json title,url --repo $repo_name --limit $Limit"
+cmd="gh pr list $Type --json title,url --repo $repo_name --limit $Limit2"
 
 # GitHub CLIでリストをJSON形式で取得
 json_data=$(eval $cmd)
