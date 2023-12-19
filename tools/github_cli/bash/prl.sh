@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # GitHubのリポジトリ一覧を取得し、fzfで選択させる
-selected_repo=$(gh repo list ${gh_user} | fzf)
+selected_repo=$(gh repo list ${gh_user} --limit 100 | fzf)
 
 # 選択されたリポジトリからリポジトリ名を抜き取る
 repo_name=$(echo "$selected_repo" | awk '{print $1}')
