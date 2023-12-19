@@ -1,13 +1,13 @@
 #!/bin/bash
 
-$Selected_repo=""
+Selected_repo=""
 
 # Gitリポジトリのorigin URLを取得
 repo_url=$(git config --get remote.origin.url)
 
 # リポジトリURLが取得できたかどうかを確認
 if [ -z "$repo_url" ]; then
-    $Selected_repo=""
+    Selected_repo=""
     exit 1
 fi
 
