@@ -1,12 +1,15 @@
 #!/bin/bash
 
 source ~/vimConf/tools/github_cli/bash/config.sh
+source ~/vimConf/tools/github_cli/bash/get_repo.sh
 
-# GitHubのリポジトリ一覧を取得し、fzfで選択させる
-selected_repo=$(gh repo list ${gh_user} --limit ${Limit1} | fzf)
+if [ -z "$Selected_repo" ]; then
+    # GitHubのリポジトリ一覧を取得し、fzfで選択させる
+    Selected_repo=$(gh repo list ${gh_user} --limit ${Limit1} | fzf)
+fi
 
 # 選択されたリポジトリからリポジトリ名を抜き取る
-repo_name=$(echo "$selected_repo" | awk '{print $1}')
+repo_name=$(echo "$Selected_repo" | awk '{print $1}')
 
 # 引数の数をチェック
 case "$#" in
