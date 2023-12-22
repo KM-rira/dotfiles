@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ~/vimConf/tools/github_cli/bash/config.sh
+source ~/vimConf/tools/github_cli/bash/option.sh
 
 # Gitリポジトリのorigin URLを取得
 repo_url=$(git config --get remote.origin.url)
@@ -9,7 +10,7 @@ repo_url=$(git config --get remote.origin.url)
 selected_repo=$(echo $repo_url | sed -e 's/.*://' -e 's/\.git$//')
 
 # リポジトリ名の抽出失敗した場合
-if [ -z "$selected_repo" ]; then
+if [ -z "$selected_repo" ] || [ "$select_repo_flg" = true ]; then
     # GitHubのリポジトリ一覧を取得し、fzfで選択させる
     selected_repo=$(gh repo list ${gh_user} --limit ${Limit1} | 
     fzf --no-sort --reverse --prompt='select REPOSITORY: ' --no-multi)
@@ -17,31 +18,6 @@ fi
 
 # 選択されたリポジトリからリポジトリ名を抜き取る
 repo_name=$(echo "$selected_repo" | awk '{print $1}')
-
-# 引数の数をチェック
-case "$#" in
-    *)
-        for arg in "$@"; do
-            case "$arg" in
-                a)
-                    Type='--state all'
-                    ;;
-                o)
-                    Type='--state open'
-                    ;;
-                c)
-                    Type='--state closed'
-                    ;;
-                d)
-                    Type='--draft'
-                    ;;
-                [1-9]*)
-                    Limit2=$arg
-                    ;;
-            esac
-        done
-        ;;
-esac
 
 cmd="gh pr list $Type --repo $repo_name --limit $Limit2"
 
