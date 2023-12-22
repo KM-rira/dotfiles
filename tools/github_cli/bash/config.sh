@@ -1,3 +1,3 @@
-Limit1="1000"
-Limit2="1000"
+Limit1="10000"
+Limit2="10000"
 Type=""

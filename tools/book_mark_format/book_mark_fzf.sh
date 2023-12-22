@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Bookmarkフォルダ内のファイルをfzfで検索
-selected_file=$(ls ~/bookmark | fzf)
+selected_file=$(ls ~/bookmark | fzf --no-sort --reverse --prompt='select BOOKMARK: ' --no-multi)
 
 # ファイルが選択されなかった場合の処理
 if [ -z "$selected_file" ]; then
