@@ -200,4 +200,13 @@ go install golang.org/x/tools/cmd/goimports@latest
 choco install glow
 ```
 
+## ソフトリンク作成
+```bash
+ln -s ~/vimConf/nvim/init.vim ./init.vim
+```
+
+
+
+
+
 
