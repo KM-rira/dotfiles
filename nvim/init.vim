@@ -11,6 +11,8 @@ call plug#begin('~/.vim/plugged')
 
 " NERDTree プラグイン
 Plug 'preservim/nerdtree'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " ヘルプ日本語化
 Plug 'vim-jp/vimdoc-ja'
@@ -38,7 +40,62 @@ Plug 'neovim/nvim-lspconfig'
 " golang
 Plug 'mattn/vim-goimports'
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+
 call plug#end()
+
+"----------------------------------------------------------
+" lua
+"----------------------------------------------------------
+
+lua << EOF
+require'nvim-tree'.setup {
+  -- netrw を完全に無効化
+  disable_netrw = true,
+  -- 起動時に netrw ウィンドウをハイジャック
+  hijack_netrw = true,
+  -- `DirChanged` でツリーのルートディレクトリを更新（通常は `:cd` を実行したとき）
+  update_cwd = true,
+  -- サインカラムに診断情報を表示
+  diagnostics = {
+    enable = true,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    }
+  },
+  -- `BufEnter` でフォーカスされたファイルを更新し、ファイルが見つかるまでフォルダーを再帰的に展開
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+    ignore_list = {}
+  },
+  -- システムオープンコマンドの設定（デフォルトではツリー内の `s`）
+  system_open = {
+    cmd = nil,
+    args = {}
+  },
+  filters = {
+    dotfiles = false,
+    custom = {}
+  },
+  git = {
+    enable = true,
+    ignore = true,
+    timeout = 500,
+  },
+  view = {
+    -- ウィンドウの幅、数値（列）または `%` での文字列のいずれかにできる
+    width = 30,
+    -- ツリーの位置、'left' | 'right' | 'top' | 'bottom' のいずれか
+    side = 'left',
+    -- マッピングの設定は個別に行う
+  }
+}
+EOF
 
 nmap <silent> gd <Plug>(coc-definition)
 "----------------------------------------------------------
@@ -262,7 +319,7 @@ cnoreabbrev he help
 nnoremap <F2> <C-v>
 vnoremap <F2> <C-v>
 " NerdTree開く
-nnoremap <C-e> :NERDTreeToggle<CR>
+nnoremap <C-e> :NvimTreeToggle<CR>
 
 nnoremap <F5> :source $MYVIMRC<CR>
 command! Re source $MYVIMRC
@@ -346,7 +403,13 @@ autocmd VimEnter,Colorscheme * :highlight goKeyword ctermfg=196
 "set mouse=a
 set breakindent
 " Nerdtree自動終了
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'nerdtree') | q | endif
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'NvimTree') | quit | endif
+
+" nvimtreeの色
+hi NvimTreeFolderIcon guibg=blue
+hi NvimTreeFolderName guifg=blue
+hi NvimTreeIndentMarker guifg=#585858
+
 
 " 正規表現を使用せずに置換する
 function! Ch(word1, word2)
