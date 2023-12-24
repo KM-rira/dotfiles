@@ -34,9 +34,8 @@ Plug 'joshdick/onedark.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'neovim/nvim-lspconfig'
-Plug 'ray-x/guihua.lua' ; recommended if need floating window support
 
-# golang
+" golang
 Plug 'mattn/vim-goimports'
 
 call plug#end()

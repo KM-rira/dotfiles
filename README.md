@@ -31,6 +31,12 @@ sudo apt install neovim
 nvim --version
 ```
 
+## Neovim update
+### linux
+```bash
+sudo snap install nvim --classic
+```
+
 ## coc.nvim
 ```bash
 :CocInstall coc-go
@@ -193,3 +199,5 @@ go install golang.org/x/tools/cmd/goimports@latest
 # 管理者権限で
 choco install glow
 ```
+
+
