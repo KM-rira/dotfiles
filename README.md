@@ -186,3 +186,10 @@ node -v
 go install golang.org/x/tools/gopls@latest
 go install golang.org/x/tools/cmd/goimports@latest
 ```
+
+## glow install
+### windows
+```bash
+# 管理者権限で
+choco install glow
+```
