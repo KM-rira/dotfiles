@@ -312,8 +312,10 @@ endif
 
 " カラースキームON
 "colorscheme industry
+"colorscheme nightfox
+syntax on
+colorscheme onedark
 
-colorscheme nightfox
 " インデントが最初からカラーリング
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=None   ctermbg=234
@@ -324,10 +326,10 @@ let g:indent_guides_enable_on_vim_startup = 1
 set number
 highlight LineNr ctermfg=8 ctermbg=235
 " 現在の行番号の色設定
-highlight CursorLineNr ctermfg=154 ctermbg=2
+highlight CursorLineNr ctermfg=214
 " 行を強調表示
 set cursorline
-highlight CursorLine ctermbg=17
+"highlight CursorLine ctermbg=17
 " 列を強調表示
 "set cursorcolumn
 "highlight CursorColumn cterm=none ctermbg=17

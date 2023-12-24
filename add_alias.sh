@@ -94,15 +94,18 @@ case $OS in
     'Linux')
         alias l='exa -l'
         alias rc='nvim ~/.config/nvim/init.vim'
+        alias wez='echo "not windows"'
         ;;
     'Darwin')
         echo "Mac"
         alias l='exa -l'
         alias rc='nvim ~/.config/nvim/init.vim'
+        alias wez='echo "not windows"'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='ls -l --color=auto'
         alias rc='nvim ~/AppData/Local/nvim/init.vim'
+        alias wez='nvim ~/.config/wezterm/wezterm.lua'
         ;;
     *)
         echo "Unknown OS: $OS"
