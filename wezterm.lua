@@ -27,5 +27,6 @@
         {key="v", mods="SUPER", action=wezterm.action{PasteFrom="Clipboard"}},
     },
     audible_bell = "Disabled",audible_bell = "Disabled",
+    font_size = 11.0,
  }
 

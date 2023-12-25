@@ -105,7 +105,7 @@ case $OS in
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='ls -l --color=auto'
         alias rc='nvim ~/AppData/Local/nvim/init.vim'
-        alias wez='nvim ~/.config/wezterm/wezterm.lua'
+        alias wez='nvim ~/vimConf/wezterm.lua'
         ;;
     *)
         echo "Unknown OS: $OS"
