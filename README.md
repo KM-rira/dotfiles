@@ -202,7 +202,11 @@ choco install glow
 
 ## ソフトリンク作成
 ```bash
+# neovim
 ln -s ~/vimConf/nvim/init.vim ./init.vim
+
+# wezterm
+ln ~/vimConf/wezterm.lua ~/.config/wezterm/wezterm.lua
 ```
 
 
