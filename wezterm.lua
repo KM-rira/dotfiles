@@ -8,8 +8,8 @@
     cursor_bg = "#30D5C8",   -- ターコイズブルーのカーソル
     cursor_border = "#30D5C8",
     cursor_fg = "#1C1C1C",
-    selection_bg = "#3A3A3A", -- 選択時の背景色
-    selection_fg = "#30D5C8",
+    selection_bg = "#FFA500", -- 選択時の背景色
+    selection_fg = "#FFFFFF",
 
     -- 以下は通常のANSIカラー
     ansi = {"#2E3436", "#CC0000", "#4E9A06", "#C4A000",
