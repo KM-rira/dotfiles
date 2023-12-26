@@ -496,3 +496,5 @@ let g:mkdp_preview_options = {
   \ 'disable_filename': 0
   \ }
 
+let g:mkdp_port = '5000'
+
