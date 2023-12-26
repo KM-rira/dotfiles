@@ -41,8 +41,13 @@ Plug 'neovim/nvim-lspconfig'
 " golang
 Plug 'mattn/vim-goimports'
 
+
+" telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+
+" markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
 call plug#end()
 
@@ -264,6 +269,7 @@ command! Pc PlugClean
 command! Gr GoReferrers
 command! Gd GoDef
 command! Tr terminal
+command! Md MarkdownPreview
 cabbrev Ner NERDTreeToggle
 nnoremap vv G$Vgg0
 nnoremap dx dd
@@ -294,9 +300,9 @@ nnoremap s "_s
 vnoremap s "_s
 onoremap s "_s
 
-nnoremap + ^
-xnoremap + ^
-onoremap + ^
+nnoremap m ^
+xnoremap m ^
+onoremap m ^
 
 nnoremap ^ +
 xnoremap ^ +
@@ -476,5 +482,17 @@ command! -nargs=+ SearchAndGrep call SearchAndGrep(<f-args>)
 set clipboard&
 set clipboard^=unnamedplus
 
-"colorscheme onedark
+let g:mkdp_preview_options = {
+  \ 'mkit': {},
+  \ 'katex': {},
+  \ 'uml': {},
+  \ 'maid': {},
+  \ 'disable_sync_scroll': 0,
+  \ 'sync_scroll_type': 'middle',
+  \ 'hide_yaml_meta': 1,
+  \ 'sequence_diagrams': {},
+  \ 'flowchart_diagrams': {},
+  \ 'content_editable': v:false,
+  \ 'disable_filename': 0
+  \ }
 
