@@ -209,6 +209,15 @@ ln -s ~/vimConf/nvim/init.vim ./init.vim
 ln ~/vimConf/wezterm.lua ~/.config/wezterm/wezterm.lua
 ```
 
+## reigrep
+```bash
+# windows
+choco install ripgrep
+
+#linux
+sudo apt-get install ripgrep
+```
+
 
 
 

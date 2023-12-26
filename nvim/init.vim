@@ -1,5 +1,6 @@
 set encoding=utf-8
 scriptencoding utf-8
+let mapleader = ";"
 
 "----------------------------------------
 " プラグインを追加
@@ -98,6 +99,8 @@ require'nvim-tree'.setup {
 EOF
 
 nmap <silent> gd <Plug>(coc-definition)
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
 "----------------------------------------------------------
 " クリップボードからのペースト
 "----------------------------------------------------------
@@ -403,7 +406,7 @@ autocmd VimEnter,Colorscheme * :highlight goKeyword ctermfg=196
 "set mouse=a
 set breakindent
 " Nerdtree自動終了
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'NvimTree') | quit | endif
+"autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'NvimTree') | quit | endif
 
 " nvimtreeの色
 hi NvimTreeFolderIcon guibg=blue
