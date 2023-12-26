@@ -74,7 +74,7 @@ alias adda="git add ."
 alias reseth="git fetch;git reset --hard"
 alias findf="find * -name"
 alias findd="find * -type d -name"
-alias cdf="find * -type d | fzf"
+alias cdf='cd $(find * -type d | fzf)'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
