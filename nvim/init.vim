@@ -100,6 +100,14 @@ EOF
 
 nmap <silent> gd <Plug>(coc-definition)
 
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    history = false
+  }
+}
+EOF
+
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 "----------------------------------------------------------
 " クリップボードからのペースト
