@@ -269,7 +269,7 @@ command! Pc PlugClean
 command! Gr GoReferrers
 command! Gd GoDef
 command! Tr terminal
-command! Md MarkdownPreview
+command! Mp MarkdownPreview
 cabbrev Ner NERDTreeToggle
 nnoremap vv G$Vgg0
 nnoremap dx dd

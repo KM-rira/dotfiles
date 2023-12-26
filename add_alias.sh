@@ -90,24 +90,22 @@ alias giu="bash ~/vimConf/tools/github_cli/bash/giu.sh"
 alias gpw="bash ~/vimConf/tools/github_cli/bash/gpw.sh"
 alias giw="bash ~/vimConf/tools/github_cli/bash/giw.sh"
 alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
+alias rc='nvim ~/vimConf/nvim/init.vim'
 
 # OS分岐
 OS=$(uname)
 case $OS in
     'Linux')
         alias l='exa -l'
-        alias rc='nvim ~/.config/nvim/init.vim'
         alias wez='echo "not windows"'
         ;;
     'Darwin')
         echo "Mac"
         alias l='exa -l'
-        alias rc='nvim ~/.config/nvim/init.vim'
         alias wez='echo "not windows"'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='ls -l --color=auto'
-        alias rc='nvim ~/AppData/Local/nvim/init.vim'
         alias wez='nvim ~/vimConf/wezterm.lua'
         ;;
     *)
