@@ -368,6 +368,7 @@ function set_default_segments {
         'conda_env_segment       MyBlue      Black'
         'aws_profile_segment     MyLime      Black'
         'kubernetes_segment      MyLime      Black'
+        'os_segment              MyLime      Black'
         'path_segment            MyPurple    Yellow'
         'read_only_segment       MyRed       White'
         'background_jobs_segment MyBlue      White'

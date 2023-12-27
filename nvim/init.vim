@@ -518,8 +518,23 @@ function! ReplaceOneFunc(search, replace)
 endfunction
 
 func! RemoveCR()
-    %s/\r//g
+    %s/\r//ge
 endfunc
 
 autocmd BufWritePre * call RemoveCR()
+
+command! Sd call SearchDollar()
+function! SearchDollar()
+    let searchPattern = '\$'
+    let result = search(searchPattern)
+
+    if result == 0
+        echo "'$' not found."
+    endif
+endfunction
+
+
+
+
+
 

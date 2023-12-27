@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# os_segment
+
+# Set default symbols if not already defined in config
+# Defaults should be standard symbols.
+
+# symbol none
+
+# -----------------------------------------------------------------------------
+# append to prompt: current directory
+# arg: $1 background color
+# arg: $2 foreground color
+# option variables;
+# none
+function os_segment {
+    local bg_color="$1"
+    local fg_color="$2"
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        # Linuxの場合、ディストリビューション名を取得
+        if [ -f /etc/os-release ]; then
+            # /etc/os-release ファイルからPRETTY_NAMEを取得
+            . /etc/os-release
+            content=$PRETTY_NAME
+        else
+            content="Unknown Linux Distribution"
+        fi
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOSの場合
+        content="macOS"
+    elif [[ "$OSTYPE" == "cygwin" ]] || [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
+        # Windowsの場合
+        content="Windows"
+    else
+        # 不明なOS
+        content="Unknown OS"
+    fi
+
+    PS1+="$(segment_end "$fg_color" "$bg_color")"
+    PS1+="$(segment_content "$fg_color" "$bg_color" " $content ")"
+    __last_color="$bg_color"
+}
+# -----------------------------------------------------------------------------
+

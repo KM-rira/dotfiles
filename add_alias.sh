@@ -48,10 +48,10 @@ alias fixup='git commit --fixup '
 alias vimConf='cd ~/vimConf'
 alias pull='git pull'
 alias findall='sudo find / -name'
-alias batf='bat $(fzf)'
-alias catf='cat $(fzf)'
+alias batf='bash ~/vimConf/tools/batf.sh'
+alias catf='bash ~/vimConf/tools/catf.sh'
 alias nvf='bash ~/vimConf/tools/nvf.sh'
-alias bashf='bash $(find . -name "*.sh"| fzf)'
+alias bashf='bash ~/vimConf/tools/bashf.sh'
 alias continue='git rebase --continue'
 alias abort='git rebase --abort'
 alias amend='git commit --amend -m'
@@ -76,7 +76,7 @@ alias adda="git add ."
 alias reseth="git fetch;git reset --hard"
 alias findf="find * -name"
 alias findd="find * -type d -name"
-alias cdf='cd $(find * -type d | fzf)'
+alias cdf='cd $(find * -type d |fzf --no-sort --reverse --prompt="Select FOLDER: " --no-multi)'
 alias stage='git diff --name-only --staged'
 
 # gh
