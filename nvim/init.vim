@@ -420,7 +420,6 @@ autocmd VimEnter,Colorscheme * :highlight goKeyword ctermfg=196
 "set mouse=a
 set breakindent
 " Nerdtree自動終了
-"autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'NvimTree') | quit | endif
 
 " nvimtreeの色
 hi NvimTreeFolderIcon guibg=blue
