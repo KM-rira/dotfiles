@@ -270,6 +270,8 @@ command! Gr GoReferrers
 command! Gd GoDef
 command! Tr terminal
 command! Mp MarkdownPreview
+command! Vst vsplit | terminal
+command! Spt split | terminal
 cabbrev Ner NERDTreeToggle
 nnoremap vv G$Vgg0
 nnoremap dx dd
@@ -420,6 +422,7 @@ autocmd VimEnter,Colorscheme * :highlight goKeyword ctermfg=196
 "set mouse=a
 set breakindent
 " Nerdtree自動終了
+autocmd BufEnter * if (winnr("$") == 1 && (bufname('') =~ 'NvimTree')) | q | endif
 
 " nvimtreeの色
 hi NvimTreeFolderIcon guibg=blue
@@ -496,4 +499,27 @@ let g:mkdp_preview_options = {
   \ }
 
 let g:mkdp_port = '5000'
+
+let g:nvim_tree_window_picker_exclude = {
+    \ 'filetype': ['notify', 'packer', 'qf'],
+    \ 'buftype': ['terminal']
+    \ }
+
+command! -nargs=+ Replace call ReplaceFunc(<f-args>)
+
+function! ReplaceFunc(search, replace)
+    execute '%s/'.a:search.'/'.a:replace.'/g'
+endfunction
+
+command! -nargs=+ ReplaceOne call ReplaceOneFunc(<f-args>)
+
+function! ReplaceOneFunc(search, replace)
+    execute '%s/'.a:search.'/'.a:replace.'/gc'
+endfunction
+
+func! RemoveCR()
+    %s/\r//g
+endfunc
+
+autocmd BufWritePre * call RemoveCR()
 
