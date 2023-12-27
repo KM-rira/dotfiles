@@ -12,5 +12,5 @@ cd ~/vimConf
 git pull
 
 # init.vimを最新化する
-bash ~/vimConf/cp_local.sh
+#bash ~/vimConf/cp_local.sh
 
