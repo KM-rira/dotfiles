@@ -78,6 +78,7 @@ alias findf="find * -name"
 alias findd="find * -type d -name"
 alias cdf='cd $(find * -type d |fzf --no-sort --reverse --prompt="Select FOLDER: " --no-multi)'
 alias stage='git diff --name-only --staged'
+alias v='nvim'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
