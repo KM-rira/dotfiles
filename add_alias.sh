@@ -68,9 +68,9 @@ alias gs='bash ~/vimConf/tools/google_search.sh'
 alias gr='bash ~/vimConf/tools/google_research.sh'
 alias hs='bash ~/vimConf/tools/history_search.sh'
 alias un='uname'
-alias diffsofancy="bash ~/vimConf/tools/diff_so_fancy_change.sh"
-alias diffs="git diff --staged"
-alias diff="git diff"
+alias gdiffsofancy="bash ~/vimConf/tools/diff_so_fancy_change.sh"
+alias gdiffs="git diff --staged"
+alias gdiff="git diff"
 alias restore="git restore"
 alias restorea="git restore ."
 alias restores="git restore --staged"
@@ -80,7 +80,8 @@ alias adda="git add ."
 alias reseth="git fetch;git reset --hard"
 alias findf="find * -name"
 alias findd="find * -type d -name"
-alias cdf='cd $(find * -type d |fzf --no-sort --reverse --prompt="Select FOLDER: " --no-multi)'
+alias cdf='cd "$(find * -type d | fzf --no-sort --reverse --prompt="Select FOLDER: " --no-multi)" || cd "$(pwd)"'
+alias changefile='git diff --name-only'
 alias stage='git diff --name-only --staged'
 alias v='nvim'
 alias c='cd'
