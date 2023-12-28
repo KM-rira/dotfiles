@@ -13,4 +13,5 @@ if ! [[ "$1" =~ ^[0-9]+$ ]]; then
 fi
 
 # git rebase -i コマンドを実行
-git rebase -i "HEAD~$1" --autosqush
+git rebase -i "HEAD~$1" --autosquash
+
