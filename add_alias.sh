@@ -13,6 +13,8 @@
 # .bashrcのパス
 BASHRC="$HOME/.bashrc"
 
+vimConf="$HOME/vimConf"
+
 # user定義
 #user=""
 #while IFS= read -r line; do
@@ -43,6 +45,7 @@ alias nv='nvim'
 alias hg='history | grep'
 alias got='go test -v -cover -run '
 alias status='git status'
+alias statuss='git status -s'
 alias push='git push'
 alias checkout='git checkout'
 alias branch='git branch'
@@ -51,11 +54,15 @@ alias log='git log --oneline'
 alias fixup='git commit --fixup '
 alias vimConf='cd ~/vimConf'
 alias pull='git pull'
+alias show='git show'
 alias findall='sudo find / -name'
 alias batf='bash ~/vimConf/tools/batf.sh'
 alias catf='bash ~/vimConf/tools/catf.sh'
 alias nvf='bash ~/vimConf/tools/nvf.sh'
+alias vf='bash ~/vimConf/tools/nvf.sh'
 alias bashf='bash ~/vimConf/tools/bashf.sh'
+alias fixupf='bash ~/vimConf/tools/fixupf.sh'
+alias showf='bash ~/vimConf/tools/showf.sh'
 alias continue='git rebase --continue'
 alias abort='git rebase --abort'
 alias amend='git commit --amend -m'
@@ -68,7 +75,7 @@ alias gs='bash ~/vimConf/tools/google_search.sh'
 alias gr='bash ~/vimConf/tools/google_research.sh'
 alias hs='bash ~/vimConf/tools/history_search.sh'
 alias un='uname'
-alias gdiffsofancy="bash ~/vimConf/tools/diff_so_fancy_change.sh"
+alias diff="bash ~/vimConf/tools/diff_so_fancy_change.sh"
 alias gdiffs="git diff --staged"
 alias gdiff="git diff"
 alias restore="git restore"
@@ -85,6 +92,7 @@ alias changefile='git diff --name-only'
 alias stage='git diff --name-only --staged'
 alias v='nvim'
 alias c='cd'
+alias commitid='bash ~/vimConf/tools/get_commit_id.sh'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"

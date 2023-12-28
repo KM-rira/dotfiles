@@ -218,8 +218,14 @@ choco install ripgrep
 sudo apt-get install ripgrep
 ```
 
+## zoxide
+```bash
+sudo apt install zoxide
+```
 
-
-
+## colordiff
+```bash
+sudo apt install colordiff
+```
 
 

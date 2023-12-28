@@ -270,8 +270,8 @@ command! Gr GoReferrers
 command! Gd GoDef
 command! Tr terminal
 command! Mp MarkdownPreview
-command! Vst vsplit | terminal
-command! Spt split | terminal
+command! Vt vsplit | terminal
+command! Ht split | terminal
 cabbrev Ner NERDTreeToggle
 nnoremap vv G$Vgg0
 nnoremap dx dd
