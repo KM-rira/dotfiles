@@ -74,10 +74,58 @@ function prompt_char {
 function time_segment {
     local bg_color="$1"
     local fg_color="$2"
-    if [ "$PL_TIME_SHOW_SECONDS" = true ]; then
-        local content="\t"
+
+    # 現在の時刻のHourを取得
+    current_hour=$(date +"%H")
+
+    if [ "$current_hour" -eq 1 ] || [ "$current_hour" -eq 13 ]; then
+        local clock_icon="🕐 "
+    elif [ "$current_hour" -eq 2 ] || [ "$current_hour" -eq 14 ]; then
+        local clock_icon="🕑 "
+    elif [ "$current_hour" -eq 3 ] || [ "$current_hour" -eq 15 ]; then
+        local clock_icon="🕒 "
+    elif [ "$current_hour" -eq 4 ] || [ "$current_hour" -eq 16 ]; then
+        local clock_icon="🕓 "
+    elif [ "$current_hour" -eq 5 ] || [ "$current_hour" -eq 17 ]; then
+        local clock_icon="🕔 "
+    elif [ "$current_hour" -eq 6 ] || [ "$current_hour" -eq 18 ]; then
+        local clock_icon="🕕 "
+    elif [ "$current_hour" -eq 7 ] || [ "$current_hour" -eq 19 ]; then
+        local clock_icon="🕖 "
+    elif [ "$current_hour" -eq 8 ] || [ "$current_hour" -eq 20 ]; then
+        local clock_icon="🕗 "
+    elif [ "$current_hour" -eq 9 ] || [ "$current_hour" -eq 21 ]; then
+        local clock_icon="🕘 "
+    elif [ "$current_hour" -eq 10 ] || [ "$current_hour" -eq 22 ]; then
+        local clock_icon="🕙 "
+    elif [ "$current_hour" -eq 11 ] || [ "$current_hour" -eq 23 ]; then
+        local clock_icon="🕙 "
+    elif [ "$current_hour" -eq 12 ] || [ "$current_hour" -eq 0 ]; then
+        local clock_icon="🕛 "
     else
-        local content="\A"
+        local clock_icon="💣 "
+    fi
+
+
+
+    if [ "$current_hour" -ge 6 ] && [ "$current_hour" -le 9 ]; then
+        local moon_icon="🌕 "
+    elif [ "$current_hour" -ge 10 ] && [ "$current_hour" -le 12 ]; then
+        local moon_icon="🌖 "
+    elif [ "$current_hour" -ge 13 ] && [ "$current_hour" -le 14 ]; then
+        local moon_icon="🌗 "
+    elif [ "$current_hour" -ge 15 ] && [ "$current_hour" -le 17 ]; then
+        local moon_icon="🌘 "
+    else
+        local moon_icon="🌑 "
+    fi
+
+    if [ "$PL_T&&IME_SHOW_SECONDS" = true ]; then
+        local content="${moon_icon}${clock_icon}\t"
+        #local content="\t"
+    else
+        local content="${moon_icon}${clock_icon}\A"
+        #local content="\A"
     fi
     PS1+="$(segment_end "$fg_color" "$bg_color")"
     PS1+="$(segment_content "$fg_color" "$bg_color" " $content ")"

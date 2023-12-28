@@ -1,6 +1,6 @@
 set encoding=utf-8
 scriptencoding utf-8
-let mapleader = ";"
+let mapleader = "m"
 
 "----------------------------------------
 " プラグインを追加
