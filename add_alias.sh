@@ -19,11 +19,15 @@ BASHRC="$HOME/.bashrc"
 #    user="${user}${line}"
 #done < ~/user.txt
 #echo -e "$user" | cat -v
-
+eval "$(zoxide init bash)"
 # export variable
 export BAT_STYLE="header,grid"
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 shopt -s histappend
+
+# デフォルトのエディタ設定
+export EDITOR=nvim
+export GIT_EDITOR=nvim
 
 # 追加したいエイリアスをこの配列に列挙
 alias open='nvim ~/.bashrc'
