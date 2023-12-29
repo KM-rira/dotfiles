@@ -114,12 +114,12 @@ alias rc='nvim ~/vimConf/nvim/init.vim'
 OS=$(uname)
 case $OS in
     'Linux')
-        alias l='exa -l'
+        alias l='exa -l --icons'
         alias wez='echo "not windows"'
         ;;
     'Darwin')
         echo "Mac"
-        alias l='exa -l'
+        alias l='exa -l --icons'
         alias wez='echo "not windows"'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
