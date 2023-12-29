@@ -14,3 +14,6 @@ git pull
 # init.vimを最新化する
 #bash ~/vimConf/cp_local.sh
 
+# wezterm copy
+bash ~/vimConf/cp_wezterm.sh
+
