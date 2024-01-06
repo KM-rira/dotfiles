@@ -443,6 +443,9 @@ nnoremap K 10k
 xnoremap K 10k
 onoremap K 10k
 
+nmap <leader>ch :call CocAction('doHover')<CR>
+xmap <leader>ch :call CocAction('doHover')<CR>
+omap <leader>ch :call CocAction('doHover')<CR>
 
 " ノーマルモードに移行
 inoremap jk <Esc>
