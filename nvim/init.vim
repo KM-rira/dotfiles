@@ -9,7 +9,6 @@ let mapleader = "m"
 set shellcmdflag=-c
 
 call plug#begin('~/.vim/plugged')
-
 " NERDTree プラグイン
 Plug 'preservim/nerdtree'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -48,6 +47,11 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
 
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+
+" debug
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'leoluz/nvim-dap-go'
 
 call plug#end()
 
@@ -102,16 +106,117 @@ require'nvim-tree'.setup {
   }
 }
 EOF
-
-nmap <silent> gd <Plug>(coc-definition)
-
 lua << EOF
-require('telescope').setup{
-  defaults = {
-    history = false
+-- shortcut
+local function map(mode, lhs, rhs, opts)
+	local options = {noremap = true}
+    if opts then options = vim.tbl_extend('force', options, opts) end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+
+map("n", "<F5>", ":lua require'dap'.continue()<CR>", { silent = true})
+map("n", "<F10>", ":lua require'dap'.step_over()<CR>", { silent = true})
+map("n", "<F11>", ":lua require'dap'.step_into()<CR>", { silent = true})
+map("n", "<F12>", ":lua require'dap'.step_out()<CR>", { silent = true})
+map("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>", { silent = true})
+map("n", "<leader>bc", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { silent = true})
+map("n", "<leader>l", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", { silent = true})
+
+-- dap-ui key map
+map("n", "<leader>d", ":lua require'dapui'.toggle()<CR>", { silent = true})
+map("n", "<leader><leader>df", ":lua require'dapui'.eval()<CR>", { silent = true})
+
+-- dap-go key map
+map("n", "<leader>td", ":lua require'dap-go'.debug_test()<CR>", { silent = true })
+
+-- nvim-dap の基本設定
+local dap = require("dap")
+dap.adapters.delve = {
+  type = 'server',
+  port = '${port}',
+  executable = {
+    command = 'dlv',
+    args = {'dap', '-l', '127.0.0.1:${port}'},
   }
 }
+
+-- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+dap.configurations.go = {
+  {
+    type = "delve",
+    name = "Debug",
+    request = "launch",
+    program = "${file}"
+  },
+  {
+    type = "delve",
+    name = "Debug test", -- configuration for debugging test files
+    request = "launch",
+    mode = "test",
+    program = "${file}"
+  },
+  -- works with go.mod packages and sub packages 
+  {
+    type = "delve",
+    name = "Debug test (go.mod)",
+    request = "launch",
+    mode = "test",
+    program = "./${relativeFileDirname}"
+  } 
+}
+
 EOF
+lua << EOF
+
+-- nvim-dap-ui のUI設定
+require('dapui').setup({
+  icons = { expanded = "▾", collapsed = "▸" },
+  mappings = {
+    -- カスタムキーマッピング
+  },
+  layouts = {
+    {
+      elements = {
+        -- サイドバーのレイアウト設定
+      },
+      size = 40,
+      position = 'left'
+    },
+    {
+      elements = {
+        -- トレイのレイアウト設定
+      },
+      size = 10,
+      position = 'bottom'
+    },
+  }
+})
+
+EOF
+lua << EOF
+-- nvim-dap-go の設定
+require('dap-go').setup()
+
+local dap = require('dap')
+
+dap.configurations.lua = {
+  {
+    type = 'nlua',
+    request = 'attach',
+    name = "Attach to running Neovim instance",
+    host = function()
+      return '127.0.0.1'
+    end,
+    port = function()
+      local val = vim.fn.input('Port: ')
+      return tonumber(val)
+    end
+  }
+}
+
+EOF
+
+nmap <silent> gd <Plug>(coc-definition)
 
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 "----------------------------------------------------------
@@ -330,17 +435,23 @@ nnoremap <Space> $
 xnoremap <Space> $
 onoremap <Space> $
 
+nnoremap J 10j
+xnoremap J 10j
+onoremap J 10j
+
+nnoremap K 10k
+xnoremap K 10k
+onoremap K 10k
+
+
 " ノーマルモードに移行
 inoremap jk <Esc>
 
 tnoremap <C-j> <C-\><C-n>
 cnoreabbrev he help
-nnoremap <F2> <C-v>
-vnoremap <F2> <C-v>
 " NerdTree開く
 nnoremap <C-e> :NvimTreeToggle<CR>
 
-nnoremap <F5> :source $MYVIMRC<CR>
 command! Re source $MYVIMRC
 
 " 編集中ファイル保存＆実行コマンド
