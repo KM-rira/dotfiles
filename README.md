@@ -209,7 +209,7 @@ ln -s ~/vimConf/nvim/init.vim ./init.vim
 ln ~/vimConf/wezterm.lua ~/.config/wezterm/wezterm.lua
 ```
 
-## reigrep
+## ripgrep
 ```bash
 # windows
 choco install ripgrep
@@ -234,4 +234,23 @@ sudo apt install colordiff
 set noerrorbells
 set nolaunchbell
 ```
+
+## Ubuntu日本語設定
+```bash
+sudo apt update
+
+# ログを日本語化
+sudo apt install language-pack-ja
+sudo update-locale LANG=ja_JP.UTF-8
+
+# manコマンド日本語化
+sudo apt install manpages-ja manpages-ja-dev
+# LANGがja_JP.UTF-8になっていることを確認してください。
+locale
+# なっていなければ
+sudo update-locale LANG=ja_JP.UTF-8
+# 確認
+man ls
+```
+
 
