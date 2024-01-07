@@ -90,11 +90,11 @@ call plug#end()
 lua << EOF
 require('nvim-test').setup({
   mappings = {
-    nearest = '<leader>t',  -- 現在のカーソル位置に最も近いテストを実行
-    file = '<leader>T',     -- 現在のファイルのテストを実行
-    suite = '<leader>a',    -- すべてのテストを実行
-    last = '<leader>l',     -- 最後に実行したテストを再実行
-    visit = '<leader>g',    -- 最後に実行したテストのファイルを開く
+    nearest = '<leader>gt',  -- 現在のカーソル位置に最も近いテストを実行
+    file = '<leader>gT',     -- 現在のファイルのテストを実行
+    suite = '<leader>ga',    -- すべてのテストを実行
+    last = '<leader>gl',     -- 最後に実行したテストを再実行
+    visit = '<leader>gg',    -- 最後に実行したテストのファイルを開く
   }
 })
 EOF
