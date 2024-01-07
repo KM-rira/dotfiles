@@ -18,8 +18,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'vim-jp/vimdoc-ja'
 
 " インデントの階層色設定
-Plug 'nathanaelkane/vim-indent-guides'
-
+"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'lukas-reineke/indent-blankline.nvim'
 " ステータスライン
 Plug 'nvim-lualine/lualine.nvim'
 
@@ -30,7 +30,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " カラースキーム
-Plug 'EdenEast/nightfox.nvim'
 Plug 'joshdick/onedark.vim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -53,7 +52,6 @@ Plug 'leoluz/nvim-dap-go'
 
 " 単語をハイライト
 Plug 'RRethy/vim-illuminate'
-let g:Illuminate_delay = 500  " ハイライトまでの遅延時間をミリ秒で設定
 " 色コードを色付け
 Plug 'norcalli/nvim-colorizer.lua'
 " モードによって色変更
@@ -82,19 +80,81 @@ Plug 'akinsho/git-conflict.nvim'
 " テストコード実行プラグイン
 Plug 'klen/nvim-test'
 
+" commentout
+Plug 'numToStr/Comment.nvim'
+
 call plug#end()
 
 "----------------------------------------------------------
 " lua
 "----------------------------------------------------------
 lua << EOF
+local highlight = {
+    "CursorColumn",
+    "Whitespace",
+}
+require("ibl").setup {
+    indent = { highlight = highlight, char = "" },
+    whitespace = {
+        highlight = highlight,
+        remove_blankline_trail = false,
+    },
+    scope = { enabled = false },
+}
+EOF
+lua << EOF
+require('Comment').setup({
+    ---コメントと行の間にスペースを追加
+    padding = true,
+    ---カーソルがその位置に留まるべきかどうか
+    sticky = true,
+    ---コメントの追加/削除時に無視する行
+    ignore = nil,
+    ---NORMALモードでのトグルマッピングの左側
+    toggler = {
+        ---行コメントのトグルキーマップ
+        line = 'gcc',
+        ---ブロックコメントのトグルキーマップ
+        block = 'gbc',
+    },
+    ---NORMALおよびVISUALモードでの操作待ちマッピングの左側
+    opleader = {
+        ---行コメントのキーマップ
+        line = 'gc',
+        ---ブロックコメントのキーマップ
+        block = 'gb',
+    },
+    ---追加のマッピングの左側
+    extra = {
+        ---上の行にコメントを追加
+        above = 'gcO',
+        ---下の行にコメントを追加
+        below = 'gco',
+        ---行の末尾にコメントを追加
+        eol = 'gcA',
+    },
+    ---キーバインディングを有効にする
+    ---注記: `false`を指定すると、プラグインはいかなるマッピングも作成しません
+    mappings = {
+        ---操作待ちマッピング; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+        basic = true,
+        ---追加のマッピング; `gco`, `gcO`, `gcA`
+        extra = true,
+    },
+    ---コメントの追加/削除前に呼び出される関数
+    pre_hook = nil,
+    ---コメントの追加/削除後に呼び出される関数
+    post_hook = nil,
+})
+EOF
+lua << EOF
 require('nvim-test').setup({
   mappings = {
-    nearest = '<leader>gt',  -- 現在のカーソル位置に最も近いテストを実行
-    file = '<leader>gT',     -- 現在のファイルのテストを実行
-    suite = '<leader>ga',    -- すべてのテストを実行
-    last = '<leader>gl',     -- 最後に実行したテストを再実行
-    visit = '<leader>gg',    -- 最後に実行したテストのファイルを開く
+    nearest = '<leader>dt',  -- 現在のカーソル位置に最も近いテストを実行
+    file = '<leader>dT',     -- 現在のファイルのテストを実行
+    suite = '<leader>da',    -- すべてのテストを実行
+    last = '<leader>dl',     -- 最後に実行したテストを再実行
+    visit = '<leader>df',    -- 最後に実行したテストのファイルを開く
   }
 })
 EOF
@@ -272,7 +332,7 @@ require('modes').setup({
 	set_cursorline = true,
 
 	-- Enable line number highlights to match cursorline
-	set_number = true,
+	set_number = false,
 
 	-- Disable modes highlights in specified filetypes
 	-- Please PR commonly ignored filetypes
@@ -298,7 +358,7 @@ lua << EOF
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'onedark',
+    theme = 'auto',
     component_separators = { left = '|', right = '|'},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
@@ -829,10 +889,10 @@ syntax on
 colorscheme onedark
 
 " インデントが最初からカラーリング
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=None   ctermbg=234
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=12 ctermbg=235
-let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_auto_colors = 0
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=None   ctermbg=234
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=12 ctermbg=235
+"let g:indent_guides_enable_on_vim_startup = 1
 
 " 選択範囲の背景色を暗いオレンジに、文字色を黒に設定
 highlight Visual ctermfg=black guifg=black ctermbg=202 guibg=#FF4500
@@ -841,7 +901,7 @@ highlight Visual ctermfg=black guifg=black ctermbg=202 guibg=#FF4500
 set number
 highlight LineNr ctermfg=8 ctermbg=235
 " 現在の行番号の色設定
-highlight CursorLineNr ctermfg=214
+highlight CursorLineNr ctermfg=118 guifg=#FFD700
 " 行を強調表示
 set cursorline
 "highlight CursorLine ctermbg=17
@@ -854,7 +914,7 @@ set nocursorcolumn
 highlight ZenkakuSpace cterm=underline ctermfg=red guibg=blue ctermbg=blue
 match ZenkakuSpace /　/
 set hlsearch
-highlight Search ctermfg=NONE ctermbg=91 cterm=NONE guifg=NONE guibg=#FFA500
+highlight Search ctermfg=black ctermbg=91 cterm=NONE guifg=#000000 guibg=#FFA500
 " コメントの字体変更
 highlight Comment cterm=italic ctermfg=44
 " Goの色設定
@@ -867,10 +927,10 @@ set breakindent
 autocmd BufEnter * if (winnr("$") == 1 && (bufname('') =~ 'NvimTree')) | q | endif
 
 " nvimtreeの色
-hi NvimTreeFolderIcon guibg=blue
-hi NvimTreeFolderName guifg=blue
-hi NvimTreeIndentMarker guifg=#585858
-
+"hi NvimTreeFolderIcon guibg=blue
+"hi NvimTreeFolderName guifg=blue
+"hi NvimTreeIndentMarker guifg=#585858
+"let g:Illuminate_delay = 500  " ハイライトまでの遅延時間をミリ秒で設定
 
 " 正規表現を使用せずに置換する
 function! Ch(word1, word2)
