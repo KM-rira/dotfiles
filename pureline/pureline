@@ -408,7 +408,7 @@ function set_default_segments {
     PL_SEGMENTS=(
         # segment                Background  Foreground
         # -------                ----------  ----------
-        'time_segment            Black       Yellow'
+        'time_segment            MyDarkGrey  Yellow'
         'battery_segment         MyBlue      Black'
         'ssh_segment             MyYellow    Black'
         'screen_session_segment  Black       white'
