@@ -15,5 +15,5 @@ git pull
 #bash ~/vimConf/cp_local.sh
 
 # wezterm copy
-bash ~/vimConf/cp_wezterm.sh
+#bash ~/vimConf/cp_wezterm.sh
 
