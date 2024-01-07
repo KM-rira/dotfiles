@@ -228,4 +228,10 @@ sudo apt install zoxide
 sudo apt install colordiff
 ```
 
+## wasavi
+```bash
+# オプションに下記追加
+set noerrorbells
+set nolaunchbell
+```
 

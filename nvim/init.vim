@@ -1,6 +1,6 @@
 set encoding=utf-8
 scriptencoding utf-8
-let mapleader = "m"
+let mapleader = ";"
 
 "----------------------------------------
 " プラグインを追加
@@ -216,9 +216,6 @@ dap.configurations.lua = {
 
 EOF
 
-nmap <silent> gd <Plug>(coc-definition)
-
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
 "----------------------------------------------------------
 " クリップボードからのペースト
 "----------------------------------------------------------
@@ -377,8 +374,55 @@ command! Tr terminal
 command! Mp MarkdownPreview
 command! Vt vsplit | terminal
 command! Ht split | terminal
+command! Rc :edit $MYVIMRC
+command! Re :source ~/.config/nvim/init.vim
 cabbrev Ner NERDTreeToggle
+
+
+"----------------------------------------
+" ショートカットキー(shortcut)
+"----------------------------------------
+" coc系
+nmap <leader>d <Plug>(coc-definition)
+omap <leader>d <Plug>(coc-definition)
+nmap <leader>d <Plug>(coc-definition)
+
+nmap <leader>t <Plug>(coc-type-definition)
+omap <leader>t <Plug>(coc-type-definition)
+nmap <leader>t <Plug>(coc-type-definition)
+
+nmap <leader>c <Plug>(coc-declaration)
+omap <leader>c <Plug>(coc-declaration)
+nmap <leader>c <Plug>(coc-declaration)
+
+nmap <leader>i <Plug>(coc-implementation)
+omap <leader>i <Plug>(coc-implementation)
+nmap <leader>i <Plug>(coc-implementation)
+
+nmap <leader>r <Plug>(coc-references)
+omap <leader>r <Plug>(coc-references)
+nmap <leader>r <Plug>(coc-references)
+
+nmap <leader>re <Plug>(coc-rename)
+omap <leader>re <Plug>(coc-rename)
+nmap <leader>re <Plug>(coc-rename)
+
+nmap <leader>ch :call CocAction('doHover')<CR>
+xmap <leader>ch :call CocAction('doHover')<CR>
+omap <leader>ch :call CocAction('doHover')<CR>
+
+" telescope系
+nmap <leader>ff <cmd>Telescope find_files<cr>
+nmap <leader>fb <cmd>Telescope buffers<cr>
+nmap <leader>fo <cmd>Telescope oldfiles<cr>
+nmap <leader>fcl <cmd>Telescope commands<cr>
+nmap <leader>ft <cmd>Telescope tags<cr>
+nmap <leader>fc <cmd>Telescope command_history<cr>
+nmap <leader>fj <cmd>Telescope jumplist<cr>
+nmap <leader>fs <cmd>Telescope search_history<cr>
+
 nnoremap vv G$Vgg0
+
 nnoremap dx dd
 nnoremap dd "_dd
 
@@ -443,9 +487,6 @@ nnoremap K 10k
 xnoremap K 10k
 onoremap K 10k
 
-nmap <leader>ch :call CocAction('doHover')<CR>
-xmap <leader>ch :call CocAction('doHover')<CR>
-omap <leader>ch :call CocAction('doHover')<CR>
 
 " ノーマルモードに移行
 inoremap jk <Esc>
