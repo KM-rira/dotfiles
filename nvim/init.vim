@@ -58,7 +58,20 @@ call plug#end()
 "----------------------------------------------------------
 " lua
 "----------------------------------------------------------
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    -- 他の設定...
 
+    mappings = {
+      i = {
+        ["<C-j>"] = require('telescope.actions').move_selection_next,
+        ["<C-k>"] = require('telescope.actions').move_selection_previous,
+      },
+    },
+  },
+}
+EOF
 lua << EOF
 require'nvim-tree'.setup {
   -- netrw を完全に無効化
