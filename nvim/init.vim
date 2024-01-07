@@ -376,6 +376,7 @@ command! Vt vsplit | terminal
 command! Ht split | terminal
 command! Rc :edit $MYVIMRC
 command! Re :source ~/.config/nvim/init.vim
+command! Nf NvimTreeFindFile
 cabbrev Ner NERDTreeToggle
 
 
@@ -385,31 +386,31 @@ cabbrev Ner NERDTreeToggle
 " coc系
 nmap <leader>d <Plug>(coc-definition)
 omap <leader>d <Plug>(coc-definition)
-nmap <leader>d <Plug>(coc-definition)
+xmap <leader>d <Plug>(coc-definition)
 
 nmap <leader>t <Plug>(coc-type-definition)
 omap <leader>t <Plug>(coc-type-definition)
-nmap <leader>t <Plug>(coc-type-definition)
+xmap <leader>t <Plug>(coc-type-definition)
 
 nmap <leader>c <Plug>(coc-declaration)
 omap <leader>c <Plug>(coc-declaration)
-nmap <leader>c <Plug>(coc-declaration)
+xmap <leader>c <Plug>(coc-declaration)
 
 nmap <leader>i <Plug>(coc-implementation)
 omap <leader>i <Plug>(coc-implementation)
-nmap <leader>i <Plug>(coc-implementation)
+xmap <leader>i <Plug>(coc-implementation)
 
 nmap <leader>r <Plug>(coc-references)
 omap <leader>r <Plug>(coc-references)
-nmap <leader>r <Plug>(coc-references)
+xmap <leader>r <Plug>(coc-references)
 
 nmap <leader>re <Plug>(coc-rename)
 omap <leader>re <Plug>(coc-rename)
-nmap <leader>re <Plug>(coc-rename)
+xmap <leader>re <Plug>(coc-rename)
 
-nmap <leader>ch :call CocAction('doHover')<CR>
-xmap <leader>ch :call CocAction('doHover')<CR>
-omap <leader>ch :call CocAction('doHover')<CR>
+nmap <leader>h :call CocAction('doHover')<CR>
+omap <leader>h :call CocAction('doHover')<CR>
+xmap <leader>h :call CocAction('doHover')<CR>
 
 " telescope系
 nmap <leader>ff <cmd>Telescope find_files<cr>
@@ -420,6 +421,10 @@ nmap <leader>ft <cmd>Telescope tags<cr>
 nmap <leader>fc <cmd>Telescope command_history<cr>
 nmap <leader>fj <cmd>Telescope jumplist<cr>
 nmap <leader>fs <cmd>Telescope search_history<cr>
+
+nmap <leader>nt <cmd>tabnew<cr>
+omap <leader>nt <cmd>tabnew<cr>
+xmap <leader>nt <cmd>tabnew<cr>
 
 nnoremap vv G$Vgg0
 
