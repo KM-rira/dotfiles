@@ -1,7 +1,7 @@
 set encoding=utf-8
 scriptencoding utf-8
 let mapleader = ";"
-
+set termguicolors
 "----------------------------------------
 " プラグインを追加
 "----------------------------------------
@@ -39,7 +39,6 @@ Plug 'neovim/nvim-lspconfig'
 " golang
 Plug 'mattn/vim-goimports'
 
-
 " telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
@@ -52,11 +51,249 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'leoluz/nvim-dap-go'
 
+" 単語をハイライト
+Plug 'RRethy/vim-illuminate'
+let g:Illuminate_delay = 500  " ハイライトまでの遅延時間をミリ秒で設定
+" 色コードを色付け
+Plug 'norcalli/nvim-colorizer.lua'
+" モードによって色変更
+Plug 'mvllow/modes.nvim'
+" スタート画面設定
+Plug 'goolord/alpha-nvim'
+
+" スクロールバー設定
+Plug 'petertriho/nvim-scrollbar'
+
+" if 等にマッチするものを強調する
+Plug 'andymass/vim-matchup'
+
+" 括弧を自動で閉じる
+Plug 'windwp/nvim-autopairs'
+
+" SQLを大文字にする
+Plug 'jsborjesson/vim-uppercase-sql'
+
+" VScode的な差分表示をする
+Plug 'lewis6991/gitsigns.nvim'
+
+" コンフリクトをわかりやすくする
+Plug 'akinsho/git-conflict.nvim'
+
+" テストコード実行プラグイン
+Plug 'klen/nvim-test'
+
 call plug#end()
 
 "----------------------------------------------------------
 " lua
 "----------------------------------------------------------
+lua << EOF
+require('nvim-test').setup({
+  mappings = {
+    nearest = '<leader>t',  -- 現在のカーソル位置に最も近いテストを実行
+    file = '<leader>T',     -- 現在のファイルのテストを実行
+    suite = '<leader>a',    -- すべてのテストを実行
+    last = '<leader>l',     -- 最後に実行したテストを再実行
+    visit = '<leader>g',    -- 最後に実行したテストのファイルを開く
+  }
+})
+EOF
+lua << EOF
+require('git-conflict').setup {
+  default_mappings = true, -- disable buffer local mapping created by this plugin
+  default_commands = true, -- disable commands created by this plugin
+  disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
+  list_opener = 'copen', -- command or function to open the conflicts list
+  highlights = { -- They must have background color, otherwise the default color will be used
+    incoming = 'DiffAdd',
+    current = 'DiffText',
+  }
+}
+EOF
+lua << EOF
+require('gitsigns').setup {
+  signs = {
+    add          = { text = '│' },
+    change       = { text = '│' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
+  },
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  watch_gitdir = {
+    follow_files = true
+  },
+  auto_attach = true,
+  attach_to_untracked = true,
+  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    delay = 1000,
+    ignore_whitespace = false,
+    virt_text_priority = 100,
+  },
+  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  max_file_length = 40000, -- Disable if file is longer than this (in lines)
+  preview_config = {
+    -- Options passed to nvim_open_win
+    border = 'single',
+    style = 'minimal',
+    relative = 'cursor',
+    row = 0,
+    col = 1
+  },
+  yadm = {
+    enable = false
+  },
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', ']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    -- Actions
+    map('n', '<leader>hs', gs.stage_hunk)
+    map('n', '<leader>hr', gs.reset_hunk)
+    map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('n', '<leader>hS', gs.stage_buffer)
+    map('n', '<leader>hu', gs.undo_stage_hunk)
+    map('n', '<leader>hR', gs.reset_buffer)
+    map('n', '<leader>hp', gs.preview_hunk)
+    map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+    map('n', '<leader>tb', gs.toggle_current_line_blame)
+    map('n', '<leader>hd', gs.diffthis)
+    map('n', '<leader>hD', function() gs.diffthis('~') end)
+    map('n', '<leader>td', gs.toggle_deleted)
+
+    -- Text object
+    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+  end
+}
+EOF
+lua << EOF
+require('gitsigns').setup {
+  signs = {
+    add          = { text = '│' },
+    change       = { text = '│' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
+  },
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  watch_gitdir = {
+    follow_files = true
+  },
+  auto_attach = true,
+  attach_to_untracked = true,
+  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    delay = 1000,
+    ignore_whitespace = false,
+    virt_text_priority = 100,
+  },
+  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  max_file_length = 40000, -- Disable if file is longer than this (in lines)
+  preview_config = {
+    -- Options passed to nvim_open_win
+    border = 'single',
+    style = 'minimal',
+    relative = 'cursor',
+    row = 0,
+    col = 1
+  },
+  yadm = {
+    enable = false
+  },
+}
+EOF
+lua << EOF
+require("nvim-autopairs").setup {}
+EOF
+lua << EOF
+vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+EOF
+lua << EOF
+require('scrollbar').setup()
+EOF
+lua << EOF
+require('alpha').setup(require('alpha.themes.startify').config)
+EOF
+lua << EOF
+require('modes').setup({
+	colors = {
+		copy = "#f5c359",
+		delete = "#c75c6a",
+		insert = "#78ccc5",
+		visual = "#9745be",
+	},
+
+	-- Set opacity for cursorline and number background
+	line_opacity = 0.15,
+
+	-- Enable cursor highlights
+	set_cursor = true,
+
+	-- Enable cursorline initially, and disable cursorline for inactive windows
+	-- or ignored filetypes
+	set_cursorline = true,
+
+	-- Enable line number highlights to match cursorline
+	set_number = true,
+
+	-- Disable modes highlights in specified filetypes
+	-- Please PR commonly ignored filetypes
+	ignore_filetypes = { 'NvimTree', 'TelescopePrompt' }
+})
+EOF
+lua << EOF
+require 'colorizer'.setup(
+  {'*';},          -- すべてのファイルタイプで有効にする
+  {
+    RGB      = true;         -- #RGB 形式を有効にする
+    RRGGBB   = true;         -- #RRGGBB 形式を有効にする
+    names    = true;         -- "blue" のような名前付きカラーを有効にする
+    RRGGBBAA = true;         -- #RRGGBBAA 形式を有効にする
+    rgb_fn   = true;         -- css rgb() および rgba() 関数を有効にする
+    hsl_fn   = true;         -- css hsl() および hsla() 関数を有効にする
+    css      = true;         -- css #RRGGBB 形式を有効にする
+    css_fn   = true;         -- css 関数を有効にする
+  }
+)
+EOF
 lua << EOF
 require('lualine').setup {
   options = {
