@@ -41,6 +41,7 @@ Plug 'mattn/vim-goimports'
 " telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+Plug 'nvim-telescope/telescope-frecency.nvim'
 
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
@@ -770,10 +771,11 @@ nmap <leader>ft <cmd>Telescope tags<cr>
 nmap <leader>fc <cmd>Telescope command_history<cr>
 nmap <leader>fj <cmd>Telescope jumplist<cr>
 nmap <leader>fs <cmd>Telescope search_history<cr>
+nmap <leader>fz <cmd>Telescope frecency<cr>
 
-nmap <leader>nt <cmd>tabnew<cr>
-omap <leader>nt <cmd>tabnew<cr>
-xmap <leader>nt <cmd>tabnew<cr>
+nmap nt <cmd>tabnew<cr>
+omap nt <cmd>tabnew<cr>
+xmap nt <cmd>tabnew<cr>
 
 nnoremap vv G$Vgg0
 
