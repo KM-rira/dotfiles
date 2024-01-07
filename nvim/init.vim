@@ -20,9 +20,8 @@ Plug 'vim-jp/vimdoc-ja'
 " インデントの階層色設定
 Plug 'nathanaelkane/vim-indent-guides'
 
-" ステータスラインを表示
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" ステータスライン
+Plug 'nvim-lualine/lualine.nvim'
 
 " ファイル検索
 Plug 'ctrlpvim/ctrlp.vim'
@@ -34,7 +33,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'EdenEast/nightfox.nvim'
 Plug 'joshdick/onedark.vim'
 
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
 
 " golang
@@ -58,6 +57,36 @@ call plug#end()
 "----------------------------------------------------------
 " lua
 "----------------------------------------------------------
+lua << EOF
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'onedark',
+    component_separators = { left = '|', right = '|'},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+EOF
 lua << EOF
 require('telescope').setup{
   defaults = {
