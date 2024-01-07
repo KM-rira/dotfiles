@@ -4,11 +4,11 @@ file=$1
 
 # selectの抽出失敗した場合
 if [ -z "$file" ] ; then
-    echo "===== not setting path ====="
+    echo "===== NOT SETTING PATH ====="
     exit 1
 else
     # ユーザーに質問をして y/n の回答を待つ
-    read -p "${file} ←check (y/n) " answer
+    read -p "${file} ← restore ok? (y/n) " answer
 
     # 回答を小文字に変換
     answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
