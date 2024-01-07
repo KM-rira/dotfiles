@@ -83,11 +83,19 @@ Plug 'klen/nvim-test'
 " commentout
 Plug 'numToStr/Comment.nvim'
 
+" サイドバー設定
+Plug 'sidebar-nvim/sidebar.nvim'
+
 call plug#end()
 
 "----------------------------------------------------------
 " lua
 "----------------------------------------------------------
+lua << EOF
+local sidebar = require("sidebar-nvim")
+local opts = {open = true}
+sidebar.setup(opts)
+EOF
 lua << EOF
 local highlight = {
     "CursorColumn",
@@ -716,6 +724,8 @@ command! Ht split | terminal
 command! Rc :edit $MYVIMRC
 command! Re :source ~/.config/nvim/init.vim
 command! Nf NvimTreeFindFile
+command! Nt NvimTreeToggle
+command! St SidebarNvimToggle
 cabbrev Ner NERDTreeToggle
 
 
@@ -1034,9 +1044,4 @@ function! SearchDollar()
         echo "'$' not found."
     endif
 endfunction
-
-
-
-
-
 
