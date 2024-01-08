@@ -5,8 +5,8 @@
     colors = {
     foreground = "#30D5C8",  -- ターコイズブルー
     background = "#1C1C1C",  -- 暗いグレーの背景
-    cursor_bg = "#FF0000",   -- ターコイズブルーのカーソル
-    cursor_border = "#FF0000",
+    cursor_bg = "#f0246b",
+    cursor_border = "#f0246b",
     cursor_fg = "#1C1C1C",
     selection_bg = "#FFA500", -- 選択時の背景色
     selection_fg = "#000000",
