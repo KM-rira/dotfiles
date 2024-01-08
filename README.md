@@ -220,7 +220,10 @@ sudo apt-get install ripgrep
 
 ## zoxide
 ```bash
+# Linux
 sudo apt install zoxide
+# windows
+choco install zoxide
 ```
 
 ## colordiff
@@ -253,4 +256,14 @@ sudo update-locale LANG=ja_JP.UTF-8
 man ls
 ```
 
+## Rust
+```bash
+# 1(defaultを選択)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+rustc --version
+cargo --version
+cargo install code-minimap
+code-minimap --version
+```
 

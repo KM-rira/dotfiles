@@ -55,43 +55,68 @@ Plug 'leoluz/nvim-dap-go'
 Plug 'RRethy/vim-illuminate'
 " 色コードを色付け
 Plug 'norcalli/nvim-colorizer.lua'
-" モードによって色変更
-Plug 'mvllow/modes.nvim'
 " スタート画面設定
 Plug 'goolord/alpha-nvim'
-
 " スクロールバー設定
 Plug 'petertriho/nvim-scrollbar'
-
 " if 等にマッチするものを強調する
 Plug 'andymass/vim-matchup'
-
 " 括弧を自動で閉じる
 Plug 'windwp/nvim-autopairs'
-
 " SQLを大文字にする
 Plug 'jsborjesson/vim-uppercase-sql'
-
 " VScode的な差分表示をする
 Plug 'lewis6991/gitsigns.nvim'
-
 " コンフリクトをわかりやすくする
 Plug 'akinsho/git-conflict.nvim'
-
 " テストコード実行プラグイン
 Plug 'klen/nvim-test'
-
 " commentout
 Plug 'numToStr/Comment.nvim'
-
 " サイドバー設定
 Plug 'sidebar-nvim/sidebar.nvim'
-
+" terminal拡張
+Plug 'akinsho/toggleterm.nvim', { 'tag': '*' }
+" minimap
+Plug 'wfxr/minimap.vim'
+Plug 'gorbit99/codewindow.nvim'
+" スクロールがなめらか
+Plug 'karb94/neoscroll.nvim'
+" インデントをきれいにする
+Plug 'aruyu/nvim-ultivisual'
+" スクロールするときの末尾が少し余白あり
+Plug 'Aasim-A/scrollEOF.nvim'
+" オブジェクトに関するバーを表示
+Plug 'utilyre/barbecue.nvim'
 call plug#end()
 
 "----------------------------------------------------------
 " lua
 "----------------------------------------------------------
+lua require('scrollEOF').setup()
+lua require('nvim-ultivisual').setup()
+lua require('neoscroll').setup()
+lua << EOF
+require('codewindow').setup()
+EOF
+" ミニマップの自動表示
+let g:minimap_auto_start = 1
+" ミニマップの自動トグル
+"let g:minimap_auto_toggle = 1
+lua << EOF
+require("toggleterm").setup{
+  -- ここに設定を追加
+  size = 20,
+  open_mapping = [[<c-\>]],
+  hide_numbers = true,
+  shade_filetypes = {},
+  shade_terminals = true,
+  shading_factor = 2,
+  start_in_insert = true,
+  persist_size = true,
+  direction = 'horizontal'
+}
+EOF
 lua << EOF
 local sidebar = require("sidebar-nvim")
 local opts = {open = true}
@@ -320,33 +345,6 @@ require('scrollbar').setup()
 EOF
 lua << EOF
 require('alpha').setup(require('alpha.themes.startify').config)
-EOF
-lua << EOF
-require('modes').setup({
-	colors = {
-		copy = "#f5c359",
-		delete = "#c75c6a",
-		insert = "#78ccc5",
-		visual = "#9745be",
-	},
-
-	-- Set opacity for cursorline and number background
-	line_opacity = 0.15,
-
-	-- Enable cursor highlights
-	set_cursor = true,
-
-	-- Enable cursorline initially, and disable cursorline for inactive windows
-	-- or ignored filetypes
-	set_cursorline = true,
-
-	-- Enable line number highlights to match cursorline
-	set_number = false,
-
-	-- Disable modes highlights in specified filetypes
-	-- Please PR commonly ignored filetypes
-	ignore_filetypes = { 'NvimTree', 'TelescopePrompt' }
-})
 EOF
 lua << EOF
 require 'colorizer'.setup(
@@ -716,6 +714,7 @@ augroup END
 command! Pi PlugInstall
 command! Pu PlugUpdate
 command! Pc PlugClean
+command! Ps PlugStatus
 command! Gr GoReferrers
 command! Gd GoDef
 command! Tr terminal
@@ -727,6 +726,7 @@ command! Re :source ~/.config/nvim/init.vim
 command! Nf NvimTreeFindFile
 command! Nt NvimTreeToggle
 command! St SidebarNvimToggle
+command! Ch checkhealth
 cabbrev Ner NERDTreeToggle
 
 
@@ -899,7 +899,8 @@ endif
 "colorscheme nightfox
 syntax on
 colorscheme onedark
-
+" ターミナル背景色
+hi Terminal guibg=black
 " インデントが最初からカラーリング
 "let g:indent_guides_auto_colors = 0
 "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=None   ctermbg=234
@@ -907,7 +908,7 @@ colorscheme onedark
 "let g:indent_guides_enable_on_vim_startup = 1
 
 " 選択範囲の背景色を暗いオレンジに、文字色を黒に設定
-highlight Visual ctermfg=black guifg=black ctermbg=202 guibg=#FF4500
+highlight Visual ctermfg=black guifg=black ctermbg=202 guibg=#FFA500
 
 " 行番号表示
 set number
