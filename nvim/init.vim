@@ -789,6 +789,8 @@ xmap nt <cmd>tabnew<cr>
 
 " 矩形選択
 nnoremap <Leader>v <C-v>
+xnoremap <Leader>v <C-v>
+onoremap <Leader>v <C-v>
 nnoremap vv G$Vgg0
 
 nnoremap dx dd
