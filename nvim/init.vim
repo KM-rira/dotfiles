@@ -124,7 +124,7 @@ require("toggleterm").setup{
 EOF
 lua << EOF
 local sidebar = require("sidebar-nvim")
-local opts = {open = true}
+local opts = {open = false}
 sidebar.setup(opts)
 EOF
 lua << EOF
@@ -712,6 +712,8 @@ augroup MyXML
   autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
   autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 augroup END
+
+autocmd BufWinLeave * if exists(':Minimap') | MinimapClose | endif
 
 "----------------------------------------
 " コマンドマッピング
