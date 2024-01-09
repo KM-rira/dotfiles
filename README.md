@@ -267,3 +267,8 @@ cargo install code-minimap
 code-minimap --version
 ```
 
+## win32yank.exe
+```
+hmod +x win32yank.exe
+```
+
