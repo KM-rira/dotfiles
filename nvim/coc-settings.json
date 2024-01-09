@@ -6,5 +6,8 @@
       "filetypes": ["go"]
     }
   }
+    "coc.preferences.formatOnSaveFiletypes": [
+        "go"
+    ]
 }
 
