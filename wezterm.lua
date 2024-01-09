@@ -24,7 +24,7 @@
         -- 前のタブに移動
         {key="Tab", mods="CTRL|SHIFT", action=wezterm.action{ActivateTabRelative=-1}},
         -- windowキー無効化
-        {key="V", mods="SUPER", action="Nop"},
+        -- {key="v", mods="SUPER", action="Nop"},
         -- 1ページ上にスクロール
         {key="b", mods="ALT", action=wezterm.action{ScrollByPage=-1}},
         -- 1ページ下にスクロール
