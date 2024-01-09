@@ -724,8 +724,8 @@ command! Gr GoReferrers
 command! Gd GoDef
 command! Tr terminal
 command! Mp MarkdownPreview
-command! Vt vsplit | terminal
-command! Ht split | terminal
+command! Tv vsplit | terminal
+command! Th split | terminal
 command! Rc :edit $MYVIMRC
 command! Re :source ~/.config/nvim/init.vim
 command! Nf NvimTreeFindFile
@@ -787,6 +787,8 @@ nmap nt <cmd>tabnew<cr>
 omap nt <cmd>tabnew<cr>
 xmap nt <cmd>tabnew<cr>
 
+" 矩形選択
+nnoremap <Leader>v <C-v>
 nnoremap vv G$Vgg0
 
 nnoremap dx dd
@@ -1074,4 +1076,12 @@ if has('wsl')
     \   'cache_enabled': 0,
     \ }
 endif
+
+command! -nargs=+ Tg call SearchFiles(<f-args>)
+
+function! SearchFiles(...)
+  let l:search_string = a:1
+  let l:file_type = a:2
+  execute 'Telescope grep_string search=' . l:search_string . ' extensions=' . l:file_type
+endfunction
 
