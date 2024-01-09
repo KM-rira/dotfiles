@@ -2,6 +2,9 @@ set encoding=utf-8
 scriptencoding utf-8
 let mapleader = ";"
 set termguicolors
+set ignorecase
+set smartcase
+
 "----------------------------------------
 " プラグインを追加
 "----------------------------------------
@@ -88,6 +91,8 @@ Plug 'aruyu/nvim-ultivisual'
 Plug 'Aasim-A/scrollEOF.nvim'
 " オブジェクトに関するバーを表示
 Plug 'utilyre/barbecue.nvim'
+" 翻訳
+Plug 'hotoolong/translate.nvim'
 call plug#end()
 
 "----------------------------------------------------------
@@ -772,6 +777,11 @@ nmap <leader>fc <cmd>Telescope command_history<cr>
 nmap <leader>fj <cmd>Telescope jumplist<cr>
 nmap <leader>fs <cmd>Telescope search_history<cr>
 nmap <leader>fz <cmd>Telescope frecency<cr>
+nmap <leader>fl <cmd>Telescope live_grep<cr>
+
+" 翻訳
+nmap gr <Plug>(Translate)
+vmap t <Plug>(VTranslate)
 
 nmap nt <cmd>tabnew<cr>
 omap nt <cmd>tabnew<cr>
@@ -1047,4 +1057,21 @@ function! SearchDollar()
         echo "'$' not found."
     endif
 endfunction
+
+" Windows のクリップボードと統合するための設定
+if has('wsl')
+  set clipboard=unnamedplus
+  let g:clipboard = {
+    \   'name': 'win32yank-wsl',
+    \   'copy': {
+    \      '+': 'win32yank.exe -i --crlf',
+    \      '*': 'win32yank.exe -i --crlf',
+    \    },
+    \   'paste': {
+    \      '+': 'win32yank.exe -o --lf',
+    \      '*': 'win32yank.exe -o --lf',
+    \   },
+    \   'cache_enabled': 0,
+    \ }
+endif
 
