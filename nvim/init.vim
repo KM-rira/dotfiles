@@ -98,6 +98,18 @@ call plug#end()
 "----------------------------------------------------------
 " lua
 "----------------------------------------------------------
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,              -- false にするとハイライトを無効にします
+    additional_vim_regex_highlighting = false,
+  },
+  ensure_installed = "go",      -- go パーサーの自動インストール
+  indent = {
+    enable = true,              -- インデント機能の有効化
+  },
+}
+EOF
 lua require('scrollEOF').setup()
 lua require('nvim-ultivisual').setup()
 lua require('neoscroll').setup()
@@ -713,7 +725,7 @@ augroup MyXML
   autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
 augroup END
 
-autocmd BufWinLeave * if exists(':Minimap') | MinimapClose | endif
+"autocmd BufWinLeave * if exists(':Minimap') | MinimapClose | endif
 
 "----------------------------------------
 " コマンドマッピング
@@ -768,6 +780,11 @@ xmap <leader>re <Plug>(coc-rename)
 nmap <leader>h :call CocAction('doHover')<CR>
 omap <leader>h :call CocAction('doHover')<CR>
 xmap <leader>h :call CocAction('doHover')<CR>
+
+" 次のエラーにジャンプ
+nmap <silent> <leader>ef :CocNext<CR>
+" 前のエラーにジャンプ
+nmap <silent> <leader>eb :CocPrev<CR>
 
 " telescope系
 nmap <leader>ff <cmd>Telescope find_files<cr>

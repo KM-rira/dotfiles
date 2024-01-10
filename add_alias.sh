@@ -93,6 +93,8 @@ alias stage='git diff --name-only --staged'
 alias v='nvim'
 alias c='cd'
 alias commitid='bash ~/vimConf/tools/get_commit_id.sh'
+alias t='tig'
+alias resetsoft='git reset --soft HEAD~1'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
