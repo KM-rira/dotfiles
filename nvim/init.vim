@@ -42,7 +42,7 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/playground'
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 
-Plug 'neovim/nvim-lspconfig'
+"Plug 'neovim/nvim-lspconfig'
 
 " golang
 Plug 'mattn/vim-goimports'
@@ -56,22 +56,22 @@ Plug 'nvim-telescope/telescope-frecency.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
 " debug
-Plug 'mfussenegger/nvim-dap'
-Plug 'rcarriga/nvim-dap-ui'
-Plug 'leoluz/nvim-dap-go'
+"Plug 'mfussenegger/nvim-dap'
+"Plug 'rcarriga/nvim-dap-ui'
+"Plug 'leoluz/nvim-dap-go'
 
 " 単語をハイライト
 Plug 'RRethy/vim-illuminate'
 " 色コードを色付け
-Plug 'norcalli/nvim-colorizer.lua'
+"Plug 'norcalli/nvim-colorizer.lua'
 " スタート画面設定
 Plug 'goolord/alpha-nvim'
 " スクロールバー設定
 Plug 'petertriho/nvim-scrollbar'
 " if 等にマッチするものを強調する
-Plug 'andymass/vim-matchup'
+"Plug 'andymass/vim-matchup'
 " 括弧を自動で閉じる
-Plug 'windwp/nvim-autopairs'
+"Plug 'windwp/nvim-autopairs'
 " SQLを大文字にする
 Plug 'jsborjesson/vim-uppercase-sql'
 " VScode的な差分表示をする
@@ -92,32 +92,49 @@ Plug 'gorbit99/codewindow.nvim'
 " スクロールがなめらか
 Plug 'karb94/neoscroll.nvim'
 " インデントをきれいにする
-Plug 'aruyu/nvim-ultivisual'
+"Plug 'aruyu/nvim-ultivisual'
 " スクロールするときの末尾が少し余白あり
 Plug 'Aasim-A/scrollEOF.nvim'
 " オブジェクトに関するバーを表示
 Plug 'utilyre/barbecue.nvim'
 " 翻訳
 Plug 'hotoolong/translate.nvim'
+
+" タブ管理
+Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+
 call plug#end()
 
 "----------------------------------------------------------
 " lua
 "----------------------------------------------------------
+set termguicolors
 lua << EOF
-require'treesitter-context'.setup{
-  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-  max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-  min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-  line_numbers = true,
-  multiline_threshold = 20, -- Maximum number of lines to show for a single context
-  trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-  mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
-  -- Separator between context and content. Should be a single character string, like '-'.
-  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-  separator = nil,
-  zindex = 20, -- The Z-index of the context window
-  on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+require("bufferline").setup{}
+EOF
+lua << EOF
+require'treesitter-context'.setup {
+    -- ここにオプションを設定
+    enable = true,  -- デフォルトで有効にする
+    throttle = true, -- スムーズなスクロールのためのスロットル
+    max_lines = 0,  -- コンテキストを表示する最大行数（0は無制限）
+    patterns = {    -- 表示するノードのタイプ
+        -- デフォルトの言語は以下のように設定されています
+        default = {
+            'class',
+            'function',
+            'method',
+            -- 他に表示したいノードタイプがあればここに追加
+        },
+        -- 特定の言語のためのカスタム設定も可能
+        -- 例：python = { 'class', 'function', 'async_function' },
+        go = {
+            'function',
+            'method',
+            -- Go言語に特有の他のノードタイプが必要な場合はここに追加
+        },
+    },
 }
 EOF
 lua << EOF
@@ -212,7 +229,7 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 lua require('scrollEOF').setup()
-lua require('nvim-ultivisual').setup()
+"lua require('nvim-ultivisual').setup()
 lua require('neoscroll').setup()
 lua << EOF
 require('codewindow').setup()
@@ -452,9 +469,9 @@ require('gitsigns').setup {
   },
 }
 EOF
-lua << EOF
-require("nvim-autopairs").setup {}
-EOF
+" lua << EOF
+" require("nvim-autopairs").setup {}
+" EOF
 lua << EOF
 vim.g.matchup_matchparen_offscreen = { method = 'popup' }
 EOF
@@ -464,21 +481,21 @@ EOF
 lua << EOF
 require('alpha').setup(require('alpha.themes.startify').config)
 EOF
-lua << EOF
-require 'colorizer'.setup(
-  {'*';},          -- すべてのファイルタイプで有効にする
-  {
-    RGB      = true;         -- #RGB 形式を有効にする
-    RRGGBB   = true;         -- #RRGGBB 形式を有効にする
-    names    = true;         -- "blue" のような名前付きカラーを有効にする
-    RRGGBBAA = true;         -- #RRGGBBAA 形式を有効にする
-    rgb_fn   = true;         -- css rgb() および rgba() 関数を有効にする
-    hsl_fn   = true;         -- css hsl() および hsla() 関数を有効にする
-    css      = true;         -- css #RRGGBB 形式を有効にする
-    css_fn   = true;         -- css 関数を有効にする
-  }
-)
-EOF
+" lua << EOF
+" require 'colorizer'.setup(
+"   {'*';},          -- すべてのファイルタイプで有効にする
+"   {
+"     RGB      = true;         -- #RGB 形式を有効にする
+"     RRGGBB   = true;         -- #RRGGBB 形式を有効にする
+"     names    = true;         -- "blue" のような名前付きカラーを有効にする
+"     RRGGBBAA = true;         -- #RRGGBBAA 形式を有効にする
+"     rgb_fn   = true;         -- css rgb() および rgba() 関数を有効にする
+"     hsl_fn   = true;         -- css hsl() および hsla() 関数を有効にする
+"     css      = true;         -- css #RRGGBB 形式を有効にする
+"     css_fn   = true;         -- css 関数を有効にする
+"   }
+" )
+" EOF
 lua << EOF
 require('lualine').setup {
   options = {
@@ -570,115 +587,115 @@ require'nvim-tree'.setup {
   }
 }
 EOF
-lua << EOF
--- shortcut
-local function map(mode, lhs, rhs, opts)
-	local options = {noremap = true}
-    if opts then options = vim.tbl_extend('force', options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
-map("n", "<F5>", ":lua require'dap'.continue()<CR>", { silent = true})
-map("n", "<F10>", ":lua require'dap'.step_over()<CR>", { silent = true})
-map("n", "<F11>", ":lua require'dap'.step_into()<CR>", { silent = true})
-map("n", "<F12>", ":lua require'dap'.step_out()<CR>", { silent = true})
-map("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>", { silent = true})
-map("n", "<leader>bc", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { silent = true})
-map("n", "<leader>l", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", { silent = true})
-
--- dap-ui key map
-map("n", "<leader>d", ":lua require'dapui'.toggle()<CR>", { silent = true})
-map("n", "<leader><leader>df", ":lua require'dapui'.eval()<CR>", { silent = true})
-
--- dap-go key map
-map("n", "<leader>td", ":lua require'dap-go'.debug_test()<CR>", { silent = true })
-
--- nvim-dap の基本設定
-local dap = require("dap")
-dap.adapters.delve = {
-  type = 'server',
-  port = '${port}',
-  executable = {
-    command = 'dlv',
-    args = {'dap', '-l', '127.0.0.1:${port}'},
-  }
-}
-
--- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
-dap.configurations.go = {
-  {
-    type = "delve",
-    name = "Debug",
-    request = "launch",
-    program = "${file}"
-  },
-  {
-    type = "delve",
-    name = "Debug test", -- configuration for debugging test files
-    request = "launch",
-    mode = "test",
-    program = "${file}"
-  },
-  -- works with go.mod packages and sub packages 
-  {
-    type = "delve",
-    name = "Debug test (go.mod)",
-    request = "launch",
-    mode = "test",
-    program = "./${relativeFileDirname}"
-  } 
-}
-
-EOF
-lua << EOF
-
--- nvim-dap-ui のUI設定
-require('dapui').setup({
-  icons = { expanded = "▾", collapsed = "▸" },
-  mappings = {
-    -- カスタムキーマッピング
-  },
-  layouts = {
-    {
-      elements = {
-        -- サイドバーのレイアウト設定
-      },
-      size = 40,
-      position = 'left'
-    },
-    {
-      elements = {
-        -- トレイのレイアウト設定
-      },
-      size = 10,
-      position = 'bottom'
-    },
-  }
-})
-
-EOF
-lua << EOF
--- nvim-dap-go の設定
-require('dap-go').setup()
-
-local dap = require('dap')
-
-dap.configurations.lua = {
-  {
-    type = 'nlua',
-    request = 'attach',
-    name = "Attach to running Neovim instance",
-    host = function()
-      return '127.0.0.1'
-    end,
-    port = function()
-      local val = vim.fn.input('Port: ')
-      return tonumber(val)
-    end
-  }
-}
-
-EOF
+" lua << EOF
+" -- shortcut
+" local function map(mode, lhs, rhs, opts)
+" 	local options = {noremap = true}
+"     if opts then options = vim.tbl_extend('force', options, opts) end
+"     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+" end
+"
+" map("n", "<F5>", ":lua require'dap'.continue()<CR>", { silent = true})
+" map("n", "<F10>", ":lua require'dap'.step_over()<CR>", { silent = true})
+" map("n", "<F11>", ":lua require'dap'.step_into()<CR>", { silent = true})
+" map("n", "<F12>", ":lua require'dap'.step_out()<CR>", { silent = true})
+" map("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>", { silent = true})
+" map("n", "<leader>bc", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { silent = true})
+" map("n", "<leader>l", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", { silent = true})
+"
+" -- dap-ui key map
+" map("n", "<leader>d", ":lua require'dapui'.toggle()<CR>", { silent = true})
+" map("n", "<leader><leader>df", ":lua require'dapui'.eval()<CR>", { silent = true})
+"
+" -- dap-go key map
+" map("n", "<leader>td", ":lua require'dap-go'.debug_test()<CR>", { silent = true })
+"
+" -- nvim-dap の基本設定
+" local dap = require("dap")
+" dap.adapters.delve = {
+"   type = 'server',
+"   port = '${port}',
+"   executable = {
+"     command = 'dlv',
+"     args = {'dap', '-l', '127.0.0.1:${port}'},
+"   }
+" }
+"
+" -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+" dap.configurations.go = {
+"   {
+"     type = "delve",
+"     name = "Debug",
+"     request = "launch",
+"     program = "${file}"
+"   },
+"   {
+"     type = "delve",
+"     name = "Debug test", -- configuration for debugging test files
+"     request = "launch",
+"     mode = "test",
+"     program = "${file}"
+"   },
+"   -- works with go.mod packages and sub packages 
+"   {
+"     type = "delve",
+"     name = "Debug test (go.mod)",
+"     request = "launch",
+"     mode = "test",
+"     program = "./${relativeFileDirname}"
+"   } 
+" }
+"
+" EOF
+" lua << EOF
+"
+" -- nvim-dap-ui のUI設定
+" require('dapui').setup({
+"   icons = { expanded = "▾", collapsed = "▸" },
+"   mappings = {
+"     -- カスタムキーマッピング
+"   },
+"   layouts = {
+"     {
+"       elements = {
+"         -- サイドバーのレイアウト設定
+"       },
+"       size = 40,
+"       position = 'left'
+"     },
+"     {
+"       elements = {
+"         -- トレイのレイアウト設定
+"       },
+"       size = 10,
+"       position = 'bottom'
+"     },
+"   }
+" })
+"
+" EOF
+" lua << EOF
+" -- nvim-dap-go の設定
+" require('dap-go').setup()
+"
+" local dap = require('dap')
+"
+" dap.configurations.lua = {
+"   {
+"     type = 'nlua',
+"     request = 'attach',
+"     name = "Attach to running Neovim instance",
+"     host = function()
+"       return '127.0.0.1'
+"     end,
+"     port = function()
+"       local val = vim.fn.input('Port: ')
+"       return tonumber(val)
+"     end
+"   }
+" }
+"
+" EOF
 
 "----------------------------------------------------------
 " クリップボードからのペースト
@@ -903,9 +920,13 @@ nmap <leader>fl <cmd>Telescope live_grep<cr>
 nmap gr <Plug>(Translate)
 vmap t <Plug>(VTranslate)
 
-nmap nt <cmd>tabnew<cr>
-omap nt <cmd>tabnew<cr>
-xmap nt <cmd>tabnew<cr>
+" タブ関連
+nmap tn <cmd>tabnew<cr>
+omap tn <cmd>tabnew<cr>
+xmap tn <cmd>tabnew<cr>
+
+nnoremap <silent><TAB> :BufferLineCycleNext<CR>
+nnoremap <silent><S-TAB> :BufferLineCyclePrev<CR>
 
 " 矩形選択
 nnoremap <Leader>v <C-v>
