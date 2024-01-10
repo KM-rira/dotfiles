@@ -99,6 +99,7 @@ alias stash='git stash'
 alias stashl='git stash list'
 alias stasha='git stash apply'
 alias stashs='git stash show'
+alias wez='nvim ~/vimConf/wezterm.lua'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
@@ -121,16 +122,16 @@ OS=$(uname)
 case $OS in
     'Linux')
         alias l='exa -l --icons'
-        alias wez='echo "not windows"'
+        alias wezl='echo "not windows"'
         ;;
     'Darwin')
         echo "Mac"
         alias l='exa -l --icons'
-        alias wez='echo "not windows"'
+        alias wezl='echo "not windows"'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='ls -l --color=auto'
-        alias wez='nvim ~/vimConf/wezterm.lua'
+        alias wezl='nvim ~/.config/wezterm/wezterm.lua'
         ;;
     *)
         echo "Unknown OS: $OS"
