@@ -59,6 +59,12 @@
         {key="j", mods="SHIFT|ALT", action=wezterm.action{AdjustPaneSize={"Down", 1}}},
         -- アクティブなペインを閉じる
         {key="x", mods="ALT", action=wezterm.action{CloseCurrentPane={confirm=true}}},
+        -- 文字の大きさを増やす
+        {key="+", mods="SHIFT|ALT", action="IncreaseFontSize"},
+        -- 文字の大きさを減らす
+        {key="=", mods="SHIFT|ALT", action="DecreaseFontSize"},
+        -- 文字の大きさをリセット
+        {key="0", mods="SHIFT|ALT", action="ResetFontSize"},
     },
     audible_bell = "Disabled",audible_bell = "Disabled",
     font_size = 7.7,
