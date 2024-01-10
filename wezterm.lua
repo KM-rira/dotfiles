@@ -61,6 +61,6 @@
         {key="x", mods="ALT", action=wezterm.action{CloseCurrentPane={confirm=true}}},
     },
     audible_bell = "Disabled",audible_bell = "Disabled",
-    font_size = 9.0,
+    font_size = 7.7,
  }
 
