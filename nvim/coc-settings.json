@@ -6,8 +6,11 @@
       "filetypes": ["go"]
     }
   }
-    "coc.preferences.formatOnSaveFiletypes": [
+  "coc.preferences.formatOnSaveFiletypes": [
         "go"
-    ]
+  ]
+  {
+      "suggest.keepCompleteopt": true,
+　　}
 }
 
