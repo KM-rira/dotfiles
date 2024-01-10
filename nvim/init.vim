@@ -998,6 +998,13 @@ nnoremap K 10k
 xnoremap K 10k
 onoremap K 10k
 
+" 補完選択系
+" 補完表示時のEnterで改行をしない
+inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
+
+set completeopt=menuone,noinsert
+inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
+inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 
 " ノーマルモードに移行
 inoremap jk <Esc>
