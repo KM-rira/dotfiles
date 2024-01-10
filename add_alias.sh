@@ -95,6 +95,10 @@ alias c='cd'
 alias commitid='bash ~/vimConf/tools/get_commit_id.sh'
 alias t='tig'
 alias resetsoft='git reset --soft HEAD~1'
+alias stash='git stash'
+alias stashl='git stash list'
+alias stasha='git stash apply'
+alias stashs='git stash show'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
