@@ -100,6 +100,7 @@ alias stashl='git stash list'
 alias stasha='git stash apply'
 alias stashs='git stash show'
 alias wez='nvim ~/vimConf/wezterm.lua'
+alias wt="nvim $wt_path"
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
