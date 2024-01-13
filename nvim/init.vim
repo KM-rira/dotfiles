@@ -235,7 +235,7 @@ lua << EOF
 require('codewindow').setup()
 EOF
 " ミニマップの自動表示
-let g:minimap_auto_start = 1
+"let g:minimap_auto_start = 1
 " ミニマップの自動トグル
 "let g:minimap_auto_toggle = 1
 lua << EOF
@@ -864,6 +864,7 @@ command! Nf NvimTreeFindFile
 command! Nt NvimTreeToggle
 command! St SidebarNvimToggle
 command! Ch checkhealth
+command! Mt MinimapToggle
 cabbrev Ner NERDTreeToggle
 
 

@@ -11,7 +11,7 @@
 # source ~/vimConf/addAlias.sh
 
 # .bashrcのパス
-BASHRC="$HOME/.bashrc"
+bashrc="$HOME/.bashrc"
 
 vimConf="$HOME/vimConf"
 
@@ -100,7 +100,9 @@ alias stashl='git stash list'
 alias stasha='git stash apply'
 alias stashs='git stash show'
 alias wez='nvim ~/vimConf/wezterm.lua'
-alias wt="nvim $wt_path"
+alias wt="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
+alias g="grep"
+alias c="cd"
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"

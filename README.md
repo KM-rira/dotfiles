@@ -272,3 +272,10 @@ code-minimap --version
 hmod +x win32yank.exe
 ```
 
+# python support
+```bash
+npm install -g pyright
+
+:CocInstall coc-pyright
+```
+
