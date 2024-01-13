@@ -3,6 +3,15 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": 
     [
+        // ペインに進む、戻る
+        {
+          "command": { "action": "moveFocus", "direction": "nextInOrder" },
+          "keys": "alt+o"
+        },
+        {
+          "command": { "action": "moveFocus", "direction": "previousInOrder" },
+          "keys": "alt+shift+o"
+        },
         // ペイン交換系
         {
             "command": { "action": "swapPane", "direction": "down" },
@@ -135,14 +144,6 @@
         {
             "command": "scrollDownPage",
             "keys": "shift+alt+f"
-        },
-        {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "previous"
-            },
-            "keys": "alt+o"
         },
         // 自動画面分割
         {
