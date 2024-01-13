@@ -3,6 +3,33 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": 
     [
+        // ペイン交換系
+        {
+            "command": { "action": "swapPane", "direction": "down" },
+            "keys": "alt+down"
+        },
+        {
+            "command": { "action": "swapPane", "direction": "left" },
+            "keys": "alt+left"
+        },
+        {
+            "command": { "action": "swapPane", "direction": "right" },
+            "keys": "alt+right"
+        },
+        {
+            "command": { "action": "swapPane", "direction": "up" },
+            "keys": "alt+up"
+        },
+        // ペインの複製
+        {
+            "command": 
+            { 
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate" 
+            },
+            "keys": "alt+shift+c"
+        },
         // 文字サイズを増やす（ズームイン）
         {
             "command": { "action": "adjustFontSize", "delta": 1 },
@@ -235,7 +262,8 @@
                 "experimental.retroTerminalEffect": false,
                 "font": 
                 {
-                    "face": "Consolas"
+                    "face": "FiraMono Nerd Font Mono",
+                    "size": 10.0
                 },
                 "foreground": "#05F8E4",
                 "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
