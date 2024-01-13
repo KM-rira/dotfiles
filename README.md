@@ -196,8 +196,11 @@ go install golang.org/x/tools/cmd/goimports@latest
 ## glow install
 ### windows
 ```bash
-# 管理者権限で
+# windows 管理者権限で
 choco install glow
+
+# linux
+sudo snap install glow
 ```
 
 ## ソフトリンク作成

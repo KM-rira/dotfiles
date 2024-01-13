@@ -118,7 +118,8 @@ alias giu="bash ~/vimConf/tools/github_cli/bash/giu.sh"
 alias gpw="bash ~/vimConf/tools/github_cli/bash/gpw.sh"
 alias giw="bash ~/vimConf/tools/github_cli/bash/giw.sh"
 alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
-alias rc='nvim ~/vimConf/nvim/init.vim'
+alias rc='nvim ~/vimConf/nvim/init.lua'
+alias rco='nvim ~/vimConf/nvim/init.vim'
 
 # OS分岐
 OS=$(uname)
