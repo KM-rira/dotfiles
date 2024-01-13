@@ -10,9 +10,7 @@
 # unalias -a
 # source ~/vimConf/addAlias.sh
 
-# .bashrcのパス
 bashrc="$HOME/.bashrc"
-
 vimConf="$HOME/vimConf"
 
 # user定義
@@ -26,7 +24,6 @@ eval "$(zoxide init bash)"
 export BAT_STYLE="header,grid"
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 shopt -s histappend
-
 # デフォルトのエディタ設定
 export EDITOR=nvim
 export GIT_EDITOR=nvim
@@ -103,6 +100,7 @@ alias wez='nvim ~/vimConf/wezterm.lua'
 alias wt="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 alias g="grep"
 alias c="cd"
+alias add='nvim ~/vimConf/add_alias.sh'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
@@ -118,7 +116,7 @@ alias giu="bash ~/vimConf/tools/github_cli/bash/giu.sh"
 alias gpw="bash ~/vimConf/tools/github_cli/bash/gpw.sh"
 alias giw="bash ~/vimConf/tools/github_cli/bash/giw.sh"
 alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
-alias rc='nvim ~/vimConf/nvim/init.lua'
+alias rc='nvim ~/vimConf/nvim/main.lua'
 alias rco='nvim ~/vimConf/nvim/init.vim'
 
 # OS分岐
