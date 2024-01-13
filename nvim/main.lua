@@ -50,7 +50,7 @@ require('packer').startup(function(use)
     use 'wfxr/minimap.vim'
     use 'gorbit99/codewindow.nvim'
     use 'karb94/neoscroll.nvim'
-    use 'Aasim-A/scroll.nvim'
+    --use 'Aasim-A/scroll.nvim'
     use 'utilyre/barbecue.nvim'
     use 'hotoolong/translate.nvim'
     use {'akinsho/bufferline.nvim', tag = '*'}
@@ -176,7 +176,7 @@ require'nvim-treesitter.configs'.setup {
 
 }
 
-require('scrollEOF').setup()
+--require('scrollEOF').setup()
 --lua require('nvim-ultivisual').setup()
 require('neoscroll').setup()
 
@@ -645,6 +645,7 @@ require'nvim-tree'.setup {
 --
 -- 
 
+vim.o.expandtab = true    -- タブをスペースに変換
 
 -- 行番号表示
 vim.o.number = true
@@ -687,10 +688,10 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 vim.o.tabstop = 4
-vim.o.guioptions = vim.o.guioptions .. "-T" -- ツールバー非表示
-vim.o.guioptions = vim.o.guioptions .. "+a" -- yank時にクリップボードにコピー
-vim.o.guioptions = vim.o.guioptions .. "-m" -- メニューバー非表示
-vim.o.guioptions = vim.o.guioptions .. "+R" -- 右スクロールバー非表示
+--vim.o.guioptions = vim.o.guioptions .. "-T" -- ツールバー非表示
+--vim.o.guioptions = vim.o.guioptions .. "+a" -- yank時にクリップボードにコピー
+--vim.o.guioptions = vim.o.guioptions .. "-m" -- メニューバー非表示
+--vim.o.guioptions = vim.o.guioptions .. "+R" -- 右スクロールバー非表示
 vim.o.smartindent = true
 vim.o.swapfile = false
 vim.o.foldenable = false
@@ -706,6 +707,7 @@ vim.o.ambiwidth = "double"
 vim.o.breakindent = true
 vim.o.breakindentopt = "shift:0"
 vim.o.shellslash = true
+vim.cmd 'filetype plugin indent on'  -- ファイルタイプに基づくインデント設定を有効化
 
 -- キーマッピング
 vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohlsearch<CR><ESC>', {})
@@ -888,14 +890,14 @@ vim.api.nvim_set_keymap('x', 'K', '10k', {noremap = true})
 vim.api.nvim_set_keymap('o', 'K', '10k', {noremap = true})
 
 -- 補完表示時のEnterで改行をしない
-vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.pumvisible() ? "<C-y>" : "<CR>"', {expr = true, noremap = true})
+--vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.pumvisible() ? "<C-y>" : "<CR>"', {expr = true, noremap = true})
 
 -- set completeopt
 vim.o.completeopt = "menuone,noinsert"
 
 -- 補完ナビゲーション
-vim.api.nvim_set_keymap('i', '<C-n>', 'v:lua.pumvisible() ? "<Down>" : "<C-n>"', {expr = true, noremap = true})
-vim.api.nvim_set_keymap('i', '<C-p>', 'v:lua.pumvisible() ? "<Up>" : "<C-p>"', {expr = true, noremap = true})
+--vim.api.nvim_set_keymap('i', '<C-n>', 'v:lua.pumvisible() ? "<Down>" : "<C-n>"', {expr = true, noremap = true})
+--vim.api.nvim_set_keymap('i', '<C-p>', 'v:lua.pumvisible() ? "<Up>" : "<C-p>"', {expr = true, noremap = true})
 
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap = true})
 vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n>', {noremap = true})
