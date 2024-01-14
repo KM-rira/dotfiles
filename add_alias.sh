@@ -101,6 +101,15 @@ alias wt="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/
 alias g="grep"
 alias c="cd"
 alias add='nvim ~/vimConf/add_alias.sh'
+alias func='nvim ~/vimConf/nvim/func.lua'
+alias keymap='nvim ~/vimConf/nvim/keymap.lua'
+alias func='nvim ~/vimConf/nvim/command.lua'
+alias auto='nvim ~/vimConf/nvim/auto.lua'
+alias plug='nvim ~/vimConf/nvim/plug.lua'
+alias setting='nvim ~/vimConf/nvim/setting.lua'
+alias view='nvim ~/vimConf/nvim/view.lua'
+alias rc='nvim ~/vimConf/nvim/init.lua'
+alias rco='nvim ~/vimConf/nvim/bk/init.vim'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
@@ -116,8 +125,6 @@ alias giu="bash ~/vimConf/tools/github_cli/bash/giu.sh"
 alias gpw="bash ~/vimConf/tools/github_cli/bash/gpw.sh"
 alias giw="bash ~/vimConf/tools/github_cli/bash/giw.sh"
 alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
-alias rc='nvim ~/vimConf/nvim/main.lua'
-alias rco='nvim ~/vimConf/nvim/init.vim'
 
 # OS分岐
 OS=$(uname)
