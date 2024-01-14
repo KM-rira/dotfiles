@@ -125,15 +125,18 @@ case $OS in
     'Linux')
         alias l='exa -l --icons'
         alias wezl='echo "not windows"'
+        alias nvimf='cd ~/.config/nvim'
         ;;
     'Darwin')
         echo "Mac"
         alias l='exa -l --icons'
         alias wezl='echo "not windows"'
+        alias nvimf='cd ~/.config/nvim'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='ls -l --color=auto'
         alias wezl='nvim ~/.config/wezterm/wezterm.lua'
+        alias nvimf='cd ~/AppData/Local/nvim'
         ;;
     *)
         echo "Unknown OS: $OS"
