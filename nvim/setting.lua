@@ -75,7 +75,7 @@ vim.o.fileformat = "unix"
 vim.o.ambiwidth = "double"
 vim.o.breakindent = true
 vim.o.breakindentopt = "shift:0"
-vim.o.shellslash = true
+--vim.o.shellslash = true
 vim.cmd 'filetype plugin indent on'  -- ファイルタイプに基づくインデント設定を有効化
 
 -- set completeopt
