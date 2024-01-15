@@ -29,6 +29,7 @@ export EDITOR=nvim
 export GIT_EDITOR=nvim
 
 # 追加したいエイリアスをこの配列に列挙
+alias fd=fdfind
 alias open='nvim ~/.bashrc'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -53,6 +54,7 @@ alias vimConf='cd ~/vimConf'
 alias pull='git pull'
 alias show='git show'
 alias findall='sudo find / -name'
+alias findalld='sudo find / -type d -name'
 alias batf='bash ~/vimConf/tools/batf.sh'
 alias catf='bash ~/vimConf/tools/catf.sh'
 alias nvf='bash ~/vimConf/tools/nvf.sh'

@@ -292,3 +292,12 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```
 
+# fd
+```bash
+# windows
+choco install fd
+
+# linux
+sudo apt install fd-find
+```
+
