@@ -1,3 +1,6 @@
+-- リーダーキーの設定
+vim.g.mapleader = ';'
+
 vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohlsearch<CR><ESC>', {})
 
 -- coc系
@@ -30,16 +33,17 @@ vim.api.nvim_set_keymap('o', '<leader>h', ':call CocAction(\'doHover\')<CR>', {s
 vim.api.nvim_set_keymap('x', '<leader>h', ':call CocAction(\'doHover\')<CR>', {silent = true, noremap = true})
 
 -- telescope系
-vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope find_files<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fb', '<cmd>Telescope buffers<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fo', '<cmd>Telescope oldfiles<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fcl', '<cmd>Telescope commands<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>ft', '<cmd>Telescope tags<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fc', '<cmd>Telescope command_history<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fj', '<cmd>Telescope jumplist<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fs', '<cmd>Telescope search_history<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fz', '<cmd>Telescope frecency<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>fl', '<cmd>Telescope live_grep<cr>', {silent = true, noremap = true})
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {})
+vim.keymap.set('n', '<leader>fcl', builtin.commands, {})
+vim.keymap.set('n', '<leader>fch', builtin.command_history, {})
+vim.keymap.set('n', '<leader>fj', builtin.jumplist, {})
+vim.keymap.set('n', '<leader>fs', builtin.search_history, {})
+vim.keymap.set("n", "<leader>fz", "<Cmd>Telescope frecency<CR>")
 
 -- 翻訳
 vim.api.nvim_set_keymap('n', 'gr', '<Plug>(Translate)', {silent = true})

@@ -2,9 +2,6 @@
 vim.o.encoding = 'utf-8'
 vim.scriptencoding = 'utf-8'
 
--- リーダーキーの設定
-vim.g.mapleader = ';'
-
 -- 色設定の有効化
 vim.o.termguicolors = true
 
