@@ -40,14 +40,79 @@ require('packer').startup(function(use)
     use {'akinsho/bufferline.nvim', tag = '*'}
 
     use {
-      'folke/todo-comments.nvim',
-      requires = 'nvim-lua/plenary.nvim',
-      config = function()
-        require('todo-comments').setup {
-          -- ここに設定を追加
-          -- またはデフォルト設定を使用するために空のままにする
-        }
-      end
+        'folke/todo-comments.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config = function()
+            require('todo-comments').setup {
+                -- ここに設定を追加
+                -- またはデフォルト設定を使用するために空のままにする
+                {
+                    signs = true, -- show icons in the signs column
+                    sign_priority = 8, -- sign priority
+                    -- keywords recognized as todo comments
+                    keywords = {
+                        FIX = {
+                            icon = "! ", -- icon used for the sign, and in search results
+                            color = "error", -- can be a hex color, or a named color (see below)
+                            alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+                            -- signs = false, -- configure signs for some keywords individually
+                        },
+                        TODO = { icon = "!  ", color = "info" },
+                        HACK = { icon = "!  ", color = "warning" },
+                        WARN = { icon = "!  ", color = "warning", alt = { "WARNING", "XXX" } },
+                        PERF = { icon = "!  ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+                        NOTE = { icon = "!  ", color = "hint", alt = { "INFO" } },
+                        TEST = { icon = "!  ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+                    },
+                    gui_style = {
+                        fg = "NONE", -- The gui style to use for the fg highlight group.
+                        bg = "BOLD", -- The gui style to use for the bg highlight group.
+                    },
+                    merge_keywords = true, -- when true, custom keywords will be merged with the defaults
+                    -- highlighting of the line containing the todo comment
+                    -- * before: highlights before the keyword (typically comment characters)
+                    -- * keyword: highlights of the keyword
+                    -- * after: highlights after the keyword (todo text)
+                    highlight = {
+                        multiline = true, -- enable multine todo comments
+                        multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
+                        multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
+                        before = "", -- "fg" or "bg" or empty
+                        keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
+                        after = "fg", -- "fg" or "bg" or empty
+                        pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
+                        comments_only = true, -- uses treesitter to match keywords in comments only
+                        max_line_len = 400, -- ignore lines longer than this
+                        exclude = {}, -- list of file types to exclude highlighting
+                    },
+                    -- list of named colors where we try to extract the guifg from the
+                    -- list of highlight groups or use the hex color if hl not found as a fallback
+                    colors = {
+                        error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+                        warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
+                        info = { "DiagnosticInfo", "#2563EB" },
+                        hint = { "DiagnosticHint", "#10B981" },
+                        default = { "Identifier", "#7C3AED" },
+                        test = { "Identifier", "#FF00FF" }
+                    },
+                    search = {
+                        command = "rg",
+                        args = {
+                            "--color=never",
+                            "--no-heading",
+                            "--with-filename",
+                            "--line-number",
+                            "--column",
+                        },
+                        -- regex that will be used to match keywords.
+                        -- don't replace the (KEYWORDS) placeholder
+                        pattern = [[\b(KEYWORDS):]], -- ripgrep regex
+                        -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
+                    },
+                }
+
+            }
+        end
     }
     -- その他のプラグインはここに追加...
 end)
@@ -81,92 +146,92 @@ require'treesitter-context'.setup {
 
 
 require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,              -- false にするとハイライトを無効にします
-    additional_vim_regex_highlighting = false,
-  },
-  ensure_installed = "go",      -- go パーサーの自動インストール
-  indent = {
-    enable = true,              -- インデント機能の有効化
-  },
-
-  -- textobject
-  textobjects = {
-    select = {
-      enable = true,
-
-      -- Automatically jump forward to textobj, similar to targets.vim
-      lookahead = true,
-
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        -- You can optionally set descriptions to the mappings (used in the desc parameter of
-        -- nvim_buf_set_keymap) which plugins like which-key display
-        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-        -- You can also use captures from other query groups like `locals.scm`
-        ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-      },
-      -- You can choose the select mode (default is charwise 'v')
-      --
-      -- Can also be a function which gets passed a table with the keys
-      -- * query_string: eg '@function.inner'
-      -- * method: eg 'v' or 'o'
-      -- and should return the mode ('v', 'V', or '<c-v>') or a table
-      -- mapping query_strings to modes.
-      selection_modes = {
-        ['@parameter.outer'] = 'v', -- charwise
-        ['@function.outer'] = 'V', -- linewise
-        ['@class.outer'] = '<c-v>', -- blockwise
-      },
-      -- If you set this to `true` (default is `false`) then any textobject is
-      -- extended to include preceding or succeeding whitespace. Succeeding
-      -- whitespace has priority in order to act similarly to eg the built-in
-      -- `ap`.
-      --
-      -- Can also be a function which gets passed a table with the keys
-      -- * query_string: eg '@function.inner'
-      -- * selection_mode: eg 'v'
-      -- and should return true of false
-      include_surrounding_whitespace = true,
+    highlight = {
+        enable = true,              -- false にするとハイライトを無効にします
+        additional_vim_regex_highlighting = false,
     },
-  },
-
-  -- refacter
-  refactor = {
-    highlight_definitions = {
-      enable = true,
-      -- Set to false if you have an `updatetime` of ~100.
-      clear_on_cursor_move = true,
+    ensure_installed = "go",      -- go パーサーの自動インストール
+    indent = {
+        enable = true,              -- インデント機能の有効化
     },
-  },
 
-  -- playground
-  playground = {
-    enable = true,
-    disable = {},
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-    persist_queries = false, -- Whether the query persists across vim sessions
-    keybindings = {
-      toggle_query_editor = 'o',
-      toggle_hl_groups = 'i',
-      toggle_injected_languages = 't',
-      toggle_anonymous_nodes = 'a',
-      toggle_language_display = 'I',
-      focus_language = 'f',
-      unfocus_language = 'F',
-      update = 'R',
-      goto_node = '<cr>',
-      show_help = '?',
+    -- textobject
+    textobjects = {
+        select = {
+            enable = true,
+
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+
+            keymaps = {
+                -- You can use the capture groups defined in textobjects.scm
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                -- You can optionally set descriptions to the mappings (used in the desc parameter of
+                -- nvim_buf_set_keymap) which plugins like which-key display
+                ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                -- You can also use captures from other query groups like `locals.scm`
+                ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+            },
+            -- You can choose the select mode (default is charwise 'v')
+            --
+            -- Can also be a function which gets passed a table with the keys
+            -- * query_string: eg '@function.inner'
+            -- * method: eg 'v' or 'o'
+            -- and should return the mode ('v', 'V', or '<c-v>') or a table
+            -- mapping query_strings to modes.
+            selection_modes = {
+                ['@parameter.outer'] = 'v', -- charwise
+                ['@function.outer'] = 'V', -- linewise
+                ['@class.outer'] = '<c-v>', -- blockwise
+            },
+            -- If you set this to `true` (default is `false`) then any textobject is
+            -- extended to include preceding or succeeding whitespace. Succeeding
+            -- whitespace has priority in order to act similarly to eg the built-in
+            -- `ap`.
+            --
+            -- Can also be a function which gets passed a table with the keys
+            -- * query_string: eg '@function.inner'
+            -- * selection_mode: eg 'v'
+            -- and should return true of false
+            include_surrounding_whitespace = true,
+        },
     },
-  },
-  query_linter = {
-    enable = true,
-    use_virtual_text = true,
-    lint_events = {"BufWrite", "CursorHold"},
-  },
+
+    -- refacter
+    refactor = {
+        highlight_definitions = {
+            enable = true,
+            -- Set to false if you have an `updatetime` of ~100.
+            clear_on_cursor_move = true,
+        },
+    },
+
+    -- playground
+    playground = {
+        enable = true,
+        disable = {},
+        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+        persist_queries = false, -- Whether the query persists across vim sessions
+        keybindings = {
+            toggle_query_editor = 'o',
+            toggle_hl_groups = 'i',
+            toggle_injected_languages = 't',
+            toggle_anonymous_nodes = 'a',
+            toggle_language_display = 'I',
+            focus_language = 'f',
+            unfocus_language = 'F',
+            update = 'R',
+            goto_node = '<cr>',
+            show_help = '?',
+        },
+    },
+    query_linter = {
+        enable = true,
+        use_virtual_text = true,
+        lint_events = {"BufWrite", "CursorHold"},
+    },
 
 }
 
@@ -182,16 +247,16 @@ require('codewindow').setup()
 --let g:minimap_auto_toggle = 1
 
 require("toggleterm").setup{
-  -- ここに設定を追加
-  size = 20,
-  open_mapping = [[<c-\>]],
-  hide_numbers = true,
-  shade_filetypes = {},
-  shade_terminals = true,
-  shading_factor = 2,
-  start_in_insert = true,
-  persist_size = true,
-  direction = 'horizontal'
+    -- ここに設定を追加
+    size = 20,
+    open_mapping = [[<c-\>]],
+    hide_numbers = true,
+    shade_filetypes = {},
+    shade_terminals = true,
+    shading_factor = 2,
+    start_in_insert = true,
+    persist_size = true,
+    direction = 'horizontal'
 }
 
 
@@ -260,155 +325,155 @@ require('Comment').setup({
 
 
 require('nvim-test').setup({
-  mappings = {
-    nearest = '<leader>dt',  -- 現在のカーソル位置に最も近いテストを実行
-    file = '<leader>dT',     -- 現在のファイルのテストを実行
-    suite = '<leader>da',    -- すべてのテストを実行
-    last = '<leader>dl',     -- 最後に実行したテストを再実行
-    visit = '<leader>df',    -- 最後に実行したテストのファイルを開く
-  }
+    mappings = {
+        nearest = '<leader>dt',  -- 現在のカーソル位置に最も近いテストを実行
+        file = '<leader>dT',     -- 現在のファイルのテストを実行
+        suite = '<leader>da',    -- すべてのテストを実行
+        last = '<leader>dl',     -- 最後に実行したテストを再実行
+        visit = '<leader>df',    -- 最後に実行したテストのファイルを開く
+    }
 })
 
 
 require('git-conflict').setup {
-  default_mappings = true, -- disable buffer local mapping created by this plugin
-  default_commands = true, -- disable commands created by this plugin
-  disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
-  list_opener = 'copen', -- command or function to open the conflicts list
-  highlights = { -- They must have background color, otherwise the default color will be used
-    incoming = 'DiffAdd',
-    current = 'DiffText',
-  }
+    default_mappings = true, -- disable buffer local mapping created by this plugin
+    default_commands = true, -- disable commands created by this plugin
+    disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
+    list_opener = 'copen', -- command or function to open the conflicts list
+    highlights = { -- They must have background color, otherwise the default color will be used
+        incoming = 'DiffAdd',
+        current = 'DiffText',
+    }
 }
 
 
 require('gitsigns').setup {
-  signs = {
-    add          = { text = '│' },
-    change       = { text = '│' },
-    delete       = { text = '_' },
-    topdelete    = { text = '‾' },
-    changedelete = { text = '~' },
-    untracked    = { text = '┆' },
-  },
-  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  watch_gitdir = {
-    follow_files = true
-  },
-  auto_attach = true,
-  attach_to_untracked = true,
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  current_line_blame_opts = {
-    virt_text = true,
-    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-    delay = 1000,
-    ignore_whitespace = false,
-    virt_text_priority = 100,
-  },
-  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-  sign_priority = 6,
-  update_debounce = 100,
-  status_formatter = nil, -- Use default
-  max_file_length = 40000, -- Disable if file is longer than this (in lines)
-  preview_config = {
-    -- Options passed to nvim_open_win
-    border = 'single',
-    style = 'minimal',
-    relative = 'cursor',
-    row = 0,
-    col = 1
-  },
-  yadm = {
-    enable = false
-  },
-  on_attach = function(bufnr)
-    local gs = package.loaded.gitsigns
+    signs = {
+        add          = { text = '│' },
+        change       = { text = '│' },
+        delete       = { text = '_' },
+        topdelete    = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked    = { text = '┆' },
+    },
+    signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+    numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+    linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+    word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+    watch_gitdir = {
+        follow_files = true
+    },
+    auto_attach = true,
+    attach_to_untracked = true,
+    current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+    current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+        delay = 1000,
+        ignore_whitespace = false,
+        virt_text_priority = 100,
+    },
+    current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+    sign_priority = 6,
+    update_debounce = 100,
+    status_formatter = nil, -- Use default
+    max_file_length = 40000, -- Disable if file is longer than this (in lines)
+    preview_config = {
+        -- Options passed to nvim_open_win
+        border = 'single',
+        style = 'minimal',
+        relative = 'cursor',
+        row = 0,
+        col = 1
+    },
+    yadm = {
+        enable = false
+    },
+    on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
 
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
+        local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- Navigation
+        map('n', ']c', function()
+            if vim.wo.diff then return ']c' end
+            vim.schedule(function() gs.next_hunk() end)
+            return '<Ignore>'
+        end, {expr=true})
+
+        map('n', '[c', function()
+            if vim.wo.diff then return '[c' end
+            vim.schedule(function() gs.prev_hunk() end)
+            return '<Ignore>'
+        end, {expr=true})
+
+        -- Actions
+        map('n', '<leader>hs', gs.stage_hunk)
+        map('n', '<leader>hr', gs.reset_hunk)
+        map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+        map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+        map('n', '<leader>hS', gs.stage_buffer)
+        map('n', '<leader>hu', gs.undo_stage_hunk)
+        map('n', '<leader>hR', gs.reset_buffer)
+        map('n', '<leader>hp', gs.preview_hunk)
+        map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+        map('n', '<leader>tb', gs.toggle_current_line_blame)
+        map('n', '<leader>hd', gs.diffthis)
+        map('n', '<leader>hD', function() gs.diffthis('~') end)
+        map('n', '<leader>td', gs.toggle_deleted)
+
+        -- Text object
+        map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
     end
-
-    -- Navigation
-    map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
-      vim.schedule(function() gs.next_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
-      vim.schedule(function() gs.prev_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    -- Actions
-    map('n', '<leader>hs', gs.stage_hunk)
-    map('n', '<leader>hr', gs.reset_hunk)
-    map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-    map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-    map('n', '<leader>hS', gs.stage_buffer)
-    map('n', '<leader>hu', gs.undo_stage_hunk)
-    map('n', '<leader>hR', gs.reset_buffer)
-    map('n', '<leader>hp', gs.preview_hunk)
-    map('n', '<leader>hb', function() gs.blame_line{full=true} end)
-    map('n', '<leader>tb', gs.toggle_current_line_blame)
-    map('n', '<leader>hd', gs.diffthis)
-    map('n', '<leader>hD', function() gs.diffthis('~') end)
-    map('n', '<leader>td', gs.toggle_deleted)
-
-    -- Text object
-    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-  end
 }
 
 
 require('gitsigns').setup {
-  signs = {
-    add          = { text = '│' },
-    change       = { text = '│' },
-    delete       = { text = '_' },
-    topdelete    = { text = '‾' },
-    changedelete = { text = '~' },
-    untracked    = { text = '┆' },
-  },
-  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  watch_gitdir = {
-    follow_files = true
-  },
-  auto_attach = true,
-  attach_to_untracked = true,
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  current_line_blame_opts = {
-    virt_text = true,
-    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-    delay = 1000,
-    ignore_whitespace = false,
-    virt_text_priority = 100,
-  },
-  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-  sign_priority = 6,
-  update_debounce = 100,
-  status_formatter = nil, -- Use default
-  max_file_length = 40000, -- Disable if file is longer than this (in lines)
-  preview_config = {
-    -- Options passed to nvim_open_win
-    border = 'single',
-    style = 'minimal',
-    relative = 'cursor',
-    row = 0,
-    col = 1
-  },
-  yadm = {
-    enable = false
-  },
+    signs = {
+        add          = { text = '│' },
+        change       = { text = '│' },
+        delete       = { text = '_' },
+        topdelete    = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked    = { text = '┆' },
+    },
+    signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+    numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+    linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+    word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+    watch_gitdir = {
+        follow_files = true
+    },
+    auto_attach = true,
+    attach_to_untracked = true,
+    current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+    current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+        delay = 1000,
+        ignore_whitespace = false,
+        virt_text_priority = 100,
+    },
+    current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+    sign_priority = 6,
+    update_debounce = 100,
+    status_formatter = nil, -- Use default
+    max_file_length = 40000, -- Disable if file is longer than this (in lines)
+    preview_config = {
+        -- Options passed to nvim_open_win
+        border = 'single',
+        style = 'minimal',
+        relative = 'cursor',
+        row = 0,
+        col = 1
+    },
+    yadm = {
+        enable = false
+    },
 }
 
 --
@@ -440,93 +505,93 @@ require('alpha').setup(require('alpha.themes.startify').config)
 --
 
 require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '|', right = '|'},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {},
-    always_divide_middle = true,
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  extensions = {}
+    options = {
+        icons_enabled = true,
+        theme = 'auto',
+        component_separators = { left = '|', right = '|'},
+        section_separators = { left = '', right = ''},
+        disabled_filetypes = {},
+        always_divide_middle = true,
+    },
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_c = {'filename'},
+        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {'filename'},
+        lualine_x = {'location'},
+        lualine_y = {},
+        lualine_z = {}
+    },
+    tabline = {},
+    extensions = {}
 }
 
 
 require('telescope').setup{
-  defaults = {
-    -- 他の設定...
+    defaults = {
+        -- 他の設定...
 
-    mappings = {
-      i = {
-        ["<C-j>"] = require('telescope.actions').move_selection_next,
-        ["<C-k>"] = require('telescope.actions').move_selection_previous,
-      },
+        mappings = {
+            i = {
+                ["<C-j>"] = require('telescope.actions').move_selection_next,
+                ["<C-k>"] = require('telescope.actions').move_selection_previous,
+            },
+        },
     },
-  },
 }
 
 
 require'nvim-tree'.setup {
-  -- netrw を完全に無効化
-  disable_netrw = true,
-  -- 起動時に netrw ウィンドウをハイジャック
-  hijack_netrw = true,
-  -- `DirChanged` でツリーのルートディレクトリを更新（通常は `:cd` を実行したとき）
-  update_cwd = true,
-  -- サインカラムに診断情報を表示
-  diagnostics = {
-    enable = true,
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
-    }
-  },
-  -- `BufEnter` でフォーカスされたファイルを更新し、ファイルが見つかるまでフォルダーを再帰的に展開
-  update_focused_file = {
-    enable = true,
+    -- netrw を完全に無効化
+    disable_netrw = true,
+    -- 起動時に netrw ウィンドウをハイジャック
+    hijack_netrw = true,
+    -- `DirChanged` でツリーのルートディレクトリを更新（通常は `:cd` を実行したとき）
     update_cwd = true,
-    ignore_list = {}
-  },
-  -- システムオープンコマンドの設定（デフォルトではツリー内の `s`）
-  system_open = {
-    cmd = nil,
-    args = {}
-  },
-  filters = {
-    dotfiles = false,
-    custom = {}
-  },
-  git = {
-    enable = true,
-    ignore = true,
-    timeout = 500,
-  },
-  view = {
-    -- ウィンドウの幅、数値（列）または `%` での文字列のいずれかにできる
-    width = 30,
-    -- ツリーの位置、'left' | 'right' | 'top' | 'bottom' のいずれか
-    side = 'left',
-    -- マッピングの設定は個別に行う
-  }
+    -- サインカラムに診断情報を表示
+    diagnostics = {
+        enable = true,
+        icons = {
+            hint = "",
+            info = "",
+            warning = "",
+            error = "",
+        }
+    },
+    -- `BufEnter` でフォーカスされたファイルを更新し、ファイルが見つかるまでフォルダーを再帰的に展開
+    update_focused_file = {
+        enable = true,
+        update_cwd = true,
+        ignore_list = {}
+    },
+    -- システムオープンコマンドの設定（デフォルトではツリー内の `s`）
+    system_open = {
+        cmd = nil,
+        args = {}
+    },
+    filters = {
+        dotfiles = false,
+        custom = {}
+    },
+    git = {
+        enable = true,
+        ignore = true,
+        timeout = 500,
+    },
+    view = {
+        -- ウィンドウの幅、数値（列）または `%` での文字列のいずれかにできる
+        width = 30,
+        -- ツリーの位置、'left' | 'right' | 'top' | 'bottom' のいずれか
+        side = 'left',
+        -- マッピングの設定は個別に行う
+    }
 }
 
 --
