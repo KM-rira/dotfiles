@@ -39,6 +39,16 @@ require('packer').startup(function(use)
     use 'hotoolong/translate.nvim'
     use {'akinsho/bufferline.nvim', tag = '*'}
 
+    use {
+      'folke/todo-comments.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+        require('todo-comments').setup {
+          -- ここに設定を追加
+          -- またはデフォルト設定を使用するために空のままにする
+        }
+      end
+    }
     -- その他のプラグインはここに追加...
 end)
 
@@ -401,9 +411,9 @@ require('gitsigns').setup {
   },
 }
 
--- 
+--
 -- require("nvim-autopairs").setup {}
--- 
+--
 
 vim.g.matchup_matchparen_offscreen = { method = 'popup' }
 
@@ -413,7 +423,7 @@ require('scrollbar').setup()
 
 require('alpha').setup(require('alpha.themes.startify').config)
 
--- 
+--
 -- require 'colorizer'.setup(
 --   {'*';},          -- すべてのファイルタイプで有効にする
 --   {
@@ -427,7 +437,7 @@ require('alpha').setup(require('alpha.themes.startify').config)
 --     css_fn   = true;         -- css 関数を有効にする
 --   }
 -- )
--- 
+--
 
 require('lualine').setup {
   options = {
@@ -519,7 +529,7 @@ require'nvim-tree'.setup {
   }
 }
 
--- 
+--
 -- -- shortcut
 -- local function map(mode, lhs, rhs, opts)
 -- 	local options = {noremap = true}
@@ -568,18 +578,18 @@ require'nvim-tree'.setup {
 --     mode = "test",
 --     program = "${file}"
 --   },
---   -- works with go.mod packages and sub packages 
+--   -- works with go.mod packages and sub packages
 --   {
 --     type = "delve",
 --     name = "Debug test (go.mod)",
 --     request = "launch",
 --     mode = "test",
 --     program = "./${relativeFileDirname}"
---   } 
+--   }
 -- }
 --
--- 
--- 
+--
+--
 --
 -- -- nvim-dap-ui のUI設定
 -- require('dapui').setup({
@@ -605,8 +615,8 @@ require'nvim-tree'.setup {
 --   }
 -- })
 --
--- 
--- 
+--
+--
 -- -- nvim-dap-go の設定
 -- require('dap-go').setup()
 --
@@ -627,7 +637,7 @@ require'nvim-tree'.setup {
 --   }
 -- }
 --
--- 
+--
 
 
 

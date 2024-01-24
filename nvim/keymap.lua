@@ -126,3 +126,17 @@ vim.api.nvim_set_keymap('n', 'K', '10k', {noremap = true})
 vim.api.nvim_set_keymap('x', 'K', '10k', {noremap = true})
 vim.api.nvim_set_keymap('o', 'K', '10k', {noremap = true})
 
+-- todo系
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+-- You can also specify a list of valid jump keywords
+
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next({keywords = { "ERROR", "WARNING" }})
+end, { desc = "Next error/warning todo comment" })
