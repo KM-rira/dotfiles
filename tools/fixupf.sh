@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# ステージングされているファイルの数をチェック
+staged_files=$(git diff --cached --name-only)
+
+# ステージングされているファイルがない場合
+if [ -z "$staged_files" ]; then
+    echo "===== not staged file ====="
+    exit 1
+fi
+
 select=$( git log --oneline -n 50 | fzf --no-sort --reverse --prompt='select COMMIT_ID: ' --no-multi )
 c_id=$(echo $select | awk '{print $1}')
 c_mes=$(echo $select | cut -d ' ' -f 2-)

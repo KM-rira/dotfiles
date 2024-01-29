@@ -8,7 +8,8 @@ HISTORY_DB="$HOME/chrome_history_copy.db"
 cp "$CHROME_HISTORY_DB" "$HISTORY_DB"
 
 # fzfを使用してタイトルを選択し、変数に格納
-select_title=$(sqlite3 "$HISTORY_DB" "SELECT DISTINCT title FROM urls ORDER BY last_visit_time DESC" |
+select_title=$(
+sqlite3 "$HISTORY_DB" "SELECT DISTINCT title FROM urls ORDER BY last_visit_time DESC LIMIT 100" |
      fzf --no-sort --reverse --prompt='Search History: ' --no-multi)
 
 get_url=$(sqlite3 "$HISTORY_DB" "SELECT url FROM urls WHERE title='$select_title' ORDER BY last_visit_time DESC LIMIT 1")

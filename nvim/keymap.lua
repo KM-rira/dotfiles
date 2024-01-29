@@ -3,34 +3,60 @@ vim.g.mapleader = ';'
 
 vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohlsearch<CR><ESC>', {})
 
+-- barbar系
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- バッファの移動
+map('n', '<A->>', ':BufferLineMoveNext<CR>', opts)
+map('n', '<A-<>', ':BufferLineMovePrev<CR>', opts)
+
+-- 特定のバッファへの移動
+map('n', '<leader>b1', ':BufferLineGoToBuffer 1<CR>', opts)
+map('n', '<leader>b2', ':BufferLineGoToBuffer 2<CR>', opts)
+map('n', '<leader>b3', ':BufferLineGoToBuffer 3<CR>', opts)
+map('n', '<leader>b4', ':BufferLineGoToBuffer 4<CR>', opts)
+map('n', '<leader>b5', ':BufferLineGoToBuffer 5<CR>', opts)
+map('n', '<leader>b6', ':BufferLineGoToBuffer 6<CR>', opts)
+map('n', '<leader>b7', ':BufferLineGoToBuffer 7<CR>', opts)
+map('n', '<leader>b8', ':BufferLineGoToBuffer 8<CR>', opts)
+map('n', '<leader>b9', ':BufferLineGoToBuffer 9<CR>', opts)
+
+-- バッファの閉じるコマンド
+map('n', '<leader>bo', ':BufferLineCloseOther<CR>', opts)
+map('n', '<leader>bl', ':BufferLineCloseLeft<CR>', opts)
+map('n', '<leader>br', ':BufferLineCloseRight<CR>', opts)
+
+map('n', '<leader>be', ':BufferLineSortByExtension<CR>', opts)
+
 -- coc系
-vim.api.nvim_set_keymap('n', '<leader>d', '<Plug>(coc-definition)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>d', '<Plug>(coc-definition)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>d', '<Plug>(coc-definition)', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>gd', '<Plug>(coc-definition)', {silent = true})
+vim.api.nvim_set_keymap('o', '<leader>gd', '<Plug>(coc-definition)', {silent = true})
+vim.api.nvim_set_keymap('x', '<leader>gd', '<Plug>(coc-definition)', {silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>t', '<Plug>(coc-type-definition)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>t', '<Plug>(coc-type-definition)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>t', '<Plug>(coc-type-definition)', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>gt', '<Plug>(coc-type-definition)', {silent = true})
+vim.api.nvim_set_keymap('o', '<leader>gt', '<Plug>(coc-type-definition)', {silent = true})
+vim.api.nvim_set_keymap('x', '<leader>gt', '<Plug>(coc-type-definition)', {silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>c', '<Plug>(coc-declaration)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>c', '<Plug>(coc-declaration)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>c', '<Plug>(coc-declaration)', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>gc', '<Plug>(coc-declaration)', {silent = true})
+vim.api.nvim_set_keymap('o', '<leader>gc', '<Plug>(coc-declaration)', {silent = true})
+vim.api.nvim_set_keymap('x', '<leader>gc', '<Plug>(coc-declaration)', {silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>i', '<Plug>(coc-implementation)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>i', '<Plug>(coc-implementation)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>i', '<Plug>(coc-implementation)', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>gi', '<Plug>(coc-implementation)', {silent = true})
+vim.api.nvim_set_keymap('o', '<leader>gi', '<Plug>(coc-implementation)', {silent = true})
+vim.api.nvim_set_keymap('x', '<leader>gi', '<Plug>(coc-implementation)', {silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>r', '<Plug>(coc-references)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>r', '<Plug>(coc-references)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>r', '<Plug>(coc-references)', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>gr', '<Plug>(coc-references)', {silent = true})
+vim.api.nvim_set_keymap('o', '<leader>gr', '<Plug>(coc-references)', {silent = true})
+vim.api.nvim_set_keymap('x', '<leader>gr', '<Plug>(coc-references)', {silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>re', '<Plug>(coc-rename)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>re', '<Plug>(coc-rename)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>re', '<Plug>(coc-rename)', {silent = true})
+vim.api.nvim_set_keymap('n', '<leader>gn', '<Plug>(coc-rename)', {silent = true})
+vim.api.nvim_set_keymap('o', '<leader>gn', '<Plug>(coc-rename)', {silent = true})
+vim.api.nvim_set_keymap('x', '<leader>gn', '<Plug>(coc-rename)', {silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>h', ':call CocAction(\'doHover\')<CR>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('o', '<leader>h', ':call CocAction(\'doHover\')<CR>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('x', '<leader>h', ':call CocAction(\'doHover\')<CR>', {silent = true, noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>gh', ':call CocAction(\'doHover\')<CR>', {silent = true, noremap = true})
+vim.api.nvim_set_keymap('o', '<leader>gh', ':call CocAction(\'doHover\')<CR>', {silent = true, noremap = true})
+vim.api.nvim_set_keymap('x', '<leader>gh', ':call CocAction(\'doHover\')<CR>', {silent = true, noremap = true})
 
 -- telescope系
 local builtin = require('telescope.builtin')
