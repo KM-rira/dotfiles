@@ -3,149 +3,87 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": 
     [
-        // ペインに進む、戻る
         {
-          "command": { "action": "moveFocus", "direction": "nextInOrder" },
-          "keys": "alt+o"
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "nextInOrder"
+            },
+            "keys": "alt+o"
         },
         {
-          "command": { "action": "moveFocus", "direction": "previousInOrder" },
-          "keys": "alt+shift+o"
-        },
-        // ペイン交換系
-        {
-            "command": { "action": "swapPane", "direction": "down" },
-            "keys": "alt+down"
-        },
-        {
-            "command": { "action": "swapPane", "direction": "left" },
-            "keys": "alt+left"
-        },
-        {
-            "command": { "action": "swapPane", "direction": "right" },
-            "keys": "alt+right"
-        },
-        {
-            "command": { "action": "swapPane", "direction": "up" },
+            "command": 
+            {
+                "action": "swapPane",
+                "direction": "up"
+            },
             "keys": "alt+up"
         },
-        // ペインの複製
         {
             "command": 
-            { 
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate" 
-            },
-            "keys": "alt+shift+c"
-        },
-        // 文字サイズを増やす（ズームイン）
-        {
-            "command": { "action": "adjustFontSize", "delta": 1 },
-            "keys": "shift+alt+plus"
-        },
-        // 文字サイズを減らす（ズームアウト）
-        {
-            "command": { "action": "adjustFontSize", "delta": -1 },
-            "keys": "shift+alt+minus"
-        },
-        // フォントサイズをリセット
-        {
-            "command": { "action": "resetFontSize" },
-            "keys": "ctrl+0"
-        },
-        // ペイン垂直分割
-        {
-            "command": { "action": "splitPane", "split": "vertical" },
-            "keys": "alt+shift+v"
-        },
-        // ペイン水平分割
-        {
-            "command": { "action": "splitPane", "split": "horizontal" },
-            "keys": "alt+shift+h"
-        },
-        // タブを左に移動
-        { 
-            "command": 
-            { 
+            {
                 "action": "moveTab",
                 "direction": "backward"
             },
-            "keys": "shift+alt+<"
+            "keys": "ctrl+shift+comma"
         },
-        // タブを右に移動
-        { 
-            "command": { 
-                "action": "moveTab",
-                "direction": "forward"
-            },
-            "keys": "shift+alt+>"
-        },
-        // フォーカスを下に移動
         {
             "command": 
             {
                 "action": "moveFocus",
+                "direction": "previousInOrder"
+            },
+            "keys": "alt+shift+o"
+        },
+        {
+            "command": 
+            {
+                "action": "swapPane",
                 "direction": "down"
             },
-            "keys": "alt+j"
+            "keys": "alt+down"
         },
-        // フォーカスを上に移動
         {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "up"
-            },
-            "keys": "alt+k"
-        },
-        // フォーカスを右に移動
-        {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "right"
-            },
-            "keys": "alt+l"
-        },
-        // フォーカスを左に移動
-        {
-            "command": 
-            {
-                "action": "moveFocus",
+                "action": "swapPane",
                 "direction": "left"
             },
-            "keys": "alt+h"
-        },
-        // pane リサイズ
-        { "command": { "action": "resizePane", "direction": "down" }, "keys": "alt+ctrl+j" },
-        { "command": { "action": "resizePane", "direction": "left" }, "keys": "alt+ctrl+h" },
-        { "command": { "action": "resizePane", "direction": "right" }, "keys": "alt+ctrl+l" },
-        { "command": { "action": "resizePane", "direction": "up" }, "keys": "alt+ctrl+k" },
-        // 画面スクロール系
-        {
-            "command": 
-            {
-                "action": "scrollUp"
-            },
-            "keys": "shift+alt+k"
-        },
-        {
-            "command": "scrollUpPage",
-            "keys": "shift+alt+b"
+            "keys": "alt+left"
         },
         {
             "command": 
             {
-                "action": "scrollDown"
+                "action": "swapPane",
+                "direction": "right"
             },
-            "keys": "shift+alt+j"
+            "keys": "alt+right"
         },
         {
-            "command": "scrollDownPage",
-            "keys": "shift+alt+f"
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 5
+            },
+            "keys": "ctrl+numpad6"
         },
-        // 自動画面分割
+        {
+            "command": 
+            {
+                "action": "adjustFontSize",
+                "delta": 1.0
+            },
+            "keys": "alt+shift+plus"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "keys": "alt+shift+c"
+        },
         {
             "command": 
             {
@@ -155,14 +93,146 @@
             },
             "keys": "alt+p"
         },
-        // 画面delete
-        { "command": "closePane", "keys": "alt+w" },
+        {
+            "command": 
+            {
+                "action": "scrollDown"
+            },
+            "keys": "alt+shift+j"
+        },
+        {
+            "command": 
+            {
+                "action": "adjustFontSize",
+                "delta": -1.0
+            },
+            "keys": "alt+shift+minus"
+        },
+        {
+            "command": "resetFontSize",
+            "keys": "ctrl+0"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "right"
+            },
+            "keys": "alt+shift+v"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "down"
+            },
+            "keys": "alt+shift+h"
+        },
+        {
+            "command": 
+            {
+                "action": "moveTab",
+                "direction": "forward"
+            },
+            "keys": "ctrl+shift+period"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "down"
+            },
+            "keys": "alt+j"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "up"
+            },
+            "keys": "alt+k"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "right"
+            },
+            "keys": "alt+l"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "left"
+            },
+            "keys": "alt+h"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 8
+            },
+            "keys": "ctrl+numpad9"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "down"
+            },
+            "keys": "ctrl+alt+j"
+        },
         {
             "command": 
             {
                 "action": "closeOtherTabs"
             },
             "keys": "ctrl+alt+o"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "left"
+            },
+            "keys": "ctrl+alt+h"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "right"
+            },
+            "keys": "ctrl+alt+l"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "up"
+            },
+            "keys": "ctrl+alt+k"
+        },
+        {
+            "command": 
+            {
+                "action": "scrollUp"
+            },
+            "keys": "alt+shift+k"
+        },
+        {
+            "command": "scrollUpPage",
+            "keys": "alt+shift+b"
+        },
+        {
+            "command": "scrollDownPage",
+            "keys": "alt+shift+f"
+        },
+        {
+            "command": "closePane",
+            "keys": "alt+w"
         },
         {
             "command": "switchSelectionEndpoint",
@@ -212,14 +282,6 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 5
-            },
-            "keys": "ctrl+numpad6"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
                 "index": 6
             },
             "keys": "ctrl+numpad7"
@@ -231,14 +293,6 @@
                 "index": 7
             },
             "keys": "ctrl+numpad8"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 8
-            },
-            "keys": "ctrl+numpad9"
         }
     ],
     "copyFormatting": "none",
@@ -277,14 +331,14 @@
             {
                 "background": "#000000",
                 "bellStyle": "none",
-                "colorScheme": "Ubuntu-22.04-ColorScheme",
+                "colorScheme": "Campbell2",
                 "commandline": "ubuntu2204.exe",
                 "cursorColor": "#B4009E",
                 "cursorShape": "filledBox",
                 "font": 
                 {
-                    "face": "Cascadia Mono",
-                    "size": 13.0
+                    "face": "FiraMono Nerd Font Mono",
+                    "size": 10.0
                 },
                 "foreground": "#05F8E4",
                 "guid": "{67effb52-e8f6-4b22-ae22-d4e42b3026c5}",
