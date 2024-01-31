@@ -16,9 +16,13 @@ vim.api.nvim_create_user_command('Nt', 'NvimTreeToggle', {})
 vim.api.nvim_create_user_command('St', 'SidebarNvimToggle', {})
 vim.api.nvim_create_user_command('Ch', 'checkhealth', {})
 vim.api.nvim_create_user_command('Mt', 'MinimapToggle', {})
+vim.api.nvim_create_user_command('Tn', 'TestNearest', {})
 
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap = true})
 vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n>', {noremap = true})
 vim.api.nvim_command('cnoreabbrev he help')
 vim.api.nvim_set_keymap('n', '<C-t>', ':NvimTreeToggle<CR>', {noremap = true})
 vim.api.nvim_create_user_command('Re', 'source $MYVIMRC', {})
+
+vim.api.nvim_create_user_command('Filepath', 'echo expand("%:p")', {})
+

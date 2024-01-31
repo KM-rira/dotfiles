@@ -28,6 +28,7 @@ map('n', '<leader>bl', ':BufferLineCloseLeft<CR>', opts)
 map('n', '<leader>br', ':BufferLineCloseRight<CR>', opts)
 
 map('n', '<leader>be', ':BufferLineSortByExtension<CR>', opts)
+map('n', '<leader>bd', ':BufferLineSortByRelativeDirectory<CR>', opts)
 
 -- coc系
 vim.api.nvim_set_keymap('n', '<leader>gd', '<Plug>(coc-definition)', {silent = true})
