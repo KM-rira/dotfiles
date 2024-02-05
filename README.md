@@ -7,6 +7,9 @@ Password for 'https://KM-rira@github.com': <ここにパーソナルアクセス
 
 ## cp_local.shで、init.vimを配置する
 
+## 有効なツール
+Windowsで、PowerToys。画面分割が容易になる。
+
 ## Go
 ### linux
 ```bash
