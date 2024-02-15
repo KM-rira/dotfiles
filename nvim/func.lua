@@ -88,8 +88,14 @@ end, {})
 
 -- カスタム検索コマンド
 vim.api.nvim_create_user_command('Tg', function(args)
-  local search_string = args.args[1]
-  local file_type = args.args[2]
+  local arguments = {}
+  for word in args.args:gmatch("%S+") do table.insert(arguments, word) end
+  local search_string = arguments[1]
+  local file_type = arguments[2]
+  if not search_string or not file_type then
+    print("Usage: :Tg <search_string> <file_type>")
+    return
+  end
   vim.cmd('Telescope grep_string search=' .. search_string .. ' extensions=' .. file_type)
 end, {nargs = '+'})
 
