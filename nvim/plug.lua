@@ -38,6 +38,7 @@ require('packer').startup(function(use)
     use 'utilyre/barbecue.nvim'
     use 'hotoolong/translate.nvim'
     use {'akinsho/bufferline.nvim', tag = '*'}
+    use 'folke/tokyonight.nvim'
 
     use {
         'folke/todo-comments.nvim',

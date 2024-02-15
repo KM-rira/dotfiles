@@ -6,7 +6,8 @@ if vim.fn.exists("syntax_on") ~= 0 then
 end
 
 vim.cmd 'syntax on'
-vim.cmd 'colorscheme onedark'
+-- vim.cmd 'colorscheme onedark'
+vim.cmd[[colorscheme tokyonight-storm]]
 
 -- ターミナル背景色
 vim.cmd 'hi Terminal guibg=black'
