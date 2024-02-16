@@ -88,7 +88,7 @@ alias findf="find * -name"
 alias findd="find * -type d -name"
 alias cdf='cd "$(find * -type d | fzf --no-sort --reverse --prompt="Select FOLDER: " --no-multi)" || cd "$(pwd)"'
 alias changefile='git diff --name-only'
-alias stage='git diff --name-only --staged'
+alias stagefile='git diff --name-only --staged'
 alias v='nvim'
 alias c='cd'
 alias commitid='bash ~/vimConf/tools/get_commit_id.sh'

@@ -42,7 +42,7 @@ require('packer').startup(function(use)
     use { "catppuccin/nvim", as = "catppuccin" }
 
     use {
-        'folke/todo-comments.nvim',
+        'KM-rira/todo-comments.nvim',
         requires = 'nvim-lua/plenary.nvim',
         config = function()
             require('todo-comments').setup {
