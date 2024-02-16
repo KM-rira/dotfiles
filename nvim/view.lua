@@ -7,7 +7,8 @@ end
 
 vim.cmd 'syntax on'
 -- vim.cmd 'colorscheme onedark'
-vim.cmd[[colorscheme tokyonight-storm]]
+-- vim.cmd[[colorscheme tokyonight-storm]]
+vim.cmd[[colorscheme catppuccin-frappe]]
 
 -- ターミナル背景色
 vim.cmd 'hi Terminal guibg=black'
