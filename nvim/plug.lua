@@ -49,7 +49,9 @@ require('packer').startup(function(use)
     }
     use 'folke/noice.nvim'
     use 'norcalli/nvim-colorizer.lua'
-
+    use 'yamatsum/nvim-cursorline'
+    use 'sindrets/diffview.nvim'
+    use 'nvim-pack/nvim-spectre'
     use {
         'KM-rira/todo-comments.nvim',
         requires = 'nvim-lua/plenary.nvim',
@@ -127,6 +129,9 @@ require('packer').startup(function(use)
     }
     -- その他のプラグインはここに追加...
 end)
+require('spectre.actions').get_current_entry()
+require('spectre.actions').get_all_entries()
+require('spectre.actions').get_state()
 
 require 'colorizer'.setup()
 
@@ -154,7 +159,8 @@ require("noice").setup({
     lsp_doc_border = false, -- add a border to hover docs and signature help
   },
 })
-require("notify")("My super important message")
+
+require("notify").setup{}
 
 require("bufferline").setup{}
 
