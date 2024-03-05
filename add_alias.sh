@@ -29,7 +29,6 @@ export EDITOR=nvim
 export GIT_EDITOR=nvim
 
 # 追加したいエイリアスをこの配列に列挙
-alias fd=fdfind
 alias open='nvim ~/.bashrc'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -112,6 +111,7 @@ alias setting='nvim ~/vimConf/nvim/setting.lua'
 alias view='nvim ~/vimConf/nvim/view.lua'
 alias rc='nvim ~/vimConf/nvim/init.lua'
 alias rco='nvim ~/vimConf/nvim/bk/init.vim'
+alias dockerf="bash ~/vimConf/tools/dockerf.sh"
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
@@ -136,6 +136,7 @@ case $OS in
         alias wezl='echo "not windows"'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
+        alias fd=fdfind
         ;;
     'Darwin')
         echo "Mac"
@@ -143,6 +144,7 @@ case $OS in
         alias wezl='echo "not windows"'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
+        alias fd=fdfind
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='ls -l --color=auto'
