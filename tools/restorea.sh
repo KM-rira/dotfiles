@@ -21,5 +21,7 @@ case "$answer" in
 esac
 
 # コマンドを実行
+cd $(git rev-parse --show-toplevel)
 git restore .
+cd -
 
