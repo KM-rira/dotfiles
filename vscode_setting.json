@@ -1,4 +1,6 @@
 {
+    "center-editor-window.threeStateToggle": true,
+    "terminal.integrated.fontFamily": "FiraMono Nerd Font Mono Regular",
     "editor.mouseWheelZoom": true,
     "window.zoomLevel": -1,
     "terminal.integrated.defaultProfile.windows": "Git Bash",

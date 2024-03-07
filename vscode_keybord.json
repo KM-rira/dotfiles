@@ -73,13 +73,6 @@
         "when": "neovim.mode == normal && editorTextFocus",
     },
     {
-    "key": "shift+space",
-    "command": "type",
-    "args": {
-    "text": "+"
-      }
-    },
-    {
         "key": "alt+f7",
         "command": "merge-conflict.next"
     }
