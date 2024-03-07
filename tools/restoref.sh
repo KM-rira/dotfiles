@@ -10,6 +10,21 @@ if [ -z "$select_file" ] ; then
     exit
 fi
 
+# 回答によって処理を分岐
+case "$answer" in
+    y|yes)
+        ;;
+    n|no)
+        echo "exit process"
+        exit 1
+        ;;
+    *)
+        echo "unknown answer"
+        exit 1
+        ;;
+esac
+
+
 # 選択されたコマンドを実行
 git restore $select_file
 
