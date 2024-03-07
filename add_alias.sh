@@ -100,6 +100,8 @@ alias stash='git stash'
 alias stashl='git stash list'
 alias stasha='git stash apply'
 alias stashs='git stash show'
+alias stashp='git stash push'
+alias stagestash='git stash push --keep-index --include-untracked'
 alias wez='nvim ~/vimConf/wezterm.lua'
 alias wt="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 alias g="grep"
@@ -115,6 +117,7 @@ alias view='nvim ~/vimConf/nvim/view.lua'
 alias rc='nvim ~/vimConf/nvim/init.lua'
 alias rco='nvim ~/vimConf/nvim/bk/init.vim'
 alias dockerf="bash ~/vimConf/tools/dockerf.sh"
+alias switch='git switch'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
