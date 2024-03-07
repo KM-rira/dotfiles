@@ -1,4 +1,4 @@
-
+vim.opt.termguicolors = true
 -- Packer.nvimの初期化と設定
 require('packer').startup(function(use)
     -- Packerを管理するために必要
