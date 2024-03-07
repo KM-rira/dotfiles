@@ -1,5 +1,10 @@
 // 既定値を上書きするには、このファイル内にキー バインドを挿入します
 [
+    //install "center editor window" and edit setting json "center-editor-window.threeStateToggle": true
+    {
+        "command": "center-editor-window.center",
+        "key": "ctrl+l",
+    },
     {
         "command": "-vscode-neovim.send",
         "key": "ctrl+h"
@@ -11,11 +16,11 @@
         "args": "j"
     },
     {
-        "key": "ctrl+shift+j",
+        "key": "ctrl+shift+tab",
         "command": "workbench.action.previousEditorInGroup"
     },
     {
-        "key": "ctrl+shift+k",
+        "key": "ctrl+tab",
         "command": "workbench.action.nextEditorInGroup"
     },
     {

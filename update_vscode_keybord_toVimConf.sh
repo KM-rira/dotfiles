@@ -12,7 +12,7 @@ case $OS in
         echo "can't update keybord.json: Mac"
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
-        cat ~/vimConf/vscode_keybord.json > ~/AppData/Roaming/Code/User/keybindings.json 
+        cat ~/AppData/Roaming/Code/User/keybindings.json > ~/vimConf/vscode_keybord.json
         echo "update done keybord.json: Windows"
         ;;
     *)
