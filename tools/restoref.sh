@@ -2,8 +2,7 @@
 
 # コマンド履歴を取得してfzfでフィルタリング
 cd $(git rev-parse --show-toplevel)
-select_file=$( git diff --name-only --cached | fzf --no-sort --prompt='SELECT RESTORE FILE: ' --no-multi)
-cd -
+select_file=$( git diff --name-only | fzf --no-sort --prompt='SELECT RESTORE FILE: ' --no-multi)
 
 # リポジトリ名の抽出失敗した場合
 if [ -z "$select_file" ] ; then
@@ -12,4 +11,6 @@ if [ -z "$select_file" ] ; then
 fi
 
 # 選択されたコマンドを実行
-git add $select_file
+git restore $select_file
+
+echo "===== done ====="
