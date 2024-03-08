@@ -182,7 +182,7 @@ require'nvim-treesitter.configs'.setup {
         enable = true,              -- false にするとハイライトを無効にします
         additional_vim_regex_highlighting = false,
     },
-    ensure_installed = "go",      -- go パーサーの自動インストール
+    ensure_installed = { "go", "rust" },      -- go パーサーの自動インストール
     indent = {
         enable = true,              -- インデント機能の有効化
     },
