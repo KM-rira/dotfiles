@@ -26,6 +26,8 @@ map('n', '<leader>b9', ':BufferLineGoToBuffer 9<CR>', opts)
 map('n', '<leader>bo', ':BufferLineCloseOther<CR>', opts)
 map('n', '<leader>bl', ':BufferLineCloseLeft<CR>', opts)
 map('n', '<leader>br', ':BufferLineCloseRight<CR>', opts)
+map('n', '<leader>bc', ':BufferLinePickClose<CR>', opts)
+map('n', '<leader>bp', ':BufferLinePick<CR>', opts)
 
 map('n', '<leader>be', ':BufferLineSortByExtension<CR>', opts)
 map('n', '<leader>bd', ':BufferLineSortByRelativeDirectory<CR>', opts)
