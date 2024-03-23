@@ -118,7 +118,8 @@ alias rc='nvim ~/vimConf/nvim/init.lua'
 alias rco='nvim ~/vimConf/nvim/bk/init.vim'
 alias dockerf="bash ~/vimConf/tools/dockerf.sh"
 alias switch='git switch'
-
+alias dcu='docker compose up --build -d'
+alias dlogsf='docker logs -f $(dockerf)'
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
 alias gil="bash ~/vimConf/tools/github_cli/bash/gil.sh"
