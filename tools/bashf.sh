@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # コマンド履歴を取得してfzfでフィルタリング
-select_file=$(find . -name "*.sh"| fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
+select_file=$(ls -F | grep -v / | find . -name "*.sh"| fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
 
 # リポジトリ名の抽出失敗した場合
 if [ -z "$select_file" ] ; then
