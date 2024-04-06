@@ -11,7 +11,7 @@
 # source ~/vimConf/addAlias.sh
 
 bashrc="$HOME/.bashrc"
-vimConf="$HOME/vimConf"
+vc="$HOME/vimConf"
 
 # user定義
 #user=""
@@ -50,7 +50,7 @@ alias branch='git branch'
 alias fetch='git fetch'
 alias log='git log --oneline'
 alias fixup='git commit --fixup '
-alias vimConf='cd ~/vimConf'
+alias vc='cd ~/vimConf'
 alias pull='git pull'
 alias show='git show'
 alias findall='sudo find / -name'
@@ -125,6 +125,9 @@ alias dockerf="bash ~/vimConf/tools/dockerf.sh"
 alias switch='git switch'
 alias dcu='docker compose up --build -d'
 alias dlogsf='docker logs -f $(dockerf)'
+alias commitid='bash ~/vimConf/tools/get_commit_id.sh'
+alias d='bash ~/vimConf/tools/do.sh'
+
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
 alias gil="bash ~/vimConf/tools/github_cli/bash/gil.sh"
