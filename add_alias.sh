@@ -93,7 +93,7 @@ alias findf="find * -name"
 alias findd="find * -type d -name"
 alias cdf='cd "$(find * -type d | fzf --no-sort --reverse --prompt="Select FOLDER: " --no-multi)" || cd "$(pwd)"'
 #alias cf="bash ~/vimConf/tools/cf.sh"
-alias cf='cd "$(ls -d */ | fzf --no-sort --prompt="CHANGE DIR: ")"'
+alias f='cd "$(ls -d */ | fzf --no-sort --prompt="CHANGE DIR: ")"'
 alias changefile='git diff --name-only'
 alias stagefile='git diff --name-only --staged'
 alias v='nvim'
