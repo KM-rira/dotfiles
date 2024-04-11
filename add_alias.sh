@@ -185,10 +185,10 @@ f() {
         dir=$(echo "$directories" | fzf --height 40%)
         if [ -z "$dir" ] ; then
             echo "===== exit process ====="
-            exit
+        else
+            echo "===== cd $dir ====="
+            cd $dir
         fi
-        echo "===== cd $dir ====="
-        cd $dir
     else
         # ディレクトリが存在しない場合のメッセージ
         echo "===== not exists dir ====="
