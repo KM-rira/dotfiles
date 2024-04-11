@@ -93,7 +93,7 @@ alias findf="find * -name"
 alias findd="find * -type d -name"
 alias cdf='cd "$(find * -type d | fzf --no-sort --reverse --prompt="Select FOLDER: " --no-multi)" || cd "$(pwd)"'
 #alias cf="bash ~/vimConf/tools/cf.sh"
-alias f='cd "$(ls -d */ | fzf --no-sort --prompt="CHANGE DIR: ")"'
+#alias f='cd "$(ls -d */ | fzf --no-sort --prompt="CHANGE DIR: ")"'
 alias changefile='git diff --name-only'
 alias stagefile='git diff --name-only --staged'
 alias v='nvim'
@@ -171,5 +171,26 @@ case $OS in
         echo "Unknown OS: $OS"
         ;;
 esac
+
+f() {
+    # 現在のディレクトリにあるディレクトリのリストを取得
+    directories=$(ls -d */ 2>/dev/null)
+
+    # ディレクトリが存在するか確認
+    if [ -n "$directories" ]; then
+        # ディレクトリが存在する場合、fzfで選択させる
+        dir=$(echo "$directories" | fzf --height 40%)
+        if [ -z "$dir" ] ; then
+            echo "===== exit process ====="
+            exit
+        fi
+        echo "===== cd $dir ====="
+        cd $dir
+    else
+        # ディレクトリが存在しない場合のメッセージ
+        echo "===== not exists dir ====="
+    fi
+}
+
 
 echo "===== Done updating alias ====="
