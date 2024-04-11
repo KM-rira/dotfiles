@@ -12,7 +12,7 @@ selected_repo=$(echo $repo_url | sed -e 's/.*://' -e 's/\.git$//')
 # リポジトリ名の抽出失敗した場合
 if [ -z "$selected_repo" ] || [ "$select_repo_flg" = true ]; then
     # GitHubのリポジトリ一覧を取得し、fzfで選択させる
-    selected_repo=$(gh repo list ${gh_user} --limit ${Limit1} | 
+    selected_repo=$(gh repo list ${gh_user} --limit ${Limit1} |
     fzf --no-sort --reverse --prompt='select REPOSITORY: ' --no-multi)
 fi
 
@@ -20,4 +20,8 @@ fi
 repo_name=$(echo "$selected_repo" | awk '{print $1}')
 
 cmd="gh pr list $Type --json title,url --repo $repo_name --limit $Limit2"
-eval $cmd
+result=$(eval $cmd)
+
+select_title=$(echo $result | jq -r '.[].title' | fzf )
+
+echo $result | jq -r --arg select_title "$select_title" '.[] | select(.title == $select_title) | .url'
