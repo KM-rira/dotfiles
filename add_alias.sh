@@ -28,6 +28,8 @@ shopt -s histappend
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 
+alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
+
 # 追加したいエイリアスをこの配列に列挙
 alias open='nvim ~/.bashrc'
 alias ..='cd ..'
@@ -111,7 +113,7 @@ alias wez='nvim ~/vimConf/wezterm.lua'
 alias wt="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 alias g="grep"
 alias c="cd"
-alias addalias='nvim ~/vimConf/add_alias.sh'
+alias aliases='nvim ~/vimConf/add_alias.sh'
 alias func='nvim ~/vimConf/nvim/func.lua'
 alias keymap='nvim ~/vimConf/nvim/keymap.lua'
 alias command='nvim ~/vimConf/nvim/command.lua'
