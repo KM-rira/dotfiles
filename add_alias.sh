@@ -131,6 +131,8 @@ alias commitid='bash ~/vimConf/tools/get_commit_id.sh'
 alias d='bash ~/vimConf/tools/do.sh'
 alias ff="ls -F | grep -v / | sed 's/\*//g' | fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 alias rgf='bash ~/vimConf/tools/rgf.sh'
+alias fdv='bash ~/vimConf/tools/fdv.sh'
+alias fdb='bash ~/vimConf/tools/fdb.sh'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
