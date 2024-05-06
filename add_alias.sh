@@ -28,7 +28,8 @@ shopt -s histappend
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 
-alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
+alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+##alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 
 # 追加したいエイリアスをこの配列に列挙
 alias open='nvim ~/.bashrc'
@@ -61,8 +62,7 @@ alias bf='bash ~/vimConf/tools/batf.sh'
 alias b='batcat'
 alias bat='batcat'
 alias catf='bash ~/vimConf/tools/catf.sh'
-alias nvf='bash ~/vimConf/tools/nvf.sh'
-alias vf='bash ~/vimConf/tools/nvf.sh'
+. ~/vimConf/tools/vf.sh
 alias bashf='bash ~/vimConf/tools/bashf.sh'
 alias fixupf='bash ~/vimConf/tools/fixupf.sh'
 alias showf='bash ~/vimConf/tools/showf.sh'
@@ -131,8 +131,9 @@ alias commitid='bash ~/vimConf/tools/get_commit_id.sh'
 alias d='bash ~/vimConf/tools/do.sh'
 alias ff="ls -F | grep -v / | sed 's/\*//g' | fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 alias rgv='bash ~/vimConf/tools/rgv.sh'
-alias fdv='bash ~/vimConf/tools/fdv.sh'
-alias fdb='bash ~/vimConf/tools/fdb.sh'
+. ~/vimConf/tools/fdv.sh
+. ~/vimConf/tools/fdb.sh
+. ~/vimConf/tools/f.sh
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"

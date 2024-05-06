@@ -4,11 +4,17 @@
 cd $(git rev-parse --show-toplevel)
 select_file=$( git diff --name-only | fzf --no-sort --prompt='SELECT RESTORE FILE: ' --multi)
 
-# リポジトリ名の抽出失敗した場合
+# ファイル名の抽出失敗した場合
 if [ -z "$select_file" ] ; then
     echo "===== exit process ====="
     exit
 fi
+
+# ユーザーに質問をして y/n の回答を待つ
+read -p "restore all ok? (y/n) " answer
+
+# 回答を小文字に変換
+answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
 
 # 回答によって処理を分岐
 case "$answer" in
