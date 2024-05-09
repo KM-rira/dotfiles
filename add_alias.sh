@@ -71,7 +71,7 @@ alias continue='git rebase --continue'
 alias abort='git rebase --abort'
 alias amend='git commit --amend -m'
 alias rebasei='bash ~/vimConf/tools/rebase_helper.sh'
-alias commit='git commit -m'
+. ~/vimConf/tools/commit.sh
 alias bmf='~/vimConf/tools/book_mark_format/book_mark_format.exe;~/vimConf/tools/book_mark_format/book_mark_fzf.sh'
 alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline'
