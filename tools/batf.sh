@@ -1,14 +1,13 @@
 #!/bin/bash
+bf() {
+    select_file=$(ls -F | grep -v / | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
 
-# コマンド履歴を取得してfzfでフィルタリング
-select_file=$(ls -F | grep -v / | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
+    if [ -z "$select_file" ] ; then
+        echo "===== exit process ====="
+        return
+    fi
 
-# リポジトリ名の抽出失敗した場合
-if [ -z "$select_file" ] ; then
-    echo "===== exit process ====="
-    exit
-fi
-
-# 選択されたコマンドを実行
-batcat $select_file
+    # 選択されたコマンドを実行
+    bat $select_file
+}
 

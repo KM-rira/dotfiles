@@ -22,6 +22,9 @@ vc="$HOME/vimConf"
 eval "$(zoxide init bash)"
 # export variable
 export BAT_STYLE="header,grid"
+alias b='batcat'
+alias bat='batcat'
+
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 shopt -s histappend
 # デフォルトのエディタ設定
@@ -58,9 +61,7 @@ alias pull='git pull'
 alias show='git show'
 alias findall='sudo find / -name'
 alias findalld='sudo find / -type d -name'
-alias bf='bash ~/vimConf/tools/batf.sh'
-alias b='batcat'
-alias bat='batcat'
+. ~/vimConf/tools/batf.sh
 alias catf='bash ~/vimConf/tools/catf.sh'
 . ~/vimConf/tools/vf.sh
 alias bashf='bash ~/vimConf/tools/bashf.sh'
