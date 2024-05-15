@@ -1,18 +1,10 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
+    "actions":
     [
         {
-            "command": 
-            {
-                "action": "moveFocus",
-                "direction": "nextInOrder"
-            },
-            "keys": "alt+o"
-        },
-        {
-            "command": 
+            "command":
             {
                 "action": "swapPane",
                 "direction": "up"
@@ -20,15 +12,15 @@
             "keys": "alt+up"
         },
         {
-            "command": 
+            "command":
             {
-                "action": "moveTab",
-                "direction": "backward"
+                "action": "moveFocus",
+                "direction": "nextInOrder"
             },
-            "keys": "ctrl+shift+comma"
+            "keys": "alt+o"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "previousInOrder"
@@ -36,15 +28,14 @@
             "keys": "alt+shift+o"
         },
         {
-            "command": 
+            "command":
             {
-                "action": "swapPane",
-                "direction": "down"
-            },
-            "keys": "alt+down"
+                "action": "moveTab",
+                "direction": "backward"
+            }
         },
         {
-            "command": 
+            "command":
             {
                 "action": "swapPane",
                 "direction": "left"
@@ -52,15 +43,15 @@
             "keys": "alt+left"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "swapPane",
-                "direction": "right"
+                "direction": "down"
             },
-            "keys": "alt+right"
+            "keys": "alt+down"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "switchToTab",
                 "index": 5
@@ -68,7 +59,15 @@
             "keys": "ctrl+numpad6"
         },
         {
-            "command": 
+            "command":
+            {
+                "action": "swapPane",
+                "direction": "right"
+            },
+            "keys": "alt+right"
+        },
+        {
+            "command":
             {
                 "action": "adjustFontSize",
                 "delta": 1.0
@@ -76,7 +75,7 @@
             "keys": "alt+shift+plus"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -85,7 +84,7 @@
             "keys": "alt+shift+c"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "splitPane",
                 "split": "auto",
@@ -94,14 +93,14 @@
             "keys": "alt+p"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "scrollDown"
             },
             "keys": "alt+shift+j"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "adjustFontSize",
                 "delta": -1.0
@@ -113,7 +112,7 @@
             "keys": "ctrl+0"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "splitPane",
                 "split": "right"
@@ -121,7 +120,11 @@
             "keys": "alt+shift+v"
         },
         {
-            "command": 
+            "command": "unbound",
+            "keys": "ctrl+shift+comma"
+        },
+        {
+            "command":
             {
                 "action": "splitPane",
                 "split": "down"
@@ -129,7 +132,7 @@
             "keys": "alt+shift+h"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveTab",
                 "direction": "forward"
@@ -137,7 +140,7 @@
             "keys": "ctrl+shift+period"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "down"
@@ -145,7 +148,7 @@
             "keys": "alt+j"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "up"
@@ -153,7 +156,7 @@
             "keys": "alt+k"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "right"
@@ -161,7 +164,7 @@
             "keys": "alt+l"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "moveFocus",
                 "direction": "left"
@@ -169,7 +172,7 @@
             "keys": "alt+h"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "switchToTab",
                 "index": 8
@@ -177,7 +180,7 @@
             "keys": "ctrl+numpad9"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "resizePane",
                 "direction": "down"
@@ -185,14 +188,14 @@
             "keys": "ctrl+alt+j"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "closeOtherTabs"
             },
             "keys": "ctrl+alt+o"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "resizePane",
                 "direction": "left"
@@ -200,7 +203,7 @@
             "keys": "ctrl+alt+h"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "resizePane",
                 "direction": "right"
@@ -208,7 +211,7 @@
             "keys": "ctrl+alt+l"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "resizePane",
                 "direction": "up"
@@ -216,7 +219,7 @@
             "keys": "ctrl+alt+k"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "scrollUp"
             },
@@ -239,7 +242,7 @@
             "keys": "space"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "switchToTab",
                 "index": 0
@@ -247,7 +250,7 @@
             "keys": "ctrl+numpad1"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "switchToTab",
                 "index": 1
@@ -255,7 +258,7 @@
             "keys": "ctrl+numpad2"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "switchToTab",
                 "index": 2
@@ -263,7 +266,7 @@
             "keys": "ctrl+numpad3"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "switchToTab",
                 "index": 3
@@ -271,7 +274,7 @@
             "keys": "ctrl+numpad4"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "switchToTab",
                 "index": 4
@@ -279,7 +282,7 @@
             "keys": "ctrl+numpad5"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "switchToTab",
                 "index": 6
@@ -287,40 +290,48 @@
             "keys": "ctrl+numpad7"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "switchToTab",
                 "index": 7
             },
             "keys": "ctrl+numpad8"
+        },
+        {
+            "command": {
+                "action": "paste",
+                "singleLine": false
+            },
+            "keys": "ctrl+v"
         }
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
-    "defaultProfile": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
-    "newTabMenu": 
+    "defaultProfile": "{67effb52-e8f6-4b22-ae22-d4e42b3026c5}",
+    "newTabMenu":
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
+    "profiles":
     {
         "defaults": {},
-        "list": 
+        "list":
         [
             {
+                "background": "#1C2825",
                 "backgroundImage": null,
                 "bellStyle": "none",
                 "cursorColor": "#B4009E",
                 "cursorShape": "filledBox",
                 "experimental.retroTerminalEffect": false,
-                "font": 
+                "font":
                 {
                     "face": "FiraMono Nerd Font Mono",
                     "size": 10.0
                 },
-                "foreground": "#05F8E4",
+                "foreground": "#C3BB76",
                 "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
                 "hidden": false,
                 "name": "Git Bash",
@@ -329,18 +340,18 @@
                 "useAcrylic": false
             },
             {
-                "background": "#000000",
+                "background": "#1C2825",
                 "bellStyle": "none",
                 "colorScheme": "Campbell2",
                 "commandline": "ubuntu2204.exe",
                 "cursorColor": "#B4009E",
                 "cursorShape": "filledBox",
-                "font": 
+                "font":
                 {
                     "face": "FiraMono Nerd Font Mono",
                     "size": 10.0
                 },
-                "foreground": "#05F8E4",
+                "foreground": "#C3BB76",
                 "guid": "{67effb52-e8f6-4b22-ae22-d4e42b3026c5}",
                 "hidden": false,
                 "icon": "https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png",
@@ -373,7 +384,7 @@
             }
         ]
     },
-    "schemes": 
+    "schemes":
     [
         {
             "background": "#0C0C0C",
