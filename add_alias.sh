@@ -161,6 +161,7 @@ case $OS in
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
         alias fd=fdfind
+        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         ;;
     'Darwin')
         echo "Mac"
@@ -169,12 +170,14 @@ case $OS in
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
         alias fd=fdfind
+        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='ls -l --color=auto'
         alias wezl='nvim ~/.config/wezterm/wezterm.lua'
         alias nvimf='cd ~/AppData/Local/nvim'
         alias setting="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
+        alias fzf="fzf --height 70% --layout reverse --info inline --border"
         ;;
     *)
         echo "Unknown OS: $OS"
