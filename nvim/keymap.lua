@@ -154,13 +154,13 @@ vim.api.nvim_set_keymap('n', 'K', '10k', {noremap = true})
 vim.api.nvim_set_keymap('x', 'K', '10k', {noremap = true})
 vim.api.nvim_set_keymap('o', 'K', '10k', {noremap = true})
 
-vim.api.nvim_set_keymap('n', '<C-e>', '10<C-e>', {noremap = true})
-vim.api.nvim_set_keymap('x', '<C-e>', '10<C-e>', {noremap = true})
-vim.api.nvim_set_keymap('o', '<C-e>', '10<C-e>', {noremap = true})
-
-vim.api.nvim_set_keymap('n', '<C-y>', '10<C-y>', {noremap = true})
-vim.api.nvim_set_keymap('x', '<C-y>', '10<C-y>', {noremap = true})
-vim.api.nvim_set_keymap('o', '<C-y>', '10<C-y>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<C-e>', '10<C-e>', {noremap = true})
+-- vim.api.nvim_set_keymap('x', '<C-e>', '10<C-e>', {noremap = true})
+-- vim.api.nvim_set_keymap('o', '<C-e>', '10<C-e>', {noremap = true})
+--
+-- vim.api.nvim_set_keymap('n', '<C-y>', '10<C-y>', {noremap = true})
+-- vim.api.nvim_set_keymap('x', '<C-y>', '10<C-y>', {noremap = true})
+-- vim.api.nvim_set_keymap('o', '<C-y>', '10<C-y>', {noremap = true})
 
 -- todo系
 vim.keymap.set("n", "]t", function()
