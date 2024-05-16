@@ -89,7 +89,7 @@ alias restores="git restore --staged"
 alias restoresf="bash ~/vimConf/tools/restoresf.sh"
 alias restoresa="bash ~/vimConf/tools/restoresa.sh"
 alias add="git add"
-alias addf="bash ~/vimConf/tools/addf.sh"
+. ~/vimConf/tools/addf.sh
 alias adda="bash ~/vimConf/tools/adda.sh"
 alias reseth="git fetch;git reset --hard"
 alias findf="find * -name"
