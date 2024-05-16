@@ -64,7 +64,7 @@ alias findalld='sudo find / -type d -name'
 . ~/vimConf/tools/batf.sh
 alias catf='bash ~/vimConf/tools/catf.sh'
 . ~/vimConf/tools/vf.sh
-alias bashf='bash ~/vimConf/tools/bashf.sh'
+. ~/vimConf/tools/bashf.sh
 alias fixupf='bash ~/vimConf/tools/fixupf.sh'
 alias showf='bash ~/vimConf/tools/showf.sh'
 alias continue='git rebase --continue'
