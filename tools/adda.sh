@@ -5,5 +5,5 @@ adda() {
 
     git add $1 .
 
-    echo "===== done ====="
+    echo "===== DONE ====="
 }

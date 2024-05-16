@@ -5,7 +5,7 @@ select_file=$(ls -F | grep -v / | fzf --tac --no-sort --reverse --prompt='Select
 
 # リポジトリ名の抽出失敗した場合
 if [ -z "$select_file" ] ; then
-    echo "===== exit process ====="
+    echo "===== EXIT PROCESS ====="
     exit
 fi
 

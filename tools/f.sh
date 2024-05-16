@@ -9,14 +9,14 @@ f() {
         # ディレクトリが存在する場合、fzfで選択させる
         dir=$(echo "$directories" | fzf --height 40%)
         if [ -z "$dir" ] ; then
-            echo "===== exit process ====="
+            echo "===== EXIT PROCESS ====="
         else
             echo "===== cd $dir ====="
             cd $dir
         fi
     else
         # ディレクトリが存在しない場合のメッセージ
-        echo "===== not exists dir ====="
+        echo "===== NOT EXISTS DIR ====="
     fi
 }
 

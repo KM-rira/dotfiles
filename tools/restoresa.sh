@@ -5,4 +5,4 @@ cd $(git rev-parse --show-toplevel)
 
 git restore --staged .
 
-echo "===== done ====="
+echo "===== DONE ====="

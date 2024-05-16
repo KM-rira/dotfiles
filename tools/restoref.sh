@@ -6,7 +6,7 @@ select_file=$( git diff --name-only | fzf --no-sort --prompt='SELECT RESTORE FIL
 
 # ファイル名の抽出失敗した場合
 if [ -z "$select_file" ] ; then
-    echo "===== exit process ====="
+    echo "===== EXIT PROCESS ====="
     exit
 fi
 
@@ -34,4 +34,4 @@ esac
 # 選択されたコマンドを実行
 git restore $select_file
 
-echo "===== done ====="
+echo "===== DONE ====="

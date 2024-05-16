@@ -3,7 +3,7 @@ bf() {
     select_file=$(ls -F | grep -v / | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
 
     if [ -z "$select_file" ] ; then
-        echo "===== exit process ====="
+        echo "===== EXIT PROCESS ====="
         return
     fi
 

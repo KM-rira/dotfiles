@@ -6,11 +6,11 @@ select_file=$( git diff --name-only --cached | fzf --no-sort --prompt='SELECT ST
 
 # リポジトリ名の抽出失敗した場合
 if [ -z "$select_file" ] ; then
-    echo "===== exit process ====="
+    echo "===== EXIT PROCESS ====="
     exit
 fi
 
 # 選択されたコマンドを実行
 git restore --staged $select_file
 
-echo "===== done ====="
+echo "===== DONE ====="

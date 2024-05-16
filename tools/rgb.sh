@@ -10,7 +10,7 @@ fi
 select_file=$(rg -l $grep_word | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
 
 if [ -z "$select_file" ] ; then
-    echo "===== exit process ====="
+    echo "===== EXIT PROCESS ====="
     exit
 fi
 

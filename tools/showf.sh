@@ -6,7 +6,7 @@ c_mes=$(echo $select | cut -d ' ' -f 2-)
 
 # selectの抽出失敗した場合
 if [ -z "$select" ] ; then
-    echo "===== exit process ====="
+    echo "===== EXIT PROCESS ====="
     exit 1
 fi
 
