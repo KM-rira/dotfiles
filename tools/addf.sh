@@ -26,10 +26,10 @@ addf() {
     # コマンド実行部分
     if [ "$flag" = true ]; then
       # -u オプションが指定された場合
-      select_file=$( git diff --name-only | fzf --no-sort --prompt='SELECT ADD FILE: ' --multi)
+      select_file=$( git diff --name-only | gfzf --no-sort --prompt='SELECT ADD FILE: ' --multi)
     else
       # -u オプションが指定されなかった場合
-      select_file=$(git status --short | cut -c4- | fzf --no-sort --prompt='SELECT ADD FILE: ' --multi)
+      select_file=$(git status --short | cut -c4- | gfzf --no-sort --prompt='SELECT ADD FILE: ' --multi)
     fi
 
     if [ -z "$select_file" ] ; then
