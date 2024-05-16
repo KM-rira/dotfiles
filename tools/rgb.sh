@@ -15,4 +15,5 @@ if [ -z "$select_file" ] ; then
 fi
 
 # 選択されたコマンドを実行
+echo $select_file
 batcat -n $select_file
