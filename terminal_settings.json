@@ -4,6 +4,12 @@
     "actions":
     [
         {
+            "command": {
+                "action": "selectAll"
+            },
+            "keys": "alt+a"
+        },
+        {
             "command":
             {
                 "action": "moveFocus",
