@@ -198,14 +198,14 @@
             {
                 "action": "scrollUp"
             },
-            "keys": "alt+ctrl+k"
+            "keys": "alt+ctrl+e"
         },
         {
             "command":
             {
                 "action": "scrollDown"
             },
-            "keys": "alt+ctrl+j"
+            "keys": "alt+ctrl+y"
         },
         {
             "command": "scrollUpPage",
