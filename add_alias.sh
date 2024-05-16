@@ -90,7 +90,8 @@ alias restoresf="bash ~/vimConf/tools/restoresf.sh"
 alias restoresa="bash ~/vimConf/tools/restoresa.sh"
 alias add="git add"
 . ~/vimConf/tools/addf.sh
-alias adda="bash ~/vimConf/tools/adda.sh"
+. ~/vimConf/tools/adda.sh
+. ~/vimConf/tools/addc.sh
 alias reseth="git fetch;git reset --hard"
 alias findf="find * -name"
 alias findd="find * -type d -name"

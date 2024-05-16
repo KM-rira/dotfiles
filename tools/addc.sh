@@ -1,8 +1,6 @@
 #!/bin/bash
 
-adda() {
-    cd $(git rev-parse --show-toplevel)
-
+addc() {
     git add $1 .
 
     echo "===== done ====="
