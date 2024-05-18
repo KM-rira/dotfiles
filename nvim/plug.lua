@@ -17,15 +17,15 @@ require('packer').startup(function(use)
             'rafamadriz/friendly-snippets'
         }
     }
-    use 'preservim/nerdtree'
-    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
+    use {'preservim/nerdtree', tag = '7.1.2-2-gfbb71fc'}
+    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', tag = 'v1.3'}
     use 'vim-jp/vimdoc-ja'
     use {'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.10'}
     use 'nvim-lualine/lualine.nvim'
     use 'ctrlpvim/ctrlp.vim'
-    use {'neoclide/coc.nvim', branch = 'release'}
+    use {'neoclide/coc.nvim', branch = 'release'} -- tag v0.0.82-191-gf1ffb8d9
     use 'joshdick/onedark.vim'
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', tag = 'v0.9.2-502-g1eabe69'}
     use 'nvim-treesitter/nvim-treesitter-context'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/playground'
@@ -37,21 +37,21 @@ require('packer').startup(function(use)
     use 'goolord/alpha-nvim'
     use 'petertriho/nvim-scrollbar'
     use 'jsborjesson/vim-uppercase-sql'
-    use 'lewis6991/gitsigns.nvim'
-    use 'akinsho/git-conflict.nvim'
-    use 'klen/nvim-test'
+    use {'lewis6991/gitsigns.nvim', tag = 'v0.8.1-5-g805610a'}
+    use {'akinsho/git-conflict.nvim', tag = 'v1.3.0'}
+    use {'klen/nvim-test', tag = '1.4.1'}
     use 'numToStr/Comment.nvim'
     use 'sidebar-nvim/sidebar.nvim'
-    use {'akinsho/toggleterm.nvim', tag = '*'}
+    use {'akinsho/toggleterm.nvim', tag = 'v2.11.0'}
     use 'wfxr/minimap.vim'
     use 'gorbit99/codewindow.nvim'
     use 'karb94/neoscroll.nvim'
     --use 'Aasim-A/scroll.nvim'
     use 'utilyre/barbecue.nvim'
     use 'hotoolong/translate.nvim'
-    use {'akinsho/bufferline.nvim', tag = '*'}
+    use {'akinsho/bufferline.nvim', tag = 'v4.5.3'}
     use 'folke/tokyonight.nvim'
-    use { "catppuccin/nvim", as = "catppuccin" }
+    use { "catppuccin/nvim", as = "catppuccin", tag = 'v1.7.0-4-gd97387a' }
     --use 'rcarriga/nvim-notify'
     --use 'folke/noice.nvim'
     use 'norcalli/nvim-colorizer.lua'
