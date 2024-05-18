@@ -139,6 +139,7 @@ alias rgb='bash ~/vimConf/tools/rgb.sh'
 . ~/vimConf/tools/f.sh
 alias h='history'
 alias m='make'
+alias packer='cd ~/.local/share/nvim/site/pack/packer/start/'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"

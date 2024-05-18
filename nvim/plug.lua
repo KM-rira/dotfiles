@@ -8,7 +8,7 @@ require('packer').startup(function(use)
     use 'preservim/nerdtree'
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
     use 'vim-jp/vimdoc-ja'
-    use 'lukas-reineke/indent-blankline.nvim'
+    use {'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.10'}
     use 'nvim-lualine/lualine.nvim'
     use 'ctrlpvim/ctrlp.vim'
     use {'neoclide/coc.nvim', branch = 'release'}
