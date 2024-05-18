@@ -138,6 +138,7 @@ alias rgb='bash ~/vimConf/tools/rgb.sh'
 . ~/vimConf/tools/fdb.sh
 . ~/vimConf/tools/f.sh
 alias h='history'
+alias m='make'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
@@ -187,26 +188,5 @@ case $OS in
         echo "Unknown OS: $OS"
         ;;
 esac
-
-f() {
-    # 現在のディレクトリにあるディレクトリのリストを取得
-    directories=$(ls -d */ 2>/dev/null)
-
-    # ディレクトリが存在するか確認
-    if [ -n "$directories" ]; then
-        # ディレクトリが存在する場合、fzfで選択させる
-        dir=$(echo "$directories" | fzf --height 40%)
-        if [ -z "$dir" ] ; then
-            echo "===== EXIT PROCESS ====="
-        else
-            echo "===== cd $dir ====="
-            cd $dir
-        fi
-    else
-        # ディレクトリが存在しない場合のメッセージ
-        echo "===== not exists dir ====="
-    fi
-}
-
 
 echo "===== Done updating alias ====="
