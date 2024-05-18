@@ -137,6 +137,7 @@ alias rgb='bash ~/vimConf/tools/rgb.sh'
 . ~/vimConf/tools/fdv.sh
 . ~/vimConf/tools/fdb.sh
 . ~/vimConf/tools/f.sh
+alias h='history'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
