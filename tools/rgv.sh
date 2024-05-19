@@ -5,7 +5,7 @@ if [ "$#" -eq 0 ]; then
     exit
 fi
 
-select_file=$(rg -l $grep_word | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
+select_file=$(rg -l "$*" | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
 
 # リポジトリ名の抽出失敗した場合
 if [ -z "$select_file" ] ; then
