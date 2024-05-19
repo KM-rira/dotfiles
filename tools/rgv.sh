@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# grepするワードを指定
-grep_word=$1
-if [ -z "$grep_word" ] ; then
+if [ "$#" -eq 0 ]; then
     echo "===== need parameter ====="
     exit
 fi
