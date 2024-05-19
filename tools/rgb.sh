@@ -1,13 +1,11 @@
 #!/bin/bash
 
-# grepするワードを指定
-grep_word=$1
-if [ -z "$grep_word" ] ; then
-    echo "===== need parameter ====="
-    exit
+if [ "$#" -eq 0 ]; then
+        echo "===== need parameter ====="
+        return
 fi
 
-select_file=$(rg -l $grep_word | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
+select_file=$(rg -l "$*" | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
 
 if [ -z "$select_file" ] ; then
     echo "===== EXIT PROCESS ====="
