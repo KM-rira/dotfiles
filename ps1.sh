@@ -42,7 +42,7 @@ parse_git_changes() {
     local commits_ahead=$(parse_git_commit_ahead)
     local result=""
 
-    result="⚙  $changes 🆕 $untracked 📂 $staged 📝 $commits_ahead"
+    result="⚙  $changes 🆕 $untracked 📂 $staged 📝 ${commits_ahead:-0}"
 
     echo "$result"
   fi
