@@ -13,6 +13,9 @@
 bashrc="$HOME/.bashrc"
 vc="$HOME/vimConf"
 
+
+. ./color.sh
+
 # user定義
 #user=""
 #while IFS= read -r line; do
