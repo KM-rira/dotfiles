@@ -67,6 +67,7 @@ alias findalld='sudo find / -type d -name'
 . ~/vimConf/tools/batf.sh
 alias catf='bash ~/vimConf/tools/catf.sh'
 . ~/vimConf/tools/vf.sh
+. ~/vimConf/tools/vff.sh
 . ~/vimConf/tools/bashf.sh
 alias fixupf='bash ~/vimConf/tools/fixupf.sh'
 alias showf='bash ~/vimConf/tools/showf.sh'
