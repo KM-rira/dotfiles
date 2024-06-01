@@ -24,6 +24,14 @@ parse_git_branch() {
   git branch 2>/dev/null | grep '*' | sed 's/* //'
 }
 
+# 現在のブランチでPUSHされる前にコミットされた数を取得する関数
+parse_git_commit_ahead() {
+  local branch=$(parse_git_branch)
+  if [ -n "$branch" ]; then
+    git rev-list --count --left-only @{u}...HEAD 2>/dev/null
+  fi
+}
+
 # Gitの変更ファイル数、未追跡ファイル数、ステージングファイル数を取得する関数
 parse_git_changes() {
   local branch=$(parse_git_branch)
@@ -31,20 +39,21 @@ parse_git_changes() {
     local changes=$(git diff --name-only 2>/dev/null | wc -l)
     local untracked=$(git ls-files --others --exclude-standard 2>/dev/null | wc -l)
     local staged=$(git diff --cached --name-only 2>/dev/null | wc -l)
+    local commits_ahead=$(parse_git_commit_ahead)
     local result=""
 
-    result="⚙️ $changes 🆕 $untracked 🗂️ $staged"
+    result="⚙  $changes 🆕 $untracked 📂 $staged 📝 $commits_ahead"
 
     echo "$result"
   fi
 }
 
 # カスタマイズされたプロンプト
-PS1="${GREEN}\u${YELLOW}@${CYAN}\h${BLUE}:\w ${LIGHT_RED}\$(parse_git_branch) ${LIGHT_PURPLE}\$(parse_git_changes) ${RED}\$ ${RESET}"
+PS1="${GREEN}\u${YELLOW}@${CYAN}\h${LIGHT_BLUE}:\w ${LIGHT_RED}\$(parse_git_branch) ${LIGHT_PURPLE}\$(parse_git_changes) ${RED}\$ ${RESET}"
 
 # \u: ユーザー名
 # \h: ホスト名
 # \w: カレントディレクトリ
 # \$(parse_git_branch): 現在のGitブランチ名
-# \$(parse_git_changes): Gitの変更ファイル数、未追跡ファイル数、ステージングファイル数（ブランチが存在する場合のみ）
+# \$(parse_git_changes): Gitの変更ファイル数、未追跡ファイル数、ステージングファイル数、プッシュされる前にコミットされた数
 # \$: 標準ユーザーの場合は $、root ユーザーの場合は #
