@@ -26,3 +26,5 @@ vim.api.nvim_create_user_command('Re', 'source $MYVIMRC', {})
 
 vim.api.nvim_create_user_command('Filepath', 'echo expand("%:p")', {})
 
+--cocdiaglus
+
