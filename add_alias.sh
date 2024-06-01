@@ -14,7 +14,7 @@ bashrc="$HOME/.bashrc"
 vc="$HOME/vimConf"
 
 
-. ./ps1.sh
+. ~/vimConf/ps1.sh
 
 # user定義
 #user=""

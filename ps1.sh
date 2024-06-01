@@ -21,7 +21,9 @@ RESET='\[\033[0m\]'
 
 # Gitブランチ名を取得する関数
 parse_git_branch() {
-  git branch 2>/dev/null | grep '*' | sed 's/* //'
+    branch=$(git branch 2>/dev/null | grep '*' | sed 's/* //')
+    result=" $branch"
+    echo "$result"
 }
 
 # Gitの変更ファイル数、未追跡ファイル数、ステージングファイル数を取得する関数
@@ -34,14 +36,14 @@ parse_git_changes() {
     local commits_ahead=$(git rev-list --count origin/$(git rev-parse --abbrev-ref HEAD)..HEAD)
     local result=""
 
-    result="⚙  $changes 🆕 $untracked 📂 $staged 📝 $commits_ahead"
+    result=" ⚙  $changes 🆕 $untracked 📂 $staged 📝 $commits_ahead "
 
     echo "$result"
   fi
 }
 
 # カスタマイズされたプロンプト
-PS1="${GREEN}\u${YELLOW}@${CYAN}\h${LIGHT_BLUE}:\w ${LIGHT_RED}\$(parse_git_branch) ${LIGHT_PURPLE}\$(parse_git_changes) ${RED}\$ ${RESET}"
+PS1="${GREEN}\u${YELLOW}@${CYAN}\h${LIGHT_BLUE}:\w${LIGHT_RED}\$(parse_git_branch)${LIGHT_PURPLE}\$(parse_git_changes)${RED}\$ ${RESET}"
 
 # \u: ユーザー名
 # \h: ホスト名
