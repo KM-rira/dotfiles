@@ -1,10 +1,14 @@
 #!/bin/bash
 
 vf() {
-    # コマンド履歴を取得してfzfでフィルタリング
+    file_count=$(ls -F | grep -v / | wc -l)
+    if [ "$file_count" -eq 0 ] ; then
+        echo "===== NOT EXIST FILE ====="
+        return
+    fi
+
     select_file=$(ls -F | grep -v / | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
 
-    # リポジトリ名の抽出失敗した場合
     if [ -z "$select_file" ] ; then
         echo "===== EXIT PROCESS ====="
         return
