@@ -29,7 +29,7 @@ parse_git_branch() {
 # Gitの変更ファイル数、未追跡ファイル数、ステージングファイル数を取得する関数
 parse_git_changes() {
   local branch=$(parse_git_branch)
-  if [ -n "$branch" ]; then
+  if [ " " != "$branch" ]; then
     local changes=$(git diff --name-only 2>/dev/null | wc -l)
     local untracked=$(git ls-files --others --exclude-standard 2>/dev/null | wc -l)
     local staged=$(git diff --cached --name-only 2>/dev/null | wc -l)
