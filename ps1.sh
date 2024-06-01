@@ -24,14 +24,6 @@ parse_git_branch() {
   git branch 2>/dev/null | grep '*' | sed 's/* //'
 }
 
-# 現在のブランチでPUSHされる前にコミットされた数を取得する関数
-parse_git_commit_ahead() {
-  local branch=$(parse_git_branch)
-  if [ -n "$branch" ]; then
-    git rev-list --count --left-only @{u}...HEAD 2>/dev/null
-  fi
-}
-
 # Gitの変更ファイル数、未追跡ファイル数、ステージングファイル数を取得する関数
 parse_git_changes() {
   local branch=$(parse_git_branch)
@@ -39,10 +31,10 @@ parse_git_changes() {
     local changes=$(git diff --name-only 2>/dev/null | wc -l)
     local untracked=$(git ls-files --others --exclude-standard 2>/dev/null | wc -l)
     local staged=$(git diff --cached --name-only 2>/dev/null | wc -l)
-    local commits_ahead=$(parse_git_commit_ahead)
+    local commits_ahead=$(git rev-list --count origin/$(git rev-parse --abbrev-ref HEAD)..HEAD)
     local result=""
 
-    result="⚙  $changes 🆕 $untracked 📂 $staged 📝 ${commits_ahead:-0}"
+    result="⚙  $changes 🆕 $untracked 📂 $staged 📝 $commits_ahead"
 
     echo "$result"
   fi
