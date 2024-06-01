@@ -1,7 +1,13 @@
 #!/bin/bash
 
-if [ "$#" -eq 0 ]; then
-    echo "===== need parameter ====="
+if [ "$#" -eq 0 ] ; then
+    echo "===== NEED PARAMETER ====="
+    exit
+fi
+
+file_count=$(rg -l "$*" | wc -l)
+if [ $file_count -eq 0 ] ; then
+    echo "===== NOT FOUND FILE ====="
     exit
 fi
 

@@ -2,7 +2,7 @@
 
 commit() {
     if [ "$#" -eq 0 ]; then
-        echo "===== need parameter ====="
+        echo "===== NEED PARAMETER ====="
         return
     fi
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 fdb() {
     if [ "$#" -eq 0 ]; then
-        echo "===== need parameter ====="
+        ECHO "===== NEED PARAMETER ====="
         return
     fi
 
