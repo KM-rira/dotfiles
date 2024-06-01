@@ -5,6 +5,12 @@ if [ "$#" -eq 0 ]; then
         return
 fi
 
+file_count=$(rg -l "$*" | wc -l)
+if [ $file_count -eq 0 ] ; then
+    echo "===== NOT FOUND FILE ====="
+    exit
+fi
+
 select_file=$(rg -l "$*" | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
 
 if [ -z "$select_file" ] ; then
