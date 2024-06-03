@@ -43,7 +43,7 @@ parse_git_changes() {
 }
 
 # カスタマイズされたプロンプト
-PS1="${GREEN}\u${YELLOW}@${CYAN}\h${LIGHT_BLUE}:\w${LIGHT_RED}\$(parse_git_branch)${LIGHT_PURPLE}\$(parse_git_changes)${RED}\$ ${RESET}"
+PS1="${GREEN}\u${YELLOW}@${CYAN}\h${LIGHT_BLUE}:\w${LIGHT_RED}\$(parse_git_branch)${LIGHT_PURPLE}\$(parse_git_changes)${RED}\\n$ ${RESET}"
 
 # \u: ユーザー名
 # \h: ホスト名
