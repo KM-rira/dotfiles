@@ -12,7 +12,7 @@ fdv() {
         return
     fi
 
-    select_file=$(fdfind $@ | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
+    select_file=$(fdfind $@ | fzf --tac --no-sort --reverse --prompt='SELECT FILE: ' --no-multi)
     if [ -z "$select_file" ] ; then
         echo "===== EXIT PROCESS ====="
         return
