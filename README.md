@@ -304,3 +304,20 @@ choco install fd
 sudo apt install fd-find
 ```
 
+# lua lsp
+```bash
+sudo apt update
+sudo apt install ninja-build cmake
+
+git clone https://github.com/sumneko/lua-language-server
+cd lua-language-server
+git submodule update --init --recursive
+
+https://github.com/LuaLS/lua-language-server/wiki/Getting-Started
+./make.sh
+
+# install パスによって下記を変更する
+      "command": "/home/koji/repo/lua-language-server/bin/lua-language-server",
+      "args": ["-E", "/home/koji/repo/lua-language-server/bin/main.lua"],
+
+```
