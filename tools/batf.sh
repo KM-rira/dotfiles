@@ -1,6 +1,6 @@
 #!/bin/bash
 bf() {
-    select_file=$(ls -F | grep -v / | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
+    select_file=$(find . -maxdepth 1 -type f | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
 
     if [ -z "$select_file" ] ; then
         echo "===== EXIT PROCESS ====="

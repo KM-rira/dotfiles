@@ -1,7 +1,7 @@
 #!/bin/bash
 
 bashf() {
-    select_file=$(ls -F | grep -v / | grep "\.sh"| fzf --tac --no-sort --reverse --prompt='SELECT FILE: ' --no-multi)
+    select_file=$(find . -maxdepth 1 -type f | grep "\.sh"| fzf --tac --no-sort --reverse --prompt='SELECT FILE: ' --no-multi)
 
     # リポジトリ名の抽出失敗した場合
     if [ -z "$select_file" ] ; then
