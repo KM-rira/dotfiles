@@ -7,7 +7,7 @@ require('packer').startup(function(use)
     -- ここからプラグインのリスト
     -- use '~/repo/myplugin'
     use 'KM-rira/myplugin'
-    use {'preservim/nerdtree', tag = '7.1.2-2-gfbb71fc'}
+    use 'preservim/nerdtree'
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', tag = 'v1.3'}
     use 'vim-jp/vimdoc-ja'
     use {'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.10'}
@@ -15,7 +15,10 @@ require('packer').startup(function(use)
     use 'ctrlpvim/ctrlp.vim'
     use {'neoclide/coc.nvim', branch = 'release'} -- tag v0.0.82-191-gf1ffb8d9
     use 'joshdick/onedark.vim'
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', tag = 'v0.9.2-502-g1eabe69'}
+        use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
     use 'nvim-treesitter/nvim-treesitter-context'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/playground'
@@ -27,7 +30,7 @@ require('packer').startup(function(use)
     use 'goolord/alpha-nvim'
     use 'petertriho/nvim-scrollbar'
     use 'jsborjesson/vim-uppercase-sql'
-    use {'lewis6991/gitsigns.nvim', tag = 'v0.8.1-5-g805610a'}
+    use 'lewis6991/gitsigns.nvim'
     use {'akinsho/git-conflict.nvim', tag = 'v1.3.0'}
     use {'klen/nvim-test', tag = '1.4.1'}
     use 'numToStr/Comment.nvim'
@@ -41,7 +44,7 @@ require('packer').startup(function(use)
     use 'hotoolong/translate.nvim'
     use {'akinsho/bufferline.nvim', tag = 'v4.6.1'}
     use 'folke/tokyonight.nvim'
-    use { "catppuccin/nvim", as = "catppuccin", tag = 'v1.7.0-4-gd97387a' }
+    use { "catppuccin/nvim", as = "catppuccin" }
     --use 'rcarriga/nvim-notify'
     --use 'folke/noice.nvim'
     use 'norcalli/nvim-colorizer.lua'
