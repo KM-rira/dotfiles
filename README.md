@@ -320,4 +320,6 @@ https://github.com/LuaLS/lua-language-server/wiki/Getting-Started
       "command": "/home/koji/repo/lua-language-server/bin/lua-language-server",
       "args": ["-E", "/home/koji/repo/lua-language-server/bin/main.lua"],
 
+# nvimで
+:CocInstall coc-sumneko-lua
 ```
