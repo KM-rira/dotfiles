@@ -28,7 +28,7 @@ vim.o.virtualedit = "block"
 vim.o.backspace = "indent,eol,start"
 
 -- 全角文字の設定
-vim.o.ambiwidth = "double"
+--vim.o.ambiwidth = "double" -- nui.nvim表示問題によりコメントアウトの対応
 
 -- wildmenuオプション
 vim.o.wildmenu = true
@@ -69,7 +69,7 @@ vim.o.nrformats = ""
 vim.o.whichwrap = "b,s,h,l,<,>,[,],~"
 vim.o.mouse = "a"
 vim.o.fileformat = "unix"
-vim.o.ambiwidth = "double"
+--vim.o.ambiwidth = "double" -- nui.nvim表示問題によりコメントアウトの対応
 vim.o.breakindent = true
 vim.o.breakindentopt = "shift:0"
 --vim.o.shellslash = true

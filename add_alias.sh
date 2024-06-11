@@ -187,7 +187,7 @@ case $OS in
         alias l='ls -l --color=auto'
         alias wezl='nvim ~/.config/wezterm/wezterm.lua'
         alias nvimf='cd ~/AppData/Local/nvim'
-        alias setting="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
+        alias settings="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
         alias fzf="fzf --height 70% --layout reverse --info inline --border"
         ;;
     *)
