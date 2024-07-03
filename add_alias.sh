@@ -178,7 +178,7 @@ case $OS in
         ;;
     'Darwin')
         echo "Mac"
-        alias l='lsd -l --icons'
+        alias l='lsd -l'
         alias wezl='echo "not windows"'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
