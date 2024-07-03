@@ -25,16 +25,13 @@ vc="$HOME/vimConf"
 eval "$(zoxide init bash)"
 # export variable
 export BAT_STYLE="header,grid"
-alias b='batcat'
-alias bat='batcat'
+export BAT_THEME="TwoDark"
 
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-shopt -s histappend
 # デフォルトのエディタ設定
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 
-alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
 ##alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 
 # 追加したいエイリアスをこの配列に列挙
@@ -45,8 +42,8 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias _='cd -'
 alias ll='ls -lt'
-alias re='source ~/.bashrc'
 alias bashrc='nv ~/.bashrc'
+alias zashrc='nv ~/.zshrc'
 # alias rc='nvim ~/AppData/Local/nvim/init.vim'
 alias nv='nvim'
 alias hg='history | grep'
@@ -173,6 +170,11 @@ case $OS in
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         . ~/vimConf/ps1.sh
+        alias b='batcat'
+        alias bat='batcat'
+        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+        shopt -s histappend
+        alias re='source ~/.bashrc'
         ;;
     'Darwin')
         echo "Mac"
@@ -180,10 +182,10 @@ case $OS in
         alias wezl='echo "not windows"'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
-        alias fd=fdfind
-        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         . ~/vimConf/ps1.sh
+        alias re='source ~/.zshrc'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='ls -l --color=auto'
@@ -192,6 +194,11 @@ case $OS in
         alias settings="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
         alias fzf="fzf --height 70% --layout reverse --info inline --border"
         . ~/vimConf/win_ps1.sh
+        alias b='batcat'
+        alias bat='batcat'
+        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+        shopt -s histappend
+        alias re='source ~/.bashrc'
         ;;
     *)
         echo "Unknown OS: $OS"
