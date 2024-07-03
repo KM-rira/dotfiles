@@ -1,5 +1,5 @@
 #!/bin/bash
-batf() {
+bf() {
     select_file=$(find . -maxdepth 1 -type f | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi)
 
     if [ -z "$select_file" ] ; then
