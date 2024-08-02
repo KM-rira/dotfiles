@@ -163,7 +163,7 @@ alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
 OS=$(uname)
 case $OS in
     'Linux')
-        alias l='exa -l --icons'
+        alias l='lsd -l'
         alias wezl='echo "not windows"'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
@@ -189,7 +189,7 @@ case $OS in
         alias re='source ~/.zshrc'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
-        alias l='ls -l --color=auto'
+        alias l='lsd -l'
         alias wezl='nvim ~/.config/wezterm/wezterm.lua'
         alias nvimf='cd ~/AppData/Local/nvim'
         alias settings="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"

@@ -323,3 +323,12 @@ https://github.com/LuaLS/lua-language-server/wiki/Getting-Started
 # nvimで
 :CocInstall coc-sumneko-lua
 ```
+
+# lsd
+```bash
+# linux
+sudo snap install lsd
+
+# windows
+choco install lsd
+```
