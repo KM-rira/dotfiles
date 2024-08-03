@@ -1,3 +1,5 @@
 #!/bin/bash
 
-ls -t $HOME/note/*.md| xargs -I {} glow {}
+noteall() {
+    ls -t $HOME/note/*.md| xargs -I {} glow {}
+}

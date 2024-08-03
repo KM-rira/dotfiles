@@ -1,9 +1,11 @@
 #!/bin/bash
 
-TARGET_DIR="$HOME/vimConf/tools/note"
-files=$(ls $TARGET_DIR | grep -v "launcher.sh")
+ source noteall.sh
+ source noteedit.sh
+ source notegen.sh
+ source notetitle.sh
+ source noteclean.sh
 
-# 各ファイルをsourceで実行
-for file in $files; do
-    source "$TARGET_DIR/$file"
-done
+
+ # END
+ noteclean
