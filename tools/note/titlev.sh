@@ -1,6 +1,6 @@
 #!/bin/bash
 
-titlev() {
+notetitle() {
     grep_word='TITLE:'
     ext='md'
     dir="$HOME/note"

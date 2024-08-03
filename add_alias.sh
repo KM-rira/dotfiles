@@ -13,9 +13,6 @@
 bashrc="$HOME/.bashrc"
 vc="$HOME/vimConf"
 
-
-. ~/vimConf/ps1.sh
-
 # user定義
 #user=""
 #while IFS= read -r line; do
@@ -159,6 +156,9 @@ alias gpw="bash ~/vimConf/tools/github_cli/bash/gpw.sh"
 alias giw="bash ~/vimConf/tools/github_cli/bash/giw.sh"
 alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
 
+# note
+source $HOME/vimConf/tools/note/launcher.sh
+
 # OS分岐
 OS=$(uname)
 case $OS in
@@ -170,7 +170,7 @@ case $OS in
         alias fd=fdfind
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        . ~/vimConf/ps1.sh
+        . ~/vimConf/tools/prompt/ps1.sh
         alias b='batcat'
         alias bat='batcat'
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
@@ -185,7 +185,7 @@ case $OS in
         alias setting='echo "not windows"'
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        . ~/vimConf/ps1.sh
+        . ~/vimConf/tools/prompt/prompt.sh
         alias re='source ~/.zshrc'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
@@ -194,7 +194,7 @@ case $OS in
         alias nvimf='cd ~/AppData/Local/nvim'
         alias settings="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
         alias fzf="fzf --height 70% --layout reverse --info inline --border"
-        . ~/vimConf/win_ps1.sh
+        . ~/vimConf/tools/prompt/ps1.sh
         alias b='batcat'
         alias bat='batcat'
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
