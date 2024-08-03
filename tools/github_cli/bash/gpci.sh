@@ -22,7 +22,8 @@ repo_name=$(echo "$selected_repo" | awk '{print $1}')
 cmd="gh pr list $Type --repo $repo_name --limit $Limit2"
 
 # pr/issue 番号取得
-num=$(eval $cmd | fzf | awk '{gsub("#", "", $1); print $1}')
+# num=$(eval $cmd | fzf | awk '{gsub("#", "", $1); print $1}')
+num=$(gh pr view --json number -q .number)
 
 # CIステータス出力
 gh pr checks "$num" --repo "$repo_name"
