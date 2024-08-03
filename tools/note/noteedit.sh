@@ -1,6 +1,6 @@
 #!/bin/bash
 
-notef() {
+noteedit() {
     grep_word='TITLE:'
     ext='md'
     dir="$HOME/note"
