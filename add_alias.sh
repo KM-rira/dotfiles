@@ -157,6 +157,7 @@ alias giw="bash ~/vimConf/tools/github_cli/bash/giw.sh"
 alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
 
 # note
+note="$HOME/vimConf/tools/note"
 source $HOME/vimConf/tools/note/launcher.sh
 
 # OS分岐
