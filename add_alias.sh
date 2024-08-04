@@ -158,7 +158,8 @@ alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
 
 # note
 note="$HOME/vimConf/tools/note"
-source $HOME/vimConf/tools/note/launcher.sh
+#source $HOME/vimConf/tools/note/launcher.sh
+source $HOME/vimConf/tools/launcher/note_launcher.sh
 
 # OS分岐
 OS=$(uname)
