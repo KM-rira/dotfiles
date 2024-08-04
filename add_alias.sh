@@ -172,10 +172,12 @@ case $OS in
         alias fd=fdfind
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+        alias lfzf="fzf --height 70% --layout reverse --info inline --border \
+            --preview 'lsd -l {}' --preview-window '~3' \
+            --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         . ~/vimConf/tools/prompt/ps1.sh
         alias b='batcat'
         alias bat='batcat'
-        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         shopt -s histappend
         alias re='source ~/.bashrc'
         ;;
@@ -187,6 +189,9 @@ case $OS in
         alias setting='echo "not windows"'
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+        alias lfzf="fzf --height 70% --layout reverse --info inline --border \
+            --preview 'lsd -l {}' --preview-window '~3' \
+            --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         . ~/vimConf/tools/prompt/prompt.sh
         alias re='source ~/.zshrc'
         ;;
@@ -199,7 +204,7 @@ case $OS in
         . ~/vimConf/tools/prompt/win_ps1.sh
         alias b='batcat'
         alias bat='batcat'
-        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+        alias gfzf="fzf --height 70% --layout reverse --info inline --border"
         shopt -s histappend
         alias re='source ~/.bashrc'
         ;;

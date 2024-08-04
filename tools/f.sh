@@ -7,7 +7,7 @@ f() {
     # ディレクトリが存在するか確認
     if [ -n "$directories" ]; then
         # ディレクトリが存在する場合、fzfで選択させる
-        dir=$(echo "$directories" | fzf --height 40%)
+        dir=$(echo "$directories" | lfzf --height 40%)
         if [ -z "$dir" ] ; then
             echo "===== EXIT PROCESS ====="
         else
