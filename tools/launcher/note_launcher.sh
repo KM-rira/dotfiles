@@ -1,12 +1,9 @@
 #!/bin/bash
 
-TARGET_DIR="$HOME/vimConf/tools/note/*.sh"
+TARGET_DIR="$HOME/vimConf/tools/note"
 
-# 各スクリプトを source コマンドで読み込む
-for script in $TARGET_DIR; do
-    if [ -r "$script" ]; then
-        source "$script"
-    else
-        echo "$script は読み込み権限がありません。"
-    fi
-done
+source $TARGET_DIR/noteall.sh
+source $TARGET_DIR/noteclean.sh
+source $TARGET_DIR/noteedit.sh
+source $TARGET_DIR/notegen.sh
+source $TARGET_DIR/notetitle.sh
