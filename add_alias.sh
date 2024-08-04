@@ -195,7 +195,7 @@ case $OS in
         alias nvimf='cd ~/AppData/Local/nvim'
         alias settings="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
         alias fzf="fzf --height 70% --layout reverse --info inline --border"
-        . ~/vimConf/tools/prompt/ps1.sh
+        . ~/vimConf/tools/prompt/win_ps1.sh
         alias b='batcat'
         alias bat='batcat'
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
