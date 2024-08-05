@@ -179,7 +179,7 @@ case $OS in
         alias b='batcat'
         alias bat='batcat'
         shopt -s histappend
-        alias re='source ~/.bashrc'
+        alias re='source ~/.zshrc'
         ;;
     'Darwin')
         echo "Mac"
