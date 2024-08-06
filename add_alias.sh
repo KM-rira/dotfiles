@@ -213,6 +213,7 @@ case $OS in
 esac
 
 if [ "$SHELL" = "/bin/zsh" ] || [ "$SHELL" = "$(which zsh)" ]; then
+    alias zshplug="v $vc/zsh_plug.sh"
     source "$vc/zsh_plug.sh"
 fi
 
