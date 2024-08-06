@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# 複数のエイリアスを効率的に`.bashrc`に追加するためには、スクリプトを一般化して、追加したいエイリアスを簡単にリストに追加できるようにすると便利です。
-# 以下のスクリプトは、追加したいエイリアスを配列として列挙し、それらのエイリアスが`.bashrc`に存在しない場合にだけ追加します。
 
 # bashrcに下記を追加。（非同期で）
 # nohup bash ~/vimConf/addAlias.s > /dev/null 2>&1 &h
@@ -175,7 +173,8 @@ case $OS in
         alias lfzf="fzf --height 70% --layout reverse --info inline --border \
             --preview 'lsd -l {}' --preview-window '~3' \
             --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        . ~/vimConf/tools/prompt/ps1.sh
+        #. ~/vimConf/tools/prompt/ps1.sh
+        . ~/vimConf/tools/prompt/prompt.sh
         alias b='batcat'
         alias bat='batcat'
         #shopt -s histappend
@@ -212,5 +211,9 @@ case $OS in
         echo "Unknown OS: $OS"
         ;;
 esac
+
+if [ "$SHELL" = "/bin/zsh" ] || [ "$SHELL" = "$(which zsh)" ]; then
+    source "$vc/zsh_plug.sh"
+fi
 
 echo "===== Done updating alias ====="
