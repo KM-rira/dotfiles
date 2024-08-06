@@ -178,7 +178,7 @@ case $OS in
         . ~/vimConf/tools/prompt/ps1.sh
         alias b='batcat'
         alias bat='batcat'
-        shopt -s histappend
+        #shopt -s histappend
         alias re='source ~/.zshrc'
         ;;
     'Darwin')
