@@ -3,8 +3,8 @@
     default_prog = {"C:\\Program Files\\Git\\bin\\bash.exe", "--login", "-i"},
     color_scheme = "YourCustomScheme",
     colors = {
-    foreground = "#30D5C8",  -- ターコイズブルー
-    background = "#1C1C1C",  -- 暗いグレーの背景
+    foreground = "#eee8aa",  -- ターコイズブルー
+    background = "#2E3436",  -- 暗いグレーの背景
     cursor_bg = "#f0246b",
     cursor_border = "#f0246b",
     cursor_fg = "#1C1C1C",
@@ -38,9 +38,9 @@
         -- 一行下にスクロール
         {key="j", mods="ALT", action=wezterm.action{ScrollByLine=1}},
         -- ペインを垂直分割
-        {key="v", mods="SHIFT|CTRL|ALT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
+        {key="v", mods="SHIFT|ALT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
         -- ペインを水平分割
-        {key="h", mods="SHIFT|CTRL|ALT", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
+        {key="s", mods="SHIFT|ALT", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
         -- タブを左に移動
         { key = '<', mods = 'SHIFT|ALT', action = wezterm.action.MoveTabRelative(-1) },
         -- タブを右に移動
@@ -58,7 +58,7 @@
         {key="k", mods="SHIFT|ALT", action=wezterm.action{AdjustPaneSize={"Up", 1}}},
         {key="j", mods="SHIFT|ALT", action=wezterm.action{AdjustPaneSize={"Down", 1}}},
         -- アクティブなペインを閉じる
-        {key="x", mods="ALT", action=wezterm.action{CloseCurrentPane={confirm=true}}},
+        {key="w", mods="ALT", action=wezterm.action{CloseCurrentPane={confirm=true}}},
         -- 文字の大きさを増やす
         {key="+", mods="SHIFT|ALT", action="IncreaseFontSize"},
         -- 文字の大きさを減らす
