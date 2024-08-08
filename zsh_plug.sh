@@ -7,10 +7,10 @@
 export ZPLUG_HOME=$HOME/.zplug
 source $ZPLUG_HOME/init.zsh
 
-autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit
 
 # NOTE zstyle
-zstyle ':completion:*:setopt:*' menu true select
+zstyle ':completion:*' menu select
 zstyle ':completion:*' auto-list true
 zstyle ':completion:*' file-sort time
 autoload -Uz colors; colors
