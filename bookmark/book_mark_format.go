@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"time"
 )
@@ -14,30 +15,39 @@ var dirPath string
 
 func main() {
 	start := time.Now()
-	// ユーザ情報取得。
+
+	// ユーザ情報取得
 	usr, err := user.Current()
 	if err != nil {
 		fmt.Println("Error getting user:", err)
 		return
 	}
-	// ホームディレクトリ取得。
 	homeDir := usr.HomeDir
 
-	// ブックマークJsonパス。
-	bookmarkJSON := "/AppData/Local/Google/Chrome/User Data/Default/Bookmarks"
+	// OSに応じたブックマークJSONのパス設定
+	var bookmarkJSON string
+	switch runtime.GOOS {
+	case "windows":
+		bookmarkJSON = "AppData/Local/Google/Chrome/User Data/Default/Bookmarks"
+	case "darwin": // Mac OSは"darwin"として検出される
+		bookmarkJSON = "Library/Application Support/Google/Chrome/Default/Bookmarks"
+	default:
+		fmt.Println("Unsupported operating system:", runtime.GOOS)
+		return
+	}
 
-	// ブックマークJsonのパス作成。
+	// ブックマークJSONのパス作成
 	JsonPath := filepath.Join(homeDir, bookmarkJSON)
 
-	// JSONの読み込み開始。
+	// JSONの読み込み開始
 	file, err := os.Open(JsonPath)
 	if err != nil {
-		fmt.Println("Error decoding JSON file:", err)
+		fmt.Println("Error opening JSON file:", err)
 		return
 	}
 	defer file.Close()
 
-	// JSONデータをインターフェースとしてデコード。
+	// JSONデータをインターフェースとしてデコード
 	var jsonData interface{}
 	decoder := json.NewDecoder(file)
 	err = decoder.Decode(&jsonData)
@@ -46,36 +56,39 @@ func main() {
 		return
 	}
 
-	// bookmarkディレクトリの存在確認。
-	dirPath = homeDir + "/bookmark"
+	// bookmarkディレクトリの存在確認
+	dirPath = filepath.Join(homeDir, "bookmark")
 	if _, err := os.Stat(dirPath); !os.IsNotExist(err) {
 		if err := os.RemoveAll(dirPath); err != nil {
 			fmt.Println("Error removing dir:", err)
 		}
 	}
 
-	// bookmarkディレクトリ作成。
+	// bookmarkディレクトリ作成
 	if err := os.Mkdir(dirPath, 0755); err != nil {
-		fmt.Println("Error create dir:", err)
+		fmt.Println("Error creating dir:", err)
 	}
 
-	// ブックマークをNameごとにファイルに保存する。
+	// ブックマークをNameごとにファイルに保存
 	j, ok := jsonData.(map[string]interface{})
 	if !ok {
 		fmt.Println("Error jsonData type assertion:", err)
+		return
 	}
 	roots, ok := j["roots"]
 	if !ok {
 		fmt.Println("Error roots type assertion:", err)
+		return
 	}
 	r := roots.(map[string]interface{})
 	for _, folderData := range r {
 		extractUrls(folderData)
 	}
+
 	fmt.Println("===== Done format bookmark json =====")
 	end := time.Now()
 	total := end.Sub(start)
-	fmt.Println("total: ", total)
+	fmt.Println("total:", total)
 }
 
 func extractUrls(folderData interface{}) {
@@ -83,6 +96,7 @@ func extractUrls(folderData interface{}) {
 	children, ok := f["children"]
 	if !ok {
 		fmt.Println("Error children type assertion:")
+		return
 	}
 	c := children.([]interface{})
 	for _, folderData := range c {
@@ -106,10 +120,9 @@ func extractUrls(folderData interface{}) {
 		bookmarkFile := filepath.Join(dirPath, name)
 		err := os.WriteFile(bookmarkFile, url, 0755)
 		if err != nil {
-			fmt.Println("Error create bookmark file:", err)
+			fmt.Println("Error creating bookmark file:", err)
 		}
 	}
-	return
 }
 
 func replaceFilename(name string) string {

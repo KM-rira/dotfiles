@@ -4,6 +4,9 @@
 # Using Homebrew (OS X)
 # brew install zplug
 
+export ZPLUG_HOME=$HOME/.zplug
+source $ZPLUG_HOME/init.zsh
+
 autoload -Uz compinit && compinit
 
 # NOTE zstyle
