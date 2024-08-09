@@ -13,4 +13,21 @@ fi
 url=$(cat ~/bookmark/"$selected_file")
 
 # URLをブラウザで開く
-start "$url"
+OS=$(uname)
+
+case $OS in
+    'Linux')
+        echo "Linux"
+        ;;
+    'Darwin')
+        # Mac
+        open -a 'Google Chrome.app' "$url"
+        ;;
+    'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
+        start "$url"
+        ;;
+    *)
+        echo "Unknown OS: $OS"
+        ;;
+esac
+
