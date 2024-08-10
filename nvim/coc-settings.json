@@ -31,6 +31,13 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "go"
   ],
-  "suggest.keepCompleteopt": true
+  "suggest.keepCompleteopt": true,
+  "python.pythonPath": "/usr/bin/python3",
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.useLibraryCodeForTypes": true",
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.useLibraryCodeForTypes": true
 }
 
