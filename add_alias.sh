@@ -35,6 +35,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias _='cd -'
+alias ld='lazydocker'
 alias ll='ls -lt'
 alias bashrc='nv ~/.bashrc'
 alias zshrc='nv ~/.zshrc'
@@ -129,6 +130,7 @@ alias commitid='bash ~/vimConf/tools/get_commit_id.sh'
 alias d='bash ~/vimConf/tools/do.sh'
 # alias ff="ls -F | grep -v / | sed 's/\*//g' | fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 . ~/vimConf/tools/rgv.sh
+alias ports='ss -tuln'
 alias rgb='bash ~/vimConf/tools/rgb.sh'
 . ~/vimConf/tools/fdv.sh
 . ~/vimConf/tools/fdb.sh

@@ -1,8 +1,28 @@
 #!/bin/bash
 
 f() {
+    # オプションを解析
+    while getopts "a" opt; do
+      case ${opt} in
+        a )
+          COMMAND='ls -da .*/ */'
+           ;;
+        \? )
+          echo "Usage: cmd [-a]"
+          return
+          ;;
+      esac
+    done
+
+    echo "1 $COMMAND"
+
+    # デフォルトのコマンドオプションを設定（オプションが指定されていない場合）
+    COMMAND="${COMMAND:-"ls -d */"}"
+
+    echo "2 $COMMAND"
     # 現在のディレクトリにあるディレクトリのリストを取得
-    directories=$(ls -d */ 2>/dev/null)
+    directories=$(eval $COMMAND)
+    echo "directories $directories"
 
     # ディレクトリが存在するか確認
     if [ -n "$directories" ]; then
