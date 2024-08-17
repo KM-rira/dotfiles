@@ -6,26 +6,24 @@ rgv() {
         return
     fi
 
-    echo rg -l "$*"
-
-    file_count=$(rg -l "$*" | wc -l)
-    if [ $file_count -eq 0 ] ; then
+    FILE_COUNT=$(rg -l "$*" | wc -l)
+    if [ $FILE_COUNT -eq 0 ] ; then
         echo "===== NOT FOUND FILE ====="
         return
     fi
 
-    select_file=$(rg -l "$*" | fzf --tac --no-sort --reverse --prompt='SELECT FILE: ' --no-multi)
-
+    SELECT_FILE=$(rg -l "$*" | fzf --tac --no-sort --reverse --prompt='SELECT FILE: ' --no-multi)
+    EXT="${SELECT_FILE##*.}"
     # リポジトリ名の抽出失敗した場合
-    if [ -z "$select_file" ] ; then
+    if [ -z "$SELECT_FILE" ] ; then
         echo "===== EXIT PROCESS ====="
         return
     fi
 
-    row_num=$(rg -n $1 $select_file | fzf --tac --no-sort --reverse --prompt='SELECT ROW: ' --no-multi | cut -d ':' -f 1)
+    ROW_NUM=$(rg -n $1 $SELECT_FILE | fzf --tac --no-sort --reverse --prompt='SELECT ROW: ' --no-multi --preview "$HOME/vimConf/tools/rgv_preview.sh {} ${SELECT_FILE} ; batcat --color=always $HOME/.tmp/tmp.${EXT}" | cut -d ':' -f 1)
 
     # 選択されたコマンドを実行
-    echo $select_file
-    nvim $select_file +$row_num
+    echo $SELECT_FILE
+    nvim $SELECT_FILE +$ROW_NUM
 }
 

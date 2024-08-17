@@ -27,6 +27,9 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export EDITOR=nvim
 export GIT_EDITOR=nvim
 
+mkdir -p $HOME/.tmp
+chmod +x $vc/tools/rgv_preview.sh
+
 ##alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 
 # 追加したいエイリアスをこの配列に列挙

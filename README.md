@@ -332,3 +332,16 @@ sudo snap install lsd
 # windows
 choco install lsd
 ```
+
+# lazydocker
+
+```bash
+go install github.com/jesseduffield/lazydocker@latest
+```
+
+# procs
+
+```bash
+cargo install procs
+```
+
