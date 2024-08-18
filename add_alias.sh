@@ -7,17 +7,9 @@
 # bashrcに下記を追記すること。
 # unalias -a
 # source ~/vimConf/addAlias.sh
-# ログファイルのパス
-LOG_FILE="$HOME/.tmp/setup_time/setup.log"
 
-# ログファイルが存在しない場合は作成
-mkdir -p "$(dirname "$LOG_FILE")"
-
-# 開始時間を記録（秒単位のタイムスタンプ）
-START_TIME=$(date +%s)
-
-# ログファイルに開始時間を追記
-echo "Start Time: $(date +"%Y-%m-%d %H:%M:%S")" >> "$LOG_FILE"
+# 開始時間を記録（ミリ秒単位のタイムスタンプ）
+START_TIME=$(date +%s%3N)
 
 bashrc="$HOME/.bashrc"
 vc="$HOME/vimConf"
@@ -83,7 +75,7 @@ alias abort='git rebase --abort'
 alias amend='git commit --amend -m'
 alias rebasei='bash ~/vimConf/tools/rebase_helper.sh'
 . ~/vimConf/tools/commit.sh
-alias bmf='~/vimConf/tools/book_mark_format/book_mark_format.exe;~/vimConf/tools/book_mark_format/book_mark_fzf.sh'
+alias bmf="go run $vc/bookmark/book_mark_format.go;~/vimConf/tools/book_mark_format/book_mark_fzf.sh"
 alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline'
 alias gs='bash ~/vimConf/tools/google_search.sh'
@@ -171,8 +163,8 @@ alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
 
 # note
 note="$HOME/vimConf/tools/note"
-#source $HOME/vimConf/tools/note/launcher.sh
-source $HOME/vimConf/tools/launcher/note_launcher.sh
+go run $vc/tools/launcher/launcher.go "$HOME/vimConf/tools/note" && source $HOME/.tmp/file_list.sh || echo "fail lancher.go"
+#source $HOME/vimConf/tools/launcher/note_launcher.sh
 
 # OS分岐
 OS=$(uname)
@@ -221,6 +213,7 @@ case $OS in
         alias b='batcat'
         alias bat='batcat'
         alias gfzf="fzf --height 70% --layout reverse --info inline --border"
+        alias lfzf="fzf --height 70% --layout reverse --info inline --border"
         shopt -s histappend
         alias re='source ~/.bashrc'
         ;;
@@ -234,18 +227,5 @@ if [ "$SHELL" = "/bin/zsh" ] || [ "$SHELL" = "$(which zsh)" ]; then
     source "$vc/zsh_plug.sh"
 fi
 
-echo "===== Done updating alias ====="
-
-# 終了時間を記録（秒単位のタイムスタンプ）
-END_TIME=$(date +%s)
-
-# ログファイルに終了時間を追記
-echo "End Time: $(date +"%Y-%m-%d %H:%M:%S")" >> "$LOG_FILE"
-
-# 開始時間と終了時間の差を計算
-DIFF_TIME=$((END_TIME - START_TIME))
-
-# ログファイルに経過時間を追記
-echo "Elapsed Time: ${DIFF_TIME} seconds" >> "$LOG_FILE"
-echo "--------------------------------" >> "$LOG_FILE"
+source $vc/tools/time_caliculator.sh
 
