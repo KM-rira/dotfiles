@@ -21,7 +21,6 @@ zstyle ':completion:*:*files' ignored-patterns '*?.o'
 
 # NOTE setopt list
 setopt autocd
-setopt hist_ignore_dups
 setopt no_beep
 setopt nobeep
 setopt nolistbeep
@@ -46,8 +45,17 @@ setopt list_packed
 setopt numeric_glob_sort
 # 辞書順ではなく数値順でソート
 
-setopt hist_ignore_space
+# 設定ファイル ~/.zshrc に追加
+setopt HIST_IGNORE_SPACE  # スペースで始まるコマンドを履歴に記録しない
+setopt HIST_IGNORE_DUPS   # 重複する履歴エントリを記録しない
+setopt HIST_FIND_NO_DUPS  # 履歴からの補完時に重複しない
+setopt HIST_REDUCE_BLANKS # 履歴からの補完時に空白を削除する
 
+# bindkey
+# Ctrl + p で履歴から補完する設定
+bindkey '^P' history-beginning-search-backward
+# Ctrl + n で履歴から補完する設定
+bindkey '^N' history-beginning-search-forward
 
 # NOTE zplug list
 # zplug の初期化
