@@ -14,12 +14,9 @@ f() {
       esac
     done
 
-    echo "1 $COMMAND"
-
     # デフォルトのコマンドオプションを設定（オプションが指定されていない場合）
     COMMAND="${COMMAND:-"ls -d */"}"
 
-    echo "2 $COMMAND"
     # 現在のディレクトリにあるディレクトリのリストを取得
     directories=$(eval $COMMAND)
     echo "directories $directories"
