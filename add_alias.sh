@@ -7,6 +7,17 @@
 # bashrcに下記を追記すること。
 # unalias -a
 # source ~/vimConf/addAlias.sh
+# ログファイルのパス
+LOG_FILE="$HOME/.tmp/setup_time/setup.log"
+
+# ログファイルが存在しない場合は作成
+mkdir -p "$(dirname "$LOG_FILE")"
+
+# 開始時間を記録（秒単位のタイムスタンプ）
+START_TIME=$(date +%s)
+
+# ログファイルに開始時間を追記
+echo "Start Time: $(date +"%Y-%m-%d %H:%M:%S")" >> "$LOG_FILE"
 
 bashrc="$HOME/.bashrc"
 vc="$HOME/vimConf"
@@ -133,7 +144,6 @@ alias commitid='bash ~/vimConf/tools/get_commit_id.sh'
 alias d='bash ~/vimConf/tools/do.sh'
 # alias ff="ls -F | grep -v / | sed 's/\*//g' | fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 . ~/vimConf/tools/rgv.sh
-alias ports='ss -tuln'
 alias rgb='bash ~/vimConf/tools/rgb.sh'
 . ~/vimConf/tools/fdv.sh
 . ~/vimConf/tools/fdb.sh
@@ -184,6 +194,7 @@ case $OS in
         alias bat='batcat'
         #shopt -s histappend
         alias re='source ~/.zshrc'
+        alias ports='ss -tuln'
         ;;
     'Darwin')
         echo "Mac"
@@ -198,6 +209,7 @@ case $OS in
             --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         . ~/vimConf/tools/prompt/prompt.sh
         alias re='source ~/.zshrc'
+        alias ports='lsof -i -P | grep -i "listen"'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='lsd -l'
@@ -223,3 +235,17 @@ if [ "$SHELL" = "/bin/zsh" ] || [ "$SHELL" = "$(which zsh)" ]; then
 fi
 
 echo "===== Done updating alias ====="
+
+# 終了時間を記録（秒単位のタイムスタンプ）
+END_TIME=$(date +%s)
+
+# ログファイルに終了時間を追記
+echo "End Time: $(date +"%Y-%m-%d %H:%M:%S")" >> "$LOG_FILE"
+
+# 開始時間と終了時間の差を計算
+DIFF_TIME=$((END_TIME - START_TIME))
+
+# ログファイルに経過時間を追記
+echo "Elapsed Time: ${DIFF_TIME} seconds" >> "$LOG_FILE"
+echo "--------------------------------" >> "$LOG_FILE"
+
