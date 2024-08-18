@@ -39,9 +39,8 @@ addf() {
     fi
 
     # 選択されたコマンドを実行
-    git add $select_file
+    echo "$select_file" | xargs git add
 
     cd $current_dir
-
     echo "===== DONE ====="
 }
