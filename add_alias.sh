@@ -83,8 +83,7 @@ alias gr='bash ~/vimConf/tools/google_research.sh'
 alias hs='bash ~/vimConf/tools/history_search.sh'
 alias un='uname'
 alias dif="bash ~/vimConf/tools/diff_so_fancy_change.sh"
-alias gdiffs="git diff --staged"
-alias gdiff="git diff"
+alias gdiff="bash $vc/tools/gdiff.sh"
 alias restore="bash ~/vimConf/tools/restore.sh"
 source "$HOME/vimConf/tools/restoref.sh"
 alias restorea="bash ~/vimConf/tools/restorea.sh"
