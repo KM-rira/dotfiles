@@ -37,7 +37,7 @@ restoref() {
 
 
     # 選択されたコマンドを実行
-    git restore $select_file
+    echo $select_file | xargs git restore
     cd -
     echo "===== DONE ====="
 }
