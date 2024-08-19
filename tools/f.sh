@@ -1,7 +1,7 @@
 #!/bin/bash
 
 f() {
-    # オプションを解析
+    COMMAND='ls -d */'
     while getopts "a" opt; do
       case ${opt} in
         a )
@@ -14,12 +14,8 @@ f() {
       esac
     done
 
-    # デフォルトのコマンドオプションを設定（オプションが指定されていない場合）
-    COMMAND="${COMMAND:-"ls -d */"}"
-
     # 現在のディレクトリにあるディレクトリのリストを取得
     directories=$(eval $COMMAND)
-    echo "directories $directories"
 
     # ディレクトリが存在するか確認
     if [ -n "$directories" ]; then
