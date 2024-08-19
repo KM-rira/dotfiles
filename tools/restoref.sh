@@ -1,54 +1,54 @@
 #!/bin/bash
 
 restoref() {
-    COMMAND='git diff --name-only'
-    QUESTION_FLAG=true
-    OPTION=''
+    local DIFF_OPTION=''
+    local QUESTION_FLAG=true
+    local RESTORE_OPTION=''
 
     while getopts "s" opt; do
         case ${opt} in
             s )
-            COMMAND='git diff --name-only --cached '
+            DIFF_OPTION=' --cached'
             QUESTION_FLAG=false
-            OPTION='--staged'
+            RESTORE_OPTION='--staged'
             ;;
         \? )
             echo "Usage: $0 [-s]"
-            exit 1
+            return 1
             ;;
         esac
     done
 
     # コマンド履歴を取得してfzfでフィルタリング
     cd $(git rev-parse --show-toplevel)
-    select_file=$( git diff --name-only | gfzf --no-sort --prompt='SELECT RESTORE FILE: ' --multi)
+    local select_file=$(eval "git diff --name-only $DIFF_OPTION" | gfzf --no-sort --prompt='SELECT RESTORE FILE: ' --multi)
 
     # ファイル名の抽出失敗した場合
     if [ -z "$select_file" ] ; then
-        cd -
+        cd - > /dev/null 2>&1
         echo "===== EXIT PROCESS ====="
         return 1
     fi
 
-    if [ "$flag" = true ]; then
+    if [ "$QUESTION_FLAG" = true ]; then
         # ユーザーに質問をして y/n の回答を待つ
         echo -n "restore all ok? (y/n) "
         read  answer
 
         # 回答を小文字に変換
-        answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
+        local answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
 
         # 回答によって処理を分岐
         case "$answer" in
             y|yes)
                 ;;
             n|no)
-                cd -
+                cd - > /dev/null 2>&1
                 echo "===== EXIT PROCESS ====="
                 return 1
                 ;;
             *)
-                cd -
+                cd - > /dev/null 2>&1
                 echo "===== UNKNOWN ANSWER ====="
                 return 1
                 ;;
@@ -57,7 +57,7 @@ restoref() {
 
 
     # 選択されたコマンドを実行
-    echo $select_file | xargs git restore $OPTION
-    cd -
+    echo $select_file | xargs git restore $RESTORE_OPTION
+    cd - > /dev/null 2>&1
     echo "===== DONE ====="
 }
