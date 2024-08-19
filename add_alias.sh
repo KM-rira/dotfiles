@@ -9,7 +9,7 @@
 # source ~/vimConf/addAlias.sh
 
 # 開始時間を記録（ミリ秒単位のタイムスタンプ）
-START_TIME=$(date +%s%3N)
+START_TIME=$(date +%s.%N)
 
 bashrc="$HOME/.bashrc"
 vc="$HOME/vimConf"
@@ -226,5 +226,13 @@ if [ "$SHELL" = "/bin/zsh" ] || [ "$SHELL" = "$(which zsh)" ]; then
     source "$vc/zsh_plug.sh"
 fi
 
-source $vc/tools/time_caliculator.sh
+# 終了時間を記録
+END_TIME=$(date +%s.%N)
 
+# 開始時間と終了時間の差を計算
+ELAPSED_TIME=$(echo "$END_TIME - $START_TIME" | bc)
+
+# 結果を表示
+echo "================================"
+printf "UpdateTime: %.3f 秒\n" "$ELAPSED_TIME"
+echo "================================"
