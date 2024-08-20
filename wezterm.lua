@@ -1,5 +1,5 @@
- local wezterm = require 'wezterm';
- return {
+local wezterm = require 'wezterm';
+return {
     default_prog = {"C:\\Program Files\\Git\\bin\\bash.exe", "--login", "-i"},
     color_scheme = "YourCustomScheme",
     colors = {
@@ -10,14 +10,12 @@
     cursor_fg = "#1C1C1C",
     selection_bg = "#FFA500", -- 選択時の背景色
     selection_fg = "#000000",
-
     -- 以下は通常のANSIカラー
     ansi = {"#2E3436", "#CC0000", "#4E9A06", "#C4A000",
             "#3465A4", "#75507B", "#06989A", "#D3D7CF"},
     brights = {"#555753", "#EF2929", "#8AE234", "#FCE94F",
                "#729FCF", "#AD7FA8", "#34E2E2", "#EEEEEC"},
     },
-
     keys = {
         -- 次のタブに移動
         {key="Tab", mods="CTRL", action=wezterm.action{ActivateTabRelative=1}},
@@ -65,8 +63,9 @@
         {key="=", mods="SHIFT|ALT", action="DecreaseFontSize"},
         -- 文字の大きさをリセット
         {key="0", mods="SHIFT|ALT", action="ResetFontSize"},
+        { key = 'm', mods = 'SHIFT|CTRL', action = wezterm.action.QuickSelect },
     },
-    audible_bell = "Disabled",audible_bell = "Disabled",
+    audible_bell = "Disabled",
     font_size = 7.7,
- }
+}
 

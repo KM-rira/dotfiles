@@ -161,7 +161,7 @@ alias giw="bash ~/vimConf/tools/github_cli/bash/giw.sh"
 alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
 
 # note
-note="$HOME/vimConf/tools/note"
+note="$HOME/note"
 go run $vc/tools/launcher/launcher.go "$HOME/vimConf/tools/note" && source $HOME/.tmp/file_list.sh || echo "fail lancher.go"
 #source $HOME/vimConf/tools/launcher/note_launcher.sh
 
