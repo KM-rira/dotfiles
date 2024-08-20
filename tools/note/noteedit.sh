@@ -10,7 +10,7 @@ noteedit() {
         return
     fi
 
-    select_file=$(rg -t $ext -l $grep_word $dir | fzf --tac --no-sort --reverse --prompt='SELECT FILE: ' --no-multi)
+    select_file=$(rg -t $ext -l $grep_word $dir | sort -V | fzf --tac --no-sort --reverse --prompt='SELECT FILE: ' --no-multi)
 
     # リポジトリ名の抽出失敗した場合
     if [ -z "$select_file" ] ; then
