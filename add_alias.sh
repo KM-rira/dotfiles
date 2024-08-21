@@ -200,6 +200,7 @@ case $OS in
         . ~/vimConf/tools/prompt/prompt.sh
         alias re='source ~/.zshrc'
         alias ports='lsof -i -P | grep -i "listen"'
+        alias batcat='bat'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='lsd -l'
