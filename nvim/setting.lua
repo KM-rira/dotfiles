@@ -102,6 +102,15 @@ vim.g.mkdp_preview_options = {
 }
 vim.g.mkdp_port = '5000'
 
+-- GoのImportを自動で追加し、ファイル保存時にフォーマットを行う
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    vim.fn.CocAction('runCommand', 'editor.action.organizeImport')
+    vim.fn.CocAction('format')
+  end
+})
+
 -- NvimTreeのウィンドウピッカー除外設定
 vim.g.nvim_tree_window_picker_exclude = {
     filetype = {'notify', 'packer', 'qf'},
