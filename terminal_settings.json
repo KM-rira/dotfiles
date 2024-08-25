@@ -70,7 +70,7 @@
             "command":
             {
                 "action": "adjustFontSize",
-                "delta": -1.0
+                "delta": -0.5
             },
             "keys": "alt+shift+minus"
         },
@@ -78,7 +78,7 @@
             "command":
             {
                 "action": "adjustFontSize",
-                "delta": 1.0
+                "delta": 0.5
             },
             "keys": "alt+shift+plus"
         },
@@ -327,7 +327,7 @@
                 "font":
                 {
                     "face": "FiraMono Nerd Font Mono",
-                    "size": 10.0
+                    "size": 9.0
                 },
                 "foreground": "#C3BB76",
                 "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
