@@ -78,3 +78,6 @@ vim.api.nvim_set_keymap('o', 'K', '10k', {noremap = true})
 -- vim.api.nvim_set_keymap('x', '<C-e>', '10<C-e>', {noremap = true})
 -- vim.api.nvim_set_keymap('o', '<C-e>', '10<C-e>', {noremap = true})
 
+-- クリップボード設定
+set clipboard+=unnamedplus
+
