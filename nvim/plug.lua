@@ -23,7 +23,19 @@ require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/playground'
     use 'nvim-treesitter/nvim-treesitter-refactor'
-    use 'mattn/vim-goimports'
+    use {
+        'mattn/vim-goimports',
+        config = function()
+            -- 保存時に自動で import を整理する設定
+            vim.cmd [[
+        augroup GoImports
+        autocmd!
+        autocmd BufWritePre *.go :GoImports
+        autocmd BufWritePre *.go :silent !gofmt -w %
+        augroup END
+        ]]
+        end
+    }
     use {'nvim-telescope/telescope.nvim', tag = '0.1.5', requires = {'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-frecency.nvim'}}
     use {'iamcco/markdown-preview.nvim', run = 'cd app && npx --yes yarn install'}
     use 'RRethy/vim-illuminate'

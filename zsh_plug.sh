@@ -28,6 +28,7 @@ setopt share_history
 setopt correct
 setopt extended_glob
 setopt noautoremoveslash
+setopt EXTENDED_GLOB
 # 末尾から自動的に/を除かない
 
 setopt auto_param_slash
