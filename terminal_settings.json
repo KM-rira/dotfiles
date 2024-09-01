@@ -5,6 +5,13 @@
     [
         {
             "command": {
+                "action": "copy",
+                "content": ""
+            },
+            "keys": "ctrl+c"
+        },
+        {
+            "command": {
                 "action": "selectAll"
             },
             "keys": "alt+a"
