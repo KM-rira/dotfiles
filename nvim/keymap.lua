@@ -43,15 +43,15 @@ vim.keymap.set({'n', 'x', 'o'},'<leader>gh', ':call CocAction(\'doHover\')<CR>',
 
 -- telescope系
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {})
-vim.keymap.set('n', '<leader>fc', builtin.commands, {})
-vim.keymap.set('n', '<leader>fh', builtin.command_history, {})
-vim.keymap.set('n', '<leader>fj', builtin.jumplist, {})
-vim.keymap.set('n', '<leader>fs', builtin.search_history, {})
-vim.keymap.set("n", "<leader>fz", "<Cmd>Telescope frecency<CR>")
+vim.keymap.set({'n', 'x', 'o'}, '<leader>ff', builtin.find_files, {})
+vim.keymap.set({'n', 'x', 'o'}, '<leader>fg', builtin.live_grep, {})
+vim.keymap.set({'n', 'x', 'o'}, '<leader>fb', builtin.buffers, {})
+vim.keymap.set({'n', 'x', 'o'}, '<leader>fo', builtin.oldfiles, {})
+vim.keymap.set({'n', 'x', 'o'}, '<leader>fc', builtin.commands, {})
+vim.keymap.set({'n', 'x', 'o'}, '<leader>fh', builtin.command_history, {})
+vim.keymap.set({'n', 'x', 'o'}, '<leader>fj', builtin.jumplist, {})
+vim.keymap.set({'n', 'x', 'o'}, '<leader>fs', builtin.search_history, {})
+vim.keymap.set({'n', 'x', 'o'}, "<leader>fz", "<Cmd>Telescope frecency<CR>")
 
 -- 翻訳
 vim.api.nvim_set_keymap('n', 'gr', '<Plug>(Translate)', {silent = true})
@@ -69,6 +69,8 @@ vim.keymap.set({'n', 'x', 'o'}, '<Leader>v', '<C-v>',{ noremap = true, silent = 
 -- 全選択
 vim.keymap.set({'n', 'x', 'o'}, 'vv', 'G$Vgg0',{ noremap = true, silent = true })
 
+vim.keymap.set({'n', 'x', 'o'}, 'dx', 'dd',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'dd', '"_dd',{ noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'd', '"_d',{ noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'c', '"_c',{ noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'D', '"_D',{ noremap = true, silent = true })
