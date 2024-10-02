@@ -33,33 +33,13 @@ map('n', '<leader>be', ':BufferLineSortByExtension<CR>', opts)
 map('n', '<leader>bd', ':BufferLineSortByRelativeDirectory<CR>', opts)
 
 -- coc系
-vim.api.nvim_set_keymap('n', '<leader>gd', '<Plug>(coc-definition)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>gd', '<Plug>(coc-definition)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>gd', '<Plug>(coc-definition)', {silent = true})
-
-vim.api.nvim_set_keymap('n', '<leader>gt', '<Plug>(coc-type-definition)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>gt', '<Plug>(coc-type-definition)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>gt', '<Plug>(coc-type-definition)', {silent = true})
-
-vim.api.nvim_set_keymap('n', '<leader>gc', '<Plug>(coc-declaration)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>gc', '<Plug>(coc-declaration)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>gc', '<Plug>(coc-declaration)', {silent = true})
-
-vim.api.nvim_set_keymap('n', '<leader>gi', '<Plug>(coc-implementation)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>gi', '<Plug>(coc-implementation)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>gi', '<Plug>(coc-implementation)', {silent = true})
-
-vim.api.nvim_set_keymap('n', '<leader>gr', '<Plug>(coc-references)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>gr', '<Plug>(coc-references)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>gr', '<Plug>(coc-references)', {silent = true})
-
-vim.api.nvim_set_keymap('n', '<leader>gn', '<Plug>(coc-rename)', {silent = true})
-vim.api.nvim_set_keymap('o', '<leader>gn', '<Plug>(coc-rename)', {silent = true})
-vim.api.nvim_set_keymap('x', '<leader>gn', '<Plug>(coc-rename)', {silent = true})
-
-vim.api.nvim_set_keymap('n', '<leader>gh', ':call CocAction(\'doHover\')<CR>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('o', '<leader>gh', ':call CocAction(\'doHover\')<CR>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('x', '<leader>gh', ':call CocAction(\'doHover\')<CR>', {silent = true, noremap = true})
+vim.keymap.set({'n', 'x', 'o'},'<leader>gd', '<Plug>(coc-definition)',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'},'<leader>gt', '<Plug>(coc-type-definition)',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'},'<leader>gc', '<Plug>(coc-declaration)',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'},'<leader>gi', '<Plug>(coc-implementation)',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'},'<leader>gr', '<Plug>(coc-references)',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'},'<leader>gn', '<Plug>(coc-rename)',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'},'<leader>gh', ':call CocAction(\'doHover\')<CR>',{ noremap = true, silent = true })
 
 -- telescope系
 local builtin = require('telescope.builtin')
@@ -78,89 +58,42 @@ vim.api.nvim_set_keymap('n', 'gr', '<Plug>(Translate)', {silent = true})
 vim.api.nvim_set_keymap('v', 't', '<Plug>(VTranslate)', {silent = true})
 
 -- タブ関連
-vim.api.nvim_set_keymap('n', 'tn', '<cmd>tabnew<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('o', 'tn', '<cmd>tabnew<cr>', {silent = true, noremap = true})
-vim.api.nvim_set_keymap('x', 'tn', '<cmd>tabnew<cr>', {silent = true, noremap = true})
+vim.keymap.set({'n', 'x', 'o'}, 'tn', '<cmd>tabnew<cr>',{ noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<TAB>', ':BufferLineCycleNext<CR>', {silent = true, noremap = true})
 vim.api.nvim_set_keymap('n', '<S-TAB>', ':BufferLineCyclePrev<CR>', {silent = true, noremap = true})
 
 -- 矩形選択
-vim.api.nvim_set_keymap('n', '<Leader>v', '<C-v>', {noremap = true})
-vim.api.nvim_set_keymap('x', '<Leader>v', '<C-v>', {noremap = true})
-vim.api.nvim_set_keymap('o', '<Leader>v', '<C-v>', {noremap = true})
+vim.keymap.set({'n', 'x', 'o'}, '<Leader>v', '<C-v>',{ noremap = true, silent = true })
 
 -- 全選択
-vim.api.nvim_set_keymap('n', 'vv', 'G$Vgg0', {noremap = true})
+vim.keymap.set({'n', 'x', 'o'}, 'vv', 'G$Vgg0',{ noremap = true, silent = true })
 
--- ノーマルモードのキーマッピング
-vim.api.nvim_set_keymap('n', 'dx', 'dd', {noremap = true})
-vim.api.nvim_set_keymap('n', 'dd', '"_dd', {noremap = true})
-vim.api.nvim_set_keymap('n', 'd', '"_d', {noremap = true})
-vim.api.nvim_set_keymap('n', 'c', '"_c', {noremap = true})
-vim.api.nvim_set_keymap('n', 'D', '"_D', {noremap = true})
-vim.api.nvim_set_keymap('n', 'C', '"_C', {noremap = true})
-vim.api.nvim_set_keymap('n', 'S', '"_S', {noremap = true})
-vim.api.nvim_set_keymap('n', 's', '"_s', {noremap = true})
-vim.api.nvim_set_keymap('n', 'm', '^', {noremap = true})
-vim.api.nvim_set_keymap('n', '^', '+', {noremap = true})
-
--- ビジュアルモードのキーマッピング
-vim.api.nvim_set_keymap('x', 'd', '"_d', {noremap = true})
-vim.api.nvim_set_keymap('x', 'c', '"_c', {noremap = true})
-vim.api.nvim_set_keymap('x', 'D', '"_D', {noremap = true})
-vim.api.nvim_set_keymap('x', 'C', '"_C', {noremap = true})
-vim.api.nvim_set_keymap('x', 'S', '"_S', {noremap = true})
-vim.api.nvim_set_keymap('x', 's', '"_s', {noremap = true})
-vim.api.nvim_set_keymap('x', 'm', '^', {noremap = true})
-vim.api.nvim_set_keymap('x', '^', '+', {noremap = true})
-
--- オペレータモードのキーマッピング
-vim.api.nvim_set_keymap('o', 'd', '"_d', {noremap = true})
-vim.api.nvim_set_keymap('o', 'c', '"_c', {noremap = true})
-vim.api.nvim_set_keymap('o', 'D', '"_D', {noremap = true})
-vim.api.nvim_set_keymap('o', 'C', '"_C', {noremap = true})
-vim.api.nvim_set_keymap('o', 'S', '"_S', {noremap = true})
-vim.api.nvim_set_keymap('o', 's', '"_s', {noremap = true})
-vim.api.nvim_set_keymap('o', 'm', '^', {noremap = true})
-vim.api.nvim_set_keymap('o', '^', '+', {noremap = true})
+vim.keymap.set({'n', 'x', 'o'}, 'd', '"_d',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'c', '"_c',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'D', '"_D',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'C', '"_C',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'S', '"_S',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 's', '"_s',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'm', '^',{ noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, '^', '+',{ noremap = true, silent = true })
 
 -- ノーマル、ビジュアル、オペレータモードでのキーマッピング
-vim.api.nvim_set_keymap('n', 'o', 'o<Esc>', {noremap = true})
-vim.api.nvim_set_keymap('x', 'o', 'o<Esc>', {noremap = true})
-vim.api.nvim_set_keymap('o', 'o', 'o<Esc>', {noremap = true})
-
-vim.api.nvim_set_keymap('n', 'O', 'O<Esc>', {noremap = true})
-vim.api.nvim_set_keymap('x', 'O', 'O<Esc>', {noremap = true})
-vim.api.nvim_set_keymap('o', 'O', 'O<Esc>', {noremap = true})
-
-vim.api.nvim_set_keymap('n', '(', 'i<Space><Esc>', {noremap = true})
-vim.api.nvim_set_keymap('x', '(', 'i<Space><Esc>', {noremap = true})
-vim.api.nvim_set_keymap('o', '(', 'i<Space><Esc>', {noremap = true})
-
-vim.api.nvim_set_keymap('n', ')', 'a<Space><Esc>', {noremap = true})
-vim.api.nvim_set_keymap('x', ')', 'a<Space><Esc>', {noremap = true})
-vim.api.nvim_set_keymap('o', ')', 'a<Space><Esc>', {noremap = true})
-
-vim.api.nvim_set_keymap('n', '<Space>', '$', {noremap = true})
-vim.api.nvim_set_keymap('x', '<Space>', '$', {noremap = true})
-vim.api.nvim_set_keymap('o', '<Space>', '$', {noremap = true})
-
-vim.api.nvim_set_keymap('n', 'J', '10j', {noremap = true})
-vim.api.nvim_set_keymap('x', 'J', '10j', {noremap = true})
-vim.api.nvim_set_keymap('o', 'J', '10j', {noremap = true})
-
-vim.api.nvim_set_keymap('n', 'K', '10k', {noremap = true})
-vim.api.nvim_set_keymap('x', 'K', '10k', {noremap = true})
-vim.api.nvim_set_keymap('o', 'K', '10k', {noremap = true})
-
--- vim.api.nvim_set_keymap('n', '<C-e>', '10<C-e>', {noremap = true})
--- vim.api.nvim_set_keymap('x', '<C-e>', '10<C-e>', {noremap = true})
--- vim.api.nvim_set_keymap('o', '<C-e>', '10<C-e>', {noremap = true})
---
--- vim.api.nvim_set_keymap('n', '<C-y>', '10<C-y>', {noremap = true})
--- vim.api.nvim_set_keymap('x', '<C-y>', '10<C-y>', {noremap = true})
--- vim.api.nvim_set_keymap('o', '<C-y>', '10<C-y>', {noremap = true})
+vim.keymap.set({'n', 'x', 'o'}, 'o', 'o<esc>', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'O', 'O<Esc>', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, '(', 'i<Space><Esc>', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, ')', 'a<Space><Esc>', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, '<Space>', '$', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'J', '10j', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'K', '10k', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'd ', 'diw', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'c ', 'ciw', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'y ', 'yiw', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'gu ', 'guiw', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'gU ', 'gUiw', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'v ', 'viw', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, ',', ';', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'Q', ',', { noremap = true, silent = true })
 
 -- todo系
 vim.keymap.set("n", "]t", function()
