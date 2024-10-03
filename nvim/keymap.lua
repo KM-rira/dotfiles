@@ -7,6 +7,9 @@ vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohlsearch<CR><ESC>', {})
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
+-- save
+vim.keymap.set({'n', 'x', 'o'}, '<C-s>', ':w<CR>', opts)
+
 -- バッファの移動
 map('n', '<A->>', ':BufferLineMoveNext<CR>', opts)
 map('n', '<A-<>', ':BufferLineMovePrev<CR>', opts)
@@ -81,21 +84,57 @@ vim.keymap.set({'n', 'x', 'o'}, 'm', '^',{ noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, '^', '+',{ noremap = true, silent = true })
 
 -- ノーマル、ビジュアル、オペレータモードでのキーマッピング
+vim.keymap.set({'n', 'x', 'o'}, 'j', 'gj', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'k', 'gk', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'gj', 'j', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'gk', 'k', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'o', 'o<esc>', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'O', 'O<Esc>', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, '(', 'i<Space><Esc>', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, ')', 'a<Space><Esc>', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, '<Space>', '$', { noremap = true, silent = true })
-vim.keymap.set({'n', 'x', 'o'}, 'J', '10j', { noremap = true, silent = true })
-vim.keymap.set({'n', 'x', 'o'}, 'K', '10k', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'J', '10gj', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'K', '10gk', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'gJ', '10j', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, 'gK', '10k', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'd ', 'diw', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'c ', 'ciw', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'y ', 'yiw', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'gu ', 'guiw', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'gU ', 'gUiw', { noremap = true, silent = true })
-vim.keymap.set({'n', 'x', 'o'}, 'v ', 'viw', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, ',', ';', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'Q', ',', { noremap = true, silent = true })
+vim.keymap.set({'n', 'x', 'o'}, '<Left>', '<C-w>h', opts)   -- 左のウィンドウへ
+vim.keymap.set({'n', 'x', 'o'}, '<Down>', '<C-w>j', opts)   -- 下のウィンドウへ
+vim.keymap.set({'n', 'x', 'o'}, '<Up>', '<C-w>k', opts)     -- 上のウィンドウへ
+vim.keymap.set({'n', 'x', 'o'}, '<Right>', '<C-w>l', opts)  -- 右のウィンドウへ
+-- insert mode setting
+vim.keymap.set('i', 'ｊｋ', '<Esc>', { noremap = true, silent = true })
+
+-- Emacs風のキー設定をインサートモードに適用
+local opts = { noremap = true, silent = true }
+-- カーソル移動
+vim.keymap.set('i', '<C-f>', '<Right>', opts)    -- 前方へ
+vim.keymap.set('i', '<C-b>', '<Left>', opts)     -- 後方へ
+vim.keymap.set('i', '<C-n>', '<Down>', opts)     -- 次の行へ
+vim.keymap.set('i', '<C-p>', '<Up>', opts)       -- 前の行へ
+vim.keymap.set('i', '<C-a>', '<Home>', opts)     -- 行の先頭へ
+vim.keymap.set('i', '<C-e>', '<End>', opts)      -- 行の末尾へ
+
+-- 削除
+vim.keymap.set('i', '<C-d>', '<Delete>', opts)    -- カーソル下の文字を削除
+vim.keymap.set('i', '<C-h>', '<BS>', opts)        -- カーソル前の文字を削除
+vim.keymap.set('i', '<C-w>', '<C-o>db', opts)     -- 単語単位で削除
+vim.keymap.set('i', '<C-u>', '<C-o>0d^', opts)    -- 行の先頭からカーソル位置までを削除
+vim.keymap.set('i', '<C-k>', '<C-o>D', opts)      -- カーソルから行末までを削除
+vim.keymap.set('i', '<M-d>', '<C-o>dw', opts) -- 次の単語を削除 (Alt + D)
+vim.keymap.set('i', '<M-Backspace>', '<C-o>dw', opts) -- 前の単語を削除 (Alt + Backspace)
+vim.keymap.set('i', '<M-b>', '<C-o>b', opts) -- 前の単語へ移動 (Alt + B)
+vim.keymap.set('i', '<M-f>', '<C-o>w', opts)         -- 次の単語へ移動
+
+-- ペースト
+vim.keymap.set('i', '<C-y>', '<C-r>"', opts)  -- 元に戻す
+vim.keymap.set('i', '<C-_>', '<C-o>u', opts)  -- 次の単語を削除 (Alt + D)
 
 -- todo系
 vim.keymap.set("n", "]t", function()
