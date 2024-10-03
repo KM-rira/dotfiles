@@ -105,10 +105,6 @@ vim.keymap.set({'n', 'x', 'o'}, 'gu ', 'guiw', { noremap = true, silent = true }
 vim.keymap.set({'n', 'x', 'o'}, 'gU ', 'gUiw', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, ',', ';', { noremap = true, silent = true })
 vim.keymap.set({'n', 'x', 'o'}, 'Q', ',', { noremap = true, silent = true })
-vim.keymap.set({'n', 'x', 'o'}, '<Left>', '<C-w>h', opts)   -- 左のウィンドウへ
-vim.keymap.set({'n', 'x', 'o'}, '<Down>', '<C-w>j', opts)   -- 下のウィンドウへ
-vim.keymap.set({'n', 'x', 'o'}, '<Up>', '<C-w>k', opts)     -- 上のウィンドウへ
-vim.keymap.set({'n', 'x', 'o'}, '<Right>', '<C-w>l', opts)  -- 右のウィンドウへ
 -- insert mode setting
 vim.keymap.set('i', 'ｊｋ', '<Esc>', { noremap = true, silent = true })
 
