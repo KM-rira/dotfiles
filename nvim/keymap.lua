@@ -130,7 +130,7 @@ vim.keymap.set('i', '<M-b>', '<C-o>b', opts) -- 前の単語へ移動 (Alt + B)
 vim.keymap.set('i', '<M-f>', '<C-o>w', opts)         -- 次の単語へ移動
 
 -- ペースト
-vim.keymap.set('i', '<C-y>', '<C-r>"', opts)  -- 元に戻す
+-- vim.keymap.set('i', '<C-y>', '<C-r>"', opts)  -- 元に戻す
 vim.keymap.set('i', '<C-_>', '<C-o>u', opts)  -- 次の単語を削除 (Alt + D)
 
 -- todo系
