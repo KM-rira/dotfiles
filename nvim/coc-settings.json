@@ -29,7 +29,11 @@
     }
   },
   "coc.preferences.formatOnSaveFiletypes": [
-    "go"
+    "go",
+    "javascript",
+    "typescript",
+    "css",
+    "html"
   ],
   "suggest.keepCompleteopt": true,
   "python.pythonPath": "/usr/bin/python3",
