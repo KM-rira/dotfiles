@@ -1,16 +1,16 @@
 local wezterm = require 'wezterm';
 return {
-    default_prog = {"C:\\Program Files\\Git\\bin\\bash.exe", "--login", "-i"},
+    default_prog = {"wsl.exe"},
+    -- default_prog = {"C:\\Program Files\\Git\\bin\\bash.exe", "--login", "-i"},
     color_scheme = "YourCustomScheme",
     colors = {
-    foreground = "#eee8aa",  -- ターコイズブルー
-    background = "#2E3436",  -- 暗いグレーの背景
+    foreground = "#eee8aa",
+    background = "#2E3436",
     cursor_bg = "#f0246b",
     cursor_border = "#f0246b",
     cursor_fg = "#1C1C1C",
-    selection_bg = "#FFA500", -- 選択時の背景色
+    selection_bg = "#FFA500",
     selection_fg = "#000000",
-    -- 以下は通常のANSIカラー
     ansi = {"#2E3436", "#CC0000", "#4E9A06", "#C4A000",
             "#3465A4", "#75507B", "#06989A", "#D3D7CF"},
     brights = {"#555753", "#EF2929", "#8AE234", "#FCE94F",
@@ -64,6 +64,27 @@ return {
         -- 文字の大きさをリセット
         {key="0", mods="SHIFT|ALT", action="ResetFontSize"},
         { key = 'm', mods = 'SHIFT|CTRL', action = wezterm.action.QuickSelect },
+        {
+          key = "c",
+          mods = "CTRL",
+          action = wezterm.action{CopyTo = "Clipboard"},
+        },
+        {
+          key = "v",
+          mods = "CTRL",
+          action = wezterm.action{PasteFrom = "Clipboard"},
+        },
+        -- Ctrl + Shift + C/V を無効化
+        {
+          key = "c",
+          mods = "CTRL|SHIFT",
+          action = wezterm.action.Nop,
+        },
+        {
+          key = "v",
+          mods = "CTRL|SHIFT",
+          action = wezterm.action.Nop,
+        },
     },
     audible_bell = "Disabled",
     font_size = 7.7,
