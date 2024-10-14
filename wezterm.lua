@@ -67,16 +67,7 @@ return {
         {
           key = 'c',
           mods = 'CTRL',
-          action = wezterm.action_callback(function(window, pane)
-            local selection = pane:get_selection_text()
-            if selection and #selection > 0 then
-              -- テキストが選択されている場合はコピーを実行
-              window:perform_action(wezterm.action.Copy, pane)
-            else
-              -- テキストが選択されていない場合はCtrl+Cを送信（SIGINT）
-              window:perform_action(wezterm.action.SendKey({ key = 'c', mods = 'CTRL' }), pane)
-            end
-          end)
+          action = wezterm.action.Copy,
         },
         {
           key = "v",
@@ -85,9 +76,9 @@ return {
         },
         -- Ctrl + Shift + C/V を無効化
         {
-          key = "c",
-          mods = "CTRL|SHIFT",
-          action = wezterm.action.Nop,
+          key = 'C',
+          mods = 'CTRL|SHIFT',
+          action = wezterm.action.SendKey { key = 'c', mods = 'CTRL' },
         },
         {
           key = "v",
