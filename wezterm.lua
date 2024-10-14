@@ -67,7 +67,7 @@ return {
         {
           key = 'c',
           mods = 'CTRL',
-          action = wezterm.action.Copy,
+          action = wezterm.action{CopyTo = "Clipboard"},
         },
         {
           key = "v",
