@@ -63,7 +63,7 @@ return {
         {key="=", mods="SHIFT|ALT", action="DecreaseFontSize"},
         -- 文字の大きさをリセット
         {key="0", mods="SHIFT|ALT", action="ResetFontSize"},
-        { key = 'm', mods = 'SHIFT|CTRL', action = wezterm.action.QuickSelect },
+        { key = 'x', mods = 'SHIFT|CTRL', action = wezterm.action.QuickSelect },
         {
           key = 'c',
           mods = 'CTRL',
@@ -84,6 +84,11 @@ return {
           key = "v",
           mods = "CTRL|SHIFT",
           action = wezterm.action.Nop,
+        },
+        {
+          key = "M",
+          mods = "CTRL|SHIFT",
+          action = wezterm.action.ActivateCopyMode,
         },
     },
     audible_bell = "Disabled",
