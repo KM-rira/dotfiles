@@ -1,47 +1,51 @@
 {
-  "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
-    },
-    "lua": {
-      "command": "/home/koji/repo/lua-language-server/bin/lua-language-server",
-      "args": ["-E", "/home/koji/repo/lua-language-server/bin/main.lua"],
-      "filetypes": ["lua"],
-      "settings": {
-        "Lua": {
-          "runtime": {
-            "version": "LuaJIT",
-            "path": ["?.lua", "?/init.lua", "/usr/share/lua/5.1/?.lua"]
-          },
-          "diagnostics": {
-            "globals": ["vim"]
-          },
-          "workspace": {
-            "library": [
-              "/usr/share/lua/5.1",
-              "/usr/share/lua/5.1/?/init.lua"
-            ]
-          }
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+            "filetypes": ["go"]
+        },
+        "lua": {
+            "command": "/home/koji/repo/lua-language-server/bin/lua-language-server",
+            "args": ["-E", "/home/koji/repo/lua-language-server/bin/main.lua"],
+            "filetypes": ["lua"],
+            "settings": {
+                "Lua": {
+                    "runtime": {
+                        "version": "LuaJIT",
+                        "path": ["?.lua", "?/init.lua", "/usr/share/lua/5.1/?.lua"]
+                    },
+                    "diagnostics": {
+                        "globals": ["vim"]
+                    },
+                    "workspace": {
+                        "library": [
+                            "/usr/share/lua/5.1",
+                            "/usr/share/lua/5.1/?/init.lua"
+                        ]
+                    }
+                }
+            }
         }
-      }
-    }
-  },
-  "coc.preferences.formatOnSaveFiletypes": [
-    "go",
-    "javascript",
-    "typescript",
-    "css",
-    "html"
-  ],
-  "suggest.keepCompleteopt": true,
-  "python.pythonPath": "/usr/bin/python3",
-  "python.analysis.autoSearchPaths": true,
-  "python.analysis.diagnosticMode": "workspace",
-  "python.analysis.useLibraryCodeForTypes": true",
-  "python.analysis.autoSearchPaths": true,
-  "python.analysis.diagnosticMode": "workspace",
-  "python.analysis.useLibraryCodeForTypes": true
+    },
+    "coc.preferences.formatOnSaveFiletypes": [
+        "go",
+        "javascript",
+        "typescript",
+        "css",
+        "html"
+    ],
+    "suggest.keepCompleteopt": true,
+    "python.pythonPath": "/usr/bin/python3",
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.useLibraryCodeForTypes": true",
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.useLibraryCodeForTypes": true,
+    {
+    "intelephense.executablePath": "/usr/local/bin/intelephense",
+    "php.validate.executablePath": "/usr/bin/php"
+}
 }
 
