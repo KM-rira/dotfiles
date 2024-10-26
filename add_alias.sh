@@ -90,6 +90,7 @@ source "$HOME/vimConf/tools/restoref.sh"
 alias restorea="bash ~/vimConf/tools/restorea.sh"
 alias restores="git restore --staged"
 source "$vc/tools/restoresf.sh"
+source "$vc/tools/replaceall.sh"
 alias restoresa="bash ~/vimConf/tools/restoresa.sh"
 alias add="git add"
 . ~/vimConf/tools/addf.sh
