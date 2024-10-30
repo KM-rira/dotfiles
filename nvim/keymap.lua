@@ -180,3 +180,15 @@ end, { desc = "Previous todo comment" })
 vim.keymap.set("n", "]t", function()
   require("todo-comments").jump_next({keywords = { "ERROR", "WARNING" }})
 end, { desc = "Next error/warning todo comment" })
+
+-- 選択しているものにクォートで囲う
+-- single qutote
+vim.api.nvim_set_keymap('n', '<leader>qs', 'yiw"_diwi\'\'<Esc>P', {silent = true})
+vim.api.nvim_set_keymap('v', '<leader>qs', 'ygvdi\'\'<Esc>P', {silent = true})
+-- double qutote
+vim.api.nvim_set_keymap('n', '<leader>qd', 'yiw"_diwi\"\"<Esc>P', {silent = true})
+vim.api.nvim_set_keymap('v', '<leader>qd', 'ygvdi\"\"<Esc>P', {silent = true})
+-- reserve qutote
+vim.api.nvim_set_keymap('n', '<leader>qr', 'yiw"_diwi``<Esc>P', {silent = true})
+vim.api.nvim_set_keymap('v', '<leader>qr', 'ygvdi``<Esc>P', {silent = true})
+
