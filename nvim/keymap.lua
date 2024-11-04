@@ -8,7 +8,7 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 -- save
-vim.keymap.set({'n', 'x', 'o'}, '<C-s>', ':w<CR>', opts)
+vim.keymap.set({'n', 'x', 'o'}, '<C-s>', 'G$Vgg0<C-=>:w<CR>', opts)
 vim.keymap.set('i', '<C-s>', '<C-o>:w<CR>', opts)
 
 -- バッファの移動
@@ -168,17 +168,17 @@ vim.keymap.set('i', '<C-_>', '<C-o>u', opts)  -- 次の単語を削除 (Alt + D)
 
 -- todo系
 vim.keymap.set("n", "]t", function()
-  require("todo-comments").jump_next()
+    require("todo-comments").jump_next()
 end, { desc = "Next todo comment" })
 
 vim.keymap.set("n", "[t", function()
-  require("todo-comments").jump_prev()
+    require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
 
 -- You can also specify a list of valid jump keywords
 
 vim.keymap.set("n", "]t", function()
-  require("todo-comments").jump_next({keywords = { "ERROR", "WARNING" }})
+    require("todo-comments").jump_next({keywords = { "ERROR", "WARNING" }})
 end, { desc = "Next error/warning todo comment" })
 
 -- 選択しているものにクォートで囲う
@@ -192,3 +192,28 @@ vim.api.nvim_set_keymap('v', '<leader>qd', 'ygvdi\"\"<Esc>P', {silent = true})
 vim.api.nvim_set_keymap('n', '<leader>qr', 'yiw"_diwi``<Esc>P', {silent = true})
 vim.api.nvim_set_keymap('v', '<leader>qr', 'ygvdi``<Esc>P', {silent = true})
 
+
+-- ~/.config/nvim/init.lua
+
+-- キーマッピングのオプション
+local opts = { silent = true, noremap = true, expr = true }
+
+-- インサートモードでのCtrl+jで次の補完候補を選択
+vim.api.nvim_set_keymap('i', '<C-j>', 'coc#pum#visible() ? coc#pum#next(1) : "\\<C-j>"', opts)
+
+-- インサートモードでのCtrl+kで前の補完候補を選択
+vim.api.nvim_set_keymap('i', '<C-k>', 'coc#pum#visible() ? coc#pum#prev(1) : "\\<C-k>"', opts)
+
+-- インサートモードでのTabキーの設定（修正済み）
+vim.api.nvim_set_keymap('i', '<Tab>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<Tab>"', opts)
+
+-- インサートモードでのShift-Tabキーの設定
+vim.api.nvim_set_keymap('i', '<S-Tab>', 'coc#pum#visible() ? coc#pum#prev(1) : "\\<S-Tab>"', opts)
+
+-- セレクトモードでのTabキーの設定（必要に応じて）
+vim.api.nvim_set_keymap('s', '<Tab>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<Tab>"', opts)
+vim.api.nvim_set_keymap('s', '<S-Tab>', 'coc#pum#visible() ? coc#pum#prev(1) : "\\<S-Tab>"', opts)
+
+-- `<Ctrl-y>` のマッピングを解除
+vim.api.nvim_set_keymap('i', '<C-y>', '', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('s', '<C-y>', '', { noremap = true, silent = true })

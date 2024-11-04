@@ -1,60 +1,104 @@
 {
-    "languageserver": {
-        "golang": {
-            "command": "gopls",
-            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-            "filetypes": ["go"]
-        },
-        "lua": {
-            "command": "/home/koji/repo/lua-language-server/bin/lua-language-server",
-            "args": ["-E", "/home/koji/repo/lua-language-server/bin/main.lua"],
-            "filetypes": ["lua"],
-            "settings": {
-                "Lua": {
-                    "runtime": {
-                        "version": "LuaJIT",
-                        "path": ["?.lua", "?/init.lua", "/usr/share/lua/5.1/?.lua"]
-                    },
-                    "diagnostics": {
-                        "globals": ["vim"]
-                    },
-                    "workspace": {
-                        "library": [
-                            "/usr/share/lua/5.1",
-                            "/usr/share/lua/5.1/?/init.lua"
-                        ]
-                    }
-                }
-            }
-        },
-        "phpls": {
-            "command": "phpls",
-            "filetypes": ["php"],
-            "rootPatterns": ["composer.json", ".git/"],
-            "trace.server": "verbose",
-            "initializationOptions": {
-                "usePlaceholders": true
-            }
-        }
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
     },
-    "coc.preferences.formatOnSaveFiletypes": [
-        "go",
-        "javascript",
-        "typescript",
-        "css",
-        "html",
-        "php"
-    ],
-    "coc-phpls.enable": true,
-    "coc-phpls.format.enable": true,
-    "coc-phpls.format.defaultFormatter": "php-cs-fixer",
-    "php-cs-fixer.executablePath": "php-cs-fixer", // php-cs-fixerのパス
-    "php-cs-fixer.config": ".php-cs-fixer.php",
-    "suggest.keepCompleteopt": true,
-    "python.pythonPath": "/usr/bin/python3",
-    "python.analysis.autoSearchPaths": true,
-    "python.analysis.diagnosticMode": "workspace",
-    "python.analysis.useLibraryCodeForTypes": true,
-    "intelephense.executablePath": "/usr/local/bin/intelephense",
-    "php.validate.executablePath": "/usr/bin/php"
+    "json": {
+      "command": "vscode-json-languageserver",
+      "args": ["--stdio"],
+      "filetypes": ["json"],
+      "settings": {
+        "json": {
+          "schemas": [
+            {
+              "fileMatch": ["*.json"],
+              "url": "http://json.schemastore.org/package"
+            }
+          ]
+        }
+      }
+    },
+    "yaml": {
+      "command": "yaml-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["yaml", "yml"],
+      "settings": {
+        "yaml": {
+          "schemas": {
+            "http://json.schemastore.org/github-workflow": ".github/workflows/*.{yml,yaml}",
+            "http://json.schemastore.org/kustomization": "kustomization.{yml,yaml}"
+          }
+        }
+      }
+    },
+    "lua": {
+      "command": "/home/koji/repo/lua-language-server/bin/lua-language-server",
+      "args": ["-E", "/home/koji/repo/lua-language-server/bin/main.lua"],
+      "filetypes": ["lua"],
+      "settings": {
+        "Lua": {
+          "runtime": {
+            "version": "LuaJIT",
+            "path": ["?.lua", "?/init.lua", "/usr/share/lua/5.1/?.lua"]
+          },
+          "diagnostics": {
+            "globals": ["vim"]
+          },
+          "workspace": {
+            "library": ["/usr/share/lua/5.1", "/usr/share/lua/5.1/?/init.lua"]
+          }
+        }
+      }
+    },
+    "phpls": {
+      "command": "phpls",
+      "filetypes": ["php"],
+      "rootPatterns": ["composer.json", ".git/"],
+      "trace.server": "verbose",
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    }
+  },
+  "coc.preferences.formatOnSaveFiletypes": [
+    "go",
+    "javascript",
+    "typescript",
+    "css",
+    "html",
+    "php",
+    "json",
+    "yaml",
+    "yml"
+  ],
+  "coc-phpls.enable": true,
+  "coc-phpls.format.enable": true,
+  "coc-phpls.format.defaultFormatter": "php-cs-fixer",
+  "php-cs-fixer.executablePath": "php-cs-fixer",
+  "php-cs-fixer.config": ".php-cs-fixer.php",
+  "suggest.keepCompleteopt": true,
+  "python.pythonPath": "/usr/bin/python3",
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.useLibraryCodeForTypes": true,
+  "intelephense.executablePath": "/usr/local/bin/intelephense",
+  "php.validate.executablePath": "/usr/bin/php",
+  "diagnostic.virtualText": true,
+  "diagnostic.enableSign": true,
+  "diagnostic.displayByAle": false,
+  "diagnostic.checkCurrentLine": true,
+  "snippets.userSnippetsDirectory": "~/.config/coc/extensions/node_modules/coc-snippets/snippets",
+  "suggest.snippetsSupport": true,
+  "snippets.extends": {
+    "javascript": ["javascript"],
+    "typescript": ["typescript"],
+    "go": ["go"],
+    "python": ["python"],
+    "php": ["php"],
+    "html": ["html"],
+    "css": ["css"],
+    "lua": ["lua"]
+  }
 }
