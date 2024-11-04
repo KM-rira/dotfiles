@@ -3,7 +3,6 @@ vim.opt.termguicolors = true
 require('packer').startup(function(use)
     -- Packerを管理するために必要
     use 'wbthomason/packer.nvim'
-
     -- ここからプラグインのリスト
     -- use '~/repo/myplugin'
     use 'KM-rira/myplugin'
@@ -15,7 +14,7 @@ require('packer').startup(function(use)
     use 'ctrlpvim/ctrlp.vim'
     use {'neoclide/coc.nvim', branch = 'release'} -- tag v0.0.82-191-gf1ffb8d9
     use 'joshdick/onedark.vim'
-        use {
+    use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
@@ -554,36 +553,36 @@ require('alpha').setup(require('alpha.themes.startify').config)
 -- )
 --
 local function file_path()
-  return vim.fn.fnamemodify(vim.fn.expand('%'), ':~:.')
+    return vim.fn.fnamemodify(vim.fn.expand('%'), ':~:.')
 end
 
 require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '|', right = '|'},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {},
-    always_divide_middle = true,
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = { file_path },  -- カスタムコンポーネントを使用
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { file_path },  -- カスタムコンポーネントを使用
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  extensions = {}
+    options = {
+        icons_enabled = true,
+        theme = 'auto',
+        component_separators = { left = '|', right = '|'},
+        section_separators = { left = '', right = ''},
+        disabled_filetypes = {},
+        always_divide_middle = true,
+    },
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_c = { file_path },  -- カスタムコンポーネントを使用
+        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { file_path },  -- カスタムコンポーネントを使用
+        lualine_x = {'location'},
+        lualine_y = {},
+        lualine_z = {}
+    },
+    tabline = {},
+    extensions = {}
 }
 
 require('telescope').setup{
