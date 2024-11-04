@@ -33,3 +33,26 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, 'i', '</', '</<C-x><C-o>', {noremap = true, silent = true})
   end
 })
+
+-- 自動コマンドグループを作成（再定義を防ぐため）
+vim.api.nvim_create_augroup("PhpFormatOnSave", { clear = true })
+
+-- BufWritePost イベントに対する自動コマンドを作成
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.php",
+  group = "PhpFormatOnSave",
+  callback = function()
+    local filepath = vim.fn.expand("%:p")  -- 現在のファイルの絶対パスを取得
+    -- php-cs-fixer を実行
+    local result = vim.fn.system("php-cs-fixer fix " .. vim.fn.shellescape(filepath))
+
+    if vim.v.shell_error == 0 then
+      -- フォーマットが成功した場合、ファイルを再読み込み
+      vim.cmd("edit!")
+      vim.notify("php-cs-fixer: ファイルをフォーマットしました。", vim.log.levels.INFO)
+    else
+      -- エラーが発生した場合、エラーメッセージを表示
+      vim.notify("php-cs-fixer エラー:\n" .. result, vim.log.levels.ERROR)
+    end
+  end,
+})
