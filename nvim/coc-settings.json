@@ -26,6 +26,15 @@
                     }
                 }
             }
+        },
+        "phpls": {
+            "command": "phpls",
+            "filetypes": ["php"],
+            "rootPatterns": ["composer.json", ".git/"],
+            "trace.server": "verbose",
+            "initializationOptions": {
+                "usePlaceholders": true
+            }
         }
     },
     "coc.preferences.formatOnSaveFiletypes": [
@@ -33,19 +42,19 @@
         "javascript",
         "typescript",
         "css",
-        "html"
+        "html",
+        "php"
     ],
+    "coc-phpls.enable": true,
+    "coc-phpls.format.enable": true,
+    "coc-phpls.format.defaultFormatter": "php-cs-fixer",
+    "php-cs-fixer.executablePath": "php-cs-fixer", // php-cs-fixerのパス
+    "php-cs-fixer.config": ".php-cs-fixer.php",
     "suggest.keepCompleteopt": true,
     "python.pythonPath": "/usr/bin/python3",
     "python.analysis.autoSearchPaths": true,
     "python.analysis.diagnosticMode": "workspace",
-    "python.analysis.useLibraryCodeForTypes": true",
-    "python.analysis.autoSearchPaths": true,
-    "python.analysis.diagnosticMode": "workspace",
     "python.analysis.useLibraryCodeForTypes": true,
-    {
     "intelephense.executablePath": "/usr/local/bin/intelephense",
     "php.validate.executablePath": "/usr/bin/php"
 }
-}
-
