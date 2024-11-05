@@ -18,6 +18,6 @@ fdb() {
         return
     fi
 
-    bat $select_file
+    batcat $select_file
 }
 
