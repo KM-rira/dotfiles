@@ -141,6 +141,9 @@ vim.keymap.set('n', 'gUar', 'gUa`', { noremap = true, silent = true })
 -- insert mode setting
 vim.keymap.set('i', 'ｊｋ', '<Esc>', { noremap = true, silent = true })
 
+vim.keymap.set('i', '<C-h>', '<Left>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true, silent = true })
+
 -- Emacs風のキー設定をインサートモードに適用
 local opts = { noremap = true, silent = true }
 -- カーソル移動
@@ -153,7 +156,7 @@ vim.keymap.set('i', '<C-e>', '<End>', opts)      -- 行の末尾へ
 
 -- 削除
 vim.keymap.set('i', '<C-d>', '<Delete>', opts)    -- カーソル下の文字を削除
-vim.keymap.set('i', '<C-h>', '<BS>', opts)        -- カーソル前の文字を削除
+--vim.keymap.set('i', '<C-h>', '<BS>', opts)        -- カーソル前の文字を削除
 vim.keymap.set('i', '<C-w>', '<C-o>db', opts)     -- 単語単位で削除
 vim.keymap.set('i', '<C-u>', '<C-o>h<C-o>v0d', opts)    -- 行の先頭からカーソル位置までを削除
 vim.keymap.set('i', '<C-k>', '<C-o>D', opts)      -- カーソルから行末までを削除
