@@ -57,10 +57,6 @@ vim.keymap.set({'n', 'x', 'o'}, '<leader>fj', builtin.jumplist, {})
 vim.keymap.set({'n', 'x', 'o'}, '<leader>fs', builtin.search_history, {})
 vim.keymap.set({'n', 'x', 'o'}, "<leader>fz", "<Cmd>Telescope frecency<CR>")
 
--- 翻訳
-vim.api.nvim_set_keymap('n', 'gr', '<Plug>(Translate)', {silent = true})
-vim.api.nvim_set_keymap('v', 't', '<Plug>(VTranslate)', {silent = true})
-
 -- タブ関連
 vim.keymap.set({'n', 'x', 'o'}, 'tn', '<cmd>tabnew<cr>',{ noremap = true, silent = true })
 

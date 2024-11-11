@@ -52,7 +52,6 @@ require('packer').startup(function(use)
     use 'karb94/neoscroll.nvim'
     --use 'Aasim-A/scroll.nvim'
     use 'utilyre/barbecue.nvim'
-    use 'hotoolong/translate.nvim'
     use {'akinsho/bufferline.nvim', tag = 'v4.6.1'}
     use 'folke/tokyonight.nvim'
     use { "catppuccin/nvim", as = "catppuccin" }
