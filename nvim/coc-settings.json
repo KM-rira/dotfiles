@@ -99,5 +99,14 @@
     "html": ["html"],
     "css": ["css"],
     "lua": ["lua"]
-  }
+  },
+  "tsserver.enable": true,
+  "eslint.enable": true,
+  "prettier.enable": true,
+  "snippets.ultisnips.directories": ["UltiSnips", "coc-snippets"],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "tailwindCSS.enable": true
 }
