@@ -45,7 +45,8 @@ vim.cmd 'match ZenkakuSpace /　/'
 
 -- 検索結果のハイライト
 vim.o.hlsearch = true
---vim.cmd 'highlight Search ctermfg=black ctermbg=91 cterm=NONE guifg=#000000 guibg=#FFA500'
+-- vim.cmd 'highlight Search ctermfg=black ctermbg=91 cterm=NONE guifg=#000000 guibg=#FFA500'
+ vim.cmd 'highlight Search ctermfg=black ctermbg=91 cterm=NONE guifg=#000000 guibg=#FFA500'
 
 -- コメントのフォントスタイル変更
 vim.cmd 'highlight Comment cterm=italic'

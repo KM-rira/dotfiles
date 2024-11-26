@@ -66,6 +66,14 @@ require('packer').startup(function(use)
     -- use 'rcarriga/nvim-notify'
     -- use 'folke/noice.nvim'
 
+    use({
+        "kdheepak/lazygit.nvim",
+        -- optional for floating window border decoration
+        requires = {
+            "nvim-lua/plenary.nvim",
+        },
+    })
+
     use 'norcalli/nvim-colorizer.lua'
     use 'yamatsum/nvim-cursorline'
     use 'sindrets/diffview.nvim'
