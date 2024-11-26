@@ -9,16 +9,18 @@ require('packer').startup(function(use)
     use 'preservim/nerdtree'
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', tag = 'v1.3'}
     use 'vim-jp/vimdoc-ja'
-    use {'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.10'}
+    -- indent line廃止
+    -- use {'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.10'}
     use 'nvim-lualine/lualine.nvim'
     use 'ctrlpvim/ctrlp.vim'
     use {'neoclide/coc.nvim', branch = 'release'} -- tag v0.0.82-191-gf1ffb8d9
-    use 'joshdick/onedark.vim'
+    -- use 'joshdick/onedark.vim'
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
-    use 'nvim-treesitter/nvim-treesitter-context'
+    -- 関数名などを上部に表示
+    -- use 'nvim-treesitter/nvim-treesitter-context'
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/playground'
     use 'nvim-treesitter/nvim-treesitter-refactor'
@@ -39,7 +41,7 @@ require('packer').startup(function(use)
     use {'iamcco/markdown-preview.nvim', run = 'cd app && npx --yes yarn install'}
     use 'RRethy/vim-illuminate'
     use 'goolord/alpha-nvim'
-    use 'petertriho/nvim-scrollbar'
+    -- use 'petertriho/nvim-scrollbar'
     use 'jsborjesson/vim-uppercase-sql'
     use 'lewis6991/gitsigns.nvim'
     use {'akinsho/git-conflict.nvim', tag = 'v1.3.0'}
@@ -47,20 +49,27 @@ require('packer').startup(function(use)
     use 'numToStr/Comment.nvim'
     use 'sidebar-nvim/sidebar.nvim'
     use {'akinsho/toggleterm.nvim', tag = 'v2.11.0'}
-    use 'wfxr/minimap.vim'
-    use 'gorbit99/codewindow.nvim'
+    -- use 'wfxr/minimap.vim'
+    -- use 'gorbit99/codewindow.nvim'
     use 'karb94/neoscroll.nvim'
     --use 'Aasim-A/scroll.nvim'
-    use 'utilyre/barbecue.nvim'
+    -- use 'utilyre/barbecue.nvim'
     use {'akinsho/bufferline.nvim', tag = 'v4.6.1'}
-    use 'folke/tokyonight.nvim'
-    use { "catppuccin/nvim", as = "catppuccin" }
-    --use 'rcarriga/nvim-notify'
-    --use 'folke/noice.nvim'
+
+
+    -- color themes
+    use { "scottmckendry/cyberdream.nvim" }
+    -- use { 'projekt0n/github-nvim-theme', name = 'github-theme' }
+    -- use 'navarasu/onedark.nvim'
+    -- use 'folke/tokyonight.nvim'
+    -- use { "catppuccin/nvim", as = "catppuccin" }
+    -- use 'rcarriga/nvim-notify'
+    -- use 'folke/noice.nvim'
+
     use 'norcalli/nvim-colorizer.lua'
     use 'yamatsum/nvim-cursorline'
     use 'sindrets/diffview.nvim'
-    use 'nvim-pack/nvim-spectre'
+    -- use 'nvim-pack/nvim-spectre'
     use {
         'KM-rira/todo-comments.nvim',
         requires = 'nvim-lua/plenary.nvim',
@@ -138,9 +147,9 @@ require('packer').startup(function(use)
     }
     -- その他のプラグインはここに追加...
 end)
-require('spectre.actions').get_current_entry()
-require('spectre.actions').get_all_entries()
-require('spectre.actions').get_state()
+-- require('spectre.actions').get_current_entry()
+-- require('spectre.actions').get_all_entries()
+-- require('spectre.actions').get_state()
 
 require 'colorizer'.setup()
 
@@ -168,28 +177,28 @@ require 'colorizer'.setup()
 require("bufferline").setup{}
 
 
-require'treesitter-context'.setup {
-    -- ここにオプションを設定
-    enable = true,  -- デフォルトで有効にする
-    throttle = true, -- スムーズなスクロールのためのスロットル
-    max_lines = 0,  -- コンテキストを表示する最大行数（0は無制限）
-    patterns = {    -- 表示するノードのタイプ
-        -- デフォルトの言語は以下のように設定されています
-        default = {
-            'class',
-            'function',
-            'method',
-            -- 他に表示したいノードタイプがあればここに追加
-        },
-        -- 特定の言語のためのカスタム設定も可能
-        -- 例：python = { 'class', 'function', 'async_function' },
-        go = {
-            'function',
-            'method',
-            -- Go言語に特有の他のノードタイプが必要な場合はここに追加
-        },
-    },
-}
+-- require'treesitter-context'.setup {
+--     -- ここにオプションを設定
+--     enable = true,  -- デフォルトで有効にする
+--     throttle = true, -- スムーズなスクロールのためのスロットル
+--     max_lines = 0,  -- コンテキストを表示する最大行数（0は無制限）
+--     patterns = {    -- 表示するノードのタイプ
+--         -- デフォルトの言語は以下のように設定されています
+--         default = {
+--             'class',
+--             'function',
+--             'method',
+--             -- 他に表示したいノードタイプがあればここに追加
+--         },
+--         -- 特定の言語のためのカスタム設定も可能
+--         -- 例：python = { 'class', 'function', 'async_function' },
+--         go = {
+--             'function',
+--             'method',
+--             -- Go言語に特有の他のノードタイプが必要な場合はここに追加
+--         },
+--     },
+-- }
 
 
 require'nvim-treesitter.configs'.setup {
@@ -287,7 +296,7 @@ require'nvim-treesitter.configs'.setup {
 --lua require('nvim-ultivisual').setup()
 require('neoscroll').setup()
 
-require('codewindow').setup()
+-- require('codewindow').setup()
 
 -- ミニマップの自動表示
 --let g:minimap_auto_start = 1
@@ -313,18 +322,18 @@ local opts = {open = false}
 sidebar.setup(opts)
 
 
-local highlight = {
-    "CursorColumn",
-    "Whitespace",
-}
-require("ibl").setup {
-    indent = { highlight = highlight, char = "" },
-    whitespace = {
-        highlight = highlight,
-        remove_blankline_trail = false,
-    },
-    scope = { enabled = false },
-}
+-- local highlight = {
+--     "CursorColumn",
+--     "Whitespace",
+-- }
+-- require("ibl").setup {
+--     indent = { highlight = highlight, char = "" },
+--     whitespace = {
+--         highlight = highlight,
+--         remove_blankline_trail = false,
+--     },
+--     scope = { enabled = false },
+-- }
 
 
 require('Comment').setup({
@@ -531,7 +540,7 @@ require('gitsigns').setup {
 vim.g.matchup_matchparen_offscreen = { method = 'popup' }
 
 
-require('scrollbar').setup()
+-- require('scrollbar').setup()
 
 
 require('alpha').setup(require('alpha.themes.startify').config)
@@ -764,6 +773,60 @@ require'nvim-tree'.setup {
 --vim.api.nvim_set_keymap('i', '<C-n>', 'v:lua.pumvisible() ? "<Down>" : "<C-n>"', {expr = true, noremap = true})
 --vim.api.nvim_set_keymap('i', '<C-p>', 'v:lua.pumvisible() ? "<Up>" : "<C-p>"', {expr = true, noremap = true})
 
+-- require("catppuccin").setup({
+--     flavour = "mocha", -- お好みのフレーバーを選択: 'latte', 'frappe', 'macchiato', 'mocha'
+--     background = {
+--         -- 必要に応じて異なるフレーバーに対して背景を指定
+--         mocha = "#121212",
+--     },
+--     custom_highlights = {
+--         Normal = { bg = "#121212" },
+--         NormalFloat = { bg = "#121212" },
+--         FloatBorder = { bg = "#121212" },
+--         SignColumn = { bg = "#121212" },
+--         VertSplit = { bg = "#121212", fg = "#121212" },
+--         StatusLine = { bg = "#121212" },
+--         StatusLineNC = { bg = "#121212" },
+--         NERDTreeNormal = { bg = "#121212" },
+--         NERDTreeDir = { fg = "#f7768e" },          -- ディレクトリ名の色（例）
+--         NERDTreeFile = { fg = "#9ece6a" },         -- ファイル名の色（例）
+--         NERDTreeStatusLine = { bg = "#121212" },
+--         NERDTreeStatusLineNc = { bg = "#121212" },
+--     },
+--     integrations = {
+--         -- 他のプラグインとの統合を有効化
+--     },
+--     transparent_background = false, -- 背景を透明にしない
+--     show_end_of_buffer = false,      -- バッファ後の'~'文字を非表示
+--     term_colors = true,              -- ターミナルカラーを使用
+--     dim_inactive = {
+--         enabled = false,             -- 非アクティブウィンドウのディミングを無効化
+--         shade = "dark",
+--         percentage = 0.15,
+--     },
+--     no_italic = false,                -- イタリックを無効化しない
+--     no_bold = false,                  -- ボールドを無効化しない
+--     no_underline = false,             -- 下線を無効化しない
+-- })
 
+require("cyberdream").setup({
+    -- 背景を透明にするかどうかを有効化
+    transparent = false,
 
+    -- コメントをイタリックにするかどうかを有効化
+    italic_comments = true,
+
+    -- 究極のクリーンな外観のために全ての fillchars を ' ' に置き換える
+    hide_fillchars = false,
+
+    -- モダンなボーダーレステレスコープテーマ - fzf-luaにも適用
+    borderless_telescope = false,
+
+    -- `:terminal` で使用されるターミナルカラーを設定
+    terminal_colors = true,
+
+    -- ハイライトをキャッシュして起動時間を改善。`:CyberdreamBuildCache` でキャッシュを生成し、`:CyberdreamClearCache` でクリア
+    cache = true,
+
+})
 

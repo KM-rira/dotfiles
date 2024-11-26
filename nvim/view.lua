@@ -6,9 +6,19 @@ if vim.fn.exists("syntax_on") ~= 0 then
 end
 
 vim.cmd 'syntax on'
--- vim.cmd 'colorscheme onedark'
+-- vim.cmd[[colorscheme onedark]]
 -- vim.cmd[[colorscheme tokyonight-storm]]
-vim.cmd[[colorscheme catppuccin-macchiato]]
+-- vim.cmd[[colorscheme catppuccin-mocha]]
+-- require('onedark').load()
+-- vim.cmd('colorscheme github_dark_high_contrast')
+vim.cmd("colorscheme cyberdream")
+
+
+-- 背景色設定
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "#121212" })
+
+-- 現在のカーソル行の背景色
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" })
 
 -- ターミナル背景色
 vim.cmd 'hi Terminal guibg=black'
@@ -18,7 +28,7 @@ vim.cmd 'highlight Visual ctermfg=black guifg=black ctermbg=202 guibg=#FFA500'
 
 -- 行番号表示
 vim.o.number = true
-vim.cmd 'highlight LineNr ctermfg=8 ctermbg=235'
+vim.cmd 'highlight LineNr ctermfg=8 ctermbg=235 guifg=#4A4A4A'
 
 -- 現在の行番号の色設定
 vim.cmd 'highlight CursorLineNr ctermfg=118 guifg=#FFD700'
