@@ -117,3 +117,38 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   callback = trim_trailing_whitespace,
 })
 
+
+-- -- カスタムコマンド: BufferCloseThis
+-- vim.api.nvim_create_user_command('BufferCloseThis', function()
+--     -- 現在のバッファ番号を取得
+--     local current_buf = vim.api.nvim_get_current_buf()
+--
+--     -- バッファを強制的に閉じる
+--     vim.api.nvim_buf_delete(current_buf, { force = true })
+--
+--     -- 確認メッセージ（オプション）
+--     vim.api.nvim_echo({{"Buffer " .. current_buf .. " has been closed.", "Normal"}}, false, {})
+-- end, { desc = "Force close the current buffer" })
+--
+-- BufferCloseThis コマンドの定義
+vim.api.nvim_create_user_command('BufferCloseThis', function()
+    local current_buf = vim.api.nvim_get_current_buf()
+    local buf_name = vim.api.nvim_buf_get_name(current_buf)
+
+    if buf_name == "" then
+        buf_name = "[No Name]"
+    else
+        buf_name = vim.fn.fnamemodify(buf_name, ":t")
+    end
+
+    local success, err = pcall(vim.api.nvim_buf_delete, current_buf, { force = true })
+
+    if success then
+        vim.api.nvim_echo({{buf_name .. " has been closed. (BufferID: " .. current_buf .. ")", "Normal"}}, false, {})
+    else
+        vim.api.nvim_echo({{"Error closing buffer: " .. err, "ErrorMsg"}}, false, {})
+    end
+end, { desc = "Force close the current buffer" })
+
+-- キーバインド: <leader>bc で BufferCloseThis を実行
+vim.api.nvim_set_keymap('n', '<leader>bc', ':BufferCloseThis<CR>', { noremap = true, silent = true, desc = "Force close the current buffer" })
