@@ -6,10 +6,10 @@ return {
     color_scheme = "YourCustomScheme",
     colors = {
     foreground = "#eee8aa",
-    background = "#2E3436",
+    background = "#121212",
     cursor_bg = "#f0246b",
     cursor_border = "#f0246b",
-    cursor_fg = "#1C1C1C",
+    cursor_fg = "#000000",
     selection_bg = "#FFA500",
     selection_fg = "#000000",
     ansi = {"#2E3436", "#CC0000", "#4E9A06", "#C4A000",
