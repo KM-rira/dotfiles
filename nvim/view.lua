@@ -45,10 +45,11 @@ vim.cmd 'match ZenkakuSpace /　/'
 
 -- 検索結果のハイライト
 vim.o.hlsearch = true
-vim.cmd 'highlight Search ctermfg=black ctermbg=91 cterm=NONE guifg=#000000 guibg=#FFA500'
+--vim.cmd 'highlight Search ctermfg=black ctermbg=91 cterm=NONE guifg=#000000 guibg=#FFA500'
 
 -- コメントのフォントスタイル変更
-vim.cmd 'highlight Comment cterm=italic ctermfg=44'
+vim.cmd 'highlight Comment cterm=italic'
+-- vim.cmd 'highlight Comment cterm=italic ctermfg=44'
 
 -- Go言語の色設定
 vim.cmd 'autocmd VimEnter,Colorscheme * :highlight goBuiltins ctermfg=201'
