@@ -37,25 +37,37 @@ map('n', '<leader>be', ':BufferLineSortByExtension<CR>', opts)
 map('n', '<leader>bd', ':BufferLineSortByRelativeDirectory<CR>', opts)
 
 -- coc系
-vim.keymap.set({'n', 'x', 'o'},'<leader>gd', '<Plug>(coc-definition)',{ noremap = true, silent = true })
-vim.keymap.set({'n', 'x', 'o'},'<leader>gt', '<Plug>(coc-type-definition)',{ noremap = true, silent = true })
-vim.keymap.set({'n', 'x', 'o'},'<leader>gc', '<Plug>(coc-declaration)',{ noremap = true, silent = true })
-vim.keymap.set({'n', 'x', 'o'},'<leader>gi', '<Plug>(coc-implementation)',{ noremap = true, silent = true })
-vim.keymap.set({'n', 'x', 'o'},'<leader>gr', '<Plug>(coc-references)',{ noremap = true, silent = true })
-vim.keymap.set({'n', 'x', 'o'},'<leader>gn', '<Plug>(coc-rename)',{ noremap = true, silent = true })
-vim.keymap.set({'n', 'x', 'o'},'<leader>gh', ':call CocAction(\'doHover\')<CR>',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gd', '<Plug>(coc-definition)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gt', '<Plug>(coc-type-definition)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gc', '<Plug>(coc-declaration)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gi', '<Plug>(coc-implementation)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gr', '<Plug>(coc-references)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gn', '<Plug>(coc-rename)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gh', ':call CocAction(\'doHover\')<CR>',{ noremap = true, silent = true })
+vim.keymap.set('n', 'gh',  '<cmd>lua vim.lsp.buf.hover()<CR>')
+vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
+vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+vim.keymap.set('n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+vim.keymap.set('n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>')
+vim.keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+vim.keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 
 -- telescope系
 local builtin = require('telescope.builtin')
-vim.keymap.set({'n', 'x', 'o'}, '<leader>ff', builtin.find_files, {})
-vim.keymap.set({'n', 'x', 'o'}, '<leader>fg', builtin.live_grep, {})
-vim.keymap.set({'n', 'x', 'o'}, '<leader>fb', builtin.buffers, {})
-vim.keymap.set({'n', 'x', 'o'}, '<leader>fo', builtin.oldfiles, {})
-vim.keymap.set({'n', 'x', 'o'}, '<leader>fc', builtin.commands, {})
-vim.keymap.set({'n', 'x', 'o'}, '<leader>fh', builtin.command_history, {})
-vim.keymap.set({'n', 'x', 'o'}, '<leader>fj', builtin.jumplist, {})
-vim.keymap.set({'n', 'x', 'o'}, '<leader>fs', builtin.search_history, {})
-vim.keymap.set({'n', 'x', 'o'}, "<leader>fz", "<Cmd>Telescope frecency<CR>")
+vim.keymap.set({'n', 'x', 'o'}, 'ff', builtin.find_files, {})
+vim.keymap.set({'n', 'x', 'o'}, 'fg', builtin.live_grep, {})
+vim.keymap.set({'n', 'x', 'o'}, 'fb', builtin.buffers, {})
+vim.keymap.set({'n', 'x', 'o'}, 'fo', builtin.oldfiles, {})
+vim.keymap.set({'n', 'x', 'o'}, 'fc', builtin.commands, {})
+vim.keymap.set({'n', 'x', 'o'}, 'fh', builtin.command_history, {})
+vim.keymap.set({'n', 'x', 'o'}, 'fj', builtin.jumplist, {})
+vim.keymap.set({'n', 'x', 'o'}, 'fs', builtin.search_history, {})
+vim.keymap.set({'n', 'x', 'o'}, "fz", "<Cmd>Telescope frecency<CR>")
 
 -- タブ関連
 vim.keymap.set({'n', 'x', 'o'}, 'tn', '<cmd>tabnew<cr>',{ noremap = true, silent = true })
@@ -197,22 +209,22 @@ vim.api.nvim_set_keymap('v', '<leader>qr', 'ygvdi``<Esc>P', {silent = true})
 -- キーマッピングのオプション
 local opts = { silent = true, noremap = true, expr = true }
 
--- インサートモードでのCtrl+jで次の補完候補を選択
-vim.api.nvim_set_keymap('i', '<C-j>', 'coc#pum#visible() ? coc#pum#next(1) : "\\<C-j>"', opts)
-
--- インサートモードでのCtrl+kで前の補完候補を選択
-vim.api.nvim_set_keymap('i', '<C-k>', 'coc#pum#visible() ? coc#pum#prev(1) : "\\<C-k>"', opts)
-
--- インサートモードでのTabキーの設定（修正済み）
-vim.api.nvim_set_keymap('i', '<Tab>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<Tab>"', opts)
-
--- インサートモードでのShift-Tabキーの設定
-vim.api.nvim_set_keymap('i', '<S-Tab>', 'coc#pum#visible() ? coc#pum#prev(1) : "\\<S-Tab>"', opts)
-
--- セレクトモードでのTabキーの設定（必要に応じて）
-vim.api.nvim_set_keymap('s', '<Tab>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<Tab>"', opts)
-vim.api.nvim_set_keymap('s', '<S-Tab>', 'coc#pum#visible() ? coc#pum#prev(1) : "\\<S-Tab>"', opts)
-
+-- -- インサートモードでのCtrl+jで次の補完候補を選択
+-- vim.api.nvim_set_keymap('i', '<C-j>', 'coc#pum#visible() ? coc#pum#next(1) : "\\<C-j>"', opts)
+--
+-- -- インサートモードでのCtrl+kで前の補完候補を選択
+-- vim.api.nvim_set_keymap('i', '<C-k>', 'coc#pum#visible() ? coc#pum#prev(1) : "\\<C-k>"', opts)
+--
+-- -- インサートモードでのTabキーの設定（修正済み）
+-- vim.api.nvim_set_keymap('i', '<Tab>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<Tab>"', opts)
+--
+-- -- インサートモードでのShift-Tabキーの設定
+-- vim.api.nvim_set_keymap('i', '<S-Tab>', 'coc#pum#visible() ? coc#pum#prev(1) : "\\<S-Tab>"', opts)
+--
+-- -- セレクトモードでのTabキーの設定（必要に応じて）
+-- vim.api.nvim_set_keymap('s', '<Tab>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<Tab>"', opts)
+-- vim.api.nvim_set_keymap('s', '<S-Tab>', 'coc#pum#visible() ? coc#pum#prev(1) : "\\<S-Tab>"', opts)
+--
 -- `<Ctrl-y>` のマッピングを解除
 vim.api.nvim_set_keymap('i', '<C-y>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('s', '<C-y>', '', { noremap = true, silent = true })

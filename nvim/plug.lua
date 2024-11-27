@@ -13,7 +13,7 @@ require('packer').startup(function(use)
     -- use {'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.10'}
     use 'nvim-lualine/lualine.nvim'
     use 'ctrlpvim/ctrlp.vim'
-    use {'neoclide/coc.nvim', branch = 'release'} -- tag v0.0.82-191-gf1ffb8d9
+    -- use {'neoclide/coc.nvim', branch = 'release'} -- tag v0.0.82-191-gf1ffb8d9
     -- use 'joshdick/onedark.vim'
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -56,6 +56,13 @@ require('packer').startup(function(use)
     -- use 'utilyre/barbecue.nvim'
     use {'akinsho/bufferline.nvim', tag = 'v4.6.1'}
 
+    -- 括弧自動補完
+    use {'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup {}
+        end
+    }
 
     -- color themes
     use { "scottmckendry/cyberdream.nvim" }
@@ -99,6 +106,15 @@ require('packer').startup(function(use)
     use 'yamatsum/nvim-cursorline'
     use 'sindrets/diffview.nvim'
     -- use 'nvim-pack/nvim-spectre'
+
+    -- lsp config
+    use 'wbthomason/packer.nvim' -- パッケージマネージャー自体
+    use 'neovim/nvim-lspconfig' -- LSP設定用プラグイン
+    use 'hrsh7th/nvim-cmp' -- オートコンプリートプラグイン
+    use 'hrsh7th/cmp-nvim-lsp' -- LSPソースのためのnvim-cmp
+    use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
+
     use {
         'KM-rira/todo-comments.nvim',
         requires = 'nvim-lua/plenary.nvim',
@@ -180,55 +196,110 @@ end)
 -- require('spectre.actions').get_all_entries()
 -- require('spectre.actions').get_state()
 
+-- LSP設定
+local nvim_lsp = require('lspconfig')
+
+-- オートコンプリートの設定
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      -- スニペットエンジンを指定（例: vsnipの場合）
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-j>'] = cmp.mapping.select_next_item(), -- Tab キーで次の補完候補を選択
+    ['<C-k>'] = cmp.mapping.select_prev_item(), -- Shift + Tab キーで前の補完候補を選択
+  }),
+  sources = {
+    { name = 'nvim_lsp' },
+    -- 必要に応じて他のソースを追加
+  }
+})
+
+-- LSPサーバーの設定例: pyright
+-- LSPの設定を読み込む
+local nvim_lsp = require('lspconfig')
+
+-- 共通の on_attach 関数を定義
+local on_attach = function(client, bufnr)
+  -- バッファローカルのキー設定を容易にするためのショートカット
+  local opts = { noremap=true, silent=true, buffer=bufnr }
+
+  --   vim.g.mapleader = ';'
+  -- -- キーマッピングの設定
+  -- vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts)
+  -- vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, opts)
+  -- vim.keymap.set('n', '<leader>gc', vim.lsp.buf.declaration, opts)
+  -- vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts)
+  -- vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, opts)
+  -- vim.keymap.set('n', '<leader>gn', vim.lsp.buf.rename, opts)
+  -- vim.keymap.set('n', '<leader>gh', vim.lsp.buf.hover, opts)
+  --
+  -- -- 追加のキーマッピング例
+  -- -- コードアクションを実行
+  -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+  -- -- シグネチャヘルプを表示
+  -- vim.keymap.set('n', '<leader>gs', vim.lsp.buf.signature_help, opts)
+end
+
+-- 使用するLSPサーバーの設定例（goplsを例に）
+nvim_lsp.gopls.setup{
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+    },
+  },
+}
+
+-- 他のLSPサーバーも同様に設定
+-- 例: pyright
+nvim_lsp.pyright.setup{
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+}
+
+require("mason").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = { "pyright", "tsserver", "gopls" }, -- 必要なLSPサーバーを列挙
+})
+
+local lspconfig = require('lspconfig')
+
+require("mason-lspconfig").setup_handlers {
+  function (server_name)
+    lspconfig[server_name].setup {
+      on_attach = function(client, bufnr)
+        -- キーバインドの設定など
+      end,
+      flags = {
+        debounce_text_changes = 150,
+      }
+    }
+  end,
+}
+
 require('csvview').setup()
 require 'colorizer'.setup()
 
--- require("noice").setup({
---   lsp = {
---     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
---     override = {
---       ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
---       ["vim.lsp.util.stylize_markdown"] = true,
---       ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
---     },
---   },
---   -- you can enable a preset for easier configuration
---   presets = {
---     bottom_search = true, -- use a classic bottom cmdline for search
---     command_palette = true, -- position the cmdline and popupmenu together
---     long_message_to_split = true, -- long messages will be sent to a split
---     inc_rename = false, -- enables an input dialog for inc-rename.nvim
---     lsp_doc_border = false, -- add a border to hover docs and signature help
---   },
--- })
-
---require("notify").setup{}
-
 require("bufferline").setup{}
 
-
--- require'treesitter-context'.setup {
---     -- ここにオプションを設定
---     enable = true,  -- デフォルトで有効にする
---     throttle = true, -- スムーズなスクロールのためのスロットル
---     max_lines = 0,  -- コンテキストを表示する最大行数（0は無制限）
---     patterns = {    -- 表示するノードのタイプ
---         -- デフォルトの言語は以下のように設定されています
---         default = {
---             'class',
---             'function',
---             'method',
---             -- 他に表示したいノードタイプがあればここに追加
---         },
---         -- 特定の言語のためのカスタム設定も可能
---         -- 例：python = { 'class', 'function', 'async_function' },
---         go = {
---             'function',
---             'method',
---             -- Go言語に特有の他のノードタイプが必要な場合はここに追加
---         },
---     },
--- }
 
 
 require'nvim-treesitter.configs'.setup {
@@ -322,16 +393,7 @@ require'nvim-treesitter.configs'.setup {
 
 }
 
---require('scrollEOF').setup()
---lua require('nvim-ultivisual').setup()
 require('neoscroll').setup()
-
--- require('codewindow').setup()
-
--- ミニマップの自動表示
---let g:minimap_auto_start = 1
--- ミニマップの自動トグル
---let g:minimap_auto_toggle = 1
 
 require("toggleterm").setup{
     -- ここに設定を追加
@@ -350,21 +412,6 @@ require("toggleterm").setup{
 local sidebar = require("sidebar-nvim")
 local opts = {open = false}
 sidebar.setup(opts)
-
-
--- local highlight = {
---     "CursorColumn",
---     "Whitespace",
--- }
--- require("ibl").setup {
---     indent = { highlight = highlight, char = "" },
---     whitespace = {
---         highlight = highlight,
---         remove_blankline_trail = false,
---     },
---     scope = { enabled = false },
--- }
-
 
 require('Comment').setup({
     ---コメントと行の間にスペースを追加
@@ -563,32 +610,11 @@ require('gitsigns').setup {
     },
 }
 
---
--- require("nvim-autopairs").setup {}
---
 
 vim.g.matchup_matchparen_offscreen = { method = 'popup' }
 
-
--- require('scrollbar').setup()
-
-
 require('alpha').setup(require('alpha.themes.startify').config)
 
---
--- require 'colorizer'.setup(
---   {'*';},          -- すべてのファイルタイプで有効にする
---   {
---     RGB      = true;         -- #RGB 形式を有効にする
---     RRGGBB   = true;         -- #RRGGBB 形式を有効にする
---     names    = true;         -- "blue" のような名前付きカラーを有効にする
---     RRGGBBAA = true;         -- #RRGGBBAA 形式を有効にする
---     rgb_fn   = true;         -- css rgb() および rgba() 関数を有効にする
---     hsl_fn   = true;         -- css hsl() および hsla() 関数を有効にする
---     css      = true;         -- css #RRGGBB 形式を有効にする
---     css_fn   = true;         -- css 関数を有効にする
---   }
--- )
 --
 local function file_path()
     return vim.fn.fnamemodify(vim.fn.expand('%'), ':~:.')
@@ -683,161 +709,6 @@ require'nvim-tree'.setup {
     }
 }
 
---
--- -- shortcut
--- local function map(mode, lhs, rhs, opts)
--- 	local options = {noremap = true}
---     if opts then options = vim.tbl_extend('force', options, opts) end
---     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
--- end
---
--- map("n", "<F5>", ":lua require'dap'.continue()<CR>", { silent = true})
--- map("n", "<F10>", ":lua require'dap'.step_over()<CR>", { silent = true})
--- map("n", "<F11>", ":lua require'dap'.step_into()<CR>", { silent = true})
--- map("n", "<F12>", ":lua require'dap'.step_out()<CR>", { silent = true})
--- map("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>", { silent = true})
--- map("n", "<leader>bc", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { silent = true})
--- map("n", "<leader>l", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", { silent = true})
---
--- -- dap-ui key map
--- map("n", "<leader>d", ":lua require'dapui'.toggle()<CR>", { silent = true})
--- map("n", "<leader><leader>df", ":lua require'dapui'.eval()<CR>", { silent = true})
---
--- -- dap-go key map
--- map("n", "<leader>td", ":lua require'dap-go'.debug_test()<CR>", { silent = true })
---
--- -- nvim-dap の基本設定
--- local dap = require("dap")
--- dap.adapters.delve = {
---   type = 'server',
---   port = '${port}',
---   executable = {
---     command = 'dlv',
---     args = {'dap', '-l', '127.0.0.1:${port}'},
---   }
--- }
---
--- -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
--- dap.configurations.go = {
---   {
---     type = "delve",
---     name = "Debug",
---     request = "launch",
---     program = "${file}"
---   },
---   {
---     type = "delve",
---     name = "Debug test", -- configuration for debugging test files
---     request = "launch",
---     mode = "test",
---     program = "${file}"
---   },
---   -- works with go.mod packages and sub packages
---   {
---     type = "delve",
---     name = "Debug test (go.mod)",
---     request = "launch",
---     mode = "test",
---     program = "./${relativeFileDirname}"
---   }
--- }
---
---
---
---
--- -- nvim-dap-ui のUI設定
--- require('dapui').setup({
---   icons = { expanded = "▾", collapsed = "▸" },
---   mappings = {
---     -- カスタムキーマッピング
---   },
---   layouts = {
---     {
---       elements = {
---         -- サイドバーのレイアウト設定
---       },
---       size = 40,
---       position = 'left'
---     },
---     {
---       elements = {
---         -- トレイのレイアウト設定
---       },
---       size = 10,
---       position = 'bottom'
---     },
---   }
--- })
---
---
---
--- -- nvim-dap-go の設定
--- require('dap-go').setup()
---
--- local dap = require('dap')
---
--- dap.configurations.lua = {
---   {
---     type = 'nlua',
---     request = 'attach',
---     name = "Attach to running Neovim instance",
---     host = function()
---       return '127.0.0.1'
---     end,
---     port = function()
---       local val = vim.fn.input('Port: ')
---       return tonumber(val)
---     end
---   }
--- }
---
---
-
-
-
--- 補完表示時のEnterで改行をしない
---vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.pumvisible() ? "<C-y>" : "<CR>"', {expr = true, noremap = true})
-
-
--- 補完ナビゲーション
---vim.api.nvim_set_keymap('i', '<C-n>', 'v:lua.pumvisible() ? "<Down>" : "<C-n>"', {expr = true, noremap = true})
---vim.api.nvim_set_keymap('i', '<C-p>', 'v:lua.pumvisible() ? "<Up>" : "<C-p>"', {expr = true, noremap = true})
-
--- require("catppuccin").setup({
---     flavour = "mocha", -- お好みのフレーバーを選択: 'latte', 'frappe', 'macchiato', 'mocha'
---     background = {
---         -- 必要に応じて異なるフレーバーに対して背景を指定
---         mocha = "#121212",
---     },
---     custom_highlights = {
---         Normal = { bg = "#121212" },
---         NormalFloat = { bg = "#121212" },
---         FloatBorder = { bg = "#121212" },
---         SignColumn = { bg = "#121212" },
---         VertSplit = { bg = "#121212", fg = "#121212" },
---         StatusLine = { bg = "#121212" },
---         StatusLineNC = { bg = "#121212" },
---         NERDTreeNormal = { bg = "#121212" },
---         NERDTreeDir = { fg = "#f7768e" },          -- ディレクトリ名の色（例）
---         NERDTreeFile = { fg = "#9ece6a" },         -- ファイル名の色（例）
---         NERDTreeStatusLine = { bg = "#121212" },
---         NERDTreeStatusLineNc = { bg = "#121212" },
---     },
---     integrations = {
---         -- 他のプラグインとの統合を有効化
---     },
---     transparent_background = false, -- 背景を透明にしない
---     show_end_of_buffer = false,      -- バッファ後の'~'文字を非表示
---     term_colors = true,              -- ターミナルカラーを使用
---     dim_inactive = {
---         enabled = false,             -- 非アクティブウィンドウのディミングを無効化
---         shade = "dark",
---         percentage = 0.15,
---     },
---     no_italic = false,                -- イタリックを無効化しない
---     no_bold = false,                  -- ボールドを無効化しない
---     no_underline = false,             -- 下線を無効化しない
--- })
 
 require("cyberdream").setup({
     -- 背景を透明にするかどうかを有効化
@@ -896,13 +767,13 @@ if hlslens then
 end
 
 require("bigfile").setup {
-  -- detect long python files
-  pattern = function(bufnr, filesize_mib)
-    -- you can't use `nvim_buf_line_count` because this runs on BufReadPre
-    local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
-    local file_length = #file_contents
-    if file_length >= 10000 then
-      return true
+    -- detect long python files
+    pattern = function(bufnr, filesize_mib)
+        -- you can't use `nvim_buf_line_count` because this runs on BufReadPre
+        local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
+        local file_length = #file_contents
+        if file_length >= 10000 then
+            return true
+        end
     end
-  end
 }
