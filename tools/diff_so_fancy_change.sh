@@ -8,5 +8,5 @@ if [ "$#" -ne 2 ]; then
 fi
 
 # diff コマンドを実行し、出力を diff-so-fancy にパイプします
-diff -u "$1" "$2" | diff-so-fancy
+delta "$1" "$2"
 
