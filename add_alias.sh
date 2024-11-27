@@ -21,6 +21,7 @@ vc="$HOME/vimConf"
 #done < ~/user.txt
 #echo -e "$user" | cat -v
 eval "$(zoxide init bash)"
+eval "$(mcfly init zsh)"
 # export variable
 export BAT_STYLE="header,grid"
 export BAT_THEME="TwoDark"

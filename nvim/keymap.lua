@@ -217,6 +217,3 @@ vim.api.nvim_set_keymap('s', '<S-Tab>', 'coc#pum#visible() ? coc#pum#prev(1) : "
 vim.api.nvim_set_keymap('i', '<C-y>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('s', '<C-y>', '', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<CR>', '<cmd>FineCmdline<CR>', {noremap = true})
-
-

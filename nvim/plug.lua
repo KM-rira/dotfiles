@@ -7,7 +7,7 @@ require('packer').startup(function(use)
     -- use '~/repo/myplugin'
     use 'KM-rira/myplugin'
     use 'preservim/nerdtree'
-    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', tag = 'v1.3'}
+    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', tag = 'v1.8.0'}
     use 'vim-jp/vimdoc-ja'
     -- indent line廃止
     -- use {'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.10'}
@@ -75,12 +75,20 @@ require('packer').startup(function(use)
         },
     })
 
-    -- comand line center panel
+    -- csv edit
+    use 'hat0uma/csvview.nvim'
+
+    -- add error customh ighlight
     use {
-        'VonHeikemen/fine-cmdline.nvim',
-        requires = {
-            {'MunifTanjim/nui.nvim'}
-        }
+        'Kasama/nvim-custom-diagnostic-highlight',
+        config = function()
+            require('nvim-custom-diagnostic-highlight').setup {}
+        end
+    }
+
+    -- file faster loader
+    use {
+        "LunarVim/bigfile.nvim",
     }
 
     -- search result count
@@ -172,6 +180,7 @@ end)
 -- require('spectre.actions').get_all_entries()
 -- require('spectre.actions').get_state()
 
+require('csvview').setup()
 require 'colorizer'.setup()
 
 -- require("noice").setup({
@@ -885,3 +894,15 @@ if hlslens then
         end
     })
 end
+
+require("bigfile").setup {
+  -- detect long python files
+  pattern = function(bufnr, filesize_mib)
+    -- you can't use `nvim_buf_line_count` because this runs on BufReadPre
+    local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
+    local file_length = #file_contents
+    if file_length >= 10000 then
+      return true
+    end
+  end
+}
