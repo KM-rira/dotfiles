@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 
 # bashrcに下記を追加。（非同期で）
@@ -20,7 +20,7 @@ vc="$HOME/vimConf"
 #    user="${user}${line}"
 #done < ~/user.txt
 #echo -e "$user" | cat -v
-eval "$(zoxide init bash)"
+eval "$(zoxide init zsh)"
 eval "$(mcfly init zsh)"
 # export variable
 export BAT_STYLE="header,grid"

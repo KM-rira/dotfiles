@@ -108,7 +108,6 @@ require('packer').startup(function(use)
     -- use 'nvim-pack/nvim-spectre'
 
     -- lsp config
-    use 'wbthomason/packer.nvim' -- パッケージマネージャー自体
     use 'neovim/nvim-lspconfig' -- LSP設定用プラグイン
     use 'hrsh7th/nvim-cmp' -- オートコンプリートプラグイン
     use 'hrsh7th/cmp-nvim-lsp' -- LSPソースのためのnvim-cmp
@@ -117,6 +116,21 @@ require('packer').startup(function(use)
     use 'rafamadriz/friendly-snippets' -- スニペットコレクション
     use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
+
+    -- nvim-dapと関連プラグイン
+    use {
+        'mfussenegger/nvim-dap',
+        requires = {
+            'rcarriga/nvim-dap-ui',
+            'theHamsta/nvim-dap-virtual-text',
+            -- 必要に応じてデバッグアダプターごとのプラグインを追加
+            -- 例: Python用
+            'mfussenegger/nvim-dap-python',
+            -- 例: Go用
+            'leoluz/nvim-dap-go',
+            -- その他のデバッグアダプター
+        }
+    }
 
     use {
         'KM-rira/todo-comments.nvim',
@@ -209,58 +223,58 @@ require("luasnip.loaders.from_vscode").lazy_load()
 local cmp = require'cmp'
 
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body) -- LuaSnipを使用してスニペットを展開
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- 確定
-    ['<C-j>'] = cmp.mapping.select_next_item(), -- 次の補完候補を選択
-    ['<C-k>'] = cmp.mapping.select_prev_item(), -- 前の補完候補を選択
-    -- LuaSnip 用のマッピング
-    ['<C-l>'] = cmp.mapping(function(fallback)
-      if luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<C-h>'] = cmp.mapping(function(fallback)
-      if luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' }, -- LuaSnipをソースとして追加
-    -- 必要に応じて他のソースを追加
-  },
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  },
-  formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        luasnip = "[Snippet]",
-        buffer = "[Buffer]",
-        path = "[Path]",
-      })[entry.source.name]
-      return vim_item
-    end,
-  },
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body) -- LuaSnipを使用してスニペットを展開
+        end,
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- 確定
+        ['<C-j>'] = cmp.mapping.select_next_item(), -- 次の補完候補を選択
+        ['<C-k>'] = cmp.mapping.select_prev_item(), -- 前の補完候補を選択
+        -- LuaSnip 用のマッピング
+        ['<C-l>'] = cmp.mapping(function(fallback)
+            if luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
+        ['<C-h>'] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
+    }),
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' }, -- LuaSnipをソースとして追加
+        -- 必要に応じて他のソースを追加
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+    formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+            vim_item.menu = ({
+                nvim_lsp = "[LSP]",
+                luasnip = "[Snippet]",
+                buffer = "[Buffer]",
+                path = "[Path]",
+            })[entry.source.name]
+            return vim_item
+        end,
+    },
 })
 
 -- LSPサーバーの設定例: pyright
@@ -269,69 +283,69 @@ local nvim_lsp = require('lspconfig')
 
 -- 共通の on_attach 関数を定義
 local on_attach = function(client, bufnr)
-  -- バッファローカルのキー設定を容易にするためのショートカット
-  local opts = { noremap=true, silent=true, buffer=bufnr }
+    -- バッファローカルのキー設定を容易にするためのショートカット
+    local opts = { noremap=true, silent=true, buffer=bufnr }
 
-  --   vim.g.mapleader = ';'
-  -- -- キーマッピングの設定
-  -- vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts)
-  -- vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, opts)
-  -- vim.keymap.set('n', '<leader>gc', vim.lsp.buf.declaration, opts)
-  -- vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts)
-  -- vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, opts)
-  -- vim.keymap.set('n', '<leader>gn', vim.lsp.buf.rename, opts)
-  -- vim.keymap.set('n', '<leader>gh', vim.lsp.buf.hover, opts)
-  --
-  -- -- 追加のキーマッピング例
-  -- -- コードアクションを実行
-  -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-  -- -- シグネチャヘルプを表示
-  -- vim.keymap.set('n', '<leader>gs', vim.lsp.buf.signature_help, opts)
+    --   vim.g.mapleader = ';'
+    -- -- キーマッピングの設定
+    -- vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts)
+    -- vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, opts)
+    -- vim.keymap.set('n', '<leader>gc', vim.lsp.buf.declaration, opts)
+    -- vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts)
+    -- vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, opts)
+    -- vim.keymap.set('n', '<leader>gn', vim.lsp.buf.rename, opts)
+    -- vim.keymap.set('n', '<leader>gh', vim.lsp.buf.hover, opts)
+    --
+    -- -- 追加のキーマッピング例
+    -- -- コードアクションを実行
+    -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+    -- -- シグネチャヘルプを表示
+    -- vim.keymap.set('n', '<leader>gs', vim.lsp.buf.signature_help, opts)
 end
 
 -- 使用するLSPサーバーの設定例（goplsを例に）
 nvim_lsp.gopls.setup{
-  on_attach = on_attach,
-  flags = {
-    debounce_text_changes = 150,
-  },
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-      },
-      staticcheck = true,
+    on_attach = on_attach,
+    flags = {
+        debounce_text_changes = 150,
     },
-  },
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+        },
+    },
 }
 
 -- 他のLSPサーバーも同様に設定
 -- 例: pyright
 nvim_lsp.pyright.setup{
-  on_attach = on_attach,
-  flags = {
-    debounce_text_changes = 150,
-  },
+    on_attach = on_attach,
+    flags = {
+        debounce_text_changes = 150,
+    },
 }
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = { "pyright", "tsserver", "gopls" }, -- 必要なLSPサーバーを列挙
+    ensure_installed = { "pyright", "tsserver", "gopls" }, -- 必要なLSPサーバーを列挙
 })
 
 local lspconfig = require('lspconfig')
 
 require("mason-lspconfig").setup_handlers {
-  function (server_name)
-    lspconfig[server_name].setup {
-      on_attach = function(client, bufnr)
-        -- キーバインドの設定など
-      end,
-      flags = {
-        debounce_text_changes = 150,
-      }
-    }
-  end,
+    function (server_name)
+        lspconfig[server_name].setup {
+            on_attach = function(client, bufnr)
+                -- キーバインドの設定など
+            end,
+            flags = {
+                debounce_text_changes = 150,
+            }
+        }
+    end,
 }
 
 require('csvview').setup()
