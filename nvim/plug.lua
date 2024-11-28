@@ -112,6 +112,9 @@ require('packer').startup(function(use)
     use 'neovim/nvim-lspconfig' -- LSP設定用プラグイン
     use 'hrsh7th/nvim-cmp' -- オートコンプリートプラグイン
     use 'hrsh7th/cmp-nvim-lsp' -- LSPソースのためのnvim-cmp
+    use 'L3MON4D3/LuaSnip' -- LuaSnip スニペットエンジン
+    use 'saadparwaiz1/cmp_luasnip' -- LuaSnip ソース
+    use 'rafamadriz/friendly-snippets' -- スニペットコレクション
     use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
 
@@ -192,12 +195,15 @@ require('packer').startup(function(use)
     }
     -- その他のプラグインはここに追加...
 end)
--- require('spectre.actions').get_current_entry()
--- require('spectre.actions').get_all_entries()
--- require('spectre.actions').get_state()
 
 -- LSP設定
 local nvim_lsp = require('lspconfig')
+
+-- LuaSnipをロード
+local luasnip = require 'luasnip'
+
+-- friendly-snippetsからスニペットを読み込む
+require("luasnip.loaders.from_vscode").lazy_load()
 
 -- オートコンプリートの設定
 local cmp = require'cmp'
@@ -205,8 +211,7 @@ local cmp = require'cmp'
 cmp.setup({
   snippet = {
     expand = function(args)
-      -- スニペットエンジンを指定（例: vsnipの場合）
-      vim.fn["vsnip#anonymous"](args.body)
+      luasnip.lsp_expand(args.body) -- LuaSnipを使用してスニペットを展開
     end,
   },
   mapping = cmp.mapping.preset.insert({
@@ -214,14 +219,48 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-j>'] = cmp.mapping.select_next_item(), -- Tab キーで次の補完候補を選択
-    ['<C-k>'] = cmp.mapping.select_prev_item(), -- Shift + Tab キーで前の補完候補を選択
+    ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- 確定
+    ['<C-j>'] = cmp.mapping.select_next_item(), -- 次の補完候補を選択
+    ['<C-k>'] = cmp.mapping.select_prev_item(), -- 前の補完候補を選択
+    -- LuaSnip 用のマッピング
+    ['<C-l>'] = cmp.mapping(function(fallback)
+      if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<C-h>'] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
   }),
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'luasnip' }, -- LuaSnipをソースとして追加
     -- 必要に応じて他のソースを追加
-  }
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  formatting = {
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      vim_item.menu = ({
+        nvim_lsp = "[LSP]",
+        luasnip = "[Snippet]",
+        buffer = "[Buffer]",
+        path = "[Path]",
+      })[entry.source.name]
+      return vim_item
+    end,
+  },
 })
 
 -- LSPサーバーの設定例: pyright

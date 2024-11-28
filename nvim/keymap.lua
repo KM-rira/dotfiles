@@ -45,7 +45,7 @@ map('n', '<leader>bd', ':BufferLineSortByRelativeDirectory<CR>', opts)
 -- vim.keymap.set({'n', 'x', 'o'},'<leader>gn', '<Plug>(coc-rename)',{ noremap = true, silent = true })
 -- vim.keymap.set({'n', 'x', 'o'},'<leader>gh', ':call CocAction(\'doHover\')<CR>',{ noremap = true, silent = true })
 vim.keymap.set('n', 'gh',  '<cmd>lua vim.lsp.buf.hover()<CR>')
-vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.format()<CR>', { noremap=true, silent=true })
 vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
 vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
@@ -228,4 +228,8 @@ local opts = { silent = true, noremap = true, expr = true }
 -- `<Ctrl-y>` のマッピングを解除
 vim.api.nvim_set_keymap('i', '<C-y>', '', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('s', '<C-y>', '', { noremap = true, silent = true })
+
+vim.keymap.set('i', 'jk', '<Esc>', {noremap = true, silent=true})
+vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-t>', ':NvimTreeToggle<CR>', {noremap = true})
 
