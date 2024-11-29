@@ -233,3 +233,16 @@ vim.keymap.set('i', 'jk', '<Esc>', {noremap = true, silent=true})
 vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<C-t>', ':NvimTreeToggle<CR>', {noremap = true})
 
+-- dap key map
+vim.api.nvim_set_keymap('n', '<F5>', ':DapContinue<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<F10>', ':DapStepOver<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<F11>', ':DapStepInto<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<F12>', ':DapStepOut<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>db', ':DapToggleBreakpoint<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dB', ':lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Breakpoint condition: "))<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dp', ':lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dr', ':lua require("dap").repl.open()<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dl', ':lua require("dap").run_last()<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dw', ':lua require("dapui").toggle()<CR>', {})
+
+

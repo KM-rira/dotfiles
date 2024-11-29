@@ -118,19 +118,12 @@ require('packer').startup(function(use)
     use 'williamboman/mason-lspconfig.nvim'
 
     -- nvim-dapと関連プラグイン
-    use {
-        'mfussenegger/nvim-dap',
-        requires = {
-            'rcarriga/nvim-dap-ui',
-            'theHamsta/nvim-dap-virtual-text',
-            -- 必要に応じてデバッグアダプターごとのプラグインを追加
-            -- 例: Python用
-            'mfussenegger/nvim-dap-python',
-            -- 例: Go用
-            'leoluz/nvim-dap-go',
-            -- その他のデバッグアダプター
-        }
-    }
+    use 'mfussenegger/nvim-dap'
+    use 'rcarriga/nvim-dap-ui'
+    use 'https://github.com/mfussenegger/nvim-dap-python'
+use {
+    'nvim-neotest/nvim-nio'
+}
 
     use {
         'KM-rira/todo-comments.nvim',
@@ -830,3 +823,32 @@ require("bigfile").setup {
         end
     end
 }
+
+-- dap setting start
+
+require('dap-python').setup("/home/linuxbrew/.linuxbrew/bin/python3")
+
+
+require("dapui").setup({
+  icons = { expanded = "", collapsed = "" },
+  layouts = {
+    {
+      elements = {
+        { id = "watches", size = 0.20 },
+        { id = "stacks", size = 0.20 },
+        { id = "breakpoints", size = 0.20 },
+        { id = "scopes", size = 0.40 },
+      },
+      size = 64,
+      position = "right",
+    },
+    {
+      elements = {
+        "repl",
+        "console",
+      },
+      size = 0.20,
+      position = "bottom",
+    },
+  },
+})
