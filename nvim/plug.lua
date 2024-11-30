@@ -826,7 +826,7 @@ require("bigfile").setup {
 
 -- dap setting start
 
-require('dap-python').setup("/home/linuxbrew/.linuxbrew/bin/python3")
+require('dap-python').setup("/home/koji/.config/nvim/venv/bin/python3")
 
 
 require("dapui").setup({
