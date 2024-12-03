@@ -153,6 +153,7 @@ alias h='history'
 alias m='make'
 alias packer='cd ~/.local/share/nvim/site/pack/packer/start/'
 source $HOME/vimConf/tools/wezcp.sh
+alias ccze='ccze -A'
 
 # gh
 alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
