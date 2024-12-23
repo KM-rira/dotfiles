@@ -16,7 +16,7 @@ vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])
 
 -- 背景色設定
--- vim.api.nvim_set_hl(0, "Normal", { bg = "#121212" })
+ vim.api.nvim_set_hl(0, "Normal", { bg = "#121212" })
 
 -- 現在のカーソル行の背景色
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" })
