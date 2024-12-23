@@ -67,6 +67,7 @@ require('packer').startup(function(use)
     -- color themes
     use { "scottmckendry/cyberdream.nvim" }
     use { "ellisonleao/gruvbox.nvim" }
+    use { "joshdick/onedark.vim" }
     -- use { 'projekt0n/github-nvim-theme', name = 'github-theme' }
     -- use 'navarasu/onedark.nvim'
     -- use 'folke/tokyonight.nvim'
