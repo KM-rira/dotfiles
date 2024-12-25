@@ -349,4 +349,8 @@ cargo install procs
 ```bash
 rm /mnt/c/Users/ユーザー名/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Amazon/Amazon\ Kindle/Kindle.lnk > /dev/null 2>&1 &
 ```
-
+# linux mint
+```bash
+sudo apt install copyq -y
+sudo apt install xclip
+```
