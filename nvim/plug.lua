@@ -119,6 +119,12 @@ require('packer').startup(function(use)
     use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
 
+    -- formatter
+    use {
+      "jose-elias-alvarez/null-ls.nvim",
+      requires = { "nvim-lua/plenary.nvim" }, -- 必須依存プラグイン
+    }
+
     -- nvim-dapと関連プラグイン
     use 'mfussenegger/nvim-dap'
     use 'rcarriga/nvim-dap-ui'
@@ -854,3 +860,28 @@ require("dapui").setup({
     },
   },
 })
+
+-- null-ls をロード
+local null_ls = require("null-ls")
+
+-- フォーマッタとリンタの設定
+null_ls.setup({
+  sources = {
+    -- フォーマッタ
+    null_ls.builtins.formatting.black,    -- Black
+    null_ls.builtins.formatting.isort,    -- isort（インポートの整列）
+
+    -- リンタ
+    null_ls.builtins.diagnostics.flake8,  -- flake8
+    null_ls.builtins.diagnostics.mypy,    -- mypy（型チェック）
+  },
+})
+
+-- 保存前に自動フォーマットを実行
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.py", -- Python ファイルに限定
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
+
