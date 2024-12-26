@@ -31,6 +31,8 @@ func main() {
 		bookmarkJSON = "AppData/Local/Google/Chrome/User Data/Default/Bookmarks"
 	case "darwin": // Mac OSは"darwin"として検出される
 		bookmarkJSON = "Library/Application Support/Google/Chrome/Default/Bookmarks"
+	case "linux":
+		bookmarkJSON = ".config/google-chrome/Default/Bookmarks"
 	default:
 		fmt.Println("Unsupported operating system:", runtime.GOOS)
 		return

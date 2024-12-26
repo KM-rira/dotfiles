@@ -864,20 +864,31 @@ require("dapui").setup({
 -- null-ls をロード
 local null_ls = require("null-ls")
 
+-- null-ls のビルトインを簡略化
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
+
 -- フォーマッタとリンタの設定
 null_ls.setup({
   sources = {
-    -- フォーマッタ
-    null_ls.builtins.formatting.black,    -- Black
-    null_ls.builtins.formatting.isort,    -- isort（インポートの整列）
+    -- Python フォーマッタ
+    formatting.black,    -- Black
+    formatting.isort,    -- isort（インポートの整列）
 
-    -- リンタ
-    null_ls.builtins.diagnostics.flake8,  -- flake8
-    null_ls.builtins.diagnostics.mypy,    -- mypy（型チェック）
+    -- Python リンタ
+    diagnostics.flake8,  -- flake8
+    diagnostics.mypy,    -- mypy（型チェック）
+
+    -- Go フォーマッタ
+    formatting.goimports, -- goimports
+    formatting.gofmt,
+
+    -- Go リンタ
+    diagnostics.staticcheck,
   },
 })
 
--- 保存前に自動フォーマットを実行
+-- Python ファイル保存時に自動フォーマットを実行
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.py", -- Python ファイルに限定
   callback = function()
@@ -885,3 +896,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+-- Go ファイル保存時に自動フォーマットを実行
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go", -- Go ファイルに限定
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
+})
