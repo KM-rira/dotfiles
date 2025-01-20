@@ -27,4 +27,6 @@ jobs:
     - name: Run tests
       run: |
         cd installer
-        docker run --rm test-install-script batcat --version
+        docker build -t $(IMAGE_NAME) .
+        docker run --rm test-install-script
+
