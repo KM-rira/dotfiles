@@ -12,13 +12,13 @@ install_function() {
     echo -e "========\n $2 end!!!\n========"
 }
 
-# apt install
 # update
 echo -e "========\n update start!!!\n========"
 apt update
 apt-get update
 echo -e "========\n update end!!!\n========"
 
+# apt-get install
 install_cmd='apt-get install -y'
 package='bat'
 install_function "$install_cmd" "$package"
@@ -32,10 +32,33 @@ install_function "$install_cmd" "$package"
 package='fd-find'
 install_function "$install_cmd" "$package"
 
+package='ripgrep'
+install_function "$install_cmd" "$package"
+
+package='fzf'
+install_function "$install_cmd" "$package"
+
+package='jq'
+install_function "$install_cmd" "$package"
+
+package='nodejs'
+install_function "$install_cmd" "$package"
+
+package='npm'
+install_function "$install_cmd" "$package"
+
 package='ntpdate'
 install_function "$install_cmd" "$package"
 ntpdate ntp.nict.jp
 
+# apt-get install
+install_cmd='apt install -y'
+
+package='zoxide'
+install_function "$install_cmd" "$package"
+
+package='lazygit'
+install_function "$install_cmd" "$package"
 
 # brew install
 install_cmd='brew install'
@@ -49,5 +72,17 @@ package='git-delta'
 install_function "$install_cmd" "$package"
 
 package='dust'
+install_function "$install_cmd" "$package"
+
+package='tlrc'
+install_function "$install_cmd" "$package"
+
+package='glances'
+install_function "$install_cmd" "$package"
+
+# npm install
+install_cmd='npm install'
+
+package='gtop -g'
 install_function "$install_cmd" "$package"
 
