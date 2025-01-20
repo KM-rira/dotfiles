@@ -27,6 +27,4 @@ jobs:
     - name: Run tests
       run: |
         cd installer
-        docker build -t $(IMAGE_NAME) .
-        docker run --rm test-install-script
-
+        make test
