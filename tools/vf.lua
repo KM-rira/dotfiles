@@ -1,33 +1,42 @@
 #!/usr/bin/env lua
 
-local function vf()
-	-- 現在のディレクトリ内の通常ファイルの数を取得
-	local count_handle = io.popen("find . -maxdepth 1 -type f | wc -l")
-	local file_count_str = count_handle:read("*a")
-	count_handle:close()
-	local file_count = tonumber(file_count_str:match("(%d+)") or "0")
+local lfs = require("lfs")
 
-	if file_count == 0 then
-		print("===== NOT EXIST FILE =====")
-		return
+local current_dir = "."
+local files = {}
+
+-- カレントディレクトリ内の通常ファイルを取得
+for file in lfs.dir(current_dir) do
+	local fullpath = current_dir .. "/" .. file
+	local attr = lfs.attributes(fullpath)
+	if attr and attr.mode == "file" then
+		table.insert(files, file)
 	end
-
-	-- fzf を用いてファイルを選択
-	local fzf_cmd = "find . -maxdepth 1 -type f | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi"
-	local select_handle = io.popen(fzf_cmd)
-	local select_file = select_handle:read("*a") or ""
-	select_handle:close()
-
-	-- 改行や不要な空白を取り除く
-	select_file = select_file:gsub("^%s*(.-)%s*$", "%1")
-
-	if select_file == "" then
-		print("===== EXIT PROCESS =====")
-		return
-	end
-
-	-- 選択されたファイルを nvim で開く
-	os.execute("nvim " .. select_file)
 end
 
-vf()
+if #files == 0 then
+	print("===== NOT EXIST FILE =====")
+	os.exit()
+end
+
+-- ファイル一覧を改行区切りの文字列に変換
+local list = table.concat(files, "\n")
+-- シングルクォートをエスケープ
+local escaped_list = list:gsub("'", "'\\''")
+
+-- fzf を呼び出して、エスケープされたファイル一覧をパイプで渡す
+local fzf_cmd = "echo '"
+	.. escaped_list
+	.. "' | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi --height 70% --layout reverse --info inline --border --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+local fzf_handle = io.popen(fzf_cmd)
+local selected = fzf_handle:read("*a") or ""
+fzf_handle:close()
+
+-- 選択結果の前後の空白を削除
+selected = selected:gsub("^%s*(.-)%s*$", "%1")
+
+if selected == "" then
+	print("===== EXIT PROCESS =====")
+else
+	os.execute("nvim " .. selected)
+end
