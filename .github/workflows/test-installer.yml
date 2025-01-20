@@ -1,0 +1,30 @@
+name: Test Installer
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. リポジトリをクローン
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # 2. Dockerイメージをビルド
+    - name: Build Docker image
+      run: |
+        cd installer
+        docker build -t test-install-script .
+
+    # 3. テスト: コンテナで `installer.sh` のテストを実行
+    - name: Run tests
+      run: |
+        cd installer
+        docker run --rm test-install-script batcat --version

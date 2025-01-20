@@ -972,11 +972,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 -- yml ファイル保存時に自動フォーマットを実行
 -- go install github.com/mikefarah/yq/v4@latest
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.yaml", "*.yml" },
-	callback = function()
-		local view = vim.fn.winsaveview()
-		vim.cmd("%!yamlfmt -") -- バッファ全体をyamlfmtに渡して整形
-		vim.fn.winrestview(view)
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	pattern = { "*.yaml", "*.yml" },
+-- 	callback = function()
+-- 		local view = vim.fn.winsaveview()
+-- 		vim.cmd("%!yamlfmt -") -- バッファ全体をyamlfmtに渡して整形
+-- 		vim.fn.winrestview(view)
+-- 	end,
+-- })
