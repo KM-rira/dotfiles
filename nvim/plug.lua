@@ -91,6 +91,9 @@ require("packer").startup(function(use)
 		},
 	})
 
+	-- github copilot
+	use("github/copilot.vim")
+
 	-- csv edit
 	use("hat0uma/csvview.nvim")
 
