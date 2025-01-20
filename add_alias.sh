@@ -69,7 +69,7 @@ alias show='git show'
 alias findall='sudo find / -name'
 alias findalld='sudo find / -type d -name'
 . ~/vimConf/tools/batf.sh
-. ~/vimConf/tools/bf.sh
+alias bf='lua ~/vimConf/tools/bf.lua'
 alias catf='bash ~/vimConf/tools/catf.sh'
 alias vf='lua ~/vimConf/tools/vf.lua'
 . ~/vimConf/tools/vff.sh
