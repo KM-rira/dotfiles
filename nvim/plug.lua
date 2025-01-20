@@ -342,7 +342,7 @@ nvim_lsp.pyright.setup({
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "pyright", "tsserver", "gopls", "lua_ls" }, -- 必要なLSPサーバーを列挙
+	ensure_installed = { "pyright", "tsserver", "gopls", "lua_ls", "yamlls", "jsonls" }, -- 必要なLSPサーバーを列挙
 })
 
 local lspconfig = require("lspconfig")
@@ -879,6 +879,8 @@ require("dapui").setup({
 
 -- null-ls をロード
 local null_ls = require("null-ls")
+local helpers = require("null-ls.helpers")
+local methods = require("null-ls.methods")
 
 -- null-ls のビルトインを簡略化
 local formatting = null_ls.builtins.formatting
@@ -914,7 +916,7 @@ null_ls.setup({
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.py", -- Python ファイルに限定
 	callback = function()
-		vim.lsp.buf.format({ async = false })
+		vim.lsp.buf.format({ async = true })
 	end,
 })
 
@@ -922,7 +924,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go", -- Go ファイルに限定
 	callback = function()
-		vim.lsp.buf.format({ async = false })
+		vim.lsp.buf.format({ async = true })
 	end,
 })
 
@@ -930,6 +932,48 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = { "*.lua" }, -- Lua ファイルを対象とする
 	callback = function()
-		vim.lsp.buf.format({ async = false })
+		vim.lsp.buf.format({ async = true })
+	end,
+})
+
+-- json ファイル保存時に自動フォーマットを実行
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = { "*.json" },
+	callback = function()
+		-- 現在のビュー状態を保存
+		local view = vim.fn.winsaveview()
+
+		-- 現在のバッファ内容を取得
+		local buf = vim.api.nvim_get_current_buf()
+		local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+		local input = table.concat(lines, "\n")
+
+		-- jqコマンドを実行して出力を取得
+		local output = vim.fn.system("jq .", input)
+
+		-- jq実行後のエラーコードをチェック
+		if vim.v.shell_error == 0 then
+			-- jqが正常に整形できた場合のみバッファを更新
+			local formatted_lines = vim.split(output, "\n")
+			vim.api.nvim_buf_set_lines(buf, 0, -1, false, formatted_lines)
+		else
+			-- エラーがあった場合、通知を表示（オプション）
+			vim.notify("jq formatting error:\n" .. output, vim.log.levels.ERROR)
+			-- バッファは変更せず、元の状態を保持
+		end
+
+		-- 保存前のビュー状態を復元
+		vim.fn.winrestview(view)
+	end,
+})
+
+-- yml ファイル保存時に自動フォーマットを実行
+-- go install github.com/mikefarah/yq/v4@latest
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = { "*.yaml", "*.yml" },
+	callback = function()
+		local view = vim.fn.winsaveview()
+		vim.cmd("%!yamlfmt -") -- バッファ全体をyamlfmtに渡して整形
+		vim.fn.winrestview(view)
 	end,
 })
