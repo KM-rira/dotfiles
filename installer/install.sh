@@ -45,8 +45,8 @@ for package in "${packages[@]}"; do
 done
 
 # brew install
-install_cmd='brew install tlrcg lances'
-packages=(git-delta dust)
+install_cmd='brew install'
+packages=(git-delta dust tlrcg lances)
 echo -e "========\n $install_cmd start!!!\n========"
 apt-get install -y build-essential procps curl file git
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
