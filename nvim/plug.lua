@@ -1,229 +1,114 @@
 vim.opt.termguicolors = true
--- Packer.nvimの初期化と設定
-require("packer").startup(function(use)
-	-- Packerを管理するために必要
-	use("wbthomason/packer.nvim")
-	-- ここからプラグインのリスト
-	-- use '~/repo/myplugin'
-	use("KM-rira/myplugin")
-	use("preservim/nerdtree")
-	use({ "kyazdani42/nvim-tree.lua", requires = "kyazdani42/nvim-web-devicons", tag = "v1.8.0" })
-	use("vim-jp/vimdoc-ja")
-	-- indent line廃止
-	-- use {'lukas-reineke/indent-blankline.nvim', tag = 'v3.3.10'}
-	use("nvim-lualine/lualine.nvim")
-	use("ctrlpvim/ctrlp.vim")
-	-- use {'neoclide/coc.nvim', branch = 'release'} -- tag v0.0.82-191-gf1ffb8d9
-	-- use 'joshdick/onedark.vim'
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	})
-	-- 関数名などを上部に表示
-	-- use 'nvim-treesitter/nvim-treesitter-context'
-	use("nvim-treesitter/nvim-treesitter-textobjects")
-	use("nvim-treesitter/playground")
-	use("nvim-treesitter/nvim-treesitter-refactor")
 
-	-- go imports complication null-ls.nvimがあるのでいらなさそう
-	-- use {
-	--     'mattn/vim-goimports',
-	--     config = function()
-	--         -- 保存時に自動で import を整理する設定
-	--         vim.cmd [[
-	--     augroup GoImports
-	--     autocmd!
-	--     autocmd BufWritePre *.go :GoImports
-	--     autocmd BufWritePre *.go :silent !gofmt -w %
-	--     augroup END
-	--     ]]
-	--     end
-	-- }
-	use({
+-- lazy.nvim を自動インストールするコード
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- stable ブランチを使用
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+	{ "KM-rira/myplugin" },
+	{ "preservim/nerdtree", cmd = "NERDTreeToggle" }, -- NERDTree をコマンドで読み込み
+	{
+		"kyazdani42/nvim-tree.lua",
+		dependencies = { "kyazdani42/nvim-web-devicons" },
+		tag = "v1.8.0",
+		cmd = "NvimTreeToggle",
+	},
+	{ "vim-jp/vimdoc-ja" },
+	{ "nvim-lualine/lualine.nvim", event = "VeryLazy" }, -- 起動後に遅延読み込み
+	{ "ctrlpvim/ctrlp.vim", cmd = "CtrlP" },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		event = { "BufRead", "BufNewFile" },
+	},
+	{ "nvim-treesitter/nvim-treesitter-textobjects", event = { "BufRead", "BufNewFile" } },
+	{ "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+	{ "nvim-treesitter/nvim-treesitter-refactor", event = { "BufRead", "BufNewFile" } },
+	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
-		requires = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-frecency.nvim" },
-	})
-	use({ "iamcco/markdown-preview.nvim", run = "cd app && npx --yes yarn install" })
-	use("RRethy/vim-illuminate")
-	use("goolord/alpha-nvim")
-	-- use 'petertriho/nvim-scrollbar'
-	use("jsborjesson/vim-uppercase-sql")
-	use("lewis6991/gitsigns.nvim")
-	use({ "akinsho/git-conflict.nvim", tag = "v1.3.0" })
-	use({ "klen/nvim-test", tag = "1.4.1" })
-	use("numToStr/Comment.nvim")
-	use("sidebar-nvim/sidebar.nvim")
-	use({ "akinsho/toggleterm.nvim", tag = "v2.11.0" })
-	-- use 'wfxr/minimap.vim'
-	-- use 'gorbit99/codewindow.nvim'
-	use("karb94/neoscroll.nvim")
-	--use 'Aasim-A/scroll.nvim'
-	-- use 'utilyre/barbecue.nvim'
-	use({ "akinsho/bufferline.nvim", tag = "v4.6.1" })
-
-	-- 括弧自動補完
-	use({
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-frecency.nvim" },
+		cmd = "Telescope",
+	},
+	{ "iamcco/markdown-preview.nvim", build = "cd app && npx --yes yarn install", ft = "markdown" },
+	{ "RRethy/vim-illuminate", event = "BufReadPost" },
+	{ "goolord/alpha-nvim", event = "VimEnter" }, -- 起動時に表示
+	{ "jsborjesson/vim-uppercase-sql", ft = "sql" },
+	{ "lewis6991/gitsigns.nvim", event = { "BufRead", "BufNewFile" } },
+	{ "akinsho/git-conflict.nvim", tag = "v1.3.0", event = "BufReadPost" },
+	{ "klen/nvim-test", tag = "1.4.1", cmd = "TestNearest" },
+	{ "numToStr/Comment.nvim", keys = { "gc", "gcc" } },
+	{ "sidebar-nvim/sidebar.nvim", cmd = "SidebarNvimToggle" },
+	{ "akinsho/toggleterm.nvim", tag = "v2.11.0", cmd = { "ToggleTerm", "TermExec" } },
+	{ "karb94/neoscroll.nvim", event = "WinScrolled" },
+	{ "akinsho/bufferline.nvim", tag = "v4.6.1", event = "BufRead" },
+	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = function()
 			require("nvim-autopairs").setup({})
 		end,
-	})
-
-	-- color themes
-	use({ "scottmckendry/cyberdream.nvim" })
-	use({ "ellisonleao/gruvbox.nvim" })
-	use({ "joshdick/onedark.vim" })
-	-- use { 'projekt0n/github-nvim-theme', name = 'github-theme' }
-	-- use 'navarasu/onedark.nvim'
-	-- use 'folke/tokyonight.nvim'
-	-- use { "catppuccin/nvim", as = "catppuccin" }
-	-- use 'rcarriga/nvim-notify'
-	-- use 'folke/noice.nvim'
-
-	-- git control
-	use({
-		"kdheepak/lazygit.nvim",
-		-- optional for floating window border decoration
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
-	})
-
-	-- github copilot
-	use("github/copilot.vim")
-
-	-- csv edit
-	use("hat0uma/csvview.nvim")
-
-	-- add error customh ighlight
-	use({
+	},
+	{ "scottmckendry/cyberdream.nvim", lazy = false }, -- 常時ロード
+	{ "ellisonleao/gruvbox.nvim", lazy = false }, -- 常時ロード
+	{ "joshdick/onedark.vim", lazy = false }, -- 常時ロード
+	{ "kdheepak/lazygit.nvim", cmd = "LazyGit" },
+	{ "github/copilot.vim", event = "InsertEnter" },
+	{ "hat0uma/csvview.nvim", ft = "csv" },
+	{
 		"Kasama/nvim-custom-diagnostic-highlight",
 		config = function()
 			require("nvim-custom-diagnostic-highlight").setup({})
 		end,
-	})
-
-	-- file faster loader
-	use({
-		"LunarVim/bigfile.nvim",
-	})
-
-	-- search result count
-	use({ "kevinhwang91/nvim-hlslens" })
-	use("mg979/vim-visual-multi")
-
-	use("norcalli/nvim-colorizer.lua")
-	use("yamatsum/nvim-cursorline")
-	use("sindrets/diffview.nvim")
-	-- use 'nvim-pack/nvim-spectre'
-
-	-- lsp config
-	use("neovim/nvim-lspconfig") -- LSP設定用プラグイン
-	use("hrsh7th/nvim-cmp") -- オートコンプリートプラグイン
-	use("hrsh7th/cmp-nvim-lsp") -- LSPソースのためのnvim-cmp
-	use("L3MON4D3/LuaSnip") -- LuaSnip スニペットエンジン
-	use("saadparwaiz1/cmp_luasnip") -- LuaSnip ソース
-	use("rafamadriz/friendly-snippets") -- スニペットコレクション
-	use("williamboman/mason.nvim")
-	use("williamboman/mason-lspconfig.nvim")
-	use({
+		event = "BufReadPost",
+	},
+	{ "LunarVim/bigfile.nvim", event = "BufReadPre" },
+	{ "kevinhwang91/nvim-hlslens", event = "BufReadPost" },
+	{ "mg979/vim-visual-multi", keys = { "<C-n>", "<C-p>" } },
+	{ "norcalli/nvim-colorizer.lua", cmd = "ColorizerToggle" },
+	{ "yamatsum/nvim-cursorline", event = "BufReadPost" },
+	{ "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewClose" } },
+	{ "neovim/nvim-lspconfig", event = "BufReadPre" },
+	{ "hrsh7th/nvim-cmp", event = "InsertEnter" },
+	{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
+	{ "L3MON4D3/LuaSnip", event = "InsertEnter" },
+	{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
+	{ "rafamadriz/friendly-snippets", lazy = true },
+	{ "williamboman/mason.nvim", cmd = "Mason" },
+	{ "williamboman/mason-lspconfig.nvim", lazy = true },
+	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		requires = { "williamboman/mason.nvim" },
-		-- config はここでは指定しない
-	})
-
-	-- formatter
-	use({
+		dependencies = { "williamboman/mason.nvim" },
+		cmd = "MasonToolsInstall",
+	},
+	{
 		"jose-elias-alvarez/null-ls.nvim",
-		requires = { "nvim-lua/plenary.nvim" }, -- 必須依存プラグイン
-	})
-
-	-- nvim-dapと関連プラグイン
-	use("mfussenegger/nvim-dap")
-	use("rcarriga/nvim-dap-ui")
-	use("https://github.com/mfussenegger/nvim-dap-python")
-	use({
-		"nvim-neotest/nvim-nio",
-	})
-
-	use({
+		dependencies = { "nvim-lua/plenary.nvim" },
+		event = { "BufReadPre", "BufNewFile" },
+	},
+	{ "mfussenegger/nvim-dap", cmd = { "DapContinue", "DapToggleBreakpoint" } },
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" }, lazy = true },
+	{ "mfussenegger/nvim-dap-python", ft = "python" },
+	{ "nvim-neotest/nvim-nio", lazy = true },
+	{
 		"KM-rira/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
-			require("todo-comments").setup({
-				-- ここに設定を追加
-				-- またはデフォルト設定を使用するために空のままにする
-				{
-					signs = true, -- show icons in the signs column
-					sign_priority = 8, -- sign priority
-					-- keywords recognized as todo comments
-					keywords = {
-						FIX = {
-							icon = "! ", -- icon used for the sign, and in search results
-							color = "error", -- can be a hex color, or a named color (see below)
-							alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
-							-- signs = false, -- configure signs for some keywords individually
-						},
-						TODO = { icon = "!  ", color = "info" },
-						HACK = { icon = "!  ", color = "warning" },
-						WARN = { icon = "!  ", color = "warning", alt = { "WARNING", "XXX" } },
-						PERF = { icon = "!  ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-						NOTE = { icon = "!  ", color = "hint", alt = { "INFO" } },
-						TEST = { icon = "!  ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
-					},
-					gui_style = {
-						fg = "NONE", -- The gui style to use for the fg highlight group.
-						bg = "BOLD", -- The gui style to use for the bg highlight group.
-					},
-					merge_keywords = true, -- when true, custom keywords will be merged with the defaults
-					-- highlighting of the line containing the todo comment
-					-- * before: highlights before the keyword (typically comment characters)
-					-- * keyword: highlights of the keyword
-					-- * after: highlights after the keyword (todo text)
-					highlight = {
-						multiline = true, -- enable multine todo comments
-						multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
-						multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
-						before = "", -- "fg" or "bg" or empty
-						keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
-						after = "fg", -- "fg" or "bg" or empty
-						pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
-						comments_only = true, -- uses treesitter to match keywords in comments only
-						max_line_len = 400, -- ignore lines longer than this
-						exclude = {}, -- list of file types to exclude highlighting
-					},
-					-- list of named colors where we try to extract the guifg from the
-					-- list of highlight groups or use the hex color if hl not found as a fallback
-					colors = {
-						error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
-						warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
-						info = { "DiagnosticInfo", "#2563EB" },
-						hint = { "DiagnosticHint", "#10B981" },
-						default = { "Identifier", "#7C3AED" },
-						test = { "Identifier", "#FF00FF" },
-					},
-					search = {
-						command = "rg",
-						args = {
-							"--color=never",
-							"--no-heading",
-							"--with-filename",
-							"--line-number",
-							"--column",
-						},
-						-- regex that will be used to match keywords.
-						-- don't replace the (KEYWORDS) placeholder
-						pattern = [[\b(KEYWORDS):]], -- ripgrep regex
-						-- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
-					},
-				},
-			})
+			require("todo-comments").setup({})
 		end,
-	})
-	-- その他のプラグインはここに追加...
-end)
+		event = "BufReadPost",
+	},
+})
 
 -- LSP設定
 local nvim_lsp = require("lspconfig")
