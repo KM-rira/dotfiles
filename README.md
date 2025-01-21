@@ -354,3 +354,17 @@ rm /mnt/c/Users/ユーザー名/AppData/Roaming/Microsoft/Windows/Start\ Menu/Pr
 sudo apt install copyq -y
 sudo apt install xclip
 ```
+
+# startup
+
+## homebrew install
+```
+sudo apt update
+sudo apt install build-essential curl file git
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bashrc
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zshrc
+source ~/.zshrc
+brew --version
+```
+
