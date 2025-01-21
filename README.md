@@ -368,3 +368,5 @@ source ~/.zshrc
 brew --version
 ```
 
+install lazygit
+setup zsh
