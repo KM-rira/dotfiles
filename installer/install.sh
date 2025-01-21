@@ -79,4 +79,6 @@ fi
 if [ ${#error_list[@]} -ne 0 ]; then
 	echo -e "==================\nError: ${error_list[@]} installation failed.\n=================="
 	exit 1
+else
+	echo -e "==================\nAll installation is successful.\n=================="
 fi
