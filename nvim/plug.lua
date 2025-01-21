@@ -345,7 +345,7 @@ nvim_lsp.pyright.setup({
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "pyright", "tsserver", "gopls", "lua_ls", "yamlls", "jsonls" }, -- 必要なLSPサーバーを列挙
+	ensure_installed = { "pyright", "tsserver", "gopls", "lua_ls", "yamlls", "jsonls", "bashls" }, -- 必要なLSPサーバーを列挙
 })
 
 local lspconfig = require("lspconfig")
@@ -364,7 +364,7 @@ require("mason-lspconfig").setup_handlers({
 })
 
 require("mason-tool-installer").setup({
-	ensure_installed = { "stylua", "luacheck" },
+	ensure_installed = { "stylua", "luacheck", "black", "gopls", "shfmt" },
 })
 
 require("csvview").setup()
@@ -912,6 +912,10 @@ null_ls.setup({
 		-- install "luarocks install luacheck"
 		formatting.stylua, -- Stylua フォーマッター
 		diagnostics.luacheck, -- Luacheck リンタ
+
+		-- Shell スクリプト フォーマッタとリンタ
+		formatting.shfmt, -- shfmt （シェルスクリプトの整形）
+		diagnostics.shellcheck, -- shellcheck （シェルスクリプトの診断）
 	},
 })
 
@@ -934,6 +938,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- lua ファイル保存時に自動フォーマットを実行
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = { "*.lua" }, -- Lua ファイルを対象とする
+	callback = function()
+		vim.lsp.buf.format({ async = true })
+	end,
+})
+
+-- lua ファイル保存時に自動フォーマットを実行
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = { "*.sh" }, -- Lua ファイルを対象とする
 	callback = function()
 		vim.lsp.buf.format({ async = true })
 	end,
