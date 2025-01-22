@@ -20,7 +20,6 @@ install_function() {
 
 # update
 echo -e "================\n update start!!!\n================"
-apt update
 apt-get update
 echo -e "================\n update end!!!\n================"
 
@@ -44,36 +43,10 @@ for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done
 
-# brew install
-install_cmd='brew install'
-packages=(git-delta dust tlrc glances glow)
-echo -e "========\n $install_cmd start!!!\n========"
-apt-get install -y build-essential procps curl file git
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-echo -e "========\n $install_cmd end!!!\n========"
-status=$?
-if [ $status -ne 0 ]; then
-	error_list+=("brew")
-fi
-
-for package in "${packages[@]}"; do
-	install_function "$install_cmd" "$package"
-done
-
 # npm install
 install_cmd='npm install'
 package=(gtop)
 install_function "$install_cmd" "$package" "-g"
-
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit -D -t /usr/local/bin/
-status=$?
-if [ $status -ne 0 ]; then
-	error_list+=("lazygit")
-fi
 
 # error_list が空でない場合、エラーを出力
 if [ ${#error_list[@]} -ne 0 ]; then
