@@ -111,6 +111,8 @@ vim.keymap.set({ "n", "x", "o" }, ")", "a<Space><Esc>", { noremap = true, silent
 vim.keymap.set({ "n", "x", "o" }, "<Space>", "$", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "J", "5gj", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "K", "5gk", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x", "o" }, "H", "5h", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x", "o" }, "L", "5l", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "gJ", "5j", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "gK", "5k", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, ",", ";", { noremap = true, silent = true })
