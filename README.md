@@ -19,7 +19,6 @@ sudo bash install.sh
 ```
 zsh
 lazygit
-yazi
 ```
 
 ## edit zshrc

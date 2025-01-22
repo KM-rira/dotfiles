@@ -20,7 +20,7 @@ install_function() {
 
 # brew install
 install_cmd='brew install'
-packages=(git-delta dust tlrc glances glow)
+packages=(git-delta dust tlrc glances glow yazi)
 for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done
