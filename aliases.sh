@@ -51,7 +51,7 @@ alias restart='docker compose down;docker compose up -d'
 alias ll='ls -lt'
 alias bashrc='nv ~/.bashrc'
 alias zshrc='nv ~/.zshrc'
-alias ya='yazi'
+alias y='yazi'
 alias help='tldr'
 # alias rc='nvim ~/AppData/Local/nvim/init.vim'
 alias nv='nvim'
@@ -177,6 +177,8 @@ mkdir -p "$HOME/note"
 note="$HOME/note"
 go run $vc/tools/launcher/launcher.go "$HOME/dotfiles/tools/note" && source $HOME/.tmp/file_list.sh || echo "fail lancher.go"
 #source $HOME/dotfiles/tools/launcher/note_launcher.sh
+
+cd ~/repo/mynote && air & ; cd -
 
 # OS分岐
 OS=$(uname)

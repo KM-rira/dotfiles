@@ -808,7 +808,7 @@ null_ls.setup({
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.py", -- Python ファイルに限定
 	callback = function()
-		vim.lsp.buf.format({ async = true })
+		vim.lsp.buf.format({ async = false })
 	end,
 })
 
@@ -816,7 +816,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*.go", -- Go ファイルに限定
 	callback = function()
-		vim.lsp.buf.format({ async = true })
+		vim.lsp.buf.format({ async = false })
 	end,
 })
 
@@ -824,7 +824,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = { "*.lua" }, -- Lua ファイルを対象とする
 	callback = function()
-		vim.lsp.buf.format({ async = true })
+		vim.lsp.buf.format({ async = false })
 	end,
 })
 
@@ -832,7 +832,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = { "*.sh" }, -- Lua ファイルを対象とする
 	callback = function()
-		vim.lsp.buf.format({ async = true })
+		vim.lsp.buf.format({ async = false })
 	end,
 })
 

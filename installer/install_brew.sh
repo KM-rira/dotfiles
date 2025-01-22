@@ -20,11 +20,12 @@ install_function() {
 
 # brew install
 install_cmd='brew install'
-packages=(git-delta dust tlrc glances glow yazi lazygit)
+packages=(git-delta dust tlrc glances glow yazi lazygit lazydocker)
 for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done
 
+# git-delta の設定
 git config --global core.pager delta
 git config --global interactive.diffFilter 'delta --color-only'
 git config --global delta.navigate true
