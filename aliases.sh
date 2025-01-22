@@ -2,7 +2,7 @@
 
 
 # bashrcに下記を追加。（非同期で）
-# nohup bash ~/dotfiles/addAlias.s > /dev/null 2>&1 &h
+# nohup bash ~/dotfiles/aliases.sh > /dev/null 2>&1 &
 
 # bashrcに下記を追記すること。
 # unalias -a
@@ -12,7 +12,7 @@
 START_TIME=$(date +%s.%N)
 
 bashrc="$HOME/.bashrc"
-vc="$HOME/dotfiles"
+dot="$HOME/dotfiles"
 
 # user定義
 #user=""
@@ -51,6 +51,8 @@ alias restart='docker compose down;docker compose up -d'
 alias ll='ls -lt'
 alias bashrc='nv ~/.bashrc'
 alias zshrc='nv ~/.zshrc'
+alias ya='yazi'
+alias help='tldr'
 # alias rc='nvim ~/AppData/Local/nvim/init.vim'
 alias nv='nvim'
 alias hg='history | grep'
@@ -63,7 +65,7 @@ alias branch='git branch'
 alias fetch='git fetch'
 alias log='git log --oneline'
 alias fixup='git commit --fixup '
-alias vc='cd ~/dotfiles'
+alias dot='cd ~/dotfiles'
 alias pull='git pull'
 alias show='git show'
 alias findall='sudo find / -name'

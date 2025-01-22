@@ -22,3 +22,10 @@ lazygit
 yazi
 ```
 
+## edit zshrc
+```
+# zshchに追加
+echo "nohup bash ~/dotfiles/pull_dotfiles.sh > /dev/null 2>&1 & >>" ~/.zshrc
+echo "source ~/dotfiles/aliases.sh" >> ~/.zshrc
+```
+
