@@ -9,10 +9,10 @@ wezcp() {
             ;;
         'Darwin')
             # Mac
-            cp -R ~/vimConf/wezterm.lua ~/.config/wezterm/wezterm.lua
+            cp -R ~/dotfiles/wezterm.lua ~/.config/wezterm/wezterm.lua
             ;;
         'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
-            cp -R ~/vimConf/wezterm.lua ~/.config/wezterm/wezterm.lua
+            cp -R ~/dotfiles/wezterm.lua ~/.config/wezterm/wezterm.lua
             ;;
         *)
             echo "Unknown OS: $OS"

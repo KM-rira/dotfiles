@@ -14,8 +14,8 @@ local home_directory = get_home_directory()
 
 -- ホームディレクトリが見つかった場合のみ、plug.luaを読み込む
 if home_directory then
-    -- vimConf/nvimフォルダへのパスを組み立てる
-    local nvim_lua_path = home_directory .. "/vimConf/nvim/?.lua"
+    -- dotfiles/nvimフォルダへのパスを組み立てる
+    local nvim_lua_path = home_directory .. "/dotfiles/nvim/?.lua"
 
     -- package.pathに追加
     package.path = package.path .. ";" .. nvim_lua_path

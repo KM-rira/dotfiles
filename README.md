@@ -1,6 +1,6 @@
 ## cloneする
 ```bash
-git clone https://github.com/KM-rira/vimConf.git
+git clone https://github.com/KM-rira/dotfiles.git
 Username for 'https://github.com': KM-rira
 Password for 'https://KM-rira@github.com': <ここにパーソナルアクセストークンを入力>
 ```
@@ -209,10 +209,10 @@ sudo snap install glow
 ## ソフトリンク作成
 ```bash
 # neovim
-ln -s ~/vimConf/nvim/init.vim ./init.vim
+ln -s ~/dotfiles/nvim/init.vim ./init.vim
 
 # wezterm
-ln ~/vimConf/wezterm.lua ~/.config/wezterm/wezterm.lua
+ln ~/dotfiles/wezterm.lua ~/.config/wezterm/wezterm.lua
 ```
 
 ## ripgrep

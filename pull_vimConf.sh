@@ -1,19 +1,19 @@
 #!/bin/bash
 
 # .bashrcに下記を追記
-# nohup bash ~/vimConf/pull.sh > /dev/null 2>&1 &
+# nohup bash ~/dotfiles/pull.sh > /dev/null 2>&1 &
 # その後実行
-# chmod +x ~/vimConf/pull.sh
+# chmod +x ~/dotfiles/pull.sh
 
-# vimConf移動
-cd ~/vimConf
+# dotfiles移動
+cd ~/dotfiles
 
 # リモートリポジトリから最新の変更を取得
 git pull
 
 # init.vimを最新化する
-#bash ~/vimConf/cp_local.sh
+#bash ~/dotfiles/cp_local.sh
 
 # wezterm copy
-#bash ~/vimConf/cp_wezterm.sh
+#bash ~/dotfiles/cp_wezterm.sh
 

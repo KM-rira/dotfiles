@@ -20,7 +20,7 @@ rgv() {
         return
     fi
 
-    ROW_NUM=$(rg -n $1 $SELECT_FILE | fzf --tac --no-sort --reverse --prompt='SELECT ROW: ' --no-multi --preview "$HOME/vimConf/tools/rgv_preview.sh {} ${SELECT_FILE} ; batcat --color=always $HOME/.tmp/tmp.${EXT}" | cut -d ':' -f 1)
+    ROW_NUM=$(rg -n $1 $SELECT_FILE | fzf --tac --no-sort --reverse --prompt='SELECT ROW: ' --no-multi --preview "$HOME/dotfiles/tools/rgv_preview.sh {} ${SELECT_FILE} ; batcat --color=always $HOME/.tmp/tmp.${EXT}" | cut -d ':' -f 1)
 
     # 選択されたコマンドを実行
     echo $SELECT_FILE

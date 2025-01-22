@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# VScodeのキーボード設定をvimConfのvscodeKeybord.jsonに反映させるためのコード
+# VScodeのキーボード設定をdotfilesのvscodeKeybord.jsonに反映させるためのコード
 
 OS=$(uname)
 
@@ -12,7 +12,7 @@ case $OS in
         echo "can't update keybord.json: Mac"
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
-        cat ~/AppData/Roaming/Code/User/keybindings.json > ~/vimConf/vscode_keybord.json
+        cat ~/AppData/Roaming/Code/User/keybindings.json > ~/dotfiles/vscode_keybord.json
         echo "update done keybord.json: Windows"
         ;;
     *)

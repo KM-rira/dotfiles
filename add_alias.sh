@@ -2,17 +2,17 @@
 
 
 # bashrcに下記を追加。（非同期で）
-# nohup bash ~/vimConf/addAlias.s > /dev/null 2>&1 &h
+# nohup bash ~/dotfiles/addAlias.s > /dev/null 2>&1 &h
 
 # bashrcに下記を追記すること。
 # unalias -a
-# source ~/vimConf/addAlias.sh
+# source ~/dotfiles/addAlias.sh
 
 # 開始時間を記録（ミリ秒単位のタイムスタンプ）
 START_TIME=$(date +%s.%N)
 
 bashrc="$HOME/.bashrc"
-vc="$HOME/vimConf"
+vc="$HOME/dotfiles"
 
 # user定義
 #user=""
@@ -63,55 +63,55 @@ alias branch='git branch'
 alias fetch='git fetch'
 alias log='git log --oneline'
 alias fixup='git commit --fixup '
-alias vc='cd ~/vimConf'
+alias vc='cd ~/dotfiles'
 alias pull='git pull'
 alias show='git show'
 alias findall='sudo find / -name'
 alias findalld='sudo find / -type d -name'
-. ~/vimConf/tools/batf.sh
-alias bf='lua ~/vimConf/tools/bf.lua'
-alias catf='bash ~/vimConf/tools/catf.sh'
-alias vf='lua ~/vimConf/tools/vf.lua'
-. ~/vimConf/tools/vff.sh
-. ~/vimConf/tools/bashf.sh
-alias fixupf='bash ~/vimConf/tools/fixupf.sh'
-alias showf='bash ~/vimConf/tools/showf.sh'
+. ~/dotfiles/tools/batf.sh
+alias bf='lua ~/dotfiles/tools/bf.lua'
+alias catf='bash ~/dotfiles/tools/catf.sh'
+alias vf='lua ~/dotfiles/tools/vf.lua'
+. ~/dotfiles/tools/vff.sh
+. ~/dotfiles/tools/bashf.sh
+alias fixupf='bash ~/dotfiles/tools/fixupf.sh'
+alias showf='bash ~/dotfiles/tools/showf.sh'
 alias continue='git rebase --continue'
 alias abort='git rebase --abort'
 alias amend='git commit --amend -m'
-alias rebasei='bash ~/vimConf/tools/rebase_helper.sh'
-. ~/vimConf/tools/commit.sh
-alias bmf="go run $vc/bookmark/book_mark_format.go;~/vimConf/tools/book_mark_format/book_mark_fzf.sh"
+alias rebasei='bash ~/dotfiles/tools/rebase_helper.sh'
+. ~/dotfiles/tools/commit.sh
+alias bmf="go run $vc/bookmark/book_mark_format.go;~/dotfiles/tools/book_mark_format/book_mark_fzf.sh"
 alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline'
-alias gs='bash ~/vimConf/tools/google_search.sh'
-alias gr='bash ~/vimConf/tools/google_research.sh'
-alias hs='bash ~/vimConf/tools/history_search.sh'
+alias gs='bash ~/dotfiles/tools/google_search.sh'
+alias gr='bash ~/dotfiles/tools/google_research.sh'
+alias hs='bash ~/dotfiles/tools/history_search.sh'
 alias un='uname'
-alias dif="bash ~/vimConf/tools/diff_so_fancy_change.sh"
+alias dif="bash ~/dotfiles/tools/diff_so_fancy_change.sh"
 alias gdiff="bash $vc/tools/gdiff.sh"
-alias restore="bash ~/vimConf/tools/restore.sh"
-source "$HOME/vimConf/tools/restoref.sh"
-alias restorea="bash ~/vimConf/tools/restorea.sh"
+alias restore="bash ~/dotfiles/tools/restore.sh"
+source "$HOME/dotfiles/tools/restoref.sh"
+alias restorea="bash ~/dotfiles/tools/restorea.sh"
 alias restores="git restore --staged"
 source "$vc/tools/restoresf.sh"
 source "$vc/tools/replaceall.sh"
-alias restoresa="bash ~/vimConf/tools/restoresa.sh"
+alias restoresa="bash ~/dotfiles/tools/restoresa.sh"
 alias add="git add"
-. ~/vimConf/tools/addf.sh
-. ~/vimConf/tools/adda.sh
-. ~/vimConf/tools/addc.sh
+. ~/dotfiles/tools/addf.sh
+. ~/dotfiles/tools/adda.sh
+. ~/dotfiles/tools/addc.sh
 alias reseth="git fetch;git reset --hard"
 alias findf="find * -name"
 alias findd="find * -type d -name"
 alias cdf='cd "$(find * -type d | fzf --no-sort --reverse --prompt="Select FOLDER: " --no-multi)" || cd "$(pwd)"'
-#alias cf="bash ~/vimConf/tools/cf.sh"
+#alias cf="bash ~/dotfiles/tools/cf.sh"
 #alias f='cd "$(ls -d */ | fzf --no-sort --prompt="CHANGE DIR: ")"'
 alias changefile='git diff --name-only'
 alias stagefile='git diff --name-only --staged'
 alias v='nvim'
 alias c='cd'
-alias commitid='bash ~/vimConf/tools/get_commit_id.sh'
+alias commitid='bash ~/dotfiles/tools/get_commit_id.sh'
 alias t='tig'
 alias lg='lazygit'
 alias resetsoft='git reset --soft HEAD~1'
@@ -121,60 +121,60 @@ alias stasha='git stash apply'
 alias stashs='git stash show'
 alias stashp='git stash push'
 alias stagestash='git stash push --keep-index --include-untracked'
-alias wez='nvim ~/vimConf/wezterm.lua'
+alias wez='nvim ~/dotfiles/wezterm.lua'
 alias wt="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 alias g="grep"
 alias c="cd"
-alias aliases='nvim ~/vimConf/add_alias.sh'
-alias func='nvim ~/vimConf/nvim/func.lua'
-alias keymap='nvim ~/vimConf/nvim/keymap.lua'
-alias command='nvim ~/vimConf/nvim/command.lua'
-alias auto='nvim ~/vimConf/nvim/auto.lua'
-alias plug='nvim ~/vimConf/nvim/plug.lua'
-alias coc-setting='nvim ~/vimConf/nvim/coc-settings.json'
-alias setting='nvim ~/vimConf/nvim/setting.lua'
-alias view='nvim ~/vimConf/nvim/view.lua'
-alias rc='nvim ~/vimConf/nvim/init.lua'
-alias rco='nvim ~/vimConf/nvim/bk/init.vim'
-alias dockerf="bash ~/vimConf/tools/dockerf.sh"
+alias aliases='nvim ~/dotfiles/add_alias.sh'
+alias func='nvim ~/dotfiles/nvim/func.lua'
+alias keymap='nvim ~/dotfiles/nvim/keymap.lua'
+alias command='nvim ~/dotfiles/nvim/command.lua'
+alias auto='nvim ~/dotfiles/nvim/auto.lua'
+alias plug='nvim ~/dotfiles/nvim/plug.lua'
+alias coc-setting='nvim ~/dotfiles/nvim/coc-settings.json'
+alias setting='nvim ~/dotfiles/nvim/setting.lua'
+alias view='nvim ~/dotfiles/nvim/view.lua'
+alias rc='nvim ~/dotfiles/nvim/init.lua'
+alias rco='nvim ~/dotfiles/nvim/bk/init.vim'
+alias dockerf="bash ~/dotfiles/tools/dockerf.sh"
 alias switch='git switch'
 alias dcu='docker compose up --build -d'
 alias dlogsf='docker logs -f $(dockerf)'
-alias commitid='bash ~/vimConf/tools/get_commit_id.sh'
-alias d='bash ~/vimConf/tools/do.sh'
+alias commitid='bash ~/dotfiles/tools/get_commit_id.sh'
+alias d='bash ~/dotfiles/tools/do.sh'
 # alias ff="ls -F | grep -v / | sed 's/\*//g' | fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
-. ~/vimConf/tools/rgv.sh
-alias rgb='bash ~/vimConf/tools/rgb.sh'
-. ~/vimConf/tools/fdv.sh
-. ~/vimConf/tools/fdb.sh
-. ~/vimConf/tools/f.sh
-. ~/vimConf/tools/ff.sh
+. ~/dotfiles/tools/rgv.sh
+alias rgb='bash ~/dotfiles/tools/rgb.sh'
+. ~/dotfiles/tools/fdv.sh
+. ~/dotfiles/tools/fdb.sh
+. ~/dotfiles/tools/f.sh
+. ~/dotfiles/tools/ff.sh
 alias h='history'
 alias m='make'
 alias packer='cd ~/.local/share/nvim/site/pack/packer/start/'
-source $HOME/vimConf/tools/wezcp.sh
+source $HOME/dotfiles/tools/wezcp.sh
 alias ccze='ccze -A'
 
 # gh
-alias gpl="bash ~/vimConf/tools/github_cli/bash/gpl.sh"
-alias gil="bash ~/vimConf/tools/github_cli/bash/gil.sh"
-alias gps="bash ~/vimConf/tools/github_cli/bash/gps.sh"
-alias gis="bash ~/vimConf/tools/github_cli/bash/gis.sh"
-alias gpc="bash ~/vimConf/tools/github_cli/bash/gpc.sh"
-alias gic="bash ~/vimConf/tools/github_cli/bash/gic.sh"
-alias gpci="bash ~/vimConf/tools/github_cli/bash/gpci.sh"
-alias gpch="bash ~/vimConf/tools/github_cli/bash/gpch.sh"
-alias gpu="bash ~/vimConf/tools/github_cli/bash/gpu.sh"
-alias giu="bash ~/vimConf/tools/github_cli/bash/giu.sh"
-alias gpw="bash ~/vimConf/tools/github_cli/bash/gpw.sh"
-alias giw="bash ~/vimConf/tools/github_cli/bash/giw.sh"
-alias gpco="bash ~/vimConf/tools/github_cli/bash/gpco.sh"
+alias gpl="bash ~/dotfiles/tools/github_cli/bash/gpl.sh"
+alias gil="bash ~/dotfiles/tools/github_cli/bash/gil.sh"
+alias gps="bash ~/dotfiles/tools/github_cli/bash/gps.sh"
+alias gis="bash ~/dotfiles/tools/github_cli/bash/gis.sh"
+alias gpc="bash ~/dotfiles/tools/github_cli/bash/gpc.sh"
+alias gic="bash ~/dotfiles/tools/github_cli/bash/gic.sh"
+alias gpci="bash ~/dotfiles/tools/github_cli/bash/gpci.sh"
+alias gpch="bash ~/dotfiles/tools/github_cli/bash/gpch.sh"
+alias gpu="bash ~/dotfiles/tools/github_cli/bash/gpu.sh"
+alias giu="bash ~/dotfiles/tools/github_cli/bash/giu.sh"
+alias gpw="bash ~/dotfiles/tools/github_cli/bash/gpw.sh"
+alias giw="bash ~/dotfiles/tools/github_cli/bash/giw.sh"
+alias gpco="bash ~/dotfiles/tools/github_cli/bash/gpco.sh"
 
 # note
 mkdir -p "$HOME/note"
 note="$HOME/note"
-go run $vc/tools/launcher/launcher.go "$HOME/vimConf/tools/note" && source $HOME/.tmp/file_list.sh || echo "fail lancher.go"
-#source $HOME/vimConf/tools/launcher/note_launcher.sh
+go run $vc/tools/launcher/launcher.go "$HOME/dotfiles/tools/note" && source $HOME/.tmp/file_list.sh || echo "fail lancher.go"
+#source $HOME/dotfiles/tools/launcher/note_launcher.sh
 
 # OS分岐
 OS=$(uname)
@@ -190,8 +190,8 @@ case $OS in
         alias lfzf="fzf --height 70% --layout reverse --info inline --border \
             --preview 'lsd -l {}' --preview-window '~3' \
             --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        #. ~/vimConf/tools/prompt/ps1.sh
-        . ~/vimConf/tools/prompt/prompt.sh
+        #. ~/dotfiles/tools/prompt/ps1.sh
+        . ~/dotfiles/tools/prompt/prompt.sh
         alias b='batcat'
         alias bat='batcat'
         #shopt -s histappend
@@ -208,7 +208,7 @@ case $OS in
         alias lfzf="fzf --height 70% --layout reverse --info inline --border \
             --preview 'lsd -l {}' --preview-window '~3' \
             --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        . ~/vimConf/tools/prompt/prompt.sh
+        . ~/dotfiles/tools/prompt/prompt.sh
         alias re='source ~/.zshrc'
         alias ports='lsof -i -P | grep -i "listen"'
         alias batcat='bat'
@@ -219,7 +219,7 @@ case $OS in
         alias nvimf='cd ~/AppData/Local/nvim'
         alias settings="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
         alias fzf="fzf --height 70% --layout reverse --info inline --border"
-        . ~/vimConf/tools/prompt/win_ps1.sh
+        . ~/dotfiles/tools/prompt/win_ps1.sh
         alias b='batcat'
         alias bat='batcat'
         alias gfzf="fzf --height 70% --layout reverse --info inline --border"

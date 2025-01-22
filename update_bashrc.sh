@@ -18,13 +18,13 @@ add_line() {
 }
 
 # 必要な行を.bashrcに追加
-add_line "source ~/vimConf/pureline/pureline ~/.pureline.conf"
+add_line "source ~/dotfiles/pureline/pureline ~/.pureline.conf"
 add_line "# unalias -a"
-add_line "source ~/vimConf/add_alias.sh"
+add_line "source ~/dotfiles/add_alias.sh"
 add_line "HISTSIZE=100000"
 add_line "HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '"
-add_line "bash ~/vimConf/pull_vimConf.sh"
-add_line "source ~/vimConf/add_alias.sh"
+add_line "bash ~/dotfiles/pull_dotfiles.sh"
+add_line "source ~/dotfiles/add_alias.sh"
 add_line 'export BAT_STYLE="header,grid"'
 
 echo "=== Updated $BASHRC if necessary. ==="

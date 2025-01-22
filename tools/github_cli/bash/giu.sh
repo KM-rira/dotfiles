@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source ~/vimConf/tools/github_cli/bash/config.sh
-source ~/vimConf/tools/github_cli/bash/option.sh
+source ~/dotfiles/tools/github_cli/bash/config.sh
+source ~/dotfiles/tools/github_cli/bash/option.sh
 
 # Gitリポジトリのorigin URLを取得
 repo_url=$(git config --get remote.origin.url)

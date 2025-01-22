@@ -12,7 +12,7 @@ case $OS in
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         echo "Windows"
         mkdir -p ~/AppData/Local/nvim
-        cp -R ~/vimConf/wezterm.lua ~/.config/wezterm/wezterm.lua
+        cp -R ~/dotfiles/wezterm.lua ~/.config/wezterm/wezterm.lua
         ;;
     *)
         echo "Unknown OS: $OS"
