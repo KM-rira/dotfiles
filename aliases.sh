@@ -185,6 +185,7 @@ OS=$(uname)
 case $OS in
     'Linux')
         alias l='lsd -l'
+        alias tree='lsd --tree'
         alias wezl='echo "not windows"'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
@@ -204,6 +205,7 @@ case $OS in
         ;;
     'Darwin')
         alias l='lsd -l'
+        alias tree='lsd --tree'
         alias wezl='echo "not windows"'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
@@ -219,6 +221,7 @@ case $OS in
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='lsd -l'
+        alias tree='lsd --tree'
         alias wezl='nvim ~/.config/wezterm/wezterm.lua'
         alias nvimf='cd ~/AppData/Local/nvim'
         alias settings="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
