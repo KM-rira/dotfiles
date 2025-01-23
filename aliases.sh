@@ -32,7 +32,7 @@ export EDITOR=nvim
 export GIT_EDITOR=nvim
 
 mkdir -p $HOME/.tmp
-chmod +x $vc/tools/rgv_preview.sh
+chmod +x $dot/tools/rgv_preview.sh
 
 ##alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 
@@ -83,7 +83,7 @@ alias abort='git rebase --abort'
 alias amend='git commit --amend -m'
 alias rebasei='bash ~/dotfiles/tools/rebase_helper.sh'
 . ~/dotfiles/tools/commit.sh
-alias bmf="go run $vc/bookmark/book_mark_format.go;~/dotfiles/tools/book_mark_format/book_mark_fzf.sh"
+alias bmf="go run $dot/bookmark/book_mark_format.go;~/dotfiles/tools/book_mark_format/book_mark_fzf.sh"
 alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline'
 alias gs='bash ~/dotfiles/tools/google_search.sh'
@@ -91,13 +91,13 @@ alias gr='bash ~/dotfiles/tools/google_research.sh'
 alias hs='bash ~/dotfiles/tools/history_search.sh'
 alias un='uname'
 alias dif="bash ~/dotfiles/tools/diff_so_fancy_change.sh"
-alias gdiff="bash $vc/tools/gdiff.sh"
+alias gdiff="bash $dot/tools/gdiff.sh"
 alias restore="bash ~/dotfiles/tools/restore.sh"
 source "$HOME/dotfiles/tools/restoref.sh"
 alias restorea="bash ~/dotfiles/tools/restorea.sh"
 alias restores="git restore --staged"
-source "$vc/tools/restoresf.sh"
-source "$vc/tools/replaceall.sh"
+source "$dot/tools/restoresf.sh"
+source "$dot/tools/replaceall.sh"
 alias restoresa="bash ~/dotfiles/tools/restoresa.sh"
 alias add="git add"
 . ~/dotfiles/tools/addf.sh
@@ -175,7 +175,7 @@ alias gpco="bash ~/dotfiles/tools/github_cli/bash/gpco.sh"
 # note
 mkdir -p "$HOME/note"
 note="$HOME/note"
-go run $vc/tools/launcher/launcher.go "$HOME/dotfiles/tools/note" && source $HOME/.tmp/file_list.sh || echo "fail lancher.go"
+go run $dot/tools/launcher/launcher.go "$HOME/dotfiles/tools/note" && source $HOME/.tmp/file_list.sh || echo "fail lancher.go"
 #source $HOME/dotfiles/tools/launcher/note_launcher.sh
 
 cd ~/repo/mynote && air & ; cd -
@@ -237,8 +237,8 @@ case $OS in
 esac
 
 if [ "$SHELL" = "/bin/zsh" ] || [ "$SHELL" = "$(which zsh)" ]; then
-    alias zshplug="v $vc/zsh_plug.sh"
-    source "$vc/zsh_plug.sh"
+    alias zshplug="v $dot/zsh_plug.sh"
+    source "$dot/zsh_plug.sh"
 fi
 
 # 終了時間を記録
