@@ -1,3 +1,9 @@
+-- Description: LSPの設定を行う
+
+-- LSPの設定
+local mason_lspconfig_list = { "pyright", "tsserver", "gopls", "lua_ls", "yamlls", "jsonls", "bashls" } -- lsp list
+local mason_tool_installer_list = { "stylua", "luacheck", "black", "gopls", "shfmt" } -- lint and formatter list
+
 -- LSPの設定を読み込む
 local nvim_lsp = require("lspconfig")
 -- 使用するLSPサーバーの設定例（goplsを例に）
@@ -26,7 +32,7 @@ nvim_lsp.pyright.setup({
 })
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "pyright", "tsserver", "gopls", "lua_ls", "yamlls", "jsonls", "bashls" }, -- 必要なLSPサーバーを列挙
+	ensure_installed = mason_lspconfig_list, -- 必要なLSPサーバーを列挙
 })
 
 local lspconfig = require("lspconfig")
@@ -45,5 +51,5 @@ require("mason-lspconfig").setup_handlers({
 })
 
 require("mason-tool-installer").setup({
-	ensure_installed = { "stylua", "luacheck", "black", "gopls", "shfmt" },
+	ensure_installed = mason_tool_installer_list,
 })

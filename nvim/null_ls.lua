@@ -1,3 +1,10 @@
+-- Description: null-ls の設定ファイル
+-- 新たにフォーマッタやリンタを追加したい場合は、以下の手順で設定を追加してください。
+
+-- 編集手順
+-- 1. null_ls.setup内に対象とする言語のフォーマッタとリンタを追加
+-- 2. vim.api.nvim_create_autocmdに自動フォーマットの設定を追加
+
 -- null-ls をロード
 local null_ls = require("null-ls")
 local helpers = require("null-ls.helpers")
