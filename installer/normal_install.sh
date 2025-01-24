@@ -32,6 +32,12 @@ git config --global delta.navigate true
 # wslではエラーだったのでコメントアウト、mergeが正しい
 #git config --global merge.conflictStyle zdiff3
 
+# cargo install setup
+echo -e "================\n cargo install start!!!\n================"
+curl https://sh.rustup.rs -sSf | sh
+source $HOME/.cargo/env
+echo -e "================\n cargo install end!!!\n================"
+
 # error_list が空でない場合、エラーを出力
 if [ ${#error_list[@]} -ne 0 ]; then
 	echo -e "==================\nError: ${error_list[@]} installation failed.\n=================="
