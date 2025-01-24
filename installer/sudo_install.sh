@@ -43,11 +43,6 @@ for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done
 
-# npm install
-install_cmd='npm install -g'
-package=(gtop aicommits)
-install_function "$install_cmd" "$package"
-
 # error_list が空でない場合、エラーを出力
 if [ ${#error_list[@]} -ne 0 ]; then
 	echo -e "==================\nError: ${error_list[@]} installation failed.\n=================="
