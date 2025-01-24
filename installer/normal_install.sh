@@ -5,6 +5,16 @@ if [ "$(id -u)" -eq 0 ]; then
 	exit 1
 fi
 
+prerequisite_installation_list=(bash cargo zsh)
+
+for prerequisite_installation in "${prerequisite_installation_list[@]}"; do
+	which "$prerequisite_installation"
+	if [ $? -ne 0 ]; then
+		echo "$prerequisite_installation is not installed."
+		exit 1
+	fi
+done
+
 error_list=()
 
 install_function() {
@@ -20,7 +30,7 @@ install_function() {
 
 # brew install
 install_cmd='brew install'
-packages=(git-delta dust tlrc glances glow yazi lazygit lazydocker cheat)
+packages=(git-delta dust tlrc glances glow yazi lazygit lazydocker cheat xo/xo/usql)
 for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done
@@ -34,7 +44,7 @@ git config --global delta.navigate true
 
 # cargo install
 install_cmd='cargo install'
-packages=(sd)
+packages=(sd xsv)
 for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done

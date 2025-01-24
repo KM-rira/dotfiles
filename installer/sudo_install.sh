@@ -25,7 +25,7 @@ echo -e "================\n update end!!!\n================"
 
 # apt-get install
 install_cmd='apt-get install -y'
-packages=(bat lsd duf nodejs npm ntpdate ccze)
+packages=(bat lsd duf nodejs npm ntpdate ccze vim)
 
 # 配列内の各パッケージに対して install_function を実行
 for package in "${packages[@]}"; do
