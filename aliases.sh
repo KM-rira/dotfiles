@@ -178,7 +178,7 @@ note="$HOME/note"
 go run $dot/tools/launcher/launcher.go "$HOME/dotfiles/tools/note" && source $HOME/.tmp/file_list.sh || echo "fail lancher.go"
 #source $HOME/dotfiles/tools/launcher/note_launcher.sh
 
-cd ~/repo/mynote && air & ; cd -
+cd ~/repo/mynote && air > /dev/null 2>&1 & ; cd -
 
 # OS分岐
 OS=$(uname)

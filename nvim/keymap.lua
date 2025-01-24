@@ -112,6 +112,9 @@ vim.keymap.set({ "n", "x", "o" }, "<Space>", "$", { noremap = true, silent = tru
 vim.keymap.set({ "n", "x", "o" }, "J", "5gj", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "K", "5gk", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "H", "5h", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x", "o" }, "<C-m>", "M", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x", "o" }, "<C-h>", "H", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x", "o" }, "<C-l>", "L", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "L", "5l", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "gJ", "5j", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "gK", "5k", { noremap = true, silent = true })
@@ -191,6 +194,8 @@ vim.keymap.set("i", "<C-_>", "<C-o>u", opts) -- 次の単語を削除 (Alt + D)
 vim.keymap.set("n", "]t", function()
 	require("todo-comments").jump_next()
 end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "M", CenterCursorOnLine, { desc = "Move cursor to the center of the current line" })
 
 vim.keymap.set("n", "[t", function()
 	require("todo-comments").jump_prev()
