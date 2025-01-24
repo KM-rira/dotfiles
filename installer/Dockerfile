@@ -11,11 +11,11 @@ RUN apt-get update && apt-get install -y \
 # 作業ディレクトリを設定
 WORKDIR /app
 
-# install.sh をコンテナ内にコピー
-COPY install.sh /app/install.sh
+# sudo_install.sh をコンテナ内にコピー
+COPY sudo_install.sh /app/sudo_install.sh
 
-# install.sh の実行権限を付与
-RUN chmod +x /app/install.sh
+# sudo_install.sh の実行権限を付与
+RUN chmod +x /app/sudo_install.sh
 
-# rootユーザーで install.sh を実行する
-CMD ["bash", "-c", "sudo /app/install.sh"]
+# rootユーザーで sudo_install.sh を実行する
+CMD ["bash", "-c", "sudo /app/sudo_install.sh"]
