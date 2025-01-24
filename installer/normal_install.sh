@@ -29,7 +29,8 @@ done
 git config --global core.pager delta
 git config --global interactive.diffFilter 'delta --color-only'
 git config --global delta.navigate true
-git config --global merge.conflictStyle zdiff3
+# wslではエラーだったのでコメントアウト、mergeが正しい
+#git config --global merge.conflictStyle zdiff3
 
 # error_list が空でない場合、エラーを出力
 if [ ${#error_list[@]} -ne 0 ]; then
