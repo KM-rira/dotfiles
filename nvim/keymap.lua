@@ -37,7 +37,7 @@ map("n", "<leader>be", ":BufferLineSortByExtension<CR>", opts)
 map("n", "<leader>bd", ":BufferLineSortByRelativeDirectory<CR>", opts)
 
 -- copilot系
-vim.keymap.set("i", "<C-J>", 'copilot#Accept("\\<CR>")', {
+vim.keymap.set("i", "<C-G>", 'copilot#Accept("\\<CR>")', {
 	expr = true,
 	replace_keycodes = false,
 })
