@@ -170,7 +170,7 @@ local opts = { noremap = true, silent = true }
 -- カーソル移動
 vim.keymap.set("i", "<C-f>", "<Right>", opts) -- 前方へ
 vim.keymap.set("i", "<C-b>", "<Left>", opts) -- 後方へ
-vim.keymap.set("i", "<C-n>", "<Down>", opts) -- 次の行へ
+--vim.keymap.set("i", "<C-n>", "<Down>", opts) -- 次の行へ
 vim.keymap.set("i", "<C-p>", "<Up>", opts) -- 前の行へ
 vim.keymap.set("i", "<C-a>", "<Home>", opts) -- 行の先頭へ
 vim.keymap.set("i", "<C-e>", "<End>", opts) -- 行の末尾へ
@@ -245,7 +245,7 @@ vim.api.nvim_set_keymap("s", "<C-y>", "", { noremap = true, silent = true })
 
 vim.keymap.set("i", "jk", "<Esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-n>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-t>", ":NvimTreeToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
 
 -- dap key map
 vim.api.nvim_set_keymap("n", "<F5>", ":DapContinue<CR>", { silent = true })

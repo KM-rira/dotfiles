@@ -32,45 +32,26 @@ null_ls.setup({
 		-- Go リンタ
 		diagnostics.staticcheck,
 
-		-- lua formatter and linter
-		-- install "cargo install stylua"
-		-- install "luarocks install luacheck"
+		-- Lua フォーマッタとリンタ
 		formatting.stylua, -- Stylua フォーマッター
 		diagnostics.luacheck, -- Luacheck リンタ
 
 		-- Shell スクリプト フォーマッタとリンタ
 		formatting.shfmt, -- shfmt （シェルスクリプトの整形）
 		diagnostics.shellcheck, -- shellcheck （シェルスクリプトの診断）
+
+		-- JavaScript / TypeScript フォーマッタとリンタ
+		formatting.prettier, -- Prettier（JS, TS, CSS, HTML のフォーマット）
+		diagnostics.eslint_d, -- ESLint（JavaScript / TypeScript）
+
+		-- CSS リンタ
+		diagnostics.stylelint, -- Stylelint（CSS / SCSS / Less の Linter）
 	},
 })
 
--- Python ファイル保存時に自動フォーマットを実行
+-- ファイル保存時に自動フォーマットを実行
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.py", -- Python ファイルに限定
-	callback = function()
-		vim.lsp.buf.format({ async = false })
-	end,
-})
-
--- Go ファイル保存時に自動フォーマットを実行
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*.go", -- Go ファイルに限定
-	callback = function()
-		vim.lsp.buf.format({ async = false })
-	end,
-})
-
--- lua ファイル保存時に自動フォーマットを実行
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.lua" }, -- Lua ファイルを対象とする
-	callback = function()
-		vim.lsp.buf.format({ async = false })
-	end,
-})
-
--- lua ファイル保存時に自動フォーマットを実行
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.sh" }, -- Lua ファイルを対象とする
+	pattern = { "*.sh", "*.lua", "*.go", "*.py", "*.js", "*.ts", "*.css", "*.scss", "*.html" }, -- フォーマット対象のファイル
 	callback = function()
 		vim.lsp.buf.format({ async = false })
 	end,

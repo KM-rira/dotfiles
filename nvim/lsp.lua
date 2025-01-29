@@ -1,8 +1,28 @@
 -- Description: LSPの設定を行う
 
 -- LSPの設定
-local mason_lspconfig_list = { "pyright", "tsserver", "gopls", "lua_ls", "yamlls", "jsonls", "bashls" } -- lsp list
-local mason_tool_installer_list = { "stylua", "luacheck", "black", "gopls", "shfmt" } -- lint and formatter list
+local mason_lspconfig_list = {
+	"pyright", -- Python
+	"tsserver", -- TypeScript & JavaScript
+	"gopls", -- Go
+	"lua_ls", -- Lua
+	"yamlls", -- YAML
+	"jsonls", -- JSON
+	"bashls", -- Bash
+	"html", -- HTML
+	"cssls", -- CSS
+	"eslint", -- JavaScript & TypeScript用Lint
+}
+
+local mason_tool_installer_list = {
+	"stylua", -- Luaフォーマッター
+	"luacheck", -- Lua Linter
+	"black", -- Pythonフォーマッター
+	"gopls", -- Go LSP
+	"shfmt", -- シェルスクリプトフォーマッター
+	"prettier", -- JS, CSS, HTMLのフォーマッター
+	"eslint_d", -- JavaScript & TypeScript用のLinter（軽量版）
+}
 
 -- LSPの設定を読み込む
 local nvim_lsp = require("lspconfig")

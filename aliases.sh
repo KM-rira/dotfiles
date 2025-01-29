@@ -179,6 +179,7 @@ go run $dot/tools/launcher/launcher.go "$HOME/dotfiles/tools/note" && source $HO
 #source $HOME/dotfiles/tools/launcher/note_launcher.sh
 
 cd ~/repo/mynote && air > /dev/null 2>&1 & ; cd -
+cd ~/repo/trends-summary && air > /dev/null 2>&1 & ; cd -
 
 # OS分岐
 OS=$(uname)
