@@ -71,6 +71,7 @@ alias show='git show'
 alias findall='sudo find / -name'
 alias findalld='sudo find / -type d -name'
 . ~/dotfiles/tools/batf.sh
+alias geminiq='go run ~/dotfiles/tools/gemini/main.go'
 alias bf='lua ~/dotfiles/tools/bf.lua'
 alias catf='bash ~/dotfiles/tools/catf.sh'
 alias vf='lua ~/dotfiles/tools/vf.lua'
