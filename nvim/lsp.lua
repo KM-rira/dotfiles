@@ -1,6 +1,7 @@
 -- Description: LSPの設定を行う
 
 -- LSPの設定
+-- LSPの設定
 local mason_lspconfig_list = {
 	"pyright", -- Python
 	"tsserver", -- TypeScript & JavaScript
@@ -12,6 +13,7 @@ local mason_lspconfig_list = {
 	"html", -- HTML
 	"cssls", -- CSS
 	"eslint", -- JavaScript & TypeScript用Lint
+	"cuelsp", -- Cuelang
 }
 
 local mason_tool_installer_list = {

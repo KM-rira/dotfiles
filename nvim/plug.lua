@@ -23,9 +23,8 @@ require("lazy").setup({
 		tag = "v1.8.0",
 		cmd = "NvimTreeToggle",
 	},
-	{ "vim-jp/vimdoc-ja" },
+	{ "vim-jp/vimdoc-ja", event = "VeryLazy" },
 	{ "nvim-lualine/lualine.nvim", event = "VeryLazy" }, -- 起動後に遅延読み込み
-	{ "ctrlpvim/ctrlp.vim", cmd = "CtrlP" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -38,7 +37,6 @@ require("lazy").setup({
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-frecency.nvim" },
-		cmd = "Telescope",
 	},
 	{ "iamcco/markdown-preview.nvim", build = "cd app && npx --yes yarn install", ft = "markdown" },
 	{ "RRethy/vim-illuminate", event = "BufReadPost" },
@@ -59,9 +57,9 @@ require("lazy").setup({
 			require("nvim-autopairs").setup({})
 		end,
 	},
-	{ "scottmckendry/cyberdream.nvim", lazy = false }, -- 常時ロード
+	--{ "scottmckendry/cyberdream.nvim", lazy = false }, -- 常時ロード
 	{ "ellisonleao/gruvbox.nvim", lazy = false }, -- 常時ロード
-	{ "joshdick/onedark.vim", lazy = false }, -- 常時ロード
+	--{ "joshdick/onedark.vim", lazy = false }, -- 常時ロード
 	{ "kdheepak/lazygit.nvim", cmd = "LazyGit" },
 	{ "github/copilot.vim", event = "InsertEnter" },
 	{ "hat0uma/csvview.nvim", ft = "csv" },
@@ -201,102 +199,12 @@ require("colorizer").setup()
 
 require("bufferline").setup({})
 
-require("nvim-treesitter.configs").setup({
-	highlight = {
-		enable = true, -- false にするとハイライトを無効にします
-		additional_vim_regex_highlighting = false,
-		disable = { "html" }, -- HTMLに対して無効化
-	},
-	ensure_installed = { "go", "rust", "lua" }, -- go パーサーの自動インストール
-	indent = {
-		enable = true, -- インデント機能の有効化
-	},
-
-	-- textobject
-	textobjects = {
-		select = {
-			enable = true,
-
-			-- Automatically jump forward to textobj, similar to targets.vim
-			lookahead = true,
-
-			keymaps = {
-				-- You can use the capture groups defined in textobjects.scm
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				-- You can optionally set descriptions to the mappings (used in the desc parameter of
-				-- nvim_buf_set_keymap) which plugins like which-key display
-				["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-				-- You can also use captures from other query groups like `locals.scm`
-				["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-			},
-			-- You can choose the select mode (default is charwise 'v')
-			--
-			-- Can also be a function which gets passed a table with the keys
-			-- * query_string: eg '@function.inner'
-			-- * method: eg 'v' or 'o'
-			-- and should return the mode ('v', 'V', or '<c-v>') or a table
-			-- mapping query_strings to modes.
-			selection_modes = {
-				["@parameter.outer"] = "v", -- charwise
-				["@function.outer"] = "V", -- linewise
-				["@class.outer"] = "<c-v>", -- blockwise
-			},
-			-- If you set this to `true` (default is `false`) then any textobject is
-			-- extended to include preceding or succeeding whitespace. Succeeding
-			-- whitespace has priority in order to act similarly to eg the built-in
-			-- `ap`.
-			--
-			-- Can also be a function which gets passed a table with the keys
-			-- * query_string: eg '@function.inner'
-			-- * selection_mode: eg 'v'
-			-- and should return true of false
-			include_surrounding_whitespace = true,
-		},
-	},
-
-	-- refacter
-	refactor = {
-		highlight_definitions = {
-			enable = true,
-			-- Set to false if you have an `updatetime` of ~100.
-			clear_on_cursor_move = true,
-		},
-	},
-
-	-- playground
-	playground = {
-		enable = true,
-		disable = {},
-		updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-		persist_queries = false, -- Whether the query persists across vim sessions
-		keybindings = {
-			toggle_query_editor = "o",
-			toggle_hl_groups = "i",
-			toggle_injected_languages = "t",
-			toggle_anonymous_nodes = "a",
-			toggle_language_display = "I",
-			focus_language = "f",
-			unfocus_language = "F",
-			update = "R",
-			goto_node = "<cr>",
-			show_help = "?",
-		},
-	},
-	query_linter = {
-		enable = true,
-		use_virtual_text = true,
-		lint_events = { "BufWrite", "CursorHold" },
-	},
-})
-
 require("neoscroll").setup()
 
 require("toggleterm").setup({
 	-- ここに設定を追加
 	size = 20,
-	open_mapping = [[<c-\>]],
+	open_mapping = [[<c-t>]],
 	hide_numbers = true,
 	shade_filetypes = {},
 	shade_terminals = true,
@@ -616,25 +524,25 @@ require("nvim-tree").setup({
 	},
 })
 
-require("cyberdream").setup({
-	-- 背景を透明にするかどうかを有効化
-	transparent = false,
+--require("cyberdream").setup({
+-- 背景を透明にするかどうかを有効化
+--	transparent = false,
 
-	-- コメントをイタリックにするかどうかを有効化
-	italic_comments = true,
+-- コメントをイタリックにするかどうかを有効化
+--	italic_comments = true,
 
-	-- 究極のクリーンな外観のために全ての fillchars を ' ' に置き換える
-	hide_fillchars = false,
+-- 究極のクリーンな外観のために全ての fillchars を ' ' に置き換える
+--	hide_fillchars = false,
 
-	-- モダンなボーダーレステレスコープテーマ - fzf-luaにも適用
-	borderless_telescope = false,
+-- モダンなボーダーレステレスコープテーマ - fzf-luaにも適用
+--	borderless_telescope = false,
 
-	-- `:terminal` で使用されるターミナルカラーを設定
-	terminal_colors = true,
+-- `:terminal` で使用されるターミナルカラーを設定
+--	terminal_colors = true,
 
-	-- ハイライトをキャッシュして起動時間を改善。`:CyberdreamBuildCache` でキャッシュを生成し、`:CyberdreamClearCache` でクリア
-	cache = true,
-})
+-- ハイライトをキャッシュして起動時間を改善。`:CyberdreamBuildCache` でキャッシュを生成し、`:CyberdreamClearCache` でクリア
+--	cache = true,
+--})
 
 local hlslens = require("hlslens")
 if hlslens then

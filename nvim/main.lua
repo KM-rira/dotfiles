@@ -5,6 +5,7 @@ if vim.g.vscode then
 else
 	-- 通常のNeovim用の設定
 	require("plug")
+	require("treesitter")
 	require("lsp")
 	require("null_ls")
 	require("auto")

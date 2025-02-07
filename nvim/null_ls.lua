@@ -4,49 +4,59 @@
 -- 編集手順
 -- 1. null_ls.setup内に対象とする言語のフォーマッタとリンタを追加
 -- 2. vim.api.nvim_create_autocmdに自動フォーマットの設定を追加
+local format_patterns = {
+	"*.sh",
+	"*.lua",
+	"*.go",
+	"*.py",
+	"*.js",
+	"*.ts",
+	"*.css",
+	"*.scss",
+	"*.html",
+	"*.cue",
+}
 
--- null-ls をロード
 local null_ls = require("null-ls")
 local helpers = require("null-ls.helpers")
 local methods = require("null-ls.methods")
-
--- null-ls のビルトインを簡略化
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
+local format = {
+	-- Python フォーマッタ
+	formatting.black, -- Black
+	formatting.isort, -- isort（インポートの整列）
+
+	-- Python リンタ
+	diagnostics.flake8, -- flake8
+	diagnostics.mypy, -- mypy（型チェック）
+
+	-- Go フォーマッタ
+	formatting.goimports, -- goimports
+	formatting.gofmt,
+
+	-- Go リンタ
+	diagnostics.staticcheck,
+
+	-- Lua フォーマッタとリンタ
+	formatting.stylua, -- Stylua フォーマッター
+	diagnostics.luacheck, -- Luacheck リンタ
+
+	-- Shell スクリプト フォーマッタとリンタ
+	formatting.shfmt, -- shfmt （シェルスクリプトの整形）
+	diagnostics.shellcheck, -- shellcheck （シェルスクリプトの診断）
+
+	-- JavaScript / TypeScript フォーマッタとリンタ
+	formatting.prettier, -- Prettier（JS, TS, CSS, HTML のフォーマット）
+	diagnostics.eslint_d, -- ESLint（JavaScript / TypeScript）
+
+	-- CSS リンタ
+	diagnostics.stylelint, -- Stylelint（CSS / SCSS / Less の Linter）
+}
 
 -- フォーマッタとリンタの設定
 null_ls.setup({
-	sources = {
-		-- Python フォーマッタ
-		formatting.black, -- Black
-		formatting.isort, -- isort（インポートの整列）
-
-		-- Python リンタ
-		diagnostics.flake8, -- flake8
-		diagnostics.mypy, -- mypy（型チェック）
-
-		-- Go フォーマッタ
-		formatting.goimports, -- goimports
-		formatting.gofmt,
-
-		-- Go リンタ
-		diagnostics.staticcheck,
-
-		-- Lua フォーマッタとリンタ
-		formatting.stylua, -- Stylua フォーマッター
-		diagnostics.luacheck, -- Luacheck リンタ
-
-		-- Shell スクリプト フォーマッタとリンタ
-		formatting.shfmt, -- shfmt （シェルスクリプトの整形）
-		diagnostics.shellcheck, -- shellcheck （シェルスクリプトの診断）
-
-		-- JavaScript / TypeScript フォーマッタとリンタ
-		formatting.prettier, -- Prettier（JS, TS, CSS, HTML のフォーマット）
-		diagnostics.eslint_d, -- ESLint（JavaScript / TypeScript）
-
-		-- CSS リンタ
-		diagnostics.stylelint, -- Stylelint（CSS / SCSS / Less の Linter）
-	},
+	sources = format,
 })
 
 -- ファイル保存時に自動フォーマットを実行
