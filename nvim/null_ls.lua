@@ -14,7 +14,6 @@ local format_patterns = {
 	"*.css",
 	"*.scss",
 	"*.html",
-	"*.cue",
 }
 
 local null_ls = require("null-ls")
