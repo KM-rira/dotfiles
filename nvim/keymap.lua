@@ -269,3 +269,9 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap("n", "<leader>dr", ':lua require("dap").repl.open()<CR>', { silent = true })
 vim.api.nvim_set_keymap("n", "<leader>dl", ':lua require("dap").run_last()<CR>', { silent = true })
 vim.api.nvim_set_keymap("n", "<leader>dw", ':lua require("dapui").toggle()<CR>', {})
+vim.api.nvim_set_keymap(
+    'n',
+    'ge',
+    '<cmd>lua vim.diagnostic.open_float()<CR>',
+    { noremap = true, silent = true }
+)
