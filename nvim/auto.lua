@@ -33,4 +33,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, 'i', '</', '</<C-x><C-o>', {noremap = true, silent = true})
   end
 })
+vim.api.nvim_create_augroup("QuickFixMapping", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  group = "QuickFixMapping",
+  pattern = "qf",
+  callback = function()
+    -- quickfix ウィンドウでは Enter をそのまま送る
+    vim.api.nvim_buf_set_keymap(0, 'n', '<CR>', '<CR>', { noremap = true, silent = true })
+  end,
+})
 
