@@ -157,6 +157,7 @@ alias m='make'
 alias packer='cd ~/.local/share/nvim/site/pack/packer/start/'
 source $HOME/dotfiles/tools/wezcp.sh
 alias ccze='ccze -A'
+alias conflicts='git diff --name-only --diff-filter=U'
 
 # gh
 alias gpl="bash ~/dotfiles/tools/github_cli/bash/gpl.sh"
