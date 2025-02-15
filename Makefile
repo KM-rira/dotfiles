@@ -1,8 +1,4 @@
 .PHONY: vscode
 
 vscode:
-	@sed -n '/# start/,/# end/ { \
-		/# start/b; \
-		/# end/b; \
-		p; \
-	}' sample.txt > copy.txt
+	@sed -n '/-- shared vscode keymap start/,/-- shared vscode keymap end/ { /-- shared vscode keymap start/b; /-- shared vscode keymap end/b; p; }' ./nvim/keymap.lua > ./nvim/vscode_nvim.lua

@@ -1,6 +1,7 @@
 if vim.g.vscode then
 	-- VS Code用の設定
 	-- vim.cmd('source /path/to/vscode-specific-config.lua')
+	require("shared_keymap")
 	require("vscode_nvim")
 else
 	-- 通常のNeovim用の設定
