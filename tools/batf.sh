@@ -8,6 +8,6 @@ batf() {
     fi
 
     # 選択されたコマンドを実行
-    batcat $select_file
+    bat $select_file
 }
 

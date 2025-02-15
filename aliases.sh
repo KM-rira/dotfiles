@@ -70,7 +70,7 @@ alias pull='git pull'
 alias show='git show'
 alias findall='sudo find / -name'
 alias findalld='sudo find / -type d -name'
-. ~/dotfiles/tools/batf.sh
+alias batf='lua ~/dotfiles/tools/bf.lua'
 alias geminiq='go run ~/dotfiles/tools/gemini/main.go'
 alias bf='lua ~/dotfiles/tools/bf.lua'
 alias catf='bash ~/dotfiles/tools/catf.sh'
@@ -190,15 +190,15 @@ case $OS in
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
         alias fd=fdfind
-        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias lfzf="fzf --height 70% --layout reverse --info inline --border \
             --preview 'lsd -l {}' --preview-window '~3' \
             --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         #. ~/dotfiles/tools/prompt/ps1.sh
         . ~/dotfiles/tools/prompt/prompt.sh
-        alias b='batcat'
-        alias bat='batcat'
+        alias b='bat'
+        alias batcat='bat'
         #shopt -s histappend
         alias re='source ~/.zshrc'
         alias ports='ss -tuln'
@@ -227,8 +227,8 @@ case $OS in
         alias settings="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
         alias fzf="fzf --height 70% --layout reverse --info inline --border"
         . ~/dotfiles/tools/prompt/win_ps1.sh
-        alias b='batcat'
-        alias bat='batcat'
+        alias b='bat'
+        alias batcat='bat'
         alias gfzf="fzf --height 70% --layout reverse --info inline --border"
         alias lfzf="fzf --height 70% --layout reverse --info inline --border"
         shopt -s histappend

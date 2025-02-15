@@ -47,7 +47,7 @@ local escaped_list = list:gsub("'", "'\\''")
 -- fzf を呼び出して、エスケープされたファイル一覧をパイプで渡す
 local fzf_cmd = "echo '"
 	.. escaped_list
-	.. "' | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi --height 70% --layout reverse --info inline --border --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+	.. "' | fzf --tac --no-sort --reverse --prompt='Select FILE: ' --no-multi --height 70% --layout reverse --info inline --border --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
 local fzf_handle = io.popen(fzf_cmd)
 local selected = fzf_handle:read("*a") or ""
 fzf_handle:close()
