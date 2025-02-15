@@ -14,6 +14,7 @@ START_TIME=$(date +%s.%N)
 bashrc="$HOME/.bashrc"
 dot="$HOME/dotfiles"
 
+export CHEAT_PATH=~/dotfiles/cheat
 # user定義
 #user=""
 #while IFS= read -r line; do

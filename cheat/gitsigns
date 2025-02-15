@@ -1,0 +1,51 @@
+# Gitsigns Cheat Sheet
+
+## Navigation（ナビゲーション）
+- **]c**
+  次の hunk へ移動（diff モードの場合は通常の動作）
+- **[c**
+  前の hunk へ移動（diff モードの場合は通常の動作）
+
+## Actions（アクション操作）
+- **<leader>hs**
+  ノーマルモード：現在の hunk をステージする
+- **<leader>hr**
+  ノーマルモード：現在の hunk の変更をリセット（unstage）する
+- **Visual モード: <leader>hs**
+  選択範囲内の行に対応する hunk をステージする
+- **Visual モード: <leader>hr**
+  選択範囲内の行に対応する hunk の変更をリセットする
+- **<leader>hS**
+  現在のバッファ全体の変更をステージする
+- **<leader>hu**
+  最後にステージした hunk の操作を取り消す（undo）
+- **<leader>hR**
+  現在のバッファ全体の変更をリセット（unstage）する
+- **<leader>hp**
+  現在の hunk の差分をプレビュー表示する
+- **<leader>hb**
+  現在行の blame 情報を詳細表示（full = true）する
+- **<leader>tb**
+  現在行の blame 表示のオン/オフを切り替える
+- **<leader>hd**
+  現在の hunk の diff 比較を行う
+- **<leader>hD**
+  ホームディレクトリとの diff 比較を行う（`diffthis("~")`）
+- **<leader>td**
+  削除された行の表示を切り替える
+
+## Text Object（テキストオブジェクト）
+- **ih** (オペレーター待機モード・Visual モード)
+  現在の hunk 全体を選択する
+  コマンド: `:<C-U>Gitsigns select_hunk<CR>`
+
+---
+
+### チートシートの作成方法（cheat の場合）
+
+1. お好みのテキストエディタで上記内容を `~/.cheat/gitsigns.md` などのファイルに保存します。
+   ※cheat のデフォルトディレクトリは `~/.cheat` ですが、設定によって変わる場合があります。
+
+2. その後、ターミナルで
+   ```sh
+   cheat gitsigns

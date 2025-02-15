@@ -328,57 +328,86 @@ require("gitsigns").setup({
 	on_attach = function(bufnr)
 		local gs = package.loaded.gitsigns
 
+		-- キーマッピングを定義するためのヘルパー関数
 		local function map(mode, l, r, opts)
 			opts = opts or {}
-			opts.buffer = bufnr
+			opts.buffer = bufnr -- このバッファに限定したキーマッピングにする
 			vim.keymap.set(mode, l, r, opts)
 		end
 
-		-- Navigation
+		-- ======================================
+		-- Navigation（ナビゲーション）
+		-- ======================================
+		-- ノーマルモードで ]c を押すと、次の hunk へ移動します
 		map("n", "]c", function()
 			if vim.wo.diff then
+				-- diffモードの場合はデフォルトの動作を使う
 				return "]c"
 			end
+			-- hunk移動をスケジュール実行
 			vim.schedule(function()
 				gs.next_hunk()
 			end)
 			return "<Ignore>"
 		end, { expr = true })
 
+		-- ノーマルモードで [c を押すと、前の hunk へ移動します
 		map("n", "[c", function()
 			if vim.wo.diff then
+				-- diffモードの場合はデフォルトの動作を使う
 				return "[c"
 			end
+			-- hunk移動をスケジュール実行
 			vim.schedule(function()
 				gs.prev_hunk()
 			end)
 			return "<Ignore>"
 		end, { expr = true })
 
-		-- Actions
+		-- ======================================
+		-- Actions（アクション操作）
+		-- ======================================
+		-- ノーマルモードで <leader>hs を押すと、現在の hunk をステージします
 		map("n", "<leader>hs", gs.stage_hunk)
+		-- ノーマルモードで <leader>hr を押すと、現在の hunk の変更をリセット（unstage）します
 		map("n", "<leader>hr", gs.reset_hunk)
+
+		-- ビジュアルモードで <leader>hs を押すと、選択範囲内の行に対応する hunk をステージします
 		map("v", "<leader>hs", function()
 			gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 		end)
+		-- ビジュアルモードで <leader>hr を押すと、選択範囲内の行に対応する hunk の変更をリセットします
 		map("v", "<leader>hr", function()
 			gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 		end)
+
+		-- ノーマルモードで <leader>hS を押すと、現在のバッファ全体の変更をステージします
 		map("n", "<leader>hS", gs.stage_buffer)
+		-- ノーマルモードで <leader>hu を押すと、最後にステージした hunk の操作を取り消します（undo）
 		map("n", "<leader>hu", gs.undo_stage_hunk)
+		-- ノーマルモードで <leader>hR を押すと、現在のバッファ全体の変更をリセット（unstage）します
 		map("n", "<leader>hR", gs.reset_buffer)
+		-- ノーマルモードで <leader>hp を押すと、現在の hunk の差分をプレビュー表示します
 		map("n", "<leader>hp", gs.preview_hunk)
+		-- ノーマルモードで <leader>hb を押すと、現在行の blame 情報を詳細表示（full = true）で表示します
 		map("n", "<leader>hb", function()
 			gs.blame_line({ full = true })
 		end)
+		-- ノーマルモードで <leader>tb を押すと、現在行の blame 表示のオン/オフを切り替えます
 		map("n", "<leader>tb", gs.toggle_current_line_blame)
+		-- ノーマルモードで <leader>hd を押すと、現在の hunk と diff 比較を行います
 		map("n", "<leader>hd", gs.diffthis)
+		-- ノーマルモードで <leader>hD を押すと、ホームディレクトリとの diff 比較を行います
 		map("n", "<leader>hD", function()
 			gs.diffthis("~")
 		end)
+		-- ノーマルモードで <leader>td を押すと、削除された行の表示を切り替えます
 		map("n", "<leader>td", gs.toggle_deleted)
 
-		-- Text object
+		-- ======================================
+		-- Text object（テキストオブジェクト）
+		-- ======================================
+		-- オペレーター待機モード（"o" と "x"）で ih を押すと、hunk 全体を選択します
 		map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 	end,
 })
