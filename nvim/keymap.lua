@@ -1,86 +1,18 @@
+-- ========================================================================
+-- shared vscode keymap start
+-- ========================================================================
+
 -- リーダーキーの設定
 vim.g.mapleader = ";"
 
 vim.api.nvim_set_keymap("n", "<Esc><Esc>", ":nohlsearch<CR><ESC>", {})
 
--- barbar系
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
 -- save
 vim.keymap.set({ "n", "x", "o" }, "<C-s>", "G$Vgg0<C-=>:w<CR>", opts)
 vim.keymap.set("i", "<C-s>", "<C-o>:w<CR>", opts)
 
--- バッファの移動
-map("n", "<A->>", ":BufferLineMoveNext<CR>", opts)
-map("n", "<A-<>", ":BufferLineMovePrev<CR>", opts)
-
--- 特定のバッファへの移動
-map("n", "<leader>b1", ":BufferLineGoToBuffer 1<CR>", opts)
-map("n", "<leader>b2", ":BufferLineGoToBuffer 2<CR>", opts)
-map("n", "<leader>b3", ":BufferLineGoToBuffer 3<CR>", opts)
-map("n", "<leader>b4", ":BufferLineGoToBuffer 4<CR>", opts)
-map("n", "<leader>b5", ":BufferLineGoToBuffer 5<CR>", opts)
-map("n", "<leader>b6", ":BufferLineGoToBuffer 6<CR>", opts)
-map("n", "<leader>b7", ":BufferLineGoToBuffer 7<CR>", opts)
-map("n", "<leader>b8", ":BufferLineGoToBuffer 8<CR>", opts)
-map("n", "<leader>b9", ":BufferLineGoToBuffer 9<CR>", opts)
-
--- バッファの閉じるコマンド
-map("n", "<leader>bo", ":BufferLineCloseOther<CR>", opts)
-map("n", "<leader>bl", ":BufferLineCloseLeft<CR>", opts)
-map("n", "<leader>br", ":BufferLineCloseRight<CR>", opts)
-map("n", "<leader>bc", ":BufferLinePickClose<CR>", opts)
-map("n", "<leader>bp", ":BufferLinePick<CR>", opts)
-
-map("n", "<leader>be", ":BufferLineSortByExtension<CR>", opts)
-map("n", "<leader>bd", ":BufferLineSortByRelativeDirectory<CR>", opts)
-
--- copilot系
-vim.keymap.set("i", "<C-G>", 'copilot#Accept("\\<CR>")', {
-	expr = true,
-	replace_keycodes = false,
-})
-vim.g.copilot_no_tab_map = true
-
--- coc系
--- vim.keymap.set({'n', 'x', 'o'},'<leader>gd', '<Plug>(coc-definition)',{ noremap = true, silent = true })
--- vim.keymap.set({'n', 'x', 'o'},'<leader>gt', '<Plug>(coc-type-definition)',{ noremap = true, silent = true })
--- vim.keymap.set({'n', 'x', 'o'},'<leader>gc', '<Plug>(coc-declaration)',{ noremap = true, silent = true })
--- vim.keymap.set({'n', 'x', 'o'},'<leader>gi', '<Plug>(coc-implementation)',{ noremap = true, silent = true })
--- vim.keymap.set({'n', 'x', 'o'},'<leader>gr', '<Plug>(coc-references)',{ noremap = true, silent = true })
--- vim.keymap.set({'n', 'x', 'o'},'<leader>gn', '<Plug>(coc-rename)',{ noremap = true, silent = true })
--- vim.keymap.set({'n', 'x', 'o'},'<leader>gh', ':call CocAction(\'doHover\')<CR>',{ noremap = true, silent = true })
-vim.keymap.set("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
-vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
-vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
-vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-vim.keymap.set("n", "ge", "<cmd>lua vim.diagnostic.open_float()<CR>")
-vim.keymap.set("n", "g]", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-vim.keymap.set("n", "g[", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-
--- telescope系
-local builtin = require("telescope.builtin")
-vim.keymap.set({ "n", "x", "o" }, "<leader>ff", builtin.find_files, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fg", builtin.live_grep, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fb", builtin.buffers, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fo", builtin.oldfiles, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fc", builtin.commands, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fh", builtin.command_history, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fj", builtin.jumplist, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fs", builtin.search_history, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fz", "<Cmd>Telescope frecency<CR>")
-
 -- タブ関連
 vim.keymap.set({ "n", "x", "o" }, "tn", "<cmd>tabnew<cr>", { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap("n", "<TAB>", ":BufferLineCycleNext<CR>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", { silent = true, noremap = true })
 
 -- 矩形選択
 vim.keymap.set({ "n", "x", "o" }, "<Leader>v", "<C-v>", { noremap = true, silent = true })
@@ -248,6 +180,82 @@ vim.keymap.set("i", "jk", "<Esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-n>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
 
+-- ========================================================================
+-- shared vscode keymap end
+-- ========================================================================
+
+-- lsp系
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gd', '<Plug>(coc-definition)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gt', '<Plug>(coc-type-definition)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gc', '<Plug>(coc-declaration)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gi', '<Plug>(coc-implementation)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gr', '<Plug>(coc-references)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gn', '<Plug>(coc-rename)',{ noremap = true, silent = true })
+-- vim.keymap.set({'n', 'x', 'o'},'<leader>gh', ':call CocAction(\'doHover\')<CR>',{ noremap = true, silent = true })
+vim.keymap.set("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
+vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
+vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+vim.keymap.set("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+vim.keymap.set("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+vim.keymap.set("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+vim.keymap.set("n", "ge", "<cmd>lua vim.diagnostic.open_float()<CR>")
+vim.keymap.set("n", "g]", "<cmd>lua vim.diagnostic.goto_next()<CR>")
+vim.keymap.set("n", "g[", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+
+-- telescope系
+local builtin = require("telescope.builtin")
+vim.keymap.set({ "n", "x", "o" }, "<leader>ff", builtin.find_files, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fg", builtin.live_grep, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fb", builtin.buffers, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fo", builtin.oldfiles, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fc", builtin.commands, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fh", builtin.command_history, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fj", builtin.jumplist, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fs", builtin.search_history, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fz", "<Cmd>Telescope frecency<CR>")
+
+-- barbar系
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- バッファの移動
+map("n", "<A->>", ":BufferLineMoveNext<CR>", opts)
+map("n", "<A-<>", ":BufferLineMovePrev<CR>", opts)
+
+-- 特定のバッファへの移動
+map("n", "<leader>b1", ":BufferLineGoToBuffer 1<CR>", opts)
+map("n", "<leader>b2", ":BufferLineGoToBuffer 2<CR>", opts)
+map("n", "<leader>b3", ":BufferLineGoToBuffer 3<CR>", opts)
+map("n", "<leader>b4", ":BufferLineGoToBuffer 4<CR>", opts)
+map("n", "<leader>b5", ":BufferLineGoToBuffer 5<CR>", opts)
+map("n", "<leader>b6", ":BufferLineGoToBuffer 6<CR>", opts)
+map("n", "<leader>b7", ":BufferLineGoToBuffer 7<CR>", opts)
+map("n", "<leader>b8", ":BufferLineGoToBuffer 8<CR>", opts)
+map("n", "<leader>b9", ":BufferLineGoToBuffer 9<CR>", opts)
+
+-- バッファの閉じるコマンド
+map("n", "<leader>bo", ":BufferLineCloseOther<CR>", opts)
+map("n", "<leader>bl", ":BufferLineCloseLeft<CR>", opts)
+map("n", "<leader>br", ":BufferLineCloseRight<CR>", opts)
+map("n", "<leader>bc", ":BufferLinePickClose<CR>", opts)
+map("n", "<leader>bp", ":BufferLinePick<CR>", opts)
+
+map("n", "<leader>be", ":BufferLineSortByExtension<CR>", opts)
+map("n", "<leader>bd", ":BufferLineSortByRelativeDirectory<CR>", opts)
+
+vim.api.nvim_set_keymap("n", "<TAB>", ":BufferLineCycleNext<CR>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", { silent = true, noremap = true })
+
+-- copilot系
+vim.keymap.set("i", "<C-G>", 'copilot#Accept("\\<CR>")', {
+	expr = true,
+	replace_keycodes = false,
+})
+vim.g.copilot_no_tab_map = true
+
 -- dap key map
 vim.api.nvim_set_keymap("n", "<F5>", ":DapContinue<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<F10>", ":DapStepOver<CR>", { silent = true })
@@ -278,7 +286,7 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap(
 	"n",
-	"gg",
+	"ga",
 	"<cmd>lua vim.diagnostic.setqflist({open = true})<CR>",
 	{ noremap = true, silent = true }
 )
