@@ -124,7 +124,6 @@ alias stasha='git stash apply'
 alias stashs='git stash show'
 alias stashp='git stash push'
 alias stagestash='git stash push --keep-index --include-untracked'
-alias wez='nvim ~/dotfiles/wezterm.lua'
 alias wt="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 alias g="grep"
 alias c="cd"
@@ -185,7 +184,7 @@ case $OS in
     'Linux')
         alias l='lsd -l'
         alias tree='lsd --tree'
-        alias wezl='echo "not windows"'
+        alias wez='echo "not windows"'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
         alias fd=fdfind
@@ -205,7 +204,7 @@ case $OS in
     'Darwin')
         alias l='lsd -l'
         alias tree='lsd --tree'
-        alias wezl='echo "not windows"'
+        alias wez='nvim ~/.config/wezterm/wezterm.lua'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
@@ -221,7 +220,7 @@ case $OS in
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l='lsd -l'
         alias tree='lsd --tree'
-        alias wezl='nvim ~/.config/wezterm/wezterm.lua'
+        alias wez='nvim ~/.config/wezterm/wezterm.lua'
         alias nvimf='cd ~/AppData/Local/nvim'
         alias settings="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
         alias fzf="fzf --height 70% --layout reverse --info inline --border"
