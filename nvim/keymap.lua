@@ -217,6 +217,33 @@ vim.keymap.set({ "n", "x", "o" }, "<leader>fj", builtin.jumplist, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fs", builtin.search_history, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fz", "<Cmd>Telescope frecency<CR>")
 
+-- =======================================================
+-- git conflicts start
+-- =======================================================
+-- 次の衝突箇所に移動
+vim.keymap.set("n", "]c", "<cmd>GitConflictNextConflict<CR>", { noremap = true, silent = true })
+
+-- 前の衝突箇所に移動
+vim.keymap.set("n", "[c", "<cmd>GitConflictPrevConflict<CR>", { noremap = true, silent = true })
+
+-- 衝突解決：自分側（ours）を採用: main側
+vim.keymap.set("n", "<leader>co", "<cmd>GitConflictChooseOurs<CR>", { noremap = true, silent = true })
+
+-- 衝突解決：相手側（theirs）を採用: dev側
+vim.keymap.set("n", "<leader>ct", "<cmd>GitConflictChooseTheirs<CR>", { noremap = true, silent = true })
+
+-- 衝突解決：両方（both）を採用
+vim.keymap.set("n", "<leader>cb", "<cmd>GitConflictChooseBoth<CR>", { noremap = true, silent = true })
+
+-- 衝突解決：どちらも採用しない（none）
+vim.keymap.set("n", "<leader>cn", "<cmd>GitConflictChooseNone<CR>", { noremap = true, silent = true })
+
+-- コンフリクトリストの表示
+vim.keymap.set("n", "<leader>cl", "<cmd>GitConflictList<CR>", { noremap = true, silent = true })
+-- =======================================================
+-- git conflicts end
+-- =======================================================
+
 -- barbar系
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
