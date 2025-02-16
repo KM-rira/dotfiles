@@ -1,0 +1,22 @@
+-- =======================================================
+-- 次の衝突箇所に移動
+vim.keymap.set("n", "]c", "<cmd>GitConflictNextConflict<CR>", { noremap = true, silent = true })
+
+-- 前の衝突箇所に移動
+vim.keymap.set("n", "[c", "<cmd>GitConflictPrevConflict<CR>", { noremap = true, silent = true })
+
+-- 衝突解決：自分側（ours）を採用: main側
+vim.keymap.set("n", "<leader>co", "<cmd>GitConflictChooseOurs<CR>", { noremap = true, silent = true })
+
+-- 衝突解決：相手側（theirs）を採用: dev側
+vim.keymap.set("n", "<leader>ct", "<cmd>GitConflictChooseTheirs<CR>", { noremap = true, silent = true })
+
+-- 衝突解決：両方（both）を採用
+vim.keymap.set("n", "<leader>cb", "<cmd>GitConflictChooseBoth<CR>", { noremap = true, silent = true })
+
+-- 衝突解決：どちらも採用しない（none）
+vim.keymap.set("n", "<leader>cn", "<cmd>GitConflictChooseNone<CR>", { noremap = true, silent = true })
+
+-- コンフリクトリストの表示
+vim.keymap.set("n", "<leader>cl", "<cmd>GitConflictList<CR>", { noremap = true, silent = true })
+-- =======================================================
