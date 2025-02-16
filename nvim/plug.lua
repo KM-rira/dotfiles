@@ -301,7 +301,7 @@ require("gitsigns").setup({
 	},
 	auto_attach = true,
 	attach_to_untracked = true,
-	current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+	current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
 	current_line_blame_opts = {
 		virt_text = true,
 		virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
@@ -342,7 +342,7 @@ require("gitsigns").setup({
 		map("n", "]c", function()
 			if vim.wo.diff then
 				-- diffモードの場合はデフォルトの動作を使う
-				return "]c"
+				return "<leader>hn"
 			end
 			-- hunk移動をスケジュール実行
 			vim.schedule(function()
@@ -355,7 +355,7 @@ require("gitsigns").setup({
 		map("n", "[c", function()
 			if vim.wo.diff then
 				-- diffモードの場合はデフォルトの動作を使う
-				return "[c"
+				return "<leader>hN"
 			end
 			-- hunk移動をスケジュール実行
 			vim.schedule(function()

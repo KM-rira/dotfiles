@@ -1,9 +1,9 @@
 # Gitsigns Cheat Sheet
 
 ## Navigation（ナビゲーション）
-- **]c**
+- **<leader>hn**
   次の hunk へ移動（diff モードの場合は通常の動作）
-- **[c**
+- **<leader>hN**
   前の hunk へ移動（diff モードの場合は通常の動作）
 
 ## Actions（アクション操作）
