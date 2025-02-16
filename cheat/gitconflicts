@@ -1,9 +1,9 @@
 -- =======================================================
 -- 次の衝突箇所に移動
-vim.keymap.set("n", "]c", "<cmd>GitConflictNextConflict<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>cN", "<cmd>GitConflictNextConflict<CR>", { noremap = true, silent = true })
 
 -- 前の衝突箇所に移動
-vim.keymap.set("n", "[c", "<cmd>GitConflictPrevConflict<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>cn", "<cmd>GitConflictPrevConflict<CR>", { noremap = true, silent = true })
 
 -- 衝突解決：自分側（ours）を採用: main側
 vim.keymap.set("n", "<leader>co", "<cmd>GitConflictChooseOurs<CR>", { noremap = true, silent = true })
