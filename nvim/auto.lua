@@ -42,4 +42,8 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, 'n', '<CR>', '<CR>', { noremap = true, silent = true })
   end,
 })
+vim.cmd([[
+  autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
+]])
+
 
