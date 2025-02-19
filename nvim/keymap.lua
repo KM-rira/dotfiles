@@ -174,7 +174,6 @@ vim.api.nvim_set_keymap("s", "<C-y>", "", { noremap = true, silent = true })
 
 vim.keymap.set("i", "jk", "<Esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-n>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
 
 -- ========================================================================
 -- shared vscode keymap end
@@ -243,6 +242,8 @@ vim.keymap.set("n", "<leader>cl", "<cmd>GitConflictList<CR>", { noremap = true, 
 -- =======================================================
 -- git conflicts end
 -- =======================================================
+
+vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
 
 -- barbar系
 local map = vim.api.nvim_set_keymap
