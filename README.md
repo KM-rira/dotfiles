@@ -20,6 +20,7 @@ sudo bash install.sh
 zsh
 lazygit
 go install github.com/TheEdgeOfRage/logfmt
+sudo npm install -g cspell
 ```
 
 ## edit zshrc

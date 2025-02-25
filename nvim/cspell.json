@@ -1,0 +1,21 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "dictionaries": [
+    "typescript",
+    "node",
+    "python",
+    "golang",
+    "java",
+    "csharp",
+    "docker",
+    "shell"
+  ],
+  "words": [
+    "Neovim",
+    "vim",
+    "nvim",
+    "cspell"
+  ]
+}
+

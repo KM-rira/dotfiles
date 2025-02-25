@@ -51,7 +51,7 @@ done
 
 # npm install
 install_cmd='npm install -g'
-package=(gtop aicommits)
+package=(gtop aicommits cspell)
 for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done
