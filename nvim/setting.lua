@@ -2,6 +2,12 @@
 vim.o.encoding = 'utf-8'
 vim.scriptencoding = 'utf-8'
 
+-- スペルチェックを有効にする
+vim.opt.spell = true
+
+-- スペルチェックする言語を指定（ここでは英語）
+vim.opt.spelllang = "en"
+
 -- 色設定の有効化
 vim.o.termguicolors = true
 
