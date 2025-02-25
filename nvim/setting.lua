@@ -1,24 +1,18 @@
 -- エンコーディングの設定
-vim.o.encoding = 'utf-8'
-vim.scriptencoding = 'utf-8'
-
--- スペルチェックを有効にする
-vim.opt.spell = true
-
--- スペルチェックする言語を指定（ここでは英語）
-vim.opt.spelllang = "en"
+vim.o.encoding = "utf-8"
+vim.scriptencoding = "utf-8"
 
 -- 色設定の有効化
 vim.o.termguicolors = true
 
 -- 検索設定
-vim.o.ignorecase = true  -- 大文字と小文字を区別しない
-vim.o.smartcase = true   -- 検索パターンに大文字が含まれている場合は大文字と小文字を区別
+vim.o.ignorecase = true -- 大文字と小文字を区別しない
+vim.o.smartcase = true -- 検索パターンに大文字が含まれている場合は大文字と小文字を区別
 
 -- "neovim特有の設定"
-vim.o.shellcmdflag = '-c'
+vim.o.shellcmdflag = "-c"
 
-vim.o.expandtab = true    -- タブをスペースに変換
+vim.o.expandtab = true -- タブをスペースに変換
 
 -- 行番号表示
 vim.o.number = true
@@ -79,7 +73,7 @@ vim.o.fileformat = "unix"
 vim.o.breakindent = true
 vim.o.breakindentopt = "shift:0"
 --vim.o.shellslash = true
-vim.cmd 'filetype plugin indent on'  -- ファイルタイプに基づくインデント設定を有効化
+vim.cmd("filetype plugin indent on") -- ファイルタイプに基づくインデント設定を有効化
 
 -- set completeopt
 vim.o.completeopt = "menuone,noinsert"
@@ -87,26 +81,25 @@ vim.o.completeopt = "menuone,noinsert"
 vim.o.breakindent = true
 
 -- Nerdtree自動終了
-vim.cmd 'autocmd BufEnter * if (winnr("$") == 1 && (bufname("") =~ "NvimTree")) | q | endif'
+vim.cmd('autocmd BufEnter * if (winnr("$") == 1 && (bufname("") =~ "NvimTree")) | q | endif')
 -- クリップボードが使用可能
 vim.o.clipboard = "unnamedplus"
 
 -- Markdown Previewの設定
 vim.g.mkdp_preview_options = {
-  mkit = {},
-  katex = {},
-  uml = {},
-  maid = {},
-  disable_sync_scroll = 0,
-  sync_scroll_type = 'middle',
-  hide_yaml_meta = 1,
-  sequence_diagrams = {},
-  flowchart_diagrams = {},
-  content_editable = false,
-  disable_filename = 0
-
+	mkit = {},
+	katex = {},
+	uml = {},
+	maid = {},
+	disable_sync_scroll = 0,
+	sync_scroll_type = "middle",
+	hide_yaml_meta = 1,
+	sequence_diagrams = {},
+	flowchart_diagrams = {},
+	content_editable = false,
+	disable_filename = 0,
 }
-vim.g.mkdp_port = '5000'
+vim.g.mkdp_port = "5000"
 
 -- GoのImportを自動で追加し、ファイル保存時にフォーマットを行う
 -- vim.api.nvim_create_autocmd("BufWritePre", {
@@ -118,23 +111,23 @@ vim.g.mkdp_port = '5000'
 
 -- NvimTreeのウィンドウピッカー除外設定
 vim.g.nvim_tree_window_picker_exclude = {
-    filetype = {'notify', 'packer', 'qf'},
-    buftype = {'terminal'}
+	filetype = { "notify", "packer", "qf" },
+	buftype = { "terminal" },
 }
 
 -- WindowsのWSLクリップボード統合設定
-if vim.fn.has('wsl') == 1 then
-  vim.o.clipboard = "unnamedplus"
-  vim.g.clipboard = {
-    name = 'win32yank-wsl',
-    copy = {
-      ['+'] = 'win32yank.exe -i --crlf',
-      ['*'] = 'win32yank.exe -i --crlf',
-    },
-    paste = {
-      ['+'] = 'win32yank.exe -o --lf',
-      ['*'] = 'win32yank.exe -o --lf',
-    },
-    cache_enabled = 0,
-  }
+if vim.fn.has("wsl") == 1 then
+	vim.o.clipboard = "unnamedplus"
+	vim.g.clipboard = {
+		name = "win32yank-wsl",
+		copy = {
+			["+"] = "win32yank.exe -i --crlf",
+			["*"] = "win32yank.exe -i --crlf",
+		},
+		paste = {
+			["+"] = "win32yank.exe -o --lf",
+			["*"] = "win32yank.exe -o --lf",
+		},
+		cache_enabled = 0,
+	}
 end
