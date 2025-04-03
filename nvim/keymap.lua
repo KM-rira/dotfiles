@@ -213,8 +213,9 @@ vim.keymap.set({ "n", "x", "o" }, "<leader>fo", builtin.oldfiles, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fc", builtin.commands, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fh", builtin.command_history, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fj", builtin.jumplist, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fs", builtin.search_history, {})
+--vim.keymap.set({ "n", "x", "o" }, "<leader>fs", builtin.search_history, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fz", "<Cmd>Telescope frecency<CR>")
+vim.keymap.set({ "n", "x", "o" }, "<leader>fs", builtin.git_status, {})
 
 -- =======================================================
 -- git conflicts start
