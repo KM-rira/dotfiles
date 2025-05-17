@@ -178,3 +178,35 @@ function CenterCursorOnLine()
 	-- カーソルを中央に移動
 	vim.api.nvim_win_set_cursor(0, { row, middle_pos - 1 }) -- カラムは0-based
 end
+
+-- SelectionRange
+vim.api.nvim_create_user_command("Sr", function()
+	local mode = vim.fn.mode()
+	local start_line, end_line
+
+	if mode == "v" or mode == "V" then
+		-- Visualモードで選択された範囲を取得
+		start_line = vim.fn.line("v")
+		end_line = vim.fn.line(".")
+		if start_line > end_line then
+			start_line, end_line = end_line, start_line
+		end
+
+		-- 選択解除（正常に終了）
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+	else
+		-- ノーマルモード: 現在行のみ
+		start_line = vim.fn.line(".")
+		end_line = start_line
+	end
+
+	local abs_path = vim.fn.expand("%:p")
+	local rel_path = vim.fn.fnamemodify(abs_path, ":.")
+
+	local output = string.format("%s %d-%d", rel_path, start_line, end_line)
+
+	vim.fn.setreg('"', output)
+	vim.fn.setreg("+", output)
+
+	print("Yanked: " .. output)
+end, {})

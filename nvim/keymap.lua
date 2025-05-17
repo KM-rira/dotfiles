@@ -319,3 +319,13 @@ vim.api.nvim_set_keymap(
 	"<cmd>lua vim.diagnostic.setqflist({open = true})<CR>",
 	{ noremap = true, silent = true }
 )
+
+-- Normalモードで ;fl
+vim.keymap.set("n", ";fl", function()
+	vim.cmd("Sr")
+end, { noremap = true, silent = true })
+
+-- Visualモードで ;fl
+vim.keymap.set("v", ";fl", function()
+	vim.cmd("Sr")
+end, { noremap = true, silent = true })
