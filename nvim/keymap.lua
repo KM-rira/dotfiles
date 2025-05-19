@@ -329,3 +329,13 @@ end, { noremap = true, silent = true })
 vim.keymap.set("v", ";fl", function()
 	vim.cmd("Sr")
 end, { noremap = true, silent = true })
+
+-- Normalモードで ;fn
+vim.keymap.set("n", ";fn", function()
+	vim.cmd("Sf")
+end, { noremap = true, silent = true })
+
+-- Visualモードで ;fn
+vim.keymap.set("v", ";fn", function()
+	vim.cmd("Sf")
+end, { noremap = true, silent = true })
