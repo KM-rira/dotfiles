@@ -210,3 +210,17 @@ vim.api.nvim_create_user_command("Sr", function()
 
 	print(output)
 end, {})
+
+-- SelectionFile
+vim.api.nvim_create_user_command("Sf", function()
+
+	local abs_path = vim.fn.expand("%:p")
+	local rel_path = vim.fn.fnamemodify(abs_path, ":.")
+
+	local output = rel_path
+
+	vim.fn.setreg('"', output)
+	vim.fn.setreg("+", output)
+
+	print(output)
+end, {})
