@@ -203,10 +203,10 @@ vim.api.nvim_create_user_command("Sr", function()
 	local abs_path = vim.fn.expand("%:p")
 	local rel_path = vim.fn.fnamemodify(abs_path, ":.")
 
-	local output = string.format("%s %d-%d", rel_path, start_line, end_line)
+	local output = string.format("%s L%d-%d", rel_path, start_line, end_line)
 
 	vim.fn.setreg('"', output)
 	vim.fn.setreg("+", output)
 
-	print("Yanked: " .. output)
+	print(output)
 end, {})
