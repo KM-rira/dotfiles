@@ -52,6 +52,9 @@ local format = {
 	-- CSS リンタ
 	diagnostics.stylelint, -- Stylelint（CSS / SCSS / Less の Linter）
 
+	formatting.npm_groovy_lint,
+	diagnostics.npm_groovy_lint,
+
 	null_ls.builtins.diagnostics.cspell.with({
 		diagnostics_postprocess = function(diagnostic)
 			-- レベルをWARNに変更（デフォルトはERROR）
@@ -69,7 +72,7 @@ null_ls.setup({
 
 -- ファイル保存時に自動フォーマットを実行
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.sh", "*.lua", "*.go", "*.py", "*.js", "*.ts", "*.css", "*.scss", "*.html" }, -- フォーマット対象のファイル
+	pattern = { "*.sh", "*.lua", "*.go", "*.py", "*.js", "*.ts", "*.css", "*.scss", "*.html", "*.groovy" }, -- フォーマット対象のファイル
 	callback = function()
 		vim.lsp.buf.format({ async = false })
 	end,
@@ -109,10 +112,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- yml ファイル保存時に自動フォーマットを実行
 -- go install github.com/mikefarah/yq/v4@latest
 -- vim.api.nvim_create_autocmd("BufWritePre", {
--- 	pattern = { "*.yaml", "*.yml" },
--- 	callback = function()
--- 		local view = vim.fn.winsaveview()
--- 		vim.cmd("%!yamlfmt -") -- バッファ全体をyamlfmtに渡して整形
--- 		vim.fn.winrestview(view)
--- 	end,
+--     pattern = { "*.yaml", "*.yml" },
+--     callback = function()
+--         local view = vim.fn.winsaveview()
+--         vim.cmd("%!yamlfmt -") -- バッファ全体をyamlfmtに渡して整形
+--         vim.fn.winrestview(view)
+--     end,
 -- })

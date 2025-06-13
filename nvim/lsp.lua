@@ -14,6 +14,7 @@ local mason_lspconfig_list = {
 	"cssls", -- CSS
 	"eslint", -- JavaScript & TypeScript用Lint
 	"cuelsp", -- Cuelang
+	"groovyls",
 }
 
 local mason_tool_installer_list = {
@@ -74,4 +75,14 @@ require("mason-lspconfig").setup_handlers({
 
 require("mason-tool-installer").setup({
 	ensure_installed = mason_tool_installer_list,
+})
+
+require("lspconfig").groovyls.setup({
+	cmd = {
+		"java",
+		"-jar",
+		"/Users/s29442/repo/groovy-language-server/build/libs/groovy-language-server-all.jar",
+	},
+	filetypes = { "groovy" },
+	root_dir = require("lspconfig.util").root_pattern(".git", "."),
 })
