@@ -50,6 +50,7 @@ vim.keymap.set({ "n", "x", "o" }, "gK", "5k", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, ",", ";", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "Q", ",", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "Y", "yy", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x", "o" }, "<C-z>", "<C-a>", { noremap = true, silent = true })
 vim.keymap.set("n", "d ", '"_diw', { noremap = true, silent = true })
 vim.keymap.set("n", "c ", '"_ciw', { noremap = true, silent = true })
 vim.keymap.set("n", "y ", "yiw", { noremap = true, silent = true })
@@ -174,6 +175,8 @@ vim.api.nvim_set_keymap("s", "<C-y>", "", { noremap = true, silent = true })
 
 vim.keymap.set("i", "jk", "<Esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-n>", { noremap = true })
+
+vim.keymap.set("x", "p", '"_dP', { noremap = true, silent = true })
 
 -- ========================================================================
 -- shared vscode keymap end
