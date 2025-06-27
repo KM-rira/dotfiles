@@ -496,6 +496,22 @@
               {
                 "type": "basic",
                 "from": {
+                  "key_code": "f10",
+                  "modifiers": {
+                    "mandatory": [
+                      "shift"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "pointing_button": "button2"
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
                   "key_code": "tab",
                   "modifiers": {
                     "mandatory": [
