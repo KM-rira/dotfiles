@@ -64,7 +64,6 @@ alias push='git push'
 alias checkout='git checkout'
 alias branch='git branch'
 alias fetch='git fetch'
-alias log='git log --oneline'
 alias fixup='git commit --fixup '
 alias dot='cd ~/dotfiles'
 alias pull='git pull'
@@ -87,7 +86,7 @@ alias rebasei='bash ~/dotfiles/tools/rebase_helper.sh'
 . ~/dotfiles/tools/commit.sh
 alias bmf="go run $dot/bookmark/book_mark_format.go;~/dotfiles/tools/book_mark_format/book_mark_fzf.sh"
 alias log='git log --oneline | nl | head -n 30'
-alias oneline='git log --oneline'
+alias oneline='git log --oneline --decorate --graph'
 alias gs='bash ~/dotfiles/tools/google_search.sh'
 alias gr='bash ~/dotfiles/tools/google_research.sh'
 alias hs='bash ~/dotfiles/tools/history_search.sh'
@@ -154,6 +153,10 @@ alias rgb='bash ~/dotfiles/tools/rgb.sh'
 . ~/dotfiles/tools/fdb.sh
 . ~/dotfiles/tools/f.sh
 . ~/dotfiles/tools/ff.sh
+. ~/dotfiles/tools/apply.sh
+. ~/dotfiles/tools/curlfmt.sh
+. ~/dotfiles/tools/maketarget.sh
+. ~/dotfiles/tools/targetdate.sh
 alias h='history'
 alias m='make'
 alias packer='cd ~/.local/share/nvim/site/pack/packer/start/'
