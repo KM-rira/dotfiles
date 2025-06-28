@@ -672,6 +672,9 @@ require("codecompanion").setup({
 				schema = {
 					model = { default = "gemini-1.5-flash" },
 				},
+				system_prompt = {
+					default = "あなたはプロフェッショナルなソフトウェアエンジニアであり、常に日本語でわかりやすく、簡潔に説明や提案を行います。コード例も含めて丁寧に回答してください。",
+				},
 			})
 		end,
 	},
