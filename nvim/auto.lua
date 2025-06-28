@@ -40,8 +40,11 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		-- quickfix ウィンドウでは Enter をそのまま送る
 		vim.api.nvim_buf_set_keymap(0, "n", "<CR>", "<CR>", { noremap = true, silent = true })
-	        -- quickfix ウィンドウで Esc キーを押したらウィンドウを閉じる
+		-- quickfix ウィンドウで Esc キーを押したらウィンドウを閉じる
 		vim.api.nvim_buf_set_keymap(0, "n", "<Esc>", ":cclose<CR>", { noremap = true, silent = true })
+		-- quickfix ウィンドウでは j と k をデフォルトの動作にする
+		vim.api.nvim_buf_set_keymap(0, "n", "j", "j", { noremap = true, silent = true })
+		vim.api.nvim_buf_set_keymap(0, "n", "k", "k", { noremap = true, silent = true })
 	end,
 })
 vim.cmd([[
