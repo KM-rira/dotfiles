@@ -235,16 +235,26 @@ vim.keymap.set("n", "g[", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 
 -- telescope系
 local builtin = require("telescope.builtin")
-vim.keymap.set({ "n", "x", "o" }, "<leader>ff", builtin.find_files, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fg", builtin.live_grep, {})
+
+local smart_path = { path_display = { "smart" } }
+
+vim.keymap.set({ "n", "x", "o" }, "<leader>ff", function()
+	builtin.find_files(smart_path)
+end, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fg", function()
+	builtin.live_grep(smart_path)
+end, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fb", builtin.buffers, {})
-vim.keymap.set({ "n", "x", "o" }, "<leader>fo", builtin.oldfiles, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fo", function()
+	builtin.oldfiles(smart_path)
+end, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fc", builtin.commands, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fh", builtin.command_history, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fj", builtin.jumplist, {})
---vim.keymap.set({ "n", "x", "o" }, "<leader>fs", builtin.search_history, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fz", "<Cmd>Telescope frecency<CR>")
-vim.keymap.set({ "n", "x", "o" }, "<leader>fs", builtin.git_status, {})
+vim.keymap.set({ "n", "x", "o" }, "<leader>fs", function()
+	builtin.git_status(smart_path)
+end, {})
 
 -- =======================================================
 -- git conflicts start
