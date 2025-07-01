@@ -207,6 +207,7 @@ local opts = {
 		width = 0.95,
 		height = 0.90,
 	},
+	path_display = { "smart" },
 }
 
 vim.keymap.set("n", "gr", function()
