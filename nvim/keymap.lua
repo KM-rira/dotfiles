@@ -198,17 +198,31 @@ vim.keymap.set("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
 vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })
 
 local builtin = require("telescope.builtin")
+
+local opts = {
+	previewer = true,
+	layout_strategy = "vertical", -- ← プレビューを下に表示
+	layout_config = {
+		preview_height = 0.5, -- プレビューウィンドウの高さ（画面の50%）
+		width = 0.95,
+		height = 0.90,
+	},
+}
+
 vim.keymap.set("n", "gr", function()
-	builtin.lsp_references({ previewer = true })
+	builtin.lsp_references(opts)
 end, { noremap = true, silent = true })
+
 vim.keymap.set("n", "gd", function()
-	builtin.lsp_definitions({ previewer = true })
+	builtin.lsp_definitions(opts)
 end, { noremap = true, silent = true })
+
 vim.keymap.set("n", "gi", function()
-	builtin.lsp_implementations({ previewer = true })
+	builtin.lsp_implementations(opts)
 end, { noremap = true, silent = true })
+
 vim.keymap.set("n", "gt", function()
-	builtin.lsp_type_definitions({ previewer = true })
+	builtin.lsp_type_definitions(opts)
 end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
