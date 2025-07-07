@@ -10,7 +10,9 @@ local format_patterns = {
 	"*.go",
 	"*.py",
 	"*.js",
+	"*.jsx",
 	"*.ts",
+	"*.tsx",
 	"*.css",
 	"*.scss",
 	"*.html",
@@ -72,7 +74,20 @@ null_ls.setup({
 
 -- ファイル保存時に自動フォーマットを実行
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.sh", "*.lua", "*.go", "*.py", "*.js", "*.ts", "*.css", "*.scss", "*.html", "*.groovy" }, -- フォーマット対象のファイル
+	pattern = {
+		"*.sh",
+		"*.lua",
+		"*.go",
+		"*.py",
+		"*.js",
+		"*.jsx",
+		"*.ts",
+		"*.tsx",
+		"*.css",
+		"*.scss",
+		"*.html",
+		"*.groovy",
+	}, -- フォーマット対象のファイル
 	callback = function()
 		vim.lsp.buf.format({ async = false })
 	end,
