@@ -30,7 +30,19 @@ return {
 			action = wezterm.action.SpawnCommandInNewTab({
 				args = { "C:\\Program Files\\Git\\bin\\bash.exe", "--login", "-i" },
 			}),
-		}, -- 次のタブに移動
+		},
+		{
+			key = "g",
+			mods = "ALT",
+			action = act.ScrollToTop,
+		},
+		-- Scroll to bottom with ALT+SHIFT+G                                        │
+		{
+			key = "g",
+			mods = "SHIFT|ALT",
+			action = act.ScrollToBottom,
+		},
+		-- 次のタブに移動
 		{ key = "Tab", mods = "CTRL", action = wezterm.action({ ActivateTabRelative = 1 }) },
 		-- 前のタブに移動
 		{ key = "Tab", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTabRelative = -1 }) },
@@ -45,9 +57,9 @@ return {
 		-- 半ページを上にスクロール
 		{ key = "u", mods = "ALT", action = wezterm.action({ ScrollByPage = 0.5 }) },
 		-- 一行上にスクロール
-		{ key = "k", mods = "ALT", action = wezterm.action({ ScrollByLine = -1 }) },
+		{ key = "k", mods = "SHIFT|ALT", action = wezterm.action({ ScrollByLine = -1 }) },
 		-- 一行下にスクロール
-		{ key = "j", mods = "ALT", action = wezterm.action({ ScrollByLine = 1 }) },
+		{ key = "j", mods = "SHIFT|ALT", action = wezterm.action({ ScrollByLine = 1 }) },
 		-- ペインを垂直分割
 		{
 			key = "v",
@@ -65,15 +77,15 @@ return {
 		-- タブを右に移動
 		{ key = ">", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(1) },
 		-- 次のペインへ移動
-		{ key = "l", mods = "SHIFT|ALT", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
+		{ key = "l", mods = "ALT", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
 		-- 前のペインへ移動
-		{ key = "h", mods = "SHIFT|ALT", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
+		{ key = "h", mods = "ALT", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
 		-- 上下のペイン間を移動するための追加のショートカット
-		{ key = "j", mods = "SHIFT|ALT", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
-		{ key = "k", mods = "SHIFT|ALT", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
+		{ key = "j", mods = "ALT", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
+		{ key = "k", mods = "ALT", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
 		-- 矢印キーを使用してペインのサイズを調整
-		{ key = "LeftArrow", mods = "SHIFT|ALT", action = wezterm.action({ AdjustPaneSize = { "Right", 1 } }) },
-		{ key = "RightArrow", mods = "SHIFT|ALT", action = wezterm.action({ AdjustPaneSize = { "Left", 1 } }) },
+		{ key = "RightArrow", mods = "SHIFT|ALT", action = wezterm.action({ AdjustPaneSize = { "Right", 1 } }) },
+		{ key = "LeftArrow", mods = "SHIFT|ALT", action = wezterm.action({ AdjustPaneSize = { "Left", 1 } }) },
 		{ key = "DownArrow", mods = "SHIFT|ALT", action = wezterm.action({ AdjustPaneSize = { "Up", 1 } }) },
 		{ key = "UpArrow", mods = "SHIFT|ALT", action = wezterm.action({ AdjustPaneSize = { "Down", 1 } }) },
 		-- アクティブなペインを閉じる
