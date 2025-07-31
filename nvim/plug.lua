@@ -113,6 +113,10 @@ require("lazy").setup({
 			"nvim-treesitter/nvim-treesitter",
 		},
 	},
+	{
+		"aklt/plantuml-syntax",
+		ft = { "plantuml" },
+	},
 })
 
 -- LuaSnipをロード
@@ -677,5 +681,11 @@ require("codecompanion").setup({
 				},
 			})
 		end,
+	},
+})
+
+vim.filetype.add({
+	extension = {
+		puml = "plantuml",
 	},
 })

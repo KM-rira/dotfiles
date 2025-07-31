@@ -8,17 +8,24 @@ import (
 
 func main() {
 	var cmd string
+	var args []string
+
 	if len(os.Args) > 1 {
 		cmd = os.Args[1]
+	}
+
+	if len(os.Args) > 2 {
+		args = os.Args[2:]
 	}
 
 	gocmdService := service.NewGocmdService()
 	gocmdUsecase := usecase.NewGocmdUsecase(gocmdService)
 
 	switch cmd {
-	case "log":
-		gocmdUsecase.RunLog()
+	case "fd":
+		gocmdUsecase.RunFd(args)
 	default:
 		gocmdUsecase.RunDefault()
 	}
 }
+
