@@ -213,7 +213,6 @@ end, {})
 
 -- SelectionFile
 vim.api.nvim_create_user_command("Sf", function()
-
 	local abs_path = vim.fn.expand("%:p")
 	local rel_path = vim.fn.fnamemodify(abs_path, ":.")
 
@@ -222,5 +221,26 @@ vim.api.nvim_create_user_command("Sf", function()
 	vim.fn.setreg('"', output)
 	vim.fn.setreg("+", output)
 
+	vim.api.nvim_create_user_command("OpenSVG", function()
+		local file = vim.fn.expand("%:p")
+		if not file:match("%.svg$") then
+			print("This is not an SVG file.")
+			return
+		end
+
+		local open_cmd
+		if vim.fn.has("mac") == 1 then
+			open_cmd = "open"
+		elseif vim.fn.has("unix") == 1 then
+			open_cmd = "xdg-open"
+		elseif vim.fn.has("win32") == 1 then
+			open_cmd = "start"
+		else
+			print("Unsupported OS")
+			return
+		end
+
+		vim.fn.jobstart({ open_cmd, file }, { detach = true })
+	end, {})
 	print(output)
 end, {})
