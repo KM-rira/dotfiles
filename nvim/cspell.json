@@ -15,7 +15,11 @@
     "Neovim",
     "vim",
     "nvim",
-    "cspell"
+    "cspell",
+    "gomock",
+    "usecase",
+    "golib",
+    "userstatus"
   ]
 }
 
