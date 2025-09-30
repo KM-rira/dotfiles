@@ -30,7 +30,7 @@ install_function() {
 
 # brew install
 install_cmd='brew install'
-packages=(git-delta dust tlrc glances glow yazi lazygit lazydocker cheat xo/xo/usql bat luarocks)
+packages=(git-delta dust tlrc glances glow yazi lazygit lazydocker cheat usql bat luarocks zoxide jq fd-find ripgrep fzf zoxide shfmt)
 for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done
