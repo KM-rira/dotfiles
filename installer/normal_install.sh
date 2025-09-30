@@ -30,10 +30,14 @@ install_function() {
 
 # brew install
 install_cmd='brew install'
-packages=(git-delta dust tlrc glances glow yazi lazygit lazydocker cheat usql bat luarocks zoxide jq fd-find ripgrep fzf zoxide shfmt)
+packages=(git-delta dust tlrc glances glow yazi lazygit lazydocker cheat usql bat luarocks zoxide jq fd-find ripgrep fzf zoxide shfmt lsd duf node npm chrony ccze vim)
+)
 for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done
+
+# 事後に実行
+# sudo chronyd -q 'server ntp.nict.jp iburst'
 
 # git-delta の設定
 git config --global core.pager delta
