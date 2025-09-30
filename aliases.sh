@@ -31,6 +31,8 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # デフォルトのエディタ設定
 export EDITOR=nvim
 export GIT_EDITOR=nvim
+export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
 
 mkdir -p $HOME/.tmp
 chmod +x $dot/tools/rgv_preview.sh
