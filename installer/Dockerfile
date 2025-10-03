@@ -21,10 +21,6 @@ RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/instal
 # PATH 設定
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
 
-# root に戻したい場合
-USER root
-WORKDIR /app
-
 # スクリプトをコピー
 COPY normal_install.sh /app/normal_install.sh
 COPY sudo_install.sh /app/sudo_install.sh
@@ -32,7 +28,5 @@ COPY sudo_install.sh /app/sudo_install.sh
 RUN chmod +x /app/sudo_install.sh
 RUN chmod +x /app/normal_install.sh
 
-# root ユーザーで直接実行
-CMD ["/app/sudo_install.sh"]
-CMD ["/app/normal_install.sh"]
+CMD ["/bin/bash", "-c", "/app/sudo_install.sh && /app/normal_install.sh"]
 
