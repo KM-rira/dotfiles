@@ -1,22 +1,28 @@
 FROM ubuntu:latest
 
-# 必要パッケージ
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
     file \
     git \
+    sudo \
     && rm -rf /var/lib/apt/lists/*
+
+# Homebrew 用ユーザーを作成
+RUN useradd -m -s /bin/bash linuxbrew && \
+    echo "linuxbrew ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+USER linuxbrew
+WORKDIR /home/linuxbrew
 
 # Homebrew インストール
 RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# PATH を通す
+# PATH 設定
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
 
-# Homebrew 初期化（ログインシェルで反映させる用）
-RUN echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /root/.bashrc
-
+# root に戻したい場合
+USER root
 WORKDIR /app
 
 # スクリプトをコピー
