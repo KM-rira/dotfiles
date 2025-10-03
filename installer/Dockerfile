@@ -8,10 +8,20 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     && rm -rf /var/lib/apt/lists/*
 
+# Homebrew インストール
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# 環境変数の設定（Linuxbrew のパスを通す）
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
+
+# Homebrew の初期化
+RUN echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /root/.bashrc
+
 # 作業ディレクトリを設定
 WORKDIR /app
 
-# sudo_install.sh をコンテナ内にコピー
+# install.sh をコンテナ内にコピー
+COPY normal_install.sh /app/normal_install.sh
 COPY sudo_install.sh /app/sudo_install.sh
 
 # sudo_install.sh の実行権限を付与
