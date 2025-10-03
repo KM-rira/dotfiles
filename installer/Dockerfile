@@ -26,5 +26,5 @@ RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/instal
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
 
 # コンテナ実行時のコマンド
-CMD ["/bin/bash", "-c", "/app/sudo_install.sh && /app/normal_install.sh"]
+CMD ["/bin/bash", "-c", "/app/normal_install.sh"]
 
