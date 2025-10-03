@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     cargo \
     nodejs \
     npm \
+    zsh \
     && rm -rf /var/lib/apt/lists/*
 
 # Homebrew 用ユーザーを作成
