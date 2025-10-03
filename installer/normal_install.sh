@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [ "$(id -u)" -eq 0 ]; then
-	echo "You are root."
-	exit 1
-fi
+# if [ "$(id -u)" -eq 0 ]; then
+# 	echo "You are root."
+# 	exit 1
+# fi
 
 prerequisite_installation_list=(bash cargo zsh)
 
