@@ -6,6 +6,9 @@ RUN apt-get update && apt-get install -y \
     file \
     git \
     sudo \
+    cargo \
+    nodejs \
+    npm \
     && rm -rf /var/lib/apt/lists/*
 
 # Homebrew 用ユーザーを作成
