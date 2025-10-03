@@ -28,10 +28,13 @@ install_function() {
 	echo -e "================\n $2 end!!!\n================"
 }
 
-# brew install
+# brew install (cczeなくなった)
 install_cmd='brew install'
-packages=(git-delta dust tlrc glances glow yazi lazygit lazydocker cheat usql bat luarocks zoxide jq fd-find ripgrep fzf zoxide shfmt lsd duf node npm chrony ccze vim)
+packages=(git-delta dust tlrc glances glow yazi lazygit lazydocker cheat usql bat luarocks zoxide jq fd ripgrep fzf zoxide shfmt lsd duf node npm chrony vim sd)
 for package in "${packages[@]}"; do
+	if [ "$package" = "usql" ]; then
+		brew tap xo/xo
+	fi
 	install_function "$install_cmd" "$package"
 done
 
@@ -47,7 +50,7 @@ git config --global delta.navigate true
 
 # cargo install
 install_cmd='cargo install'
-packages=(sd xsv)
+packages=(xsv)
 for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done
