@@ -24,8 +24,9 @@ func main() {
 	switch cmd {
 	case "fd":
 		gocmdUsecase.RunFd(args)
+	case "fdv":
+		gocmdUsecase.RunFdv(args)
 	default:
 		gocmdUsecase.RunDefault()
 	}
 }
-
