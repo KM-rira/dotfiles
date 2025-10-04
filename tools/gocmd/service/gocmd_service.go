@@ -3,6 +3,7 @@ package service
 import (
 	"bytes"
 	"fmt"
+	"gocmd/errorCode"
 	"log"
 	"os"
 	"os/exec"
@@ -43,10 +44,10 @@ func (s *GocmdService) Fzf(args []byte) (string, error) {
 		// これらはアプリケーションのエラーではないので、ログに出さずに正常終了する。
 		if exitError, ok := err.(*exec.ExitError); ok {
 			if exitError.ExitCode() == 1 {
-				fmt.Println("=== NO MATCH ===")
+				fmt.Println(errorCode.NotMatch)
 				return "", nil
 			} else if exitError.ExitCode() == 130 {
-				fmt.Println("=== CANCEL ===")
+				fmt.Println(errorCode.NotMatch)
 				return "", nil
 			}
 		}
@@ -67,5 +68,5 @@ func (s *GocmdService) Nvim(args string) error {
 }
 
 func (s *GocmdService) HandleDefault() {
-	fmt.Println("=== NOT MATCH COMMAND===")
+	fmt.Println(errorCode.NotMatchCommand)
 }
