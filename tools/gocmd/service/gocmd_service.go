@@ -24,6 +24,14 @@ func (s *GocmdService) Fd(args []string) []byte {
 	return out
 }
 
+func (s *GocmdService) Rg(args []string) []byte {
+	out, err := exec.Command("rg", args...).Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return out
+}
+
 func (s *GocmdService) FindOneDepth() []byte {
 	// fzfコマンドを準備
 	out, err := exec.Command(

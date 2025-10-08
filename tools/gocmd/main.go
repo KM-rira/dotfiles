@@ -23,11 +23,13 @@ func main() {
 
 	switch cmd {
 	case "fd":
-		gocmdUsecase.RunFd(args)
+		gocmdUsecase.Fd(args)
 	case "fdv":
-		gocmdUsecase.RunFdv(args)
+		gocmdUsecase.Fdv(args)
 	case "bf":
-		gocmdUsecase.RunBf(args)
+		gocmdUsecase.Bf(args)
+	case "vf":
+		gocmdUsecase.Vf(args)
 	default:
 		gocmdUsecase.RunDefault()
 	}
