@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 )
 
@@ -25,11 +26,73 @@ func (s *GocmdService) Fd(args []string) []byte {
 }
 
 func (s *GocmdService) Rg(args []string) []byte {
-	out, err := exec.Command("rg", args...).Output()
+	out, err := exec.Command("rg -l", args...).Output()
 	if err != nil {
 		log.Fatal(err)
 	}
 	return out
+}
+
+func (s *GocmdService) RgGetRowNum(paramWord, selectFile string) []byte {
+	out, err := exec.Command("rg -n", paramWord, selectFile).Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return out
+}
+
+func (s *GocmdService) Cut(input, separateWord string, getField int) string {
+	// 区切りで分割
+	parts := strings.Split(input, separateWord)
+
+	// インデックス範囲チェック（cutは1始まり）
+	if getField <= 0 || getField > len(parts) {
+		return ""
+	}
+
+	// 該当フィールドを返す
+	return parts[getField-1]
+}
+
+func (s *GocmdService) FzfSelectRow(args []byte, ext string) (string, error) {
+	//ROW_NUM=$(rg -n $1 $SELECT_FILE | fzf --tac --no-sort --reverse --prompt='SELECT ROW: ' --no-multi --preview "$HOME/dotfiles/tools/rgv_preview.sh {} ${SELECT_FILE} ; bat --color=always $HOME/.tmp/tmp.${EXT}" | cut -d ':' -f 1)
+	// fzfコマンドを準備
+	cmd := exec.Command(
+		"bash", "-c",
+		fmt.Sprintf(
+			"fzf --tac --no-sort --reverse --prompt='SELECT ROW: ' --no-multi "+
+				"--preview \"$HOME/dotfiles/tools/rgv_preview.sh {} ${SELECT_FILE} ; "+
+				"bat --color=always $HOME/.tmp/tmp.%s\"",
+			ext,
+		),
+	)
+	// fzfの標準入力にfdの出力を渡す
+	cmd.Stdin = bytes.NewReader(args)
+	// fzfの標準出力をキャプチャするためのバッファ
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	// fzfはインタラクティブなUIを標準エラーに出力するので、
+	// 現在のプロセスの標準エラーに接続する
+	cmd.Stderr = os.Stderr
+
+	// fzfを実行
+	err := cmd.Run()
+	if err != nil {
+		// fzfで何も選択せずに終了した場合(ESCキーなど)もエラーになる。
+		// exit status 1は「何もマッチしなかった」、130は「Ctrl+Cで中断」
+		// これらはアプリケーションのエラーではないので、ログに出さずに正常終了する。
+		if exitError, ok := err.(*exec.ExitError); ok {
+			if exitError.ExitCode() == 1 {
+				fmt.Println(errorCode.NotMatch)
+				return "", nil
+			} else if exitError.ExitCode() == 130 {
+				fmt.Println(errorCode.NotMatch)
+				return "", nil
+			}
+		}
+		return "", err
+	}
+	return strings.TrimSpace(out.String()), nil
 }
 
 func (s *GocmdService) FindOneDepth() []byte {
@@ -87,6 +150,14 @@ func (s *GocmdService) FzfSelectOne(args []byte) (string, error) {
 		return "", err
 	}
 	return strings.TrimSpace(out.String()), nil
+}
+
+func (s *GocmdService) NvimSelectRow(selectFile string, rowNum int) error {
+	cmd := exec.Command("nvim", selectFile, "+"+strconv.Itoa(rowNum))
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
 }
 
 func (s *GocmdService) Nvim(args string) error {

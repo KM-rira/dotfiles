@@ -30,6 +30,8 @@ func main() {
 		gocmdUsecase.Bf(args)
 	case "vf":
 		gocmdUsecase.Vf(args)
+	case "rgv":
+		gocmdUsecase.Rgv(args)
 	default:
 		gocmdUsecase.RunDefault()
 	}
