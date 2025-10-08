@@ -26,6 +26,8 @@ func main() {
 		gocmdUsecase.RunFd(args)
 	case "fdv":
 		gocmdUsecase.RunFdv(args)
+	case "bf":
+		gocmdUsecase.RunBf(args)
 	default:
 		gocmdUsecase.RunDefault()
 	}

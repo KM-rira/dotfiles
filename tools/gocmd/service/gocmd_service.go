@@ -24,9 +24,34 @@ func (s *GocmdService) Fd(args []string) []byte {
 	return out
 }
 
-func (s *GocmdService) Fzf(args []byte) (string, error) {
+func (s *GocmdService) FindOneDepth() []byte {
 	// fzfコマンドを準備
-	cmd := exec.Command("fzf")
+	out, err := exec.Command(
+		"find", ".", "-maxdepth", "1", "-type", "f",
+	).Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return out
+}
+
+func (s *GocmdService) FzfSelectOne(args []byte) (string, error) {
+	// fzfコマンドを準備
+	cmd := exec.Command(
+		"fzf",
+		"--tac",
+		"--no-sort",
+		"--reverse",
+		"--prompt=Select FILE: ",
+		"--no-multi",
+		"--height", "70%",
+		"--layout", "reverse",
+		"--info", "inline",
+		"--border",
+		"--preview", "bat --color=always {}",
+		"--preview-window", "~3",
+		"--bind", "ctrl-/:change-preview-window(50%|hidden|)",
+	)
 	// fzfの標準入力にfdの出力を渡す
 	cmd.Stdin = bytes.NewReader(args)
 	// fzfの標準出力をキャプチャするためのバッファ
@@ -61,6 +86,17 @@ func (s *GocmdService) Nvim(args string) error {
 		return nil
 	}
 	cmd := exec.Command("nvim", args)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
+}
+
+func (s *GocmdService) Bat(args string) error {
+	if args == "" {
+		return nil
+	}
+	cmd := exec.Command("bat", args)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
