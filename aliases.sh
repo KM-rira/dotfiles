@@ -39,6 +39,10 @@ chmod +x $dot/tools/rgv_preview.sh
 
 ##alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 
+cd ~/dotfiles/tools/gocli
+make build &
+cd -
+
 # 追加したいエイリアスをこの配列に列挙
 alias clip='clip.exe'
 alias ..='cd ..'
@@ -72,11 +76,12 @@ alias pull='git pull'
 alias show='git show'
 alias findall='sudo find / -name'
 alias findalld='sudo find / -type d -name'
-alias batf='lua ~/dotfiles/tools/bf.lua'
+alias batf="~/dotfiles/tools/gocli/gocli bf"
+alias bf="~/dotfiles/tools/gocli/gocli bf"
+alias fdv="~/dotfiles/tools/gocli/gocli fdv"
 alias geminiq='go run ~/dotfiles/tools/gemini/main.go'
-alias bf='lua ~/dotfiles/tools/bf.lua'
 alias catf='bash ~/dotfiles/tools/catf.sh'
-alias vf='lua ~/dotfiles/tools/vf.lua'
+alias vf="~/dotfiles/tools/gocli/gocli vf"
 . ~/dotfiles/tools/vff.sh
 . ~/dotfiles/tools/bashf.sh
 alias fixupf='bash ~/dotfiles/tools/fixupf.sh'
@@ -153,7 +158,6 @@ alias d='bash ~/dotfiles/tools/do.sh'
 # alias ff="ls -F | grep -v / | sed 's/\*//g' | fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 . ~/dotfiles/tools/rgv.sh
 alias rgb='bash ~/dotfiles/tools/rgb.sh'
-. ~/dotfiles/tools/fdv.sh
 . ~/dotfiles/tools/fdb.sh
 . ~/dotfiles/tools/f.sh
 . ~/dotfiles/tools/ff.sh

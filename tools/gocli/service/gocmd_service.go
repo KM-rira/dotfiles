@@ -3,7 +3,7 @@ package service
 import (
 	"bytes"
 	"fmt"
-	"gocmd/errorCode"
+	"gocli/errorCode"
 	"log"
 	"os"
 	"os/exec"
