@@ -79,6 +79,7 @@ alias findalld='sudo find / -type d -name'
 alias batf="~/dotfiles/tools/gocli/gocli bf"
 alias bf="~/dotfiles/tools/gocli/gocli bf"
 alias fdv="~/dotfiles/tools/gocli/gocli fdv"
+alias fdb="~/dotfiles/tools/gocli/gocli fdb"
 alias geminiq='go run ~/dotfiles/tools/gemini/main.go'
 alias catf='bash ~/dotfiles/tools/catf.sh'
 alias vf="~/dotfiles/tools/gocli/gocli vf"
@@ -158,7 +159,6 @@ alias d='bash ~/dotfiles/tools/do.sh'
 # alias ff="ls -F | grep -v / | sed 's/\*//g' | fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 . ~/dotfiles/tools/rgv.sh
 alias rgb='bash ~/dotfiles/tools/rgb.sh'
-. ~/dotfiles/tools/fdb.sh
 . ~/dotfiles/tools/f.sh
 . ~/dotfiles/tools/ff.sh
 . ~/dotfiles/tools/apply.sh

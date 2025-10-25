@@ -33,6 +33,18 @@ func (u *GocmdUsecase) Fdv(args []string) {
 	}
 }
 
+func (u *GocmdUsecase) Fdb(args []string) {
+	fdOut := u.gocliService.Fd(args)
+	fzfInput := bytes.NewReader(fdOut)
+	selected, err := u.gocliService.FzfSelectOne(fzfInput)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if err := u.gocliService.Bat(selected); err != nil {
+		log.Fatalf("failed to open bat: %v", err)
+	}
+}
+
 // func (u *GocmdUsecase) Rgv(args []string) {
 // 	rgOut := u.gocliService.Rg(args)
 //

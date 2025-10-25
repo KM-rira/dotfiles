@@ -26,6 +26,8 @@ func main() {
 		gocliUsecase.Fd(args)
 	case "fdv":
 		gocliUsecase.Fdv(args)
+	case "fdb":
+		gocliUsecase.Fdb(args)
 	case "bf":
 		gocliUsecase.Bf(args)
 	case "vf":
