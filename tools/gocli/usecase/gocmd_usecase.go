@@ -1,9 +1,11 @@
 package usecase
 
 import (
+	"bytes"
 	"fmt"
 	"gocli/service"
 	"log"
+	"strings"
 )
 
 type GocmdUsecase struct {
@@ -21,8 +23,8 @@ func (u *GocmdUsecase) Fd(args []string) {
 
 func (u *GocmdUsecase) Fdv(args []string) {
 	fdOut := u.gocliService.Fd(args)
-
-	selected, err := u.gocliService.FzfSelectOne(fdOut)
+	fzfInput := bytes.NewReader(fdOut)
+	selected, err := u.gocliService.FzfSelectOne(fzfInput)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -56,8 +58,8 @@ func (u *GocmdUsecase) Fdv(args []string) {
 
 func (u *GocmdUsecase) Bf(args []string) {
 	findOut := u.gocliService.FindOneDepth()
-
-	selected, err := u.gocliService.FzfSelectOne(findOut)
+	fzfInput := bytes.NewReader(findOut)
+	selected, err := u.gocliService.FzfSelectOne(fzfInput)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -67,9 +69,9 @@ func (u *GocmdUsecase) Bf(args []string) {
 }
 
 func (u *GocmdUsecase) Vf(args []string) {
-	findOut := u.gocliService.FindOneDepth()
-
-	selected, err := u.gocliService.FzfSelectOne(findOut)
+	files, _ := u.gocliService.GetCurrentFiles()
+	fzfInput := strings.Join(files, "\n") // fzfは改行区切りで候補を認識
+	selected, err := u.gocliService.FzfSelectOne(strings.NewReader(fzfInput))
 	if err != nil {
 		log.Fatal(err)
 	}

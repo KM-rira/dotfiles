@@ -4,9 +4,11 @@ import (
 	"bytes"
 	"fmt"
 	"gocli/errorCode"
+	"io"
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strconv"
 	"strings"
 )
@@ -106,7 +108,28 @@ func (s *GocmdService) FindOneDepth() []byte {
 	return out
 }
 
-func (s *GocmdService) FzfSelectOne(args []byte) (string, error) {
+func (s *GocmdService) GetCurrentFiles() ([]string, error) {
+	dir, err := os.Getwd()
+	if err != nil {
+		return nil, fmt.Errorf("getwd error: %w", err)
+	}
+
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, fmt.Errorf("readdir error: %w", err)
+	}
+
+	var files []string
+	for _, entry := range entries {
+		if !entry.IsDir() {
+			files = append(files, filepath.Join(dir, entry.Name()))
+		}
+	}
+
+	return files, nil
+}
+
+func (s *GocmdService) FzfSelectOne(args io.Reader) (string, error) {
 	// fzfコマンドを準備
 	cmd := exec.Command(
 		"fzf",
@@ -124,7 +147,7 @@ func (s *GocmdService) FzfSelectOne(args []byte) (string, error) {
 		"--bind", "ctrl-/:change-preview-window(50%|hidden|)",
 	)
 	// fzfの標準入力にfdの出力を渡す
-	cmd.Stdin = bytes.NewReader(args)
+	cmd.Stdin = args
 	// fzfの標準出力をキャプチャするためのバッファ
 	var out bytes.Buffer
 	cmd.Stdout = &out
