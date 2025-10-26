@@ -42,6 +42,7 @@ chmod +x $dot/tools/rgv_preview.sh
 cd ~/dotfiles/tools/gocli
 make build &
 cd -
+. "$dot/tools/gocli/generate/output/alias.sh"
 alias gocli='cd ~/dotfiles/tools/gocli'
 
 # 追加したいエイリアスをこの配列に列挙
