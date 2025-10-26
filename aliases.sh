@@ -42,6 +42,7 @@ chmod +x $dot/tools/rgv_preview.sh
 cd ~/dotfiles/tools/gocli
 make build &
 cd -
+alias gocli='cd ~/dotfiles/tools/gocli'
 
 # 追加したいエイリアスをこの配列に列挙
 alias clip='clip.exe'
@@ -87,7 +88,7 @@ alias vf="~/dotfiles/tools/gocli/gocli vf"
 . ~/dotfiles/tools/vff.sh
 . ~/dotfiles/tools/bashf.sh
 alias fixupf='bash ~/dotfiles/tools/fixupf.sh'
-alias showf='bash ~/dotfiles/tools/showf.sh'
+alias showf="~/dotfiles/tools/gocli/gocli showf"
 alias continue='git rebase --continue'
 alias abort='git rebase --abort'
 alias amend='git commit --amend -m'

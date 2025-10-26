@@ -1,0 +1,21 @@
+package switch
+
+import (
+	"gocli/service"
+	"gocli/usecase"
+	"os"
+)
+
+func SwitchCommand(cmd string, args []string) {
+
+	gocliService := service.NewGocmdService()
+	gocliUsecase := usecase.NewGocmdUsecase(gocliService)
+    switch cmd {
+    {{- range .Commands }}
+    case "{{ . }}":
+        gocliUsecase.{{ title . }}(args)
+    {{- end }}
+    default:
+        gocliUsecase.RunDefault()
+    }
+}

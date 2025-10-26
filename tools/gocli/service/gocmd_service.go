@@ -8,7 +8,6 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"strconv"
 	"strings"
 )
@@ -122,7 +121,7 @@ func (s *GocmdService) GetCurrentFiles() ([]string, error) {
 	var files []string
 	for _, entry := range entries {
 		if !entry.IsDir() {
-			files = append(files, filepath.Join(dir, entry.Name()))
+			files = append(files, entry.Name())
 		}
 	}
 
@@ -207,4 +206,24 @@ func (s *GocmdService) Bat(args string) error {
 
 func (s *GocmdService) HandleDefault() {
 	fmt.Println(errorCode.NotMatchCommand)
+}
+
+func (s *GocmdService) GitLog(args []string) []byte {
+	gitLog := exec.Command("git", "log", "--oneline", "-n", "50")
+	var logOut bytes.Buffer
+	gitLog.Stdout = &logOut
+	gitLog.Stderr = os.Stderr
+	if err := gitLog.Run(); err != nil {
+		log.Fatalf("git log の実行に失敗: %v", err)
+	}
+	return logOut.Bytes()
+}
+
+func (s *GocmdService) GitShow(commitID string) {
+	show := exec.Command("git", "show", commitID)
+	show.Stdout = os.Stdout
+	show.Stderr = os.Stderr
+	if err := show.Run(); err != nil {
+		log.Fatalf("git show の実行に失敗: %v", err)
+	}
 }

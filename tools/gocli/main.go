@@ -1,8 +1,7 @@
 package main
 
 import (
-	"gocli/service"
-	"gocli/usecase"
+	"gocli/generate/output"
 	"os"
 )
 
@@ -18,23 +17,5 @@ func main() {
 		args = os.Args[2:]
 	}
 
-	gocliService := service.NewGocmdService()
-	gocliUsecase := usecase.NewGocmdUsecase(gocliService)
-
-	switch cmd {
-	case "fd":
-		gocliUsecase.Fd(args)
-	case "fdv":
-		gocliUsecase.Fdv(args)
-	case "fdb":
-		gocliUsecase.Fdb(args)
-	case "bf":
-		gocliUsecase.Bf(args)
-	case "vf":
-		gocliUsecase.Vf(args)
-	// case "rgv":
-	// 	gocliUsecase.Rgv(args)
-	default:
-		gocliUsecase.RunDefault()
-	}
+	output.SwitchCommand(cmd, args)
 }
