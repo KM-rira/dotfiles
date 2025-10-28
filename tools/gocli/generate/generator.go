@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -34,30 +35,31 @@ func main() {
 		},
 	}
 
-	// テンプレート読み込み（修正版）
-	switchTmpl := template.Must(template.New("").Funcs(funcMap).ParseFiles("template/switch.tmpl"))
-
-	switchOut, err := os.Create("output/switch.go")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer switchOut.Close()
-
-	if err := switchTmpl.ExecuteTemplate(switchOut, "switch.tmpl", data); err != nil {
-		log.Fatal(err)
+	// テンプレート名と拡張子のマップ
+	tmplMap := map[string]string{
+		"switch": "go",
+		"alias":  "sh",
 	}
 
-	// テンプレート読み込み（修正版）
-	tmpl2 := template.Must(template.New("").Funcs(funcMap).ParseFiles("template/alias.tmpl"))
+	for tmplName, tmplExt := range tmplMap {
+		templatePath := fmt.Sprintf("template/%s.tmpl", tmplName)
+		outputPath := fmt.Sprintf("output/%s.%s", tmplName, tmplExt)
 
-	out2, err := os.Create("output/alias.sh")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer out2.Close()
+		fmt.Println("Processing:", templatePath)
 
-	if err := tmpl2.ExecuteTemplate(out2, "alias.tmpl", data); err != nil {
-		log.Fatal(err)
+		// ✅ テンプレート名を指定してNew()
+		tmpl := template.Must(template.New(tmplName + ".tmpl").Funcs(funcMap).ParseFiles(templatePath))
+
+		out, err := os.Create(outputPath)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer out.Close()
+
+		// ✅ tmplName+".tmpl" を使ってテンプレートを実行
+		if err := tmpl.ExecuteTemplate(out, tmplName+".tmpl", data); err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	log.Println("✅ generate done")

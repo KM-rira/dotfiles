@@ -79,17 +79,11 @@ alias pull='git pull'
 alias show='git show'
 alias findall='sudo find / -name'
 alias findalld='sudo find / -type d -name'
-alias batf="~/dotfiles/tools/gocli/gocli bf"
-alias bf="~/dotfiles/tools/gocli/gocli bf"
-alias fdv="~/dotfiles/tools/gocli/gocli fdv"
-alias fdb="~/dotfiles/tools/gocli/gocli fdb"
 alias geminiq='go run ~/dotfiles/tools/gemini/main.go'
 alias catf='bash ~/dotfiles/tools/catf.sh'
-alias vf="~/dotfiles/tools/gocli/gocli vf"
 . ~/dotfiles/tools/vff.sh
 . ~/dotfiles/tools/bashf.sh
 alias fixupf='bash ~/dotfiles/tools/fixupf.sh'
-alias showf="~/dotfiles/tools/gocli/gocli showf"
 alias continue='git rebase --continue'
 alias abort='git rebase --abort'
 alias amend='git commit --amend -m'
