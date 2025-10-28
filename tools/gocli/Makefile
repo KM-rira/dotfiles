@@ -1,7 +1,7 @@
 # プロジェクト名（バイナリ名）
 APP_NAME := gocli
 APP_DIR := $(HOME)/dotfiles/tools/gocli
-OUT_DIR := $(HOME)/dotfiles/tools/gocli
+OUT_DIR := $(HOME)/dotfiles/tools/gocli/.out
 
 # デフォルトターゲット
 .PHONY: all
