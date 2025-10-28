@@ -1,0 +1,21 @@
+{
+  "name": "Ubuntu + nvim/bat/fd",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."                 // Docker がプロジェクト全体にアクセスできるように
+  },
+  "workspaceFolder": "/workspace",   // コンテナ側の作業パス
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind"  // ローカルと完全同期
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "postCreateCommand": "bash -lc 'nvim --version | head -n1; echo ----; bat --version; fd --version; rg --version'"
+}
+
