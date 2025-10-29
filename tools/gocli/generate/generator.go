@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"sync"
 	"text/template"
 
 	"gopkg.in/yaml.v3"
@@ -25,7 +26,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// 関数マップ登録
 	funcMap := template.FuncMap{
 		"title": func(s string) string {
 			if s == "" {
@@ -35,32 +35,42 @@ func main() {
 		},
 	}
 
-	// テンプレート名と拡張子のマップ
 	tmplMap := map[string]string{
 		"switch": "go",
 		"alias":  "sh",
 	}
 
+	var wg sync.WaitGroup
+	wg.Add(len(tmplMap))
+
 	for tmplName, tmplExt := range tmplMap {
-		templatePath := fmt.Sprintf("template/%s.tmpl", tmplName)
-		outputPath := fmt.Sprintf("output/%s.%s", tmplName, tmplExt)
+		go func(tmplName, tmplExt string) {
+			defer wg.Done()
 
-		fmt.Println("Processing:", templatePath)
+			templatePath := fmt.Sprintf("template/%s.tmpl", tmplName)
+			outputPath := fmt.Sprintf("output/%s.%s", tmplName, tmplExt)
 
-		// ✅ テンプレート名を指定してNew()
-		tmpl := template.Must(template.New(tmplName + ".tmpl").Funcs(funcMap).ParseFiles(templatePath))
+			fmt.Println("Processing:", templatePath)
 
-		out, err := os.Create(outputPath)
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer out.Close()
+			// 各goroutine内でテンプレート処理
+			tmpl := template.Must(template.New(tmplName + ".tmpl").Funcs(funcMap).ParseFiles(templatePath))
 
-		// ✅ tmplName+".tmpl" を使ってテンプレートを実行
-		if err := tmpl.ExecuteTemplate(out, tmplName+".tmpl", data); err != nil {
-			log.Fatal(err)
-		}
+			out, err := os.Create(outputPath)
+			if err != nil {
+				log.Printf("❌ %s: %v\n", tmplName, err)
+				return
+			}
+			defer out.Close()
+
+			if err := tmpl.ExecuteTemplate(out, tmplName+".tmpl", data); err != nil {
+				log.Printf("❌ %s: %v\n", tmplName, err)
+				return
+			}
+
+			fmt.Printf("✅ %s done\n", tmplName)
+		}(tmplName, tmplExt)
 	}
 
-	log.Println("✅ generate done")
+	wg.Wait()
+	log.Println("🏁 all templates processed successfully")
 }
