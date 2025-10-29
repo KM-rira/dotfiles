@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"sync"
@@ -20,7 +21,16 @@ type Data struct {
 func main() {
 	// YAML読み込み
 	var data Data
-	b, err := os.ReadFile("definition/commands.yml")
+	_, exePath, _, ok := runtime.Caller(0)
+	if !ok {
+		log.Fatal("❌ failed to get runtime caller")
+	}
+	exeDir := filepath.Dir(exePath)
+
+	ymlPath := filepath.Join(exeDir, "definition", "commands.yml")
+
+	// YAML読み込み
+	b, err := os.ReadFile(ymlPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -57,8 +67,8 @@ func main() {
 		tmplName := args["name"]
 		tmplExt := args["ext"]
 
-		templatePath := fmt.Sprintf("template/%s.tmpl", tmplName)
-		outputPath := fmt.Sprintf("output/%s.%s", tmplName, tmplExt)
+		templatePath := fmt.Sprintf("%s/template/%s.tmpl", exeDir, tmplName)
+		outputPath := fmt.Sprintf("%s/output/%s.%s", exeDir, tmplName, tmplExt)
 		tmpl := template.Must(template.New(tmplName + ".tmpl").Funcs(funcMap).ParseFiles(templatePath))
 
 		out, err := os.Create(outputPath)
