@@ -41,36 +41,43 @@ func main() {
 	}
 
 	var wg sync.WaitGroup
-	wg.Add(len(tmplMap))
+	results := make(chan string, len(tmplMap)) // ✅ 結果を受け取るチャネルを作成
 
 	for tmplName, tmplExt := range tmplMap {
+		wg.Add(1)
 		go func(tmplName, tmplExt string) {
 			defer wg.Done()
 
 			templatePath := fmt.Sprintf("template/%s.tmpl", tmplName)
 			outputPath := fmt.Sprintf("output/%s.%s", tmplName, tmplExt)
-
-			fmt.Println("Processing:", templatePath)
-
-			// 各goroutine内でテンプレート処理
 			tmpl := template.Must(template.New(tmplName + ".tmpl").Funcs(funcMap).ParseFiles(templatePath))
 
 			out, err := os.Create(outputPath)
 			if err != nil {
-				log.Printf("❌ %s: %v\n", tmplName, err)
+				results <- fmt.Sprintf("❌ %s: %v", tmplName, err)
 				return
 			}
 			defer out.Close()
 
 			if err := tmpl.ExecuteTemplate(out, tmplName+".tmpl", data); err != nil {
-				log.Printf("❌ %s: %v\n", tmplName, err)
+				results <- fmt.Sprintf("❌ %s: %v", tmplName, err)
 				return
 			}
 
-			fmt.Printf("✅ %s done\n", tmplName)
+			results <- fmt.Sprintf("✅ %s done", tmplName) // ✅ 完了メッセージを送信
 		}(tmplName, tmplExt)
 	}
 
-	wg.Wait()
+	// 別goroutineでwg完了を待ち、チャネルを閉じる
+	go func() {
+		wg.Wait()
+		close(results)
+	}()
+
+	// チャネルから結果を順次受け取る
+	for msg := range results {
+		fmt.Println(msg)
+	}
+
 	log.Println("🏁 all templates processed successfully")
 }
