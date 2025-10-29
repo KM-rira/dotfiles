@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"gocli/generate/output"
 	"os"
 )
@@ -17,5 +18,9 @@ func main() {
 		args = os.Args[2:]
 	}
 
-	output.SwitchCommand(cmd, args)
+	if err := output.SwitchCommand(cmd, args); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
 }

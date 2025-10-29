@@ -2,6 +2,7 @@ package service
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"gocli/errorCode"
 	"io"
@@ -18,41 +19,41 @@ func NewGocmdService() *GocmdService {
 	return &GocmdService{}
 }
 
-func (s *GocmdService) Fd(args []string) []byte {
+func (s *GocmdService) Fd(args []string) ([]byte, error) {
 	out, err := exec.Command("fd", args...).Output()
 	if err != nil {
 		log.Fatal(err)
 	}
-	return out
+	return out, nil
 }
 
-func (s *GocmdService) Rg(args []string) []byte {
+func (s *GocmdService) Rg(args []string) ([]byte, error) {
 	out, err := exec.Command("rg -l", args...).Output()
 	if err != nil {
 		log.Fatal(err)
 	}
-	return out
+	return out, nil
 }
 
-func (s *GocmdService) RgGetRowNum(paramWord, selectFile string) []byte {
+func (s *GocmdService) RgGetRowNum(paramWord, selectFile string) ([]byte, error) {
 	out, err := exec.Command("rg -n", paramWord, selectFile).Output()
 	if err != nil {
 		log.Fatal(err)
 	}
-	return out
+	return out, nil
 }
 
-func (s *GocmdService) Cut(input, separateWord string, getField int) string {
+func (s *GocmdService) Cut(input, separateWord string, getField int) (string, error) {
 	// 区切りで分割
 	parts := strings.Split(input, separateWord)
 
 	// インデックス範囲チェック（cutは1始まり）
 	if getField <= 0 || getField > len(parts) {
-		return ""
+		return "", nil
 	}
 
 	// 該当フィールドを返す
-	return parts[getField-1]
+	return parts[getField-1], nil
 }
 
 func (s *GocmdService) FzfSelectRow(args []byte, ext string) (string, error) {
@@ -96,7 +97,7 @@ func (s *GocmdService) FzfSelectRow(args []byte, ext string) (string, error) {
 	return strings.TrimSpace(out.String()), nil
 }
 
-func (s *GocmdService) FindOneDepth() []byte {
+func (s *GocmdService) FindOneDepth() ([]byte, error) {
 	// fzfコマンドを準備
 	out, err := exec.Command(
 		"find", ".", "-maxdepth", "1", "-type", "f",
@@ -104,7 +105,7 @@ func (s *GocmdService) FindOneDepth() []byte {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return out
+	return out, nil
 }
 
 func (s *GocmdService) GetCurrentFiles() ([]string, error) {
@@ -165,7 +166,7 @@ func (s *GocmdService) FzfSelectOne(args io.Reader) (string, error) {
 				fmt.Println(errorCode.NotMatch)
 				return "", nil
 			} else if exitError.ExitCode() == 130 {
-				fmt.Println(errorCode.NotMatch)
+				fmt.Println(errorCode.Cancel)
 				return "", nil
 			}
 		}
@@ -204,11 +205,11 @@ func (s *GocmdService) Bat(args string) error {
 	return cmd.Run()
 }
 
-func (s *GocmdService) HandleDefault() {
-	fmt.Println(errorCode.NotMatchCommand)
+func (s *GocmdService) HandleDefault() error {
+	return errors.New(errorCode.NotMatchCommand)
 }
 
-func (s *GocmdService) GitLog(args []string) []byte {
+func (s *GocmdService) GitLog(args []string) ([]byte, error) {
 	gitLog := exec.Command("git", "log", "--oneline", "-n", "50")
 	var logOut bytes.Buffer
 	gitLog.Stdout = &logOut
@@ -216,14 +217,15 @@ func (s *GocmdService) GitLog(args []string) []byte {
 	if err := gitLog.Run(); err != nil {
 		log.Fatalf("git log の実行に失敗: %v", err)
 	}
-	return logOut.Bytes()
+	return logOut.Bytes(), nil
 }
 
-func (s *GocmdService) GitShow(commitID string) {
+func (s *GocmdService) GitShow(commitID string) error {
 	show := exec.Command("git", "show", commitID)
 	show.Stdout = os.Stdout
 	show.Stderr = os.Stderr
 	if err := show.Run(); err != nil {
 		log.Fatalf("git show の実行に失敗: %v", err)
 	}
+	return nil
 }
