@@ -5,16 +5,18 @@ import (
 	"gocli/usecase"
 )
 
-func SwitchCommand(cmd string, args []string) {
+func SwitchCommand(cmd string, args []string) error {
 
+	var err error
 	gocliService := service.NewGocmdService()
 	gocliUsecase := usecase.NewGocmdUsecase(gocliService)
     switch cmd {
     {{- range .Commands }}
     case "{{ . }}":
-        gocliUsecase.{{ title . }}(args)
+        err = gocliUsecase.{{ title . }}(args)
     {{- end }}
     default:
-        gocliUsecase.RunDefault()
-    }
+		err = gocliUsecase.RunDefault()
+	}
+	return err
 }
