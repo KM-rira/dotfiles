@@ -95,22 +95,6 @@ func (u *GocmdUsecase) Bf(args []string) error {
 	return nil
 }
 
-func (u *GocmdUsecase) Vf(args []string) error {
-	files, err := u.gocliService.GetCurrentFiles()
-	if err != nil {
-		return err
-	}
-	fzfInput := strings.Join(files, "\n") // fzfは改行区切りで候補を認識
-	selected, err := u.gocliService.FzfSelectOne(strings.NewReader(fzfInput))
-	if err != nil {
-		log.Fatal(err)
-	}
-	if err := u.gocliService.Nvim(selected); err != nil {
-		log.Fatalf("failed to open bat: %v", err)
-	}
-	return nil
-}
-
 func (u *GocmdUsecase) RunDefault() error {
 	u.gocliService.HandleDefault()
 	return nil

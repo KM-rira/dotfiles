@@ -108,7 +108,9 @@ func (s *GocmdService) FindOneDepth() ([]byte, error) {
 	return out, nil
 }
 
-func (s *GocmdService) GetCurrentFiles() ([]string, error) {
+// ListAllFiles は、現在の作業ディレクトリにある全てのファイル名（隠しファイルを含む）を返します。
+// 元の GetCurrentAllFiles の機能そのままです。
+func (s *GocmdService) ListAllFiles() ([]string, error) {
 	dir, err := os.Getwd()
 	if err != nil {
 		return nil, fmt.Errorf("getwd error: %w", err)
@@ -121,9 +123,43 @@ func (s *GocmdService) GetCurrentFiles() ([]string, error) {
 
 	var files []string
 	for _, entry := range entries {
+		// ディレクトリではないエントリを全て含める
 		if !entry.IsDir() {
 			files = append(files, entry.Name())
 		}
+	}
+
+	return files, nil
+}
+
+// ListVisibleFiles は、現在の作業ディレクトリにある隠しファイル（.で始まるファイル）を除くファイル名を返します。
+// 元の GetCurrentFiles に隠しファイル除外のロジックを追加しました。
+func (s *GocmdService) ListVisibleFiles() ([]string, error) {
+	dir, err := os.Getwd()
+	if err != nil {
+		return nil, fmt.Errorf("getwd error: %w", err)
+	}
+
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, fmt.Errorf("readdir error: %w", err)
+	}
+
+	var files []string
+	for _, entry := range entries {
+		name := entry.Name()
+
+		// 1. ディレクトリではないこと
+		if entry.IsDir() {
+			continue
+		}
+
+		// 2. 隠しファイルではないこと (Unix/Linux系OSの慣習に従い、ファイル名が "." で始まらないこと)
+		if strings.HasPrefix(name, ".") {
+			continue
+		}
+
+		files = append(files, name)
 	}
 
 	return files, nil
