@@ -79,22 +79,6 @@ func (u *GocmdUsecase) Showf(args []string) error {
 	return nil
 }
 
-func (u *GocmdUsecase) Bf(args []string) error {
-	findOut, err := u.gocliService.FindOneDepth()
-	if err != nil {
-		return err
-	}
-	fzfInput := bytes.NewReader(findOut)
-	selected, err := u.gocliService.FzfSelectOne(fzfInput)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if err := u.gocliService.Bat(selected); err != nil {
-		log.Fatalf("failed to open bat: %v", err)
-	}
-	return nil
-}
-
 func (u *GocmdUsecase) RunDefault() error {
 	u.gocliService.HandleDefault()
 	return nil

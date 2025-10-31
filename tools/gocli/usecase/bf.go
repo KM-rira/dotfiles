@@ -7,9 +7,9 @@ import (
 	"github.com/spf13/pflag"
 )
 
-func (u *GocmdUsecase) Vf(args []string) error {
+func (u *GocmdUsecase) Bf(args []string) error {
 	var aFlag bool
-	fs := pflag.NewFlagSet("vf", pflag.ContinueOnError)
+	fs := pflag.NewFlagSet("bf", pflag.ContinueOnError)
 	fs.BoolVarP(&aFlag, "all", "a", false, "output all files including hidden files")
 	if err := fs.Parse(args); err != nil {
 		if err == pflag.ErrHelp {
@@ -37,7 +37,7 @@ func (u *GocmdUsecase) Vf(args []string) error {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err := u.gocliService.Nvim(selected); err != nil {
+	if err := u.gocliService.Bat(selected); err != nil {
 		log.Fatalf("failed to open bat: %v", err)
 	}
 	return nil
