@@ -2,3 +2,4 @@ commands:
   - bf
   - vf
   - showf
+  - fixupf

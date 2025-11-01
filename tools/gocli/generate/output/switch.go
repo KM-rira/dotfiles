@@ -17,6 +17,8 @@ func SwitchCommand(cmd string, args []string) error {
         err = gocliUsecase.Vf(args)
     case "showf":
         err = gocliUsecase.Showf(args)
+    case "fixupf":
+        err = gocliUsecase.Fixupf(args)
     default:
 		err = gocliUsecase.RunDefault()
 	}

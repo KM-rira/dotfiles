@@ -265,3 +265,14 @@ func (s *GocmdService) GitShow(commitID string) error {
 	}
 	return nil
 }
+
+func (s *GocmdService) ListStagedFiles() ([]byte, error) {
+	gitDiff := exec.Command("git", "diff", "--cached", "--name-only")
+	var stagedFilesOut bytes.Buffer
+	gitDiff.Stdout = &stagedFilesOut
+	gitDiff.Stderr = os.Stderr
+	if err := gitDiff.Run(); err != nil {
+		log.Fatalf("git log の実行に失敗: %v", err)
+	}
+	return stagedFilesOut.Bytes(), nil
+}
