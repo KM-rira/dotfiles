@@ -20,7 +20,8 @@ func NewGocmdService() *GocmdService {
 }
 
 func (s *GocmdService) Fd(args []string) ([]byte, error) {
-	out, err := exec.Command("fd", args...).Output()
+	cmdArgs := append([]string{"-t", "f"}, args[2:]...)
+	out, err := exec.Command("fd", cmdArgs...).Output()
 	if err != nil {
 		log.Fatal(err)
 	}
