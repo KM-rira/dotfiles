@@ -7,6 +7,10 @@ Build type: RelWithDebInfo
 LuaJIT 2.1.1713484068
 Run "nvim -V1 -v" for more info
 
+### tag log
+git for-each-ref refs/tags --sort=taggerdate \
+  --format='%(refname:short) %(taggerdate)'
+
 ### install
 sudo apt install ninja-build gettext cmake unzip curl build-essential
 git clone git@github.com:neovim/neovim.git
