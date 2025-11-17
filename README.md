@@ -1,15 +1,27 @@
 # setup procedure
 
 ## nvim setting
+$ v -v
+NVIM v0.10.3
+Build type: RelWithDebInfo
+LuaJIT 2.1.1713484068
+Run "nvim -V1 -v" for more info
+
 ### install
+sudo apt install ninja-build gettext cmake unzip curl build-essential
 git clone git@github.com:neovim/neovim.git
 git tag
 git checkout vx.x.x
 make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local install
 make install
 
-### 失敗時:   
-rm -rf build
+### 失敗時:
+rm -rf ~/repo/neovim/build
+rm -rf ~/repo/neovim/.deps
+rm -rf ~/.local/bin/nvim
+rm -rf ~/.local/share/nvim
+rm -rf ~/.local/lib/nvim
+rm -rf ~/.local/state/nvim
 make distclean
 
 ## clone
