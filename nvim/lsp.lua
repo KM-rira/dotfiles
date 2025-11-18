@@ -60,18 +60,18 @@ require("mason-lspconfig").setup({
 
 local lspconfig = require("lspconfig")
 
-require("mason-lspconfig").setup_handlers({
-    function(server_name)
-        lspconfig[server_name].setup({
-            on_attach = function(client, bufnr)
-                -- キーバインドの設定など
-            end,
-            flags = {
-                debounce_text_changes = 150,
-            },
-        })
-    end,
-})
+-- require("mason-lspconfig").setup_handlers({
+--     function(server_name)
+--         lspconfig[server_name].setup({
+--             on_attach = function(client, bufnr)
+--                 -- キーバインドの設定など
+--             end,
+--             flags = {
+--                 debounce_text_changes = 150,
+--             },
+--         })
+--     end,
+-- })
 
 require("mason-tool-installer").setup({
     ensure_installed = mason_tool_installer_list,
@@ -92,3 +92,4 @@ lspconfig.ts_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
 })
+
