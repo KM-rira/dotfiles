@@ -244,3 +244,108 @@ vim.api.nvim_create_user_command("Sf", function()
 	end, {})
 	print(output)
 end, {})
+
+vim.api.nvim_create_user_command("Tf", function(opts)
+  local args = vim.split(opts.args, "%s+")
+  local search_hidden = false
+  local filetype = nil
+
+  -- --- 引数パース ---
+  for i = 1, #args do
+    local arg = args[i]
+
+    if arg == "-a" then
+      search_hidden = true
+
+    elseif arg == "-t" then
+      filetype = args[i + 1]
+    end
+  end
+
+  -- rg コマンド構築
+  local find_command = { "rg", "--files" }
+
+  -- hidden OFF（デフォルト） → dotfile 除外
+  if not search_hidden then
+    table.insert(find_command, "--glob")
+    table.insert(find_command, "!.*")  -- dotfile 全除外
+  end
+
+  -- hidden ON
+  if search_hidden then
+    table.insert(find_command, "--hidden")
+    table.insert(find_command, "--glob")
+    table.insert(find_command, "!.git/*")  -- .gitだけ除外
+  end
+
+  -- 拡張子指定（*.go など）
+  if filetype then
+    table.insert(find_command, "--glob")
+    table.insert(find_command, string.format("*.%s", filetype))
+  end
+
+  require("telescope.builtin").find_files({
+    find_command = find_command,
+  })
+end, {
+  nargs = "*",
+})
+
+vim.api.nvim_create_user_command("Tg", function(opts)
+  local args = vim.split(opts.args, "%s+")
+  local search_hidden = false
+  local filetype = nil
+  local query = nil
+
+  local i = 1
+  while i <= #args do
+    local arg = args[i]
+
+    if arg == "-a" then
+      search_hidden = true
+
+    elseif arg == "-t" then
+      filetype = args[i + 1]
+      i = i + 1
+
+    else
+      -- 最初に出てきた非オプションは検索ワード
+      if not query then
+        query = arg
+      end
+    end
+
+    i = i + 1
+  end
+
+  if not query or query == "" then
+    print("Tg: 検索ワードを指定してください")
+    return
+  end
+
+  -- grep オプション構築
+  local extra = {}
+
+  if not search_hidden then
+    table.insert(extra, "--glob")
+    table.insert(extra, "!.*")
+  else
+    table.insert(extra, "--hidden")
+    table.insert(extra, "--glob")
+    table.insert(extra, "!.git/*")
+  end
+
+  if filetype then
+    table.insert(extra, "--glob")
+    table.insert(extra, string.format("*.%s", filetype))
+  end
+
+  require("telescope.builtin").live_grep({
+    default_text = query,
+    additional_args = function()
+      return extra
+    end,
+  })
+end, {
+  nargs = "*",
+})
