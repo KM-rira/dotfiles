@@ -1,3 +1,6 @@
+-- タイマー開始
+local start_time = vim.loop.hrtime()
+
 -- ホームディレクトリのパスを取得する関数
 local function get_home_directory()
     if os.getenv("HOME") then
@@ -22,6 +25,11 @@ if home_directory then
 
     -- main.luaを読み込む
     require("main")
+
+     -- require("main") 後の経過時間を計算
+    local end_time = vim.loop.hrtime()
+    local elapsed_ms = (end_time - start_time) / 1e6
+    print(string.format("Neovim start up time: %.2f ms", elapsed_ms))
 else
     print("Home directory not found.")
 end
