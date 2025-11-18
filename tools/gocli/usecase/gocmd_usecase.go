@@ -3,6 +3,7 @@ package usecase
 import (
 	"bytes"
 	"fmt"
+	"gocli/errorCode"
 	"gocli/service"
 	"log"
 	"strings"
@@ -26,6 +27,10 @@ func (u *GocmdUsecase) Fd(args []string) error {
 }
 
 func (u *GocmdUsecase) Fdv(args []string) error {
+	if len(args) < 3 {
+		return fmt.Errorf("%s\n args length: %d", errorCode.NeedParameter, len(args))
+	}
+
 	fdOut, err := u.gocliService.Fd(args)
 	if err != nil {
 		return err
@@ -42,6 +47,10 @@ func (u *GocmdUsecase) Fdv(args []string) error {
 }
 
 func (u *GocmdUsecase) Fdb(args []string) error {
+	if len(args) < 3 {
+		return fmt.Errorf("%s\n args length: %d", errorCode.NeedParameter, len(args))
+	}
+
 	fdOut, err := u.gocliService.Fd(args)
 	if err != nil {
 		return err

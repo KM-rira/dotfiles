@@ -1,25 +1,20 @@
 package main
 
 import (
-	"fmt"
+	"github.com/fatih/color"
 	"gocli/generate/output"
 	"os"
 )
 
 func main() {
 	var cmd string
-	// var args []string
-
 	if len(os.Args) > 1 {
 		cmd = os.Args[1]
 	}
 
-	// if len(os.Args) > 2 {
-	// 	args = os.Args[2:]
-	// }
-
 	if err := output.SwitchCommand(cmd, os.Args); err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		red := color.New(color.FgRed, color.Bold)
+		red.Fprintln(os.Stderr, err.Error())
 		os.Exit(1)
 	}
 
