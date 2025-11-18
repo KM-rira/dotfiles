@@ -3,6 +3,7 @@ local act = wezterm.action
 return {
 	default_prog = { "wsl.exe" },
 	-- default_prog = {"C:\\Program Files\\Git\\bin\\bash.exe", "--login", "-i"},
+	font_size = 11.0,
 	color_scheme = "YourCustomScheme",
 	colors = {
 		foreground = "#eee8aa",
