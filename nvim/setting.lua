@@ -36,7 +36,7 @@ vim.o.wildmenu = true
 -- 検索設定
 vim.o.wrapscan = true
 vim.o.incsearch = true
-vim.o.hlsearch = true
+-- vim.o.hlsearch = true
 
 -- 表示設定
 vim.o.background = "light"

@@ -25,7 +25,7 @@ vim.api.nvim_set_hl(0, "CursorLine", { bg = "#222222" })
 vim.cmd("hi Terminal guibg=black")
 
 -- 選択範囲の背景色と文字色
-vim.cmd("highlight Visual ctermfg=black guifg=black ctermbg=202 guibg=#FFA500")
+-- vim.cmd("highlight Visual ctermfg=black guifg=black ctermbg=202 guibg=#FFA500")
 
 -- 行番号表示
 vim.o.number = true
@@ -45,9 +45,11 @@ vim.cmd("highlight ZenkakuSpace cterm=underline ctermfg=red guibg=blue ctermbg=b
 vim.cmd("match ZenkakuSpace /　/")
 
 -- 検索結果のハイライト
-vim.o.hlsearch = true
+-- vim.o.hlsearch = true
 -- vim.cmd 'highlight Search ctermfg=black ctermbg=91 cterm=NONE guifg=#000000 guibg=#FFA500'
-vim.cmd("highlight Search ctermfg=black ctermbg=91 cterm=NONE guifg=#000000 guibg=#FFA500")
+-- vim.cmd("highlight Search ctermfg=black ctermbg=91 cterm=NONE guifg=#000000 guibg=#FFA500")
+vim.api.nvim_set_hl(0, "Search", { bg = "#444444", fg = "NONE" })
+vim.api.nvim_set_hl(0, "IncSearch", { bg = "#666666", fg = "NONE" })
 
 -- コメントのフォントスタイル変更
 vim.cmd("highlight Comment cterm=italic")
