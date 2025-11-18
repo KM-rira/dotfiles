@@ -16,7 +16,7 @@ sudo apt install ninja-build gettext cmake unzip curl build-essential
 git clone git@github.com:neovim/neovim.git
 git tag
 git checkout vx.x.x
-make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local install
+make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local
 make install
 
 ### 失敗時:
