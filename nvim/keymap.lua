@@ -101,14 +101,14 @@ vim.keymap.set("i", "<C-f>", "<Right>", opts) -- 前方へ
 vim.keymap.set("i", "<C-b>", "<Left>", opts) -- 後方へ
 --vim.keymap.set("i", "<C-n>", "<Down>", opts) -- 次の行へ
 vim.keymap.set("i", "<C-p>", "<Up>", opts) -- 前の行へ
-vim.keymap.set("i", "<C-a>", "<Home>", opts) -- 行の先頭へ
+vim.keymap.set("i", "<C-a>", "<C-o>^", opts) -- 行の先頭へ
 vim.keymap.set("i", "<C-e>", "<End>", opts) -- 行の末尾へ
 
 -- 削除
 vim.keymap.set("i", "<C-d>", "<Delete>", opts) -- カーソル下の文字を削除
 --vim.keymap.set('i', '<C-h>', '<BS>', opts)        -- カーソル前の文字を削除
 vim.keymap.set("i", "<C-w>", "<C-o>db", opts) -- 単語単位で削除
-vim.keymap.set("i", "<C-u>", "<C-o>h<C-o>v0d", opts) -- 行の先頭からカーソル位置までを削除
+vim.keymap.set("i", "<C-u>", "<C-o>h<C-o>v^d", opts) -- 行の先頭からカーソル位置までを削除
 vim.keymap.set("i", "<C-k>", "<C-o>D", opts) -- カーソルから行末までを削除
 vim.keymap.set("i", "<M-d>", "<C-o>dw", opts) -- 次の単語を削除 (Alt + D)
 vim.keymap.set("i", "<M-Backspace>", "<C-o>dw", opts) -- 前の単語を削除 (Alt + Backspace)

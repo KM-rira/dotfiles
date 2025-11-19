@@ -48,7 +48,7 @@ require("lazy").setup({
     { "numToStr/Comment.nvim",         keys = { "gc", "gcc" } },
     { "sidebar-nvim/sidebar.nvim",     cmd = "SidebarNvimToggle" },
     { "akinsho/toggleterm.nvim",       tag = "v2.11.0",                            cmd = { "ToggleTerm", "TermExec" } },
-    { "karb94/neoscroll.nvim",         event = "WinScrolled" },
+    -- { "karb94/neoscroll.nvim",         event = "WinScrolled" },
     { "akinsho/bufferline.nvim",       tag = "v4.6.1",                             event = "BufRead" },
     {
         "windwp/nvim-autopairs",
@@ -213,7 +213,7 @@ require("colorizer").setup()
 
 require("bufferline").setup({})
 
-require("neoscroll").setup()
+-- require("neoscroll").setup()
 
 require("toggleterm").setup({
     -- ここに設定を追加
