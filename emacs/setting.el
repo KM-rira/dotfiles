@@ -70,28 +70,51 @@
   :commands lsp-ui-mode)
 
 
-;; ===========================================
-;; Telescope 的 UI: Vertico + Orderless + Consult
-;; ===========================================
+;;; ---------------------------------------------------------
+;;; 2. UIと検索ロジック (Vertico + Orderless)
+;;; ---------------------------------------------------------
 (use-package vertico
   :init
-  (vertico-mode))
+  (vertico-mode)
+  :config
+  ;; 補完サイクルを有効にする
+  (setq vertico-cycle t))
 
+;; 検索スタイルを「スペース区切り」で曖昧検索できるようにする
 (use-package orderless
   :custom
-  (completion-styles '(orderless))
-  (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles orderless)))))
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
-(use-package consult
-  :bind (("C-s"     . consult-line)
-         ("C-p"     . consult-buffer)
-         ("C-f"     . consult-find)
-         ("C-c g"   . consult-ripgrep)
-         ("M-g M-g" . consult-goto-line)
-         ("M-i"     . consult-imenu)))
-
+;; 補完候補にリッチな情報（ファイルサイズや説明）を表示
 (use-package marginalia
   :init
   (marginalia-mode))
 
+;;; ---------------------------------------------------------
+;;; 3. 画面中央にフロート表示 (Telescope風の見た目)
+;;; ---------------------------------------------------------
+(use-package vertico-posframe
+  :after vertico
+  :config
+  (vertico-posframe-mode 1)
+  ;; 画面中央に表示
+  (setq vertico-posframe-poshandler #'posframe-poshandler-frame-center)
+  ;; ウィンドウの見た目調整
+  (setq vertico-posframe-parameters
+        '((left-fringe . 8)
+          (right-fringe . 8))))
+
+;;; ---------------------------------------------------------
+;;; 4. 強力な検索コマンド集 (Consult)
+;;; ---------------------------------------------------------
+;; consult-fd を使う（fd がインストールされている必要あり）
+(use-package consult
+  :bind
+  (("C-c f" . consult-fd)          ; ← 修正ポイント（最重要）
+   ("C-c r" . consult-ripgrep)
+   ("C-x b" . consult-buffer)
+   ("C-c l" . consult-line)
+   ("C-y"   . consult-yank-pop))
+  :config
+  (setq consult-preview-key 'any))
