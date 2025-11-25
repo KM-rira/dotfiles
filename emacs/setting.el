@@ -1,3 +1,7 @@
+(set-language-environment "Japanese")
+(prefer-coding-system 'utf-8)
+(set-fontset-font t 'japanese-jisx0208 (font-spec :family "Hiragino Maru Gothic ProN"))
+
 ;; ===========================================
 ;; Package setup（use-package 有効化）
 ;; ===========================================
