@@ -39,6 +39,9 @@ chmod +x $dot/tools/rgv_preview.sh
 
 ##alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'batcat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 
+alias e='emacs'
+alias el='emacs .'
+
 cd ~/dotfiles/tools/gocli
 make build &
 cd -
