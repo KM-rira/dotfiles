@@ -30,7 +30,7 @@ install_function() {
 
 # brew install (cczeなくなった)
 install_cmd='brew install'
-packages=(git-delta dust tlrc glances glow yazi lazygit lazydocker cheat usql bat luarocks zoxide jq fd ripgrep fzf zoxide shfmt lsd duf node npm chrony vim sd)
+packages=(gh git-delta dust tlrc glances glow yazi lazygit lazydocker cheat usql bat luarocks zoxide jq fd ripgrep fzf zoxide shfmt lsd duf node npm chrony vim sd)
 for package in "${packages[@]}"; do
 	if [ "$package" = "usql" ]; then
 		brew tap xo/xo
