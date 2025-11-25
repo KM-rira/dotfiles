@@ -69,52 +69,45 @@
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
-
-;;; ---------------------------------------------------------
-;;; 2. UIと検索ロジック (Vertico + Orderless)
-;;; ---------------------------------------------------------
-(use-package vertico
+(use-package projectile
   :init
-  (vertico-mode)
+  (projectile-mode +1)
   :config
-  ;; 補完サイクルを有効にする
-  (setq vertico-cycle t))
+  ;; プロジェクト認識の仕組み
+  (setq projectile-project-search-path '("~/"))
+  (setq projectile-enable-caching t))
 
-;; 検索スタイルを「スペース区切り」で曖昧検索できるようにする
-(use-package orderless
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
+(defun my/fd-find-file (pattern)
+  "Search files using fd from current directory (Neovim style)."
+  (interactive "sSearch: ")
+  (let* ((root default-directory)  ;; ← Projectileは使わず、Emacsのcwdを root に
+         (default-directory root)
+         (cmd (format "fd -t f \"%s\"" pattern))
+         (results (split-string (shell-command-to-string cmd) "\n" t)))
+    (if (null results)
+        (message "No files found.")
+      (let ((file (completing-read "Open: " results)))
+        (find-file file)))))
 
-;; 補完候補にリッチな情報（ファイルサイズや説明）を表示
-(use-package marginalia
-  :init
-  (marginalia-mode))
+(global-set-key (kbd "C-x f") 'my/fd-find-file)
 
-;;; ---------------------------------------------------------
-;;; 3. 画面中央にフロート表示 (Telescope風の見た目)
-;;; ---------------------------------------------------------
-(use-package vertico-posframe
-  :after vertico
-  :config
-  (vertico-posframe-mode 1)
-  ;; 画面中央に表示
-  (setq vertico-posframe-poshandler #'posframe-poshandler-frame-center)
-  ;; ウィンドウの見た目調整
-  (setq vertico-posframe-parameters
-        '((left-fringe . 8)
-          (right-fringe . 8))))
+(defun my/rg-search (pattern)
+  "Search text using ripgrep (rg) from current directory (Neovim style)."
+  (interactive "sRG Search: ")
+  (let* ((root default-directory) ;; ← Neovim 的。cwd が root になる
+         (default-directory root)
+         (cmd (format "rg --line-number --no-heading --color never \"%s\"" pattern))
+         (raw (shell-command-to-string cmd))
+         (results (split-string raw "\n" t)))
+    (if (null results)
+        (message "No matches found.")
+      (let* ((choice (completing-read "Select match: " results))
+             (parts (split-string choice ":"))
+             (file (nth 0 parts))
+             (line (string-to-number (nth 1 parts))))
+        (find-file file)
+        (goto-line line)))))
 
-;;; ---------------------------------------------------------
-;;; 4. 強力な検索コマンド集 (Consult)
-;;; ---------------------------------------------------------
-;; consult-fd を使う（fd がインストールされている必要あり）
-(use-package consult
-  :bind
-  (("C-c f" . consult-fd)          ; ← 修正ポイント（最重要）
-   ("C-c r" . consult-ripgrep)
-   ("C-x b" . consult-buffer)
-   ("C-c l" . consult-line)
-   ("C-y"   . consult-yank-pop))
-  :config
-  (setq consult-preview-key 'any))
+(global-set-key (kbd "C-x g") 'my/rg-search)
+
+
