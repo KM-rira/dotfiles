@@ -1,3 +1,5 @@
+;; sudo apt install fonts-ipafont
+;; sudo update-locale LANG=ja_JP.UTF-8
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8)
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Hiragino Maru Gothic ProN"))
