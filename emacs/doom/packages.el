@@ -52,3 +52,4 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
+(package! blamer :recipe (:host github :repo "artawower/blamer.el"))

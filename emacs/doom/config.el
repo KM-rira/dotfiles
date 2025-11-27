@@ -87,3 +87,40 @@
 ;;   (exec-path-from-shell-initialize))
 
 (map! :n "gr" #'lsp-find-references)
+
+(use-package! blamer
+  :config
+  (global-blamer-mode +1))
+
+(defun +my/async-fuzzy-find-project-file (initial-input)
+  "現在のプロジェクト内でのみ、ファイルをファジー検索します。"
+  (interactive
+   (list (read-from-minibuffer
+          "Search for file: " "")))
+
+  (let ((root-dir (projectile-project-root)))
+    (unless root-dir
+      (user-error "プロジェクトルートが見つかりません! .git または .projectile ファイルがあるフォルダ内で実行してください。"))
+
+    ;; ★ consult-find は引数は 0〜2個まで
+    (consult-find root-dir initial-input)))
+
+(map! :leader
+      :desc "Async Project File Search"
+      "f t" #'+my/async-fuzzy-find-project-file)
+
+(defun +my/async-fuzzy-grep-project (initial-input)
+  "現在のプロジェクト内のファイル内容を ripgrep でファジー検索します。"
+  (interactive
+   (list (read-from-minibuffer "Grep search: " "")))
+
+  (let ((root-dir (projectile-project-root)))
+    (unless root-dir
+      (user-error "プロジェクトルートが見つかりません! .git または .projectile のあるプロジェクト内で実行してください。"))
+
+    ;; consult-ripgrep は DIR と INITIAL の2引数のみ
+    (consult-ripgrep root-dir initial-input)))
+
+(map! :leader
+      :desc "Async Project Grep Search"
+      "f g" #'+my/async-fuzzy-grep-project)

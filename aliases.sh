@@ -41,6 +41,7 @@ chmod +x $dot/tools/rgv_preview.sh
 
 alias e='emacs'
 alias el='emacs .'
+alias redoom='doom sync && emacs'
 export PATH="$HOME/.emacs.d/bin:$PATH"
 export DOOMDIR="$HOME/dotfiles/emacs/doom"
 
