@@ -53,6 +53,7 @@
        workspaces        ; tab emulation, persistence & separate workspaces
        ;;zen               ; distraction-free coding or writing
        nerd-icons        ; M-x nerd-icons-install-fonts
+       lsp-ui
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
