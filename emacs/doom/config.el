@@ -124,3 +124,23 @@
 (map! :leader
       :desc "Async Project Grep Search"
       "f g" #'+my/async-fuzzy-grep-project)
+
+
+(after! centaur-tabs
+  ;; 基本設定
+  (setq centaur-tabs-style "bar"
+        centaur-tabs-set-bar 'over
+        centaur-tabs-height 24      ;; タブの高さ
+        centaur-tabs-set-icons t
+        centaur-tabs-set-close-button nil  ;; ×ボタンを非表示にする例
+        )
+
+  (centaur-tabs-mode 1)  ;; 有効化
+
+  ;; キーバインド（例: Ctrl-Tab / Ctrl-Shift-Tab）
+  (global-set-key (kbd "C-<tab>") #'centaur-tabs-forward)
+  (global-set-key (kbd "C-S-<tab>") #'centaur-tabs-backward)
+
+  ;; プロジェクトごとにタブを分けたいなら
+  (centaur-tabs-group-by-projectile-project)
+  )
