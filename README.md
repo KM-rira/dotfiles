@@ -39,6 +39,12 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 
 echo 'export DOOMDIR="$HOME/dotfiles/emacs/doom"' >> ~/.zshenv
 
+echo 'export DOOMDIR="$HOME/dotfiles/emacs/doom"' >> ~/.profile
+
+export DOOMDIR="$HOME/dotfiles/emacs/doom"
+
+DOOMDIR="$HOME/dotfiles/emacs/doom" ~/.emacs.d/bin/doom sync
+
 ## 失敗
 rm -rf ~/.emacs.d/.local/straight
 rm -rf ~/.emacs.d/.local/cache
