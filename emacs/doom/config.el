@@ -132,8 +132,7 @@
         centaur-tabs-set-bar 'over
         centaur-tabs-height 24      ;; タブの高さ
         centaur-tabs-set-icons t
-        centaur-tabs-set-close-button nil  ;; ×ボタンを非表示にする例
-        )
+        centaur-tabs-set-close-button nil)  ;; ×ボタンを非表示にする例
 
   (centaur-tabs-mode 1)  ;; 有効化
 
@@ -142,11 +141,8 @@
   (global-set-key (kbd "C-S-<tab>") #'centaur-tabs-backward)
 
   ;; プロジェクトごとにタブを分けたいなら
-  (centaur-tabs-group-by-projectile-project)
-)
+  (centaur-tabs-group-by-projectile-project))
 
-;; C-\で入力
-;; sudo apt install fonts-noto-cjk
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8)
 
@@ -155,3 +151,9 @@
                     (font-spec :family "Noto Sans CJK JP"))
   (set-fontset-font t 'japanese-jisx0212
                     (font-spec :family "Noto Sans CJK JP")))
+;; --- jk で Insert → Normal に戻る ---
+(use-package! key-chord
+  :init
+  (key-chord-mode 1)
+  :config
+  (key-chord-define evil-insert-state-map "jk" #'evil-normal-state))
