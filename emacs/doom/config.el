@@ -36,7 +36,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type nil)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -152,8 +152,29 @@
   (set-fontset-font t 'japanese-jisx0212
                     (font-spec :family "Noto Sans CJK JP")))
 ;; --- jk で Insert → Normal に戻る ---
-(use-package! key-chord
-  :init
-  (key-chord-mode 1)
-  :config
-  (key-chord-define evil-insert-state-map "jk" #'evil-normal-state))
+;; (use-package! key-chord
+;;   :init
+;;   (key-chord-mode 1)
+;;   :config
+;;   (key-chord-define evil-insert-state-map "jk" #'evil-normal-state))
+;;; Zsh 完全互換 Emacs プリセット
+;;; ---------------------------------
+;;; 注意：C-u は Emacs 標準の「引数(prefix)」と衝突します。
+;;;       Zsh 互換を優先して削除動作に置き換えています。
+
+(defun my/kill-to-beginning-of-line ()
+  "Zsh の C-u と同じ：カーソルより前を全削除。"
+  (interactive)
+  (kill-region (line-beginning-position) (point)))
+
+;; Zsh の Ctrl+U を再現（衝突あり）
+(global-set-key (kbd "C-u") #'my/kill-to-beginning-of-line)
+
+;; Zsh の Ctrl+K は Emacs と完全一致するため再設定は不要
+;; (C-k = kill-line)
+
+;; Zsh の Ctrl+W も Emacs 標準 backward-kill-word と同じため不要
+
+;; もし Backspace を強制的に C-h に統一したいなら：
+;; (global-set-key (kbd "C-h") #'delete-backward-char)
+;; ※C-h は help-command と衝突するため、ここではデフォルトのままにしてあります。
