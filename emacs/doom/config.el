@@ -143,4 +143,15 @@
 
   ;; プロジェクトごとにタブを分けたいなら
   (centaur-tabs-group-by-projectile-project)
-  )
+)
+
+;; C-\で入力
+;; sudo apt install fonts-noto-cjk
+(set-language-environment "Japanese")
+(prefer-coding-system 'utf-8)
+
+(when (member "Noto Sans CJK JP" (font-family-list))
+  (set-fontset-font t 'japanese-jisx0208
+                    (font-spec :family "Noto Sans CJK JP"))
+  (set-fontset-font t 'japanese-jisx0212
+                    (font-spec :family "Noto Sans CJK JP")))
