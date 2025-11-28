@@ -6,7 +6,6 @@ import (
 )
 
 func SwitchCommand(cmd string, args []string) error {
-
 	var err error
 	gocliService := service.NewGocmdService()
 	gocliUsecase := usecase.NewGocmdUsecase(gocliService)
