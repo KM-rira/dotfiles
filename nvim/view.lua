@@ -28,7 +28,8 @@ vim.cmd("hi Terminal guibg=black")
 -- vim.cmd("highlight Visual ctermfg=black guifg=black ctermbg=202 guibg=#FFA500")
 
 -- 行番号表示
-vim.o.number = true
+-- vim.o.number = true
+vim.o.number = false
 vim.cmd("highlight LineNr ctermfg=8 ctermbg=235 guifg=#4A4A4A")
 
 -- 現在の行番号の色設定
