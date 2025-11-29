@@ -178,3 +178,11 @@
 ;; もし Backspace を強制的に C-h に統一したいなら：
 ;; (global-set-key (kbd "C-h") #'delete-backward-char)
 ;; ※C-h は help-command と衝突するため、ここではデフォルトのままにしてあります。
+(defun my/smart-copy ()
+  "選択範囲があればコピー、なければ行コピー。カーソルは動かない。"
+  (interactive)
+  (if (use-region-p)
+      (kill-ring-save (region-beginning) (region-end))
+    (save-excursion
+      (kill-ring-save (line-beginning-position) (line-end-position)))))
+(global-set-key (kbd "M-w") #'my/smart-copy)
