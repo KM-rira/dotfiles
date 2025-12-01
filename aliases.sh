@@ -176,6 +176,8 @@ source $HOME/dotfiles/tools/wezcp.sh
 alias ccze='ccze -A'
 alias conflicts='git diff --name-only --diff-filter=U'
 
+alias difff='git diff $(changefile | fzf)'
+
 # gh
 alias gpl="bash ~/dotfiles/tools/github_cli/bash/gpl.sh"
 alias gil="bash ~/dotfiles/tools/github_cli/bash/gil.sh"
