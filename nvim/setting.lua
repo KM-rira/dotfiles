@@ -135,3 +135,6 @@ end
 -- C++やLuaなど、多くの言語で 'false' や 'true' をワードリストに追加します。
 -- これにより、<C-a>がこれらの単語を認識してトグルできるようになります。
 vim.opt.cpt:append('k')
+
+-- 1.2 だと20%up
+vim.g.neovide_scale_factor = 1.0
