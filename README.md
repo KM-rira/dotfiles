@@ -183,3 +183,9 @@ echo "source ~/dotfiles/aliases.sh" >> ~/.zshrc
 ~/.config/cheat/conf.yml
 cheatpathsのpersonalのpathを~/dotfiles/cheatsに変更
 ```
+
+→ コマンドライン結果をコピーしたいなら：
+:redir @+ | コマンド | redir END
+
+→ コマンドラインにペーストしたいなら：
+<C-r>+
