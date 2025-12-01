@@ -126,10 +126,23 @@ return {
 		},
 	},
 	audible_bell = "Disabled",
-	font_size = 7.7,
 
 	key_tables = {
 		copy_mode = {
+             { key = "J", mods = "SHIFT", action = wezterm.action.Multiple({
+                      wezterm.action.CopyMode("MoveDown"),
+                      wezterm.action.CopyMode("MoveDown"),
+                      wezterm.action.CopyMode("MoveDown"),
+                      wezterm.action.CopyMode("MoveDown"),
+                      wezterm.action.CopyMode("MoveDown"),
+              })},
+             { key = "K", mods = "SHIFT", action = wezterm.action.Multiple({
+                      wezterm.action.CopyMode("MoveUp"),
+                      wezterm.action.CopyMode("MoveUp"),
+                      wezterm.action.CopyMode("MoveUp"),
+                      wezterm.action.CopyMode("MoveUp"),
+                      wezterm.action.CopyMode("MoveUp"),
+              })},
 			{ key = "Tab", mods = "NONE", action = act.CopyMode("MoveForwardWord") },
 			{
 				key = "Tab",
