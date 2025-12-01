@@ -131,3 +131,7 @@ if vim.fn.has("wsl") == 1 then
 		cache_enabled = 0,
 	}
 end
+
+-- C++やLuaなど、多くの言語で 'false' や 'true' をワードリストに追加します。
+-- これにより、<C-a>がこれらの単語を認識してトグルできるようになります。
+vim.opt.cpt:append('k')

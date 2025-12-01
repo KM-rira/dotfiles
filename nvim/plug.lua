@@ -215,18 +215,28 @@ require("bufferline").setup({})
 
 -- require("neoscroll").setup()
 
-require("toggleterm").setup({
-    -- ここに設定を追加
-    size = 20,
-    open_mapping = [[<c-t>]],
-    hide_numbers = true,
-    shade_filetypes = {},
-    shade_terminals = true,
-    shading_factor = 2,
-    start_in_insert = true,
-    persist_size = true,
-    direction = "horizontal",
+local Terminal = require("toggleterm.terminal").Terminal
+
+-- Horizontal terminal
+local horizontal_term = Terminal:new({
+  direction = "horizontal",
+  size = 20,  -- あなたの今の設定と統合
 })
+
+vim.keymap.set("n", "<C-t>h", function()
+  horizontal_term:toggle()
+end, { noremap = true, silent = true })
+
+-- Vertical terminal（幅をデフォルトより広くする）
+local vertical_term = Terminal:new({
+  direction = "vertical",
+  size = 110, -- ★ みんな使ってる標準的な幅
+-- :vertical resize +20
+})
+
+vim.keymap.set("n", "<C-t>v", function()
+  vertical_term:toggle()
+end, { noremap = true, silent = true })
 
 local sidebar = require("sidebar-nvim")
 local opts = { open = false }

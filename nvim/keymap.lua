@@ -173,7 +173,10 @@ vim.api.nvim_set_keymap("i", "<C-y>", "", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("s", "<C-y>", "", { noremap = true, silent = true })
 
 vim.keymap.set("i", "jk", "<Esc>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-n>", { noremap = true })
+-- vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-n>", { noremap = true })
+
+-- tarminal mode exit
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 
 vim.keymap.set("x", "p", '"_dP', { noremap = true, silent = true })
 
@@ -313,6 +316,9 @@ map("n", "<leader>bp", ":BufferLinePick<CR>", opts)
 map("n", "<leader>be", ":BufferLineSortByExtension<CR>", opts)
 map("n", "<leader>bd", ":BufferLineSortByRelativeDirectory<CR>", opts)
 
+-- Insert Mode: <Shift-Insert> をシステムクリップボードからのペーストに割り当てる
+vim.keymap.set('i', '<S-Insert>', '<C-r>+', { silent = true })
+
 vim.api.nvim_set_keymap("n", "<TAB>", ":BufferLineCycleNext<CR>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", { silent = true, noremap = true })
 
@@ -377,3 +383,10 @@ end, { noremap = true, silent = true })
 vim.keymap.set("v", ";fn", function()
 	vim.cmd("Sf")
 end, { noremap = true, silent = true })
+
+-- Normal Mode: <C-x>f で Emacs の find-file のような操作を実現
+vim.keymap.set('n', '<C-x>f',
+  -- コマンドラインに ':e ' を入力し、続けて現在のカレントディレクトリ(getcwd())を挿入
+  ':e <C-R>=getcwd()<CR>/',
+  { silent = true, noremap = true, desc = 'Emacs C-x C-f style file find' }
+)

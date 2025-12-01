@@ -14,6 +14,8 @@ START_TIME=$(date +%s.%N)
 bashrc="$HOME/.bashrc"
 dot="$HOME/dotfiles"
 
+alias nv='neovide'
+
 export CHEAT_PATH=~/dotfiles/cheat
 # user定義
 #user=""
@@ -65,12 +67,11 @@ alias dcdn='docker compose down'
 alias dcup='docker compose up -d'
 alias restart='docker compose down;docker compose up -d'
 alias ll='ls -lt'
-alias bashrc='nv ~/.bashrc'
-alias zshrc='nv ~/.zshrc'
+alias bashrc='v ~/.bashrc'
+alias zshrc='v ~/.zshrc'
 alias y='yazi'
 alias help='tldr'
 # alias rc='nvim ~/AppData/Local/nvim/init.vim'
-alias nv='nvim'
 alias hg='history | grep'
 alias got='go test -v -cover -run '
 alias status='git status'
