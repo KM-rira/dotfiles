@@ -316,6 +316,12 @@ map("n", "<leader>bp", ":BufferLinePick<CR>", opts)
 map("n", "<leader>be", ":BufferLineSortByExtension<CR>", opts)
 map("n", "<leader>bd", ":BufferLineSortByRelativeDirectory<CR>", opts)
 
+-- Resize windows with arrow keys (便利)
+vim.keymap.set("n", "<C-Up>", "<C-w>+")
+vim.keymap.set("n", "<C-Down>", "<C-w>-")
+vim.keymap.set("n", "<C-Left>", "<C-w><")
+vim.keymap.set("n", "<C-Right>", "<C-w>>")
+
 -- Insert Mode: <Shift-Insert> をシステムクリップボードからのペーストに割り当てる
 vim.keymap.set('i', '<S-Insert>', '<C-r>+', { silent = true })
 
@@ -392,6 +398,24 @@ vim.keymap.set('n', '<C-x>f',
 )
 
 if vim.g.neovide then
+
+  -- 初期ズーム倍率
+  vim.g.neovide_scale_factor = 1.0
+
+  local function change_scale(delta)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta
+  end
+
+  -- 🔍 ズームイン（Ctrl +）
+  vim.keymap.set("n", "<C-=>", function() change_scale(0.1) end) -- "=" の Ctrl
+  vim.keymap.set("n", "<C-+>", function() change_scale(0.1) end) -- "+" の Ctrl（Shift含む環境用）
+
+  -- 🔎 ズームアウト（Ctrl -）
+  vim.keymap.set("n", "<C-->", function() change_scale(-0.1) end)
+
+  -- 🔁 リセット（Ctrl 0）
+  vim.keymap.set("n", "<C-0>", function() vim.g.neovide_scale_factor = 1.0 end)
+
   -- カーソルアニメーション完全OFF
   vim.g.neovide_cursor_animation_length = 0
 
@@ -445,8 +469,3 @@ if vim.g.neovide then
     end
 end
 
--- Resize windows with arrow keys (便利)
-vim.keymap.set("n", "<C-Up>", "<C-w>+")
-vim.keymap.set("n", "<C-Down>", "<C-w>-")
-vim.keymap.set("n", "<C-Left>", "<C-w><")
-vim.keymap.set("n", "<C-Right>", "<C-w>>")
