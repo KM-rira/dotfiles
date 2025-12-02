@@ -371,3 +371,43 @@ end, {})
 vim.api.nvim_create_user_command("Lg", function()
   vim.cmd("LazyGit")
 end, {})
+
+-- 共通処理：bool トグルできたら true を返す
+local function toggle_boolean_if_possible()
+  local word = vim.fn.expand("<cword>")
+  if word == "true" then
+    vim.cmd("normal! ciwfalse")
+    return true
+  elseif word == "false" then
+    vim.cmd("normal! ciwtrue")
+    return true
+  end
+  return false
+end
+
+-- 共通処理：<C-a> または <C-x> の元の動作を呼び出す
+local function feed_ctrl(key)
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes(key, true, false, true),
+    "n",
+    false
+  )
+end
+
+-- スマート Ctrl+A / Ctrl+X 共通化された本体
+local function smart_ctrl(op)
+  -- トグルできたら終了
+  if toggle_boolean_if_possible() then return end
+
+  -- トグルできなければ本来の動作を実行
+  if op == "inc" then
+    feed_ctrl("<C-a>")
+  else
+    feed_ctrl("<C-x>")
+  end
+end
+
+-- Normal / Insert mode
+vim.keymap.set({"n", "i"}, "<C-a>", function() smart_ctrl("inc") end, { noremap = true, silent = true })
+vim.keymap.set({"n", "i"}, "<C-x>", function() smart_ctrl("dec") end, { noremap = true, silent = true })
+
