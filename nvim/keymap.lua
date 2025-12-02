@@ -390,3 +390,46 @@ vim.keymap.set('n', '<C-x>f',
   ':e <C-R>=getcwd()<CR>/',
   { silent = true, noremap = true, desc = 'Emacs C-x C-f style file find' }
 )
+
+if vim.g.neovide then
+  -- カーソルアニメーション完全OFF
+  vim.g.neovide_cursor_animation_length = 0
+
+  -- カーソルの残像なし
+  vim.g.neovide_cursor_trail_length = 0
+
+  -- スクロールアニメーション完全OFF
+  vim.g.neovide_scroll_animation_length = 0
+
+  -- VFX（炎・粒子など）無効化
+  vim.g.neovide_cursor_vfx_mode = ""
+
+  -- 透明度設定（1.0 = 完全不透明）
+  -- ※ neovide_transparency は廃止され opacity に変更されました
+  vim.g.neovide_opacity = 1.0
+
+  -- GUIで24bitカラーを使う（Neovideでは推奨）
+  vim.o.termguicolors = true
+
+  -- OSごとの貼り付けキー設定
+  local uname = vim.loop.os_uname().sysname
+  if uname == "Darwin" then
+    vim.g.neovide_input_use_logo = 1
+    vim.g.neovide_input_mappings = {
+      ["<D-v>"] = "<C-r>+",
+    }
+
+    vim.keymap.set('n', '<D-v>', '"+p')
+    vim.keymap.set('i', '<D-v>', '<C-r>+')
+    vim.keymap.set('c', '<D-v>', '<C-r>+')
+
+  else
+    vim.g.neovide_input_mappings = {
+      ["<C-v>"] = "<C-r>+",
+    }
+
+    vim.keymap.set('n', '<C-v>', '"+p')
+    vim.keymap.set('i', '<C-v>', '<C-r>+')
+    vim.keymap.set('c', '<C-v>', '<C-r>+')
+  end
+end
