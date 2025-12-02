@@ -367,7 +367,7 @@ require("gitsigns").setup({
         -- Navigation（ナビゲーション）
         -- ======================================
         -- ノーマルモードで ]c を押すと、次の hunk へ移動します
-        map("n", "]c", function()
+        map("n", "<leader>hn", function()
             if vim.wo.diff then
                 -- diffモードの場合はデフォルトの動作を使う
                 return "<leader>hn"
@@ -380,7 +380,7 @@ require("gitsigns").setup({
         end, { expr = true })
 
         -- ノーマルモードで [c を押すと、前の hunk へ移動します
-        map("n", "[c", function()
+        map("n", "<leader>hN", function()
             if vim.wo.diff then
                 -- diffモードの場合はデフォルトの動作を使う
                 return "<leader>hN"

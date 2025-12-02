@@ -62,3 +62,8 @@ vim.cmd("autocmd VimEnter,Colorscheme * :highlight goKeyword ctermfg=196")
 
 -- tab hide color
 vim.opt.list = false
+
+-- command lineの高さを0に設定
+vim.o.cmdheight = 0
+-- status lineの高さを0に設定
+vim.o.laststatus = 0

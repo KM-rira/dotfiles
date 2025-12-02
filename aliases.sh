@@ -269,6 +269,38 @@ END_TIME=$(date +%s.%N)
 # 開始時間と終了時間の差を計算
 ELAPSED_TIME=$(echo "$END_TIME - $START_TIME" | bc)
 
+
+# Detect OS
+OS="$(uname)"
+
+### macOS ###
+if [[ "$OS" == "Darwin" ]]; then
+    alias copy="pbcopy"
+    alias paste="pbpaste"
+    alias open="open"
+
+### Linux ###
+elif [[ "$OS" == "Linux" ]]; then
+    # copy: xclip または xsel が必要
+    if command -v xclip >/dev/null 2>&1; then
+        alias copy="xclip -selection clipboard"
+        alias paste="xclip -selection clipboard -o"
+    elif command -v xsel >/dev/null 2>&1; then
+        alias copy="xsel --clipboard --input"
+        alias paste="xsel --clipboard --output"
+    else
+        echo "Install xclip or xsel for copy/paste"
+    fi
+
+    alias open="xdg-open"
+
+### Windows(Git Bash / MSYS / WSL) ###
+elif echo "$OS" | grep -qi "mingw\|msys\|cygwin"; then
+    alias copy='powershell.exe -NoLogo -NoProfile -Command "Set-Clipboard"'
+    alias paste='powershell.exe -NoLogo -NoProfile -Command "Get-Clipboard"'
+    alias open='powershell.exe /c start'
+fi
+
 # 結果を表示
 echo "================================"
 printf "UpdateTime: %.3f 秒\n" "$ELAPSED_TIME"

@@ -8,8 +8,8 @@ vim.g.mapleader = ";"
 vim.api.nvim_set_keymap("n", "<Esc><Esc>", ":nohlsearch<CR><ESC>", {})
 
 -- save
-vim.keymap.set({ "n", "x", "o" }, "<C-s>", "G$Vgg0<C-=>:w<CR>", opts)
-vim.keymap.set("i", "<C-s>", "<C-o>:w<CR>", opts)
+-- vim.keymap.set({ "n", "x", "o" }, "<C-s>", "G$Vgg0<C-=>:w<CR>", opts)
+-- vim.keymap.set("i", "<C-s>", "<C-o>:w<CR>", opts)
 
 -- タブ関連
 vim.keymap.set({ "n", "x", "o" }, "tn", "<cmd>tabnew<cr>", { noremap = true, silent = true })
@@ -172,7 +172,7 @@ local opts = { silent = true, noremap = true, expr = true }
 vim.api.nvim_set_keymap("i", "<C-y>", "", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("s", "<C-y>", "", { noremap = true, silent = true })
 
-vim.keymap.set("i", "jk", "<Esc>", { noremap = true, silent = true })
+vim.keymap.set({"i", "t"}, "jk", "<Esc>", { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-n>", { noremap = true })
 
 -- tarminal mode exit
@@ -411,25 +411,42 @@ if vim.g.neovide then
   -- GUIで24bitカラーを使う（Neovideでは推奨）
   vim.o.termguicolors = true
 
-  -- OSごとの貼り付けキー設定
-  local uname = vim.loop.os_uname().sysname
-  if uname == "Darwin" then
-    vim.g.neovide_input_use_logo = 1
-    vim.g.neovide_input_mappings = {
-      ["<D-v>"] = "<C-r>+",
-    }
+    -- OSごとの貼り付けキー設定
+    local uname = vim.loop.os_uname().sysname
 
-    vim.keymap.set('n', '<D-v>', '"+p')
-    vim.keymap.set('i', '<D-v>', '<C-r>+')
-    vim.keymap.set('c', '<D-v>', '<C-r>+')
+    if vim.g.neovide then
+      if uname == "Darwin" then
+        -- Mac: Cmd+V
+        vim.g.neovide_input_use_logo = 1
+        vim.g.neovide_input_mappings = {
+          ["<D-v>"] = "<C-r>+",
+        }
 
-  else
-    vim.g.neovide_input_mappings = {
-      ["<C-v>"] = "<C-r>+",
-    }
+        vim.keymap.set('n', '<D-v>', '"+p')
+        vim.keymap.set('i', '<D-v>', '<C-r>+')
+        vim.keymap.set('c', '<D-v>', '<C-r>+')
+        vim.keymap.set('t', '<D-v>', function()
+          vim.api.nvim_feedkeys(vim.fn.getreg('+'), 'n', false)
+        end)
 
-    vim.keymap.set('n', '<C-v>', '"+p')
-    vim.keymap.set('i', '<C-v>', '<C-r>+')
-    vim.keymap.set('c', '<C-v>', '<C-r>+')
-  end
+      else
+        -- Windows / Linux: Ctrl+V
+        vim.g.neovide_input_mappings = {
+          ["<C-v>"] = "<C-r>+",
+        }
+
+        vim.keymap.set('n', '<C-v>', '"+p')
+        vim.keymap.set('i', '<C-v>', '<C-r>+')
+        vim.keymap.set('c', '<C-v>', '<C-r>+')
+        vim.keymap.set('t', '<C-v>', function()
+          vim.api.nvim_feedkeys(vim.fn.getreg('+'), 'n', false)
+        end)
+      end
+    end
 end
+
+-- Resize windows with arrow keys (便利)
+vim.keymap.set("n", "<C-Up>", "<C-w>+")
+vim.keymap.set("n", "<C-Down>", "<C-w>-")
+vim.keymap.set("n", "<C-Left>", "<C-w><")
+vim.keymap.set("n", "<C-Right>", "<C-w>>")

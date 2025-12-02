@@ -349,3 +349,25 @@ vim.api.nvim_create_user_command("Tg", function(opts)
 end, {
   nargs = "*",
 })
+
+-- ステータスライン toggle 用の関数
+local function toggle_statusline()
+  if vim.o.laststatus == 0 then
+    vim.o.laststatus = 3   -- 表示（全体で1つのステータスライン）
+  else
+    vim.o.laststatus = 0   -- 非表示
+  end
+end
+
+-- Ctrl-s を押すとトグル
+vim.keymap.set("n", "<C-s>", toggle_statusline, { noremap = true, silent = true })
+
+vim.api.nvim_create_user_command("Fullpath", function()
+  local fullpath = vim.fn.expand("%:p")
+  vim.fn.setreg("+", fullpath)   -- システムクリップボードへコピー
+  print("Copied to clipboard: " .. fullpath)
+end, {})
+
+vim.api.nvim_create_user_command("Lg", function()
+  vim.cmd("LazyGit")
+end, {})
