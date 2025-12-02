@@ -29,7 +29,7 @@ vim.keymap.set({ "n", "x", "o" }, "C", '"_S', { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "S", '"_C', { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "s", '"_s', { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "m", "^", { noremap = true, silent = true })
-vim.keymap.set({ "n", "x", "o" }, "^", "+", { noremap = true, silent = true })
+-- vim.keymap.set({ "n", "x", "o" }, "^", "+", { noremap = true, silent = true })
 
 -- ノーマル、ビジュアル、オペレータモードでのキーマッピング
 vim.keymap.set({ "n", "x", "o" }, "o", "o<esc>", { noremap = true, silent = true })
