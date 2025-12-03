@@ -25,9 +25,9 @@ vim.keymap.set({ "n", "x", "o" }, "dd", '"_dd', { noremap = true, silent = true 
 vim.keymap.set({ "n", "x", "o" }, "d", '"_d', { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "c", '"_c', { noremap = true, silent = true })
 -- vim.keymap.set({ "n", "x", "o" }, "D", '"_dd', { noremap = true, silent = true })
-vim.keymap.set({ "n", "x", "o" }, "C", '"_S', { noremap = true, silent = true })
-vim.keymap.set({ "n", "x", "o" }, "S", '"_C', { noremap = true, silent = true })
-vim.keymap.set({ "n", "x", "o" }, "s", '"_s', { noremap = true, silent = true })
+vim.keymap.set({ "n", "x", "o" }, "C", '"_C', { noremap = true, silent = true })
+-- vim.keymap.set({ "n", "x", "o" }, "S", '"_C', { noremap = true, silent = true })
+-- vim.keymap.set({ "n", "x", "o" }, "s", '"_s', { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "m", "^", { noremap = true, silent = true })
 -- vim.keymap.set({ "n", "x", "o" }, "^", "+", { noremap = true, silent = true })
 

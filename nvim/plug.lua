@@ -120,6 +120,20 @@ require("lazy").setup({
         "aklt/plantuml-syntax",
         ft = { "plantuml" },
     },
+    {
+    "ggandor/leap.nvim",
+  dependencies = { "tpope/vim-repeat" },
+  config = function()
+    local leap = require("leap")
+
+    leap.add_default_mappings()
+
+    -- 見やすくて現代的なオプション
+    leap.opts.highlight_unlabeled_phase_one_targets = true
+    leap.opts.max_phase_one_targets = 0
+    leap.opts.labels = "arstneioqwfpbdluyghjkl"
+  end,
+    },
 })
 
 -- LuaSnipをロード
