@@ -411,3 +411,4 @@ end
 vim.keymap.set({"n", "i"}, "<C-a>", function() smart_ctrl("inc") end, { noremap = true, silent = true })
 vim.keymap.set({"n", "i"}, "<C-x>", function() smart_ctrl("dec") end, { noremap = true, silent = true })
 
+

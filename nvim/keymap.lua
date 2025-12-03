@@ -50,6 +50,7 @@ vim.keymap.set({ "n", "x", "o" }, ",", ";", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "Q", ",", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "Y", "yy", { noremap = true, silent = true })
 vim.keymap.set({ "n", "x", "o" }, "<C-z>", "<C-a>", { noremap = true, silent = true })
+vim.api.nvim_del_keymap('v', 'x')
 vim.keymap.set("n", "d ", '"_diw', { noremap = true, silent = true })
 vim.keymap.set("n", "c ", '"_ciw', { noremap = true, silent = true })
 vim.keymap.set("n", "y ", "yiw", { noremap = true, silent = true })
@@ -469,3 +470,58 @@ if vim.g.neovide then
     end
 end
 
+function _G.ToggleCase()
+    local word = vim.fn.expand("<cword>")
+
+    if word == "" then
+        return
+    end
+
+    -- === 1. スネークケース (snake_case) から キャメルケース (PascalCase) へ ===
+    -- 判定: 単語にアンダースコア'_'が含まれている場合
+    if word:match("_") then
+        local temp_word = word:lower()
+
+        -- _の次の文字を大文字にする (例: my_variable -> myVariable)
+        local camel_pattern = "_(.)"
+        local camel_result = temp_word:gsub(camel_pattern, function(capture)
+            return capture:upper()
+        end)
+
+        -- 【スネーク→キャメルの要件】: 変換後の結果の先頭文字を大文字にする
+        local first_char = camel_result:sub(1, 1):upper()
+        local rest_of_word = camel_result:sub(2)
+        local final_camel_result = first_char .. rest_of_word
+
+        vim.cmd('normal! ciw' .. final_camel_result)
+        return
+    end
+
+    -- === 2. キャメルケース (camelCase) から スネークケース (snake_case) へ ===
+
+    -- 最初に、元の単語を使ってスネークパターンを適用する
+    local snake_pattern = "([a-z])([A-Z])"
+    -- (例: SmartCtrl) → (Smart_ctrl)
+    local snake_temp_result = word:gsub(snake_pattern, function(c1, c2)
+        -- 大文字の前に '_' を挿入し、大文字を小文字に戻す (ただし先頭文字は大文字のままの可能性あり)
+        return c1 .. "_" .. c2:lower()
+    end)
+
+    -- 元の単語に大文字が含まれていた場合、またはパターンマッチングが成功した場合
+    if snake_temp_result ~= word or word:match("[A-Z]") then
+        -- 【キャメル→スネークの要件】: 最終的な結果をすべて小文字にする
+        -- (例: Smart_ctrl) → (smart_ctrl)
+        local final_snake_result = snake_temp_result:lower()
+
+        vim.cmd('normal! ciw' .. final_snake_result)
+        return
+    end
+
+    -- どちらのケースでもない場合（すべて小文字の単語など）は何もしない
+end
+-- ノーマルモード
+vim.keymap.set('n', '<leader>sc', '<cmd>lua ToggleCase()<CR>', { desc = 'Toggle case (camel/snake)' })
+
+-- ビジュアルモード（選択範囲全体を処理する場合など、この関数ではカーソル下の単語を処理するため、nmapだけで十分なことが多いですが、設定の例として）
+-- 厳密には、ビジュアルモードで選択したテキストに対して上記の関数を適用するためには、関数自体を修正する必要があります。
+-- ここではカーソル下の単語を対象としているため、nmapのみで十分です。
