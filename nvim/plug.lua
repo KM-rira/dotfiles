@@ -134,6 +134,14 @@ require("lazy").setup({
     leap.opts.labels = "arstneioqwfpbdluyghjkl"
   end,
     },
+{
+  "tyru/open-browser.vim",
+  config = function()
+    vim.keymap.set("n", "gx", "<Plug>(openbrowser-open)", { silent = true })
+  end,
+},
+
+
 })
 
 -- LuaSnipをロード
@@ -540,14 +548,35 @@ require("lualine").setup({
     extensions = {},
 })
 
+local actions = require("telescope.actions")
 require("telescope").setup({
     defaults = {
-        -- 他の設定...
-
         mappings = {
             i = {
-                ["<C-j>"] = require("telescope.actions").move_selection_next,
-                ["<C-k>"] = require("telescope.actions").move_selection_previous,
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+            },
+        },
+
+        -- デフォルトはプレビュー非表示（多くのピッカーが軽くなる）
+        preview = {
+            hide_on_startup = true,
+        },
+    },
+
+    pickers = {
+        -- ▼ find_files はプレビュー無し（あなたの希望）
+        find_files = {
+            previewer = false,
+        },
+
+        -- ▼ live_grep は上下分割の UI にする
+        live_grep = {
+            previewer = true,
+            layout_strategy = "vertical",
+            layout_config = {
+                preview_height = 0.45,   -- プレビュー45%、下に選択リスト55%
+                mirror = true,           -- プレビューを上側に配置
             },
         },
     },

@@ -99,6 +99,7 @@ alias rebasei='bash ~/dotfiles/tools/rebase_helper.sh'
 alias bmf="go run $dot/bookmark/book_mark_format.go;~/dotfiles/tools/book_mark_format/book_mark_fzf.sh"
 alias log='git log --oneline | nl | head -n 30'
 alias oneline='git log --oneline --decorate --graph'
+alias alllog='git log --stat --patch --decorate --graph --all --full-history --pretty=fuller --date=iso'
 alias gs='bash ~/dotfiles/tools/google_search.sh'
 alias gr='bash ~/dotfiles/tools/google_research.sh'
 alias hs='bash ~/dotfiles/tools/history_search.sh'

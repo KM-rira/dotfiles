@@ -138,3 +138,13 @@ vim.opt.cpt:append('k')
 
 -- 1.2 だと20%up
 vim.g.neovide_scale_factor = 1.0
+
+-- カレントディレクトリの固定
+vim.g.startup_cwd = vim.fn.getcwd()
+vim.api.nvim_create_autocmd("DirChanged", {
+  callback = function()
+    if vim.fn.getcwd() ~= vim.g.startup_cwd then
+      vim.cmd("cd " .. vim.g.startup_cwd)
+    end
+  end,
+})
