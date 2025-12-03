@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 
-# bashrcに下記を追加。（非同期で）
-# nohup bash ~/dotfiles/aliases.sh > /dev/null 2>&1 &
+# .zshrcに下記を追加
+# source ~/dotfiles/aliases.sh
 
 # bashrcに下記を追記すること。
 # unalias -a
@@ -176,7 +176,7 @@ source $HOME/dotfiles/tools/wezcp.sh
 alias ccze='ccze -A'
 alias conflicts='git diff --name-only --diff-filter=U'
 
-alias difff='git diff $(changefile | fzf)'
+. ~/dotfiles/tools/difff.sh
 
 # gh
 alias gpl="bash ~/dotfiles/tools/github_cli/bash/gpl.sh"
@@ -268,10 +268,6 @@ END_TIME=$(date +%s.%N)
 
 # 開始時間と終了時間の差を計算
 ELAPSED_TIME=$(echo "$END_TIME - $START_TIME" | bc)
-
-
-# Detect OS
-OS="$(uname)"
 
 ### macOS ###
 if [[ "$OS" == "Darwin" ]]; then
