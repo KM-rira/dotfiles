@@ -4,6 +4,28 @@ return {
 	default_prog = { "wsl.exe" },
 	-- default_prog = {"C:\\Program Files\\Git\\bin\\bash.exe", "--login", "-i"},
 	font_size = 11.0,
+
+  -- GPU レンダリングを強制（最速）
+  front_end = "OpenGL",
+
+  -- レンダリング頻度の最適化（速いPCなら 120 でもOK）
+  max_fps = 90,
+
+  -- 字の描画パフォーマンス改善
+  allow_square_glyphs_to_overflow_width = "WhenFollowedBySpace",
+
+  -- スクロール性能最適化
+  scrollback_lines = 7000, -- 必要十分で軽い
+  -- タブバー非表示（1タブなら必要ない）
+  -- hide_tab_bar_if_only_one_tab = true,
+  -- use_fancy_tab_bar = false,
+
+  -- ウィンドウの余白を消す（Neovim表示が広くなる）
+  window_padding = {
+    left = 0, right = 0,
+    top = 0, bottom = 0,
+  },
+
 	color_scheme = "YourCustomScheme",
 	colors = {
 		foreground = "#eee8aa",
