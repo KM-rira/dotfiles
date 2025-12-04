@@ -200,6 +200,19 @@ vim.keymap.set({ "n", "x", "o" }, "gk", "k", { noremap = true, silent = true })
 vim.keymap.set("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>")
 vim.keymap.set("n", "gf", "<cmd>lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })
 
+local function right_trim_path(_, path)
+  local max = 70  -- ★ 表示したい最大文字数
+  local len = #path
+
+  if len <= max then
+    return path
+  end
+
+  -- 右側を優先し、左を切り捨てて "...." を付ける
+  return "...." .. path:sub(len - (max - 4) + 1)
+end
+
+
 local builtin = require("telescope.builtin")
 
 local opts = {
@@ -210,7 +223,7 @@ local opts = {
 		width = 0.95,
 		height = 0.90,
 	},
-	path_display = { "smart" },
+	path_display = { right_trim_path },
 }
 
 vim.keymap.set("n", "gr", function()
@@ -239,24 +252,34 @@ vim.keymap.set("n", "g[", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 -- telescope系
 local builtin = require("telescope.builtin")
 
-local smart_path = { path_display = { "smart" } }
+
+require("telescope").setup({
+  defaults = {
+    path_display = right_trim_path,
+  },
+})
+
+local opts_smart = { path_display = { "smart" } }
+local opts_full  = { path_display = { "absolute" } }
+local opts_tail  = { path_display = { "tail" } }
+local opts_custom  = { path_display = right_trim_path }
 
 vim.keymap.set({ "n", "x", "o" }, "<leader>ff", function()
-	builtin.find_files(smart_path)
+	builtin.find_files(opts_custom)
 end, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fg", function()
-	builtin.live_grep(smart_path)
+	builtin.live_grep(opts_custom)
 end, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fb", builtin.buffers, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fo", function()
-	builtin.oldfiles(smart_path)
+	builtin.oldfiles(opts_custom)
 end, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fc", builtin.commands, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fh", builtin.command_history, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fj", builtin.jumplist, {})
 vim.keymap.set({ "n", "x", "o" }, "<leader>fz", "<Cmd>Telescope frecency<CR>")
 vim.keymap.set({ "n", "x", "o" }, "<leader>fs", function()
-	builtin.git_status(smart_path)
+	builtin.git_status(opts_custom)
 end, {})
 
 -- =======================================================
