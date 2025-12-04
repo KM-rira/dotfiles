@@ -115,10 +115,12 @@ require("lazy").setup({
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
         },
+        event = "BufReadPost",
     },
     {
         "aklt/plantuml-syntax",
         ft = { "plantuml" },
+        event = "BufReadPost",
     },
     {
     "ggandor/leap.nvim",
@@ -134,6 +136,7 @@ require("lazy").setup({
     leap.opts.labels = "arstneioqwfpbdluyghjkl"
   end,
     },
+        event = "BufReadPost",
 {
   "tyru/open-browser.vim",
   config = function()
@@ -245,20 +248,20 @@ local horizontal_term = Terminal:new({
   size = 20,  -- あなたの今の設定と統合
 })
 
-vim.keymap.set("n", "<C-t>h", function()
+vim.keymap.set("n", "<C-t>", function()
   horizontal_term:toggle()
 end, { noremap = true, silent = true })
 
--- Vertical terminal（幅をデフォルトより広くする）
-local vertical_term = Terminal:new({
-  direction = "vertical",
-  size = 110, -- ★ みんな使ってる標準的な幅
--- :vertical resize +20
-})
-
-vim.keymap.set("n", "<C-t>v", function()
-  vertical_term:toggle()
-end, { noremap = true, silent = true })
+-- -- Vertical terminal（幅をデフォルトより広くする）
+-- local vertical_term = Terminal:new({
+--   direction = "vertical",
+--   size = 110, -- ★ みんな使ってる標準的な幅
+-- -- :vertical resize +20
+-- })
+--
+-- vim.keymap.set("n", "<C-t>v", function()
+--   vertical_term:toggle()
+-- end, { noremap = true, silent = true })
 
 local sidebar = require("sidebar-nvim")
 local opts = { open = false }

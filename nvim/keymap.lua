@@ -548,3 +548,10 @@ vim.keymap.set('n', '<leader>sc', '<cmd>lua ToggleCase()<CR>', { desc = 'Toggle 
 -- ビジュアルモード（選択範囲全体を処理する場合など、この関数ではカーソル下の単語を処理するため、nmapだけで十分なことが多いですが、設定の例として）
 -- 厳密には、ビジュアルモードで選択したテキストに対して上記の関数を適用するためには、関数自体を修正する必要があります。
 -- ここではカーソル下の単語を対象としているため、nmapのみで十分です。
+
+local opts = { noremap = true, silent = true }
+
+vim.keymap.set("n", "<leader>th", "<Cmd>split | terminal<CR>", opts)
+-- vim.keymap.set("n", "<leader>tk", "<Cmd>split | terminal | wincmd K<CR>", opts)
+vim.keymap.set("n", "<leader>tv", "<Cmd>vsplit | terminal<CR>", opts)
+-- vim.keymap.set("n", "<leader>tl", "<Cmd>vsplit | terminal | wincmd L<CR>", opts)
