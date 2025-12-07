@@ -17,6 +17,7 @@ dot="$HOME/dotfiles"
 alias nv='neovide'
 
 export CHEAT_PATH=~/dotfiles/cheat
+bindkey -e
 # user定義
 #user=""
 #while IFS= read -r line; do
