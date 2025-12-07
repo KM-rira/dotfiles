@@ -1,15 +1,39 @@
 #!/bin/bash
 
 ff() {
-    while true;
-    do
-        # Find directories in the current directory
-        directories=$(find . -maxdepth 1 -type d ! -name '.*' | cut -c 3-)
+    # reset OPTIND for repeated calls
+    OPTIND=1
+    show_hidden=false
 
-        # Check if there are any directories
+    # parse options
+    while getopts "a" opt; do
+        case ${opt} in
+            a )
+                show_hidden=true
+                ;;
+            \? )
+                echo "Usage: ff [-a]"
+                return
+                ;;
+        esac
+    done
+
+    while true; do
+        # directories search
+        if [ "$show_hidden" = true ]; then
+            # include hidden directories
+            directories=$(find . -maxdepth 1 -type d | cut -c 3-)
+        else
+            # exclude hidden directories
+            directories=$(find . -maxdepth 1 -type d ! -name '.*' | cut -c 3-)
+        fi
+
+        # remove empty line for root "."
+        directories=$(echo "$directories" | sed '/^$/d')
+
         if [ -n "$directories" ]; then
-            # If directories exist, let the user choose one with fzf
             dir=$(echo "$directories" | fzf --height 40%)
+
             if [ -z "$dir" ]; then
                 echo "===== EXIT PROCESS ====="
                 return
@@ -17,9 +41,9 @@ ff() {
                 cd "$dir" && echo "Now in $dir" || echo "Failed to enter $dir"
             fi
         else
-            # Message if no directories exist
             echo "===== NO DIRECTORIES EXIST ====="
             return
         fi
     done
 }
+
