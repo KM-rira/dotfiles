@@ -6,6 +6,7 @@ local file_types = {
 	"lua",
 	"python",
 	"cue",
+	"proto",
 }
 
 require("nvim-treesitter.configs").setup({

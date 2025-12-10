@@ -53,6 +53,17 @@ nvim_lsp.pyright.setup({
         debounce_text_changes = 150,
     },
 })
+
+-- 🌟 ProtoBuf (bufls) の設定を修正 🌟
+nvim_lsp.bufls.setup({
+    on_attach = on_attach,
+    flags = {
+        debounce_text_changes = 150,
+    },
+    -- ここで bufls バイナリの絶対パスを明示的に指定します
+    cmd = { "/home/linuxbrew/.linuxbrew/bin/buf", "ls" },
+})
+
 require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = mason_lspconfig_list, -- 必要なLSPサーバーを列挙
