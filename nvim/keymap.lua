@@ -378,7 +378,7 @@ vim.api.nvim_set_keymap(
 	{ silent = true }
 )
 vim.api.nvim_set_keymap("n", "<leader>dr", ':lua require("dap").repl.open()<CR>', { silent = true })
-vim.api.nvim_set_keymap("n", "<leader>dl", ':lua require("dap").run_last()<CR>', { silent = true })
+vim.api.nvim_set_keymap("n", "<leader>dR", ':lua require("dap").run_last()<CR>', { silent = true })
 vim.api.nvim_set_keymap("n", "<leader>dw", ':lua require("dapui").toggle()<CR>', {})
 vim.api.nvim_set_keymap("n", "ge", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap(
@@ -393,6 +393,15 @@ vim.api.nvim_set_keymap(
 	"<cmd>lua vim.diagnostic.setqflist({open = true})<CR>",
 	{ noremap = true, silent = true }
 )
+
+-- nvim-test系
+vim.api.nvim_set_keymap("n", "<leader>dt", "<Cmd>TestNearest<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>dT", "<Cmd>TestFile<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>da", "<Cmd>TestSuite<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>dl", "<Cmd>TestLast<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>df", "<Cmd>TestVisit<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "ge", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
 
 -- Normalモードで ;fl
 vim.keymap.set("n", ";fl", function()

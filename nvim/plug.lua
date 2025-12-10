@@ -312,13 +312,6 @@ require("Comment").setup({
 })
 
 require("nvim-test").setup({
-    mappings = {
-        nearest = "<leader>dt", -- 現在のカーソル位置に最も近いテストを実行
-        file = "<leader>dT",    -- 現在のファイルのテストを実行
-        suite = "<leader>da",   -- すべてのテストを実行
-        last = "<leader>dl",    -- 最後に実行したテストを再実行
-        visit = "<leader>df",   -- 最後に実行したテストのファイルを開く
-    },
 })
 
 require("git-conflict").setup({
