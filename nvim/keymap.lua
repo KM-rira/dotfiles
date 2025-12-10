@@ -400,8 +400,6 @@ vim.api.nvim_set_keymap("n", "<leader>dT", "<Cmd>TestFile<CR>", { noremap = true
 vim.api.nvim_set_keymap("n", "<leader>da", "<Cmd>TestSuite<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>dl", "<Cmd>TestLast<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>df", "<Cmd>TestVisit<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "ge", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap(
 
 -- Normalモードで ;fl
 vim.keymap.set("n", ";fl", function()
