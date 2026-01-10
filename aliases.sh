@@ -37,6 +37,14 @@ export GIT_EDITOR=nvim
 export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 
+export HISTFILE=$HOME/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+setopt APPEND_HISTORY        # 既存ファイルに追記
+setopt INC_APPEND_HISTORY    # コマンド実行ごとに履歴ファイルへ追記（重要）
+setopt SHARE_HISTORY         # 複数端末で履歴共有（必要なら）
+
 mkdir -p $HOME/.tmp
 chmod +x $dot/tools/rgv_preview.sh
 
