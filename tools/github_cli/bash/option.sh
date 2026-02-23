@@ -5,19 +5,22 @@ case "$#" in
     *)
         for arg in "$@"; do
             case "$arg" in
-                a)
+                a|-a)
                     Type='--state all'
                     ;;
-                o)
+                o|-o)
                     Type='--state open'
                     ;;
-                c)
+                c|-c)
                     Type='--state closed'
                     ;;
-                d)
+                d|-d)
                     Type='--draft'
                     ;;
-                s)
+                e|-e)
+                    error_only_flg=true
+                    ;;
+                s|-s)
                     select_repo_flg=true
                     ;;
                 [1-9]*)
