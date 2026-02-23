@@ -1,2 +1,6 @@
- nvim/plugin
+nvim/plugin
 tools/gocli/.out/*
+tools/chrome-extentions/gh-actions-step-copy/node_modules/
+tools/chrome-extentions/gh-actions-step-copy/dist/
+tools/chrome-extentions/gh-actions-step-copy/*.log
+tools/chrome-extentions/gh-actions-step-copy/.DS_Store
