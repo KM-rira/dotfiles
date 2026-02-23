@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "GitHub Actions Step Log Copy Button",
-  "version": "0.1.0",
-  "description": "Add a copy button next to a GitHub Actions step (e.g. gofmt -s check) to copy its log.",
+  "version": "0.2.0",
+  "description": "Add a copy button next to a GitHub Actions step (e.g. gofmt -s check) to copy its log. Highlights error keywords in red.",
   "permissions": [
     "clipboardWrite"
   ],

@@ -1,7 +1,7 @@
 {
   "name": "gh-actions-step-copy",
-  "version": "0.1.0",
-  "description": "GitHub Actions Step Log Copy Button Chrome Extension",
+  "version": "0.2.0",
+  "description": "GitHub Actions Step Log Copy Button Chrome Extension with error highlighting",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch"

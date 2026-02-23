@@ -7,6 +7,9 @@ GitHub ActionsのCI画面の各ステップにコピーボタンを追加するC
 - GitHub Actionsの各ステップ（Set up job、gofmt -s checkなど）の右上にコピーボタンを配置
 - ボタンをクリックすると、そのステップのログをクリップボードにコピー
 - タイムスタンプや行番号などを自動的に除外してクリーンなログをコピー
+- **エラーメッセージのハイライト表示**
+  - `error`, `fail`, `fatal`, `panic`, `exception`, `cannot`, `unable`, `invalid`, `not found`, `undefined`, `unexpected`, `denied`, `timeout` などのエラーキーワードを自動的に赤字でハイライト
+  - ダークモード対応
 
 ## 開発
 

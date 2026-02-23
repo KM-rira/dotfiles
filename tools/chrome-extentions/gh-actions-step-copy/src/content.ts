@@ -5,66 +5,169 @@
     return new Promise((r) => setTimeout(r, ms));
   }
 
+  function highlightErrorsInLogLine(element: Element): void {
+    // 既に処理済みかチェック
+    if (element.hasAttribute('data-error-highlighted')) {
+      return;
+    }
+    element.setAttribute('data-error-highlighted', 'true');
+
+    // エラーキーワードのパターン（大文字小文字を区別しない）
+    const errorPatterns = [
+      /\b(error|errors|err)\b/gi,
+      /\b(fail|failed|failure|failing)\b/gi,
+      /\b(fatal)\b/gi,
+      /\b(panic|panicking)\b/gi,
+      /\b(exception)\b/gi,
+      /\b(cannot|can't)\b/gi,
+      /\b(unable)\b/gi,
+      /\b(invalid)\b/gi,
+      /\b(not found|missing)\b/gi,
+      /\b(undefined)\b/gi,
+      /\b(unexpected)\b/gi,
+      /\b(denied|permission denied)\b/gi,
+      /\b(timeout|timed out)\b/gi,
+    ];
+
+    // テキストノードを走査して、エラーキーワードをハイライト
+    const walkTextNodes = (node: Node) => {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent) {
+        const text = node.textContent;
+        let hasError = false;
+
+        // いずれかのパターンにマッチするかチェック
+        for (const pattern of errorPatterns) {
+          if (pattern.test(text)) {
+            hasError = true;
+            break;
+          }
+        }
+
+        if (hasError && node.parentElement) {
+          console.log('[GH-Actions] Found error text:', text.trim());
+          // テキストをハイライト処理
+          const span = document.createElement('span');
+
+          let html = text;
+          for (const pattern of errorPatterns) {
+            html = html.replace(pattern, (match) => {
+              return `<span class="km-gh-error-highlight">${match}</span>`;
+            });
+          }
+
+          span.innerHTML = html;
+          node.parentElement.replaceChild(span, node);
+        }
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // 既にハイライトされている場合はスキップ
+        const el = node as Element;
+        if (el.classList.contains('km-gh-error-highlight')) {
+          return;
+        }
+        // 子ノードを再帰的に処理
+        Array.from(node.childNodes).forEach(walkTextNodes);
+      }
+    };
+
+    walkTextNodes(element);
+  }
+
+  function highlightErrorsInStep(stepEl: Element): void {
+    // DETAILS要素を探す（ログはその中にネストされている）
+    const detailsEl = stepEl.querySelector('details.js-checks-log-details');
+    if (!detailsEl) {
+      console.log('[GH-Actions] No details element found in step');
+      return;
+    }
+
+    // ログ行を含む全ての要素を探す
+    // GitHubのログは通常、div要素として表示される
+    const logContainer = detailsEl.querySelector('.js-check-step-log-container, [class*="log"]');
+    if (!logContainer) {
+      console.log('[GH-Actions] No log container found');
+      return;
+    }
+
+    console.log('[GH-Actions] Processing log container:', logContainer);
+
+    // ログコンテナ内のすべてのテキストノードを走査
+    const walkAndHighlight = (node: Node) => {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent && node.textContent.trim()) {
+        highlightErrorsInLogLine(node.parentElement!);
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        const el = node as Element;
+        // 既に処理済みの要素はスキップ
+        if (el.hasAttribute('data-error-highlighted')) {
+          return;
+        }
+        // 子ノードを処理
+        Array.from(node.childNodes).forEach(walkAndHighlight);
+      }
+    };
+
+    walkAndHighlight(logContainer);
+  }
+
   function cleanLogText(text: string): string {
     // 行ごとに処理
     const lines = text.split('\n');
     const cleanedLines: string[] = [];
-    
+
     // タイムスタンプの正規表現パターン
     const timestampPattern = /^(?:[A-Z][a-z]{2},\s+\d{1,2}\s+[A-Z][a-z]{2}\s+\d{4}\s+\d{2}:\d{2}:\d{2}\s+[A-Z]{3}\s*)+/;
-    
+
     for (let line of lines) {
       const originalLine = line;
-      
+
       // 行番号を削除（先頭の数字のみの行、または数字+空白+内容）
       line = line.replace(/^\s*\d+\s*$/, ''); // 数字のみの行
       line = line.replace(/^\s*\d+\s+/, '');   // 数字+空白+内容
-      
+
       // タイムスタンプを削除（行の先頭から）
       line = line.replace(timestampPattern, '');
-      
+
       // 余分な空白をトリム
       line = line.trim();
-      
+
       // 行番号のみの行はスキップ
       if (originalLine.trim().match(/^\d+$/)) {
         continue;
       }
-      
+
       // 行全体がタイムスタンプのみの場合はスキップ
       if (originalLine.trim().match(/^[A-Z][a-z]{2},\s+\d{1,2}\s+[A-Z][a-z]{2}\s+\d{4}\s+\d{2}:\d{2}:\d{2}\s+[A-Z]{3}$/)) {
         continue;
       }
-      
+
       // ボタンのテキストを除外
       if (line === 'Copy' || line === 'Copying...' || line === '✓ Copied!' || line === '✗ Failed') {
         continue;
       }
-      
+
       // ログをコピーというツールチップテキストを除外
       if (line === 'ログをコピー') {
         continue;
       }
-      
+
       // 切り詰められた説明文を除外
-      if (line.includes('This step has been truncated') || 
+      if (line.includes('This step has been truncated') ||
           line.includes('View the raw logs') ||
           line.includes('once the workflow run has completed')) {
         continue;
       }
-      
+
       // "Error: Process completed with exit code"の行まで取得
       if (line.match(/^Error:\s*Process completed with exit code \d+\.?$/)) {
         cleanedLines.push(line);
         break;
       }
-      
+
       // 空行でなければ追加
       if (line) {
         cleanedLines.push(line);
       }
     }
-    
+
     return cleanedLines.join('\n');
   }
 
@@ -254,6 +357,23 @@
       .${BUTTON_CLASS}:active {
         transform: scale(0.95);
       }
+
+      /* エラーメッセージのハイライト */
+      .km-gh-error-highlight {
+        color: #d73a49 !important;
+        font-weight: 600 !important;
+        background-color: rgba(215, 58, 73, 0.1) !important;
+        padding: 2px 4px !important;
+        border-radius: 3px !important;
+      }
+
+      /* ダークモード対応 */
+      @media (prefers-color-scheme: dark) {
+        .km-gh-error-highlight {
+          color: #ff7b72 !important;
+          background-color: rgba(255, 123, 114, 0.15) !important;
+        }
+      }
     `;
     document.head.appendChild(style);
   }
@@ -306,7 +426,10 @@
   function tick(): void {
     ensureStyleOnce();
     const steps = findAllSteps();
-    steps.forEach((stepEl) => injectIntoStepRow(stepEl));
+    steps.forEach((stepEl) => {
+      injectIntoStepRow(stepEl);
+      highlightErrorsInStep(stepEl);
+    });
   }
 
   // SPA & 遅延描画対策
