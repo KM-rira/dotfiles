@@ -32,7 +32,7 @@ ff() {
         directories=$(echo "$directories" | sed '/^$/d')
 
         if [ -n "$directories" ]; then
-            dir=$(echo "$directories" | fzf --height 40%)
+            dir=$(echo "$directories" | lfzf --height 40%)
 
             if [ -z "$dir" ]; then
                 echo "===== EXIT PROCESS ====="
