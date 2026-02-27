@@ -29,8 +29,9 @@ bindkey -e
 eval "$(zoxide init zsh)"
 ##eval "$(mcfly init zsh)"
 # export variable
-export BAT_STYLE="header,grid"
+export BAT_STYLE="header"
 export BAT_THEME="TwoDark"
+export BAT_OPTS="--color=always --paging=never"
 
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # デフォルトのエディタ設定
@@ -239,7 +240,7 @@ case $OS in
         alias wez='nvim ~/.config/wezterm/wezterm.lua'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
-        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"gg
         alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias lfzf="fzf --height 70% --layout reverse --info inline --border \
             --preview 'eza -1 --no-icons --no-git --color=never {}' --preview-window '~3' \
