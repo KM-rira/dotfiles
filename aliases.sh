@@ -15,6 +15,8 @@ bashrc="$HOME/.bashrc"
 dot="$HOME/dotfiles"
 
 alias nv='neovide'
+export EZA_ICONS_AUTO=1
+local eza_options=' -la --git --icons --group-directories-first'
 
 export CHEAT_PATH=~/dotfiles/cheat
 bindkey -e
@@ -213,15 +215,15 @@ go run $dot/tools/launcher/launcher.go "$HOME/dotfiles/tools/note" && source $HO
 OS=$(uname)
 case $OS in
     'Linux')
-        alias l='lsd -l'
-        alias tree='lsd --tree'
+        alias l="eza $eza_options"
+        alias tree='eza --tree'
         alias wez='echo "not windows"'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias lfzf="fzf --height 70% --layout reverse --info inline --border \
-            --preview 'lsd -l {}' --preview-window '~3' \
+            --preview 'eza -1 --icons=never --no-git --color=never {}' --preview-window '~3' \
             --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         #. ~/dotfiles/tools/prompt/ps1.sh
         . ~/dotfiles/tools/prompt/prompt.sh
@@ -232,15 +234,15 @@ case $OS in
         alias ports='ss -tuln'
         ;;
     'Darwin')
-        alias l='lsd -l'
-        alias tree='lsd --tree'
+        alias l="eza $eza_options"
+        alias tree='eza --tree'
         alias wez='nvim ~/.config/wezterm/wezterm.lua'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
         alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         alias lfzf="fzf --height 70% --layout reverse --info inline --border \
-            --preview 'lsd -l {}' --preview-window '~3' \
+            --preview 'eza -1 --no-icons --no-git --color=never {}' --preview-window '~3' \
             --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
         . ~/dotfiles/tools/prompt/prompt.sh
         alias re='source ~/.zshrc'
@@ -249,8 +251,8 @@ case $OS in
         alias batcat='bat'
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
-        alias l='lsd -l'
-        alias tree='lsd --tree'
+        alias l="eza $eza_options"
+        alias tree='eza --tree'
         alias wez='nvim ~/.config/wezterm/wezterm.lua'
         alias nvimf='cd ~/AppData/Local/nvim'
         alias settings="nvim ~/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
