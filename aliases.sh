@@ -18,6 +18,8 @@ alias nv='neovide'
 export EZA_ICONS_AUTO=1
 local eza_options=' -la --git --icons --group-directories-first'
 
+eval "$(starship init zsh)"
+
 export CHEAT_PATH=~/dotfiles/cheat
 bindkey -e
 # user定義
@@ -226,8 +228,7 @@ case $OS in
         alias lfzf="fzf --height 70% --layout reverse --info inline --border \
             --preview 'eza -1 --icons=never --no-git --color=never {}' --preview-window '~3' \
             --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        #. ~/dotfiles/tools/prompt/ps1.sh
-        . ~/dotfiles/tools/prompt/prompt.sh
+        # . ~/dotfiles/tools/prompt/prompt.sh
         alias b='bat'
         alias batcat='bat'
         #shopt -s histappend
@@ -245,7 +246,7 @@ case $OS in
         alias lfzf="fzf --height 70% --layout reverse --info inline --border \
             --preview 'eza -1 --no-icons --no-git --color=never {}' --preview-window '~3' \
             --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        . ~/dotfiles/tools/prompt/prompt.sh
+        # . ~/dotfiles/tools/prompt/prompt.sh
         alias re='source ~/.zshrc'
         alias ports='lsof -i -P | grep -i "listen"'
         alias b='bat'
