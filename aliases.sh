@@ -34,8 +34,40 @@ eval "$(zoxide init zsh)"
 export BAT_STYLE="header"
 export BAT_THEME="TwoDark"
 export BAT_OPTS="--color=always --paging=never"
+# 1. 共通オプション（クォートのミスを修正）
+export FZF_DEFAULT_OPTS='
+  --height=~60%
+  --layout=reverse
+  --border
+  --cycle
+  --multi
+  --info=inline-right
+  --scroll-off=3
+  --color="pointer:#ff0000:bold,fg+:#00ff00:bold:underline,bg+:#333333,hl+:#ff0055"
+  --pointer="▶"
+  --preview "bat --color=always --style=numbers --line-range :500 {}"
+  --preview-window "right,50%,border-left"
+  --header "Keys: [C-t]Top [C-l]Last [C-/]Preview [C-u/d]Scroll [Tab]Select"
+  --bind "ctrl-u:preview-page-up,ctrl-d:preview-page-down"
+  --bind "ctrl-t:top,ctrl-l:last,ctrl-/:toggle-preview"
+  --bind "ctrl-a:select-all,ctrl-x:deselect-all"
+'
 
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# 2. 各機能のコマンド指定
+export FZF_CTRL_T_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git --exclude node_modules --exclude .cache'
+export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+
+# 3. Ctrl+R 専用設定（履歴検索を軽くする）
+export FZF_CTRL_R_OPTS='
+  --preview ""
+  --header "History Search [C-y]Copy"
+  --bind "ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort"
+'
+
+# 4. シェル連携のロードとキー奪還
+eval "$(fzf --zsh)"
+bindkey '^G' fzf-cd-widget
+# export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # デフォルトのエディタ設定
 export EDITOR=nvim
 export GIT_EDITOR=nvim
