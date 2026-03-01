@@ -51,7 +51,7 @@ export FZF_DEFAULT_OPTS='
   --multi
   --info=inline-right
   --scroll-off=3
-  --color="pointer:#ff0000:bold,fg+:#00ff00:bold:underline,bg+:#333333,hl+:#ff0055"
+  --color="pointer:#ff0000:bold,fg+:#00ff00:bold:underline,bg+:#333333,hl+:#00BFFF:bold"
   --pointer="▶"
   --marker="●"
   --preview "bat --color=always --style=numbers --line-range :500 {}"
