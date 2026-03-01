@@ -35,25 +35,28 @@ export BAT_STYLE="header"
 export BAT_THEME="TwoDark"
 export BAT_OPTS="--color=always --paging=never"
 # 1. 共通オプション（クォートのミスを修正）
-export FZF_DEFAULT_OPTS='
-  --height=~60%
-  --layout=reverse
-  --border
-  --cycle
-  --multi
-  --info=inline-right
-  --scroll-off=3
-  --color="pointer:#ff0000:bold,fg+:#00ff00:bold:underline,bg+:#333333,hl+:#ff0055"
-  --pointer="▶"
-  --preview "bat --color=always --style=numbers --line-range :500 {}"
-  --preview-window "right,50%,border-left"
-  --header "Keys: [C-t]Top [C-l]Last [C-/]Preview [C-u/d]Scroll [Tab]Select"
-  --bind "ctrl-u:preview-page-up,ctrl-d:preview-page-down"
-  --bind "ctrl-t:top,ctrl-l:last,ctrl-/:toggle-preview"
-  --bind "ctrl-a:select-all,ctrl-x:deselect-all"
-'
+# export FZF_DEFAULT_OPTS='
+#   --height=~60%
+#   --layout=reverse
+#   --border
+#   --cycle
+#   --multi
+#   --info=inline-right
+#   --scroll-off=3
+#   --color="pointer:#ff0000:bold,fg+:#00ff00:bold:underline,bg+:#333333,hl+:#ff0055"
+#   --pointer="▶"
+#   --preview "bat --color=always --style=numbers --line-range :500 {}"
+#   --preview-window "right,50%,border-left,follow"
+#   --header "Keys: [C-t]Top [C-l]Last [C-/]Preview [C-u/d]Scroll [C-y]Copy [Tab]Select"
+#   --bind "ctrl-u:preview-page-up,ctrl-d:preview-page-down"
+#   --bind "ctrl-t:top,ctrl-l:last,ctrl-/:toggle-preview"
+#   --bind "ctrl-a:select-all,ctrl-x:deselect-all"
+#   --bind 'ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)+abort'
+# '
+#
 
-# 2. 各機能のコマンド指定
+eval "$(fzf --zsh)"
+# # 2. 各機能のコマンド指定
 export FZF_CTRL_T_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git --exclude node_modules --exclude .cache'
 export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
 
@@ -65,8 +68,39 @@ export FZF_CTRL_R_OPTS='
 '
 
 # 4. シェル連携のロードとキー奪還
-eval "$(fzf --zsh)"
-bindkey '^G' fzf-cd-widget
+# fzf を使って配下のディレクトリを選択し、移動する関数
+function fzf-cd-subdirs() {
+    # hiddenファイルを除外し、カレントディレクトリ配下のディレクトリをリストアップ
+    local dir=$(find . -maxdepth 3 -type d 2> /dev/null | fzf --height 40% --reverse --border)
+
+    # ディレクトリが選択された場合のみ cd する
+    if [ -n "$dir" ]; then
+        BUFFER="cd ${(q)dir}"
+        zle accept-line
+    fi
+    zle reset-prompt
+}
+
+# ウィジェットとして登録
+zle -N fzf-cd-subdirs
+
+# Ctrl + G にバインド
+bindkey '^g' fzf-cd-subdirs
+
+fzf-open-file() {
+  local file
+  file=$(fd --type f --hidden --follow --exclude .git | fzf --height=60%)
+  [ -n "$file" ] && ${EDITOR:-nvim} "$file"
+}
+zle -N fzf-open-file
+fzf-open-nvim() {
+  local file
+  file=$(fd --type f --hidden --follow --exclude .git | fzf --height=60%)
+  [ -n "$file" ] && nvim "$file"
+}
+zle -N fzf-open-nvim
+bindkey '^E' fzf-open-nvim
+bindkey '^O' fzf-open-file
 # export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # デフォルトのエディタ設定
 export EDITOR=nvim
