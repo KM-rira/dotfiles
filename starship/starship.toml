@@ -1,0 +1,65 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[░▒▓](#2b1748)\
+[](bg:#2b1748 fg:#2b1748)\
+$directory\
+[](fg:#2b1748 bg:#3a0ca3)\
+$git_branch\
+$git_status\
+$nodejs\
+$rust\
+$golang\
+$php\
+$cmd_duration\
+\n$character"""
+
+[directory]
+style = "fg:#e0ccff bg:#2b1748"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "bg:#3a0ca3"
+format = '[[ $symbol $branch ](fg:#c77dff bg:#3a0ca3)]($style)'
+
+[git_status]
+style = "bg:#3a0ca3 fg:#e0aaff"
+format = '[$all_status$ahead_behind]($style)'
+staged = ' [S:$count](bg:#3a0ca3 #4cc9f0)'
+modified = ' [M:$count](bg:#3a0ca3 #ffbe0b)'
+untracked = ' [U:$count](bg:#3a0ca3 #ffffff)'
+deleted = ' [D:$count](bg:#3a0ca3 #ff006e)'
+ahead = ' [⇡$count](bg:#3a0ca3)'
+behind = ' [⇣$count](bg:#3a0ca3)'
+
+# ---- Language blocks: “必要な時だけ” 区切りを出す ----
+[nodejs]
+symbol = ""
+style = "bg:#240046"
+format = '[](fg:#3a0ca3 bg:#240046)[[ $symbol ($version) ](fg:#9d4edd bg:#240046)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#240046"
+format = '[](fg:#3a0ca3 bg:#240046)[[ $symbol ($version) ](fg:#9d4edd bg:#240046)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:#240046"
+format = '[](fg:#3a0ca3 bg:#240046)[[ $symbol ($version) ](fg:#9d4edd bg:#240046)]($style)'
+
+[php]
+symbol = ""
+style = "bg:#240046"
+format = '[](fg:#3a0ca3 bg:#240046)[[ $symbol ($version) ](fg:#9d4edd bg:#240046)]($style)'
+
+[time]
+disabled = true
+
+[cmd_duration]
+min_time = 200
+show_milliseconds = true
+format = " [⏱ $duration](bold #9d4edd)"
