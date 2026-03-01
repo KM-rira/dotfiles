@@ -34,26 +34,38 @@ eval "$(zoxide init zsh)"
 export BAT_STYLE="header"
 export BAT_THEME="TwoDark"
 export BAT_OPTS="--color=always --paging=never"
-# 1. 共通オプション（クォートのミスを修正）
-# export FZF_DEFAULT_OPTS='
-#   --height=~60%
-#   --layout=reverse
-#   --border
-#   --cycle
-#   --multi
-#   --info=inline-right
-#   --scroll-off=3
-#   --color="pointer:#ff0000:bold,fg+:#00ff00:bold:underline,bg+:#333333,hl+:#ff0055"
-#   --pointer="▶"
-#   --preview "bat --color=always --style=numbers --line-range :500 {}"
-#   --preview-window "right,50%,border-left,follow"
-#   --header "Keys: [C-t]Top [C-l]Last [C-/]Preview [C-u/d]Scroll [C-y]Copy [Tab]Select"
-#   --bind "ctrl-u:preview-page-up,ctrl-d:preview-page-down"
-#   --bind "ctrl-t:top,ctrl-l:last,ctrl-/:toggle-preview"
-#   --bind "ctrl-a:select-all,ctrl-x:deselect-all"
-#   --bind 'ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)+abort'
-# '
-#
+# OSに応じたコピーコマンドの設定
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export FZF_COPY_CMD="pbcopy"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # xselの場合は標準入力から受け取る
+    export FZF_COPY_CMD="xclip -selection clipboard"
+fi
+
+# FZF_DEFAULT_OPTS の --bind 部分を修正
+export FZF_DEFAULT_OPTS='
+  --height=~60%
+  --layout=reverse
+  --border
+  --cycle
+  --multi
+  --info=inline-right
+  --scroll-off=3
+  --color="pointer:#ff0000:bold,fg+:#00ff00:bold:underline,bg+:#333333,hl+:#ff0055"
+  --pointer="▶"
+  --marker="●"
+  --preview "bat --color=always --style=numbers --line-range :500 {}"
+  --preview-window "right,50%,border-left,follow"
+  --header "Keys: [C-t]Top [C-l]Last [C-/]Preview [C-u/d]Scroll [C-y]Copy [Tab]Select"
+  --bind "ctrl-u:preview-page-up,ctrl-d:preview-page-down"
+  --bind "ctrl-t:top,ctrl-l:last,ctrl-/:toggle-preview"
+  --bind "ctrl-a:select-all,ctrl-x:deselect-all"
+'
+#  --bind "ctrl-y:execute-silent(printf '%s' {+} | xclip -selection clipboard)"
+export FZF_DEFAULT_OPTS="
+    ${FZF_DEFAULT_OPTS}
+    --bind 'ctrl-y:execute-silent(printf '%s' {+} | ${FZF_COPY_CMD})'
+"
 
 eval "$(fzf --zsh)"
 # # 2. 各機能のコマンド指定
@@ -70,18 +82,19 @@ export FZF_CTRL_R_OPTS='
 # 4. シェル連携のロードとキー奪還
 # fzf を使って配下のディレクトリを選択し、移動する関数
 function fzf-cd-subdirs() {
-    # hiddenファイルを除外し、カレントディレクトリ配下のディレクトリをリストアップ
-    local dir=$(find . -maxdepth 3 -type d 2> /dev/null | fzf --height 40% --reverse --border)
+    # fd を使用してディレクトリのみを抽出
+    # --max-depth 1: 現在の直下のみ
+    # --type d: ディレクトリのみ
+    # --hidden: 隠しディレクトリも含める（不要なら消してください）
+    # --exclude: 除外したいディレクトリがあれば追加
+    local dir=$(fd --max-depth 1 --type d --hidden --exclude .git . 2> /dev/null | fzf --height 40% --reverse --border)
 
-    # ディレクトリが選択された場合のみ cd する
     if [ -n "$dir" ]; then
         BUFFER="cd ${(q)dir}"
         zle accept-line
     fi
     zle reset-prompt
 }
-
-# ウィジェットとして登録
 zle -N fzf-cd-subdirs
 
 # Ctrl + G にバインド
@@ -99,7 +112,7 @@ fzf-open-nvim() {
   [ -n "$file" ] && nvim "$file"
 }
 zle -N fzf-open-nvim
-bindkey '^E' fzf-open-nvim
+# bindkey '^E' fzf-open-nvim
 bindkey '^O' fzf-open-file
 # export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 # デフォルトのエディタ設定
@@ -280,6 +293,34 @@ note="$HOME/note"
 go run $dot/tools/launcher/launcher.go "$HOME/dotfiles/tools/note" && source $HOME/.tmp/file_list.sh || echo "fail lancher.go"
 #source $HOME/dotfiles/tools/launcher/note_launcher.sh
 
+### macOS ###
+if [[ "$OS" == "Darwin" ]]; then
+    alias copy="pbcopy"
+    alias paste="pbpaste"
+    alias open="open"
+
+### Linux ###
+elif [[ "$OS" == "Linux" ]]; then
+    # copy: xclip または xsel が必要
+    if command -v xclip >/dev/null 2>&1; then
+        alias copy="xclip -selection clipboard"
+        alias paste="xclip -selection clipboard -o"
+    elif command -v xsel >/dev/null 2>&1; then
+        alias copy="xsel --clipboard --input"
+        alias paste="xsel --clipboard --output"
+    else
+        echo "Install xclip or xsel for copy/paste"
+    fi
+
+    alias open="xdg-open"
+
+### Windows(Git Bash / MSYS / WSL) ###
+elif echo "$OS" | grep -qi "mingw\|msys\|cygwin"; then
+    alias copy='powershell.exe -NoLogo -NoProfile -Command "Set-Clipboard"'
+    alias paste='powershell.exe -NoLogo -NoProfile -Command "Get-Clipboard"'
+    alias open='powershell.exe /c start'
+fi
+
 # OS分岐
 OS=$(uname)
 case $OS in
@@ -300,6 +341,8 @@ case $OS in
         #shopt -s histappend
         alias re='source ~/.zshrc'
         alias ports='ss -tuln'
+        autoload -Uz bracketed-paste-magic
+        zle -N bracketed-paste bracketed-paste-magic
         ;;
     'Darwin')
         alias l="eza $eza_options"
@@ -317,6 +360,8 @@ case $OS in
         alias ports='lsof -i -P | grep -i "listen"'
         alias b='bat'
         alias batcat='bat'
+        autoload -Uz bracketed-paste-magic
+        zle -N bracketed-paste bracketed-paste-magic
         ;;
     'WindowsNT' | 'CYGWIN'* | 'MINGW'*)
         alias l="eza $eza_options"
@@ -349,33 +394,6 @@ END_TIME=$(date +%s.%N)
 # 開始時間と終了時間の差を計算
 ELAPSED_TIME=$(echo "$END_TIME - $START_TIME" | bc)
 
-### macOS ###
-if [[ "$OS" == "Darwin" ]]; then
-    alias copy="pbcopy"
-    alias paste="pbpaste"
-    alias open="open"
-
-### Linux ###
-elif [[ "$OS" == "Linux" ]]; then
-    # copy: xclip または xsel が必要
-    if command -v xclip >/dev/null 2>&1; then
-        alias copy="xclip -selection clipboard"
-        alias paste="xclip -selection clipboard -o"
-    elif command -v xsel >/dev/null 2>&1; then
-        alias copy="xsel --clipboard --input"
-        alias paste="xsel --clipboard --output"
-    else
-        echo "Install xclip or xsel for copy/paste"
-    fi
-
-    alias open="xdg-open"
-
-### Windows(Git Bash / MSYS / WSL) ###
-elif echo "$OS" | grep -qi "mingw\|msys\|cygwin"; then
-    alias copy='powershell.exe -NoLogo -NoProfile -Command "Set-Clipboard"'
-    alias paste='powershell.exe -NoLogo -NoProfile -Command "Get-Clipboard"'
-    alias open='powershell.exe /c start'
-fi
 
 # 結果を表示
 echo "================================"
