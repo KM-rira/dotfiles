@@ -1,10 +1,13 @@
 -- Description: LSPの設定を行う
 
--- LSPの設定
+vim.schedule(function()
+  vim.notify("LSP CONFIG LOADED", vim.log.levels.WARN)
+end)
+
 -- LSPの設定
 local mason_lspconfig_list = {
     "pyright", -- Python
-    "ts_ls",   -- TypeScript & JavaScript
+    "tsserver",   -- TypeScript & JavaScript
     "gopls",   -- Go
     "lua_ls",  -- Lua
     "yamlls",  -- YAML
@@ -13,15 +16,15 @@ local mason_lspconfig_list = {
     "html",    -- HTML
     "cssls",   -- CSS
     "eslint",  -- JavaScript & TypeScript用Lint
-    "cuelsp",  -- Cuelang
-    "groovyls",
+    -- "cuelsp",  -- Cuelang
+    -- "groovyls",
 }
 
 local mason_tool_installer_list = {
     "stylua",   -- Luaフォーマッター
     "luacheck", -- Lua Linter
     "black",    -- Pythonフォーマッター
-    "gopls",    -- Go LSP
+    -- "gopls",    -- Go LSP
     "shfmt",    -- シェルスクリプトフォーマッター
     "prettier", -- JS, CSS, HTMLのフォーマッター
     "eslint_d", -- JavaScript & TypeScript用のLinter（軽量版）
@@ -55,14 +58,14 @@ nvim_lsp.pyright.setup({
 })
 
 -- 🌟 ProtoBuf (bufls) の設定を修正 🌟
-nvim_lsp.bufls.setup({
-    on_attach = on_attach,
-    flags = {
-        debounce_text_changes = 150,
-    },
-    -- ここで bufls バイナリの絶対パスを明示的に指定します
-    cmd = { "/home/linuxbrew/.linuxbrew/bin/buf", "ls" },
-})
+-- nvim_lsp.bufls.setup({
+--     on_attach = on_attach,
+--     flags = {
+--         debounce_text_changes = 150,
+--     },
+--     -- ここで bufls バイナリの絶対パスを明示的に指定します
+--     cmd = { "/home/linuxbrew/.linuxbrew/bin/buf", "ls" },
+-- })
 
 require("mason").setup()
 require("mason-lspconfig").setup({
@@ -98,9 +101,25 @@ require("lspconfig").groovyls.setup({
     root_dir = require("lspconfig.util").root_pattern(".git", "."),
 })
 
-lspconfig.ts_ls.setup({
-    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
+local util = require("lspconfig.util")
 
+lspconfig.ts_ls.setup({
+  filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = util.root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git"),
+  settings = {
+    typescript = {
+      inlayHints = {
+        includeInlayParameterNameHints = "all",
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+      },
+    },
+    javascript = {
+      inlayHints = {
+        includeInlayParameterNameHints = "all",
+      },
+    },
+  },
+})
