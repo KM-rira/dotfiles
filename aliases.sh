@@ -51,7 +51,7 @@ export FZF_DEFAULT_OPTS='
   --multi
   --info=inline-right
   --scroll-off=3
-  --color="pointer:#ff0000:bold,fg+:#00ff00:bold:underline,bg+:#333333,hl+:#00BFFF:bold"
+  --color="pointer:#ff0000:bold,fg+:#00ff00:bold:underline,bg+:#333333,hl+:#FF8C00:bold:underline"
   --pointer="▶"
   --marker="●"
   --preview "bat --color=always --style=numbers --line-range :500 {}"
@@ -330,12 +330,8 @@ case $OS in
         alias wez='echo "not windows"'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
-        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        alias lfzf="fzf --height 70% --layout reverse --info inline --border \
-            --preview 'eza -1 --icons=never --no-git --color=never {}' --preview-window '~3' \
-            --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        # . ~/dotfiles/tools/prompt/prompt.sh
+        alias gfzf='fzf --preview "git diff --color=always HEAD -- {}"'
+        alias lfzf='fzf --preview "eza -1 --icons --group-directories-first --color=always {}"'
         alias b='bat'
         alias batcat='bat'
         #shopt -s histappend
@@ -350,12 +346,8 @@ case $OS in
         alias wez='nvim ~/.config/wezterm/wezterm.lua'
         alias nvimf='cd ~/.config/nvim'
         alias setting='echo "not windows"'
-        alias fzf="fzf --height 70% --layout reverse --info inline --border     --preview 'bat --color=always {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"gg
-        alias gfzf="fzf --height 70% --layout reverse --info inline --border     --preview 'git diff --color=always HEAD -- {}' --preview-window '~3'      --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        alias lfzf="fzf --height 70% --layout reverse --info inline --border \
-            --preview 'eza -1 --no-icons --no-git --color=never {}' --preview-window '~3' \
-            --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
-        # . ~/dotfiles/tools/prompt/prompt.sh
+        alias gfzf='fzf --preview "git diff --color=always HEAD -- {}"'
+        alias lfzf='fzf --preview "eza -1 --icons --group-directories-first --color=always {}"'
         alias re='source ~/.zshrc'
         alias ports='lsof -i -P | grep -i "listen"'
         alias b='bat'
