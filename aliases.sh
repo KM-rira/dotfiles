@@ -212,6 +212,7 @@ alias add="git add"
 . ~/dotfiles/tools/addc.sh
 #. ~/dotfiles/tools/create_branch.sh
 alias createbranch='lua ~/dotfiles/tools/create_branch.lua'
+alias creater-repository='bash ~/dotfiles/tools/create_repository.sh'
 alias reseth="git fetch;git reset --hard"
 alias findf="find * -name"
 alias findd="find * -type d -name"
