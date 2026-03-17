@@ -23,6 +23,7 @@ mkdir -p "$REPO_NAME"
 cd "$REPO_NAME"
 
 # ===== Git初期化 =====
+git config --global init.defaultBranch main
 git init
 
 # ===== 初期ファイル =====
