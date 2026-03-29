@@ -46,6 +46,11 @@ bin/
 # Editor
 .vscode/
 .idea/
+
+# SQLite
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
 EOF
 
 # ===== commit =====
