@@ -189,6 +189,7 @@ alias continue='git rebase --continue'
 alias abort='git rebase --abort'
 alias amend='git commit --amend -m'
 alias rebasei='bash ~/dotfiles/tools/rebase_helper.sh'
+alias ge='gemini'
 . ~/dotfiles/tools/commit.sh
 alias bmf="go run $dot/bookmark/book_mark_format.go;~/dotfiles/tools/book_mark_format/book_mark_fzf.sh"
 alias log='git log --oneline | nl | head -n 30'
