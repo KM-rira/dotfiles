@@ -1,0 +1,63 @@
+name: Test Neovim Configuration
+
+on:
+  push:
+    paths:
+      - 'nvim/**'
+      - 'flake.nix'
+      - 'nix/home.nix'
+      - '.github/workflows/test-nvim.yml'
+  pull_request:
+    paths:
+      - 'nvim/**'
+      - 'flake.nix'
+      - 'nix/home.nix'
+      - '.github/workflows/test-nvim.yml'
+
+jobs:
+  test-neovim:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Apply Home Manager (Installs Neovim & Dependencies)
+        run: |
+          nix run home-manager -- switch --flake .#koji-linux --impure
+
+      - name: Setup Neovim Configuration Link
+        run: |
+          mkdir -p ~/.config
+          ln -s ${{ github.workspace }}/nvim ~/.config/nvim
+
+      - name: Test Neovim Startup
+        run: |
+          # Nixプロファイルを読み込んでコマンドパスを通す
+          source ~/.nix-profile/etc/profile.d/nix.sh || true
+          
+          echo "Neovim version:"
+          nvim --version
+
+          echo "Running Lazy.nvim sync..."
+          # プラグインのダウンロードを試行（タイムアウトを防ぐためheadlessで実行）
+          nvim --headless "+Lazy! sync" +qa || true
+
+          echo "Checking for startup errors..."
+          # エラー出力をログファイルにリダイレクトして保存
+          nvim --headless -c "quitall" 2> nvim_errors.log
+          
+          cat nvim_errors.log
+
+          # 「Error detected」や「stack traceback」、「E番号エラー」が含まれている場合は失敗とする
+          if grep -qi "Error detected\|stack traceback\|E[0-9]\{3,4\}:" nvim_errors.log; then
+            echo "❌ Neovim startup failed with errors."
+            exit 1
+          else
+            echo "✅ Neovim started successfully without critical errors."
+          fi
