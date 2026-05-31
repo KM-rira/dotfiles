@@ -143,7 +143,10 @@ require("lazy").setup({
   config = function()
     local leap = require("leap")
 
-    leap.add_default_mappings()
+    -- 推奨されるマッピング設定 (v0.11+対応)
+    vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
+    vim.keymap.set({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
+    vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
 
     -- 見やすくて現代的なオプション
     leap.opts.highlight_unlabeled_phase_one_targets = true
@@ -739,16 +742,18 @@ require("codecompanion").setup({
         inline = { adapter = "gemini" },
     },
     adapters = {
-        gemini = function()
-            return require("codecompanion.adapters").extend("gemini", {
-                schema = {
-                    model = { default = "gemini-1.5-flash" },
-                },
-                system_prompt = {
-                    default = "あなたはプロフェッショナルなソフトウェアエンジニアであり、常に日本語でわかりやすく、簡潔に説明や提案を行います。コード例も含めて丁寧に回答してください。",
-                },
-            })
-        end,
+        http = {
+            gemini = function()
+                return require("codecompanion.adapters").extend("gemini", {
+                    schema = {
+                        model = { default = "gemini-1.5-flash" },
+                    },
+                    system_prompt = {
+                        default = "あなたはプロフェッショナルなソフトウェアエンジニアであり、常に日本語でわかりやすく、簡潔に説明や提案を行います。コード例も含めて丁寧に回答してください。",
+                    },
+                })
+            end,
+        },
     },
 })
 

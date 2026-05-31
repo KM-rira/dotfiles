@@ -31,9 +31,9 @@ local mason_tool_installer_list = {
 }
 
 -- LSPの設定を読み込む
-local nvim_lsp = require("lspconfig")
--- 使用するLSPサーバーの設定例（goplsを例に）
-nvim_lsp.gopls.setup({
+-- Neovim 0.11+ uses vim.lsp.config
+-- goplsの設定
+vim.lsp.config("gopls", {
     on_attach = on_attach,
     flags = {
         debounce_text_changes = 150,
@@ -48,50 +48,39 @@ nvim_lsp.gopls.setup({
     },
 })
 
--- 他のLSPサーバーも同様に設定
--- 例: pyright
-nvim_lsp.pyright.setup({
+-- pyrightの設定
+vim.lsp.config("pyright", {
     on_attach = on_attach,
     flags = {
         debounce_text_changes = 150,
     },
 })
 
--- 🌟 ProtoBuf (bufls) の設定を修正 🌟
--- nvim_lsp.bufls.setup({
---     on_attach = on_attach,
---     flags = {
---         debounce_text_changes = 150,
---     },
---     -- ここで bufls バイナリの絶対パスを明示的に指定します
---     cmd = { "/home/linuxbrew/.linuxbrew/bin/buf", "ls" },
--- })
-
 require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = mason_lspconfig_list, -- 必要なLSPサーバーを列挙
 })
 
-local lspconfig = require("lspconfig")
-
--- require("mason-lspconfig").setup_handlers({
---     function(server_name)
---         lspconfig[server_name].setup({
---             on_attach = function(client, bufnr)
---                 -- キーバインドの設定など
---             end,
---             flags = {
---                 debounce_text_changes = 150,
---             },
---         })
---     end,
--- })
+-- mason-lspconfig と vim.lsp.config の連携
+require("mason-lspconfig").setup_handlers({
+    function(server_name)
+        -- ts_ls など個別に設定しているもの以外を自動設定
+        if server_name ~= "gopls" and server_name ~= "pyright" and server_name ~= "ts_ls" and server_name ~= "groovyls" then
+            vim.lsp.config(server_name, {
+                on_attach = on_attach,
+                flags = {
+                    debounce_text_changes = 150,
+                },
+            })
+        end
+    end,
+})
 
 require("mason-tool-installer").setup({
     ensure_installed = mason_tool_installer_list,
 })
 
-require("lspconfig").groovyls.setup({
+vim.lsp.config("groovyls", {
     cmd = {
         "java",
         "-jar",
@@ -103,7 +92,7 @@ require("lspconfig").groovyls.setup({
 
 local util = require("lspconfig.util")
 
-lspconfig.ts_ls.setup({
+vim.lsp.config("ts_ls", {
   filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
   on_attach = on_attach,
   capabilities = capabilities,
