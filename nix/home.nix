@@ -35,7 +35,7 @@ in
     # xsv # undefined variable
     ccze
     chrony
-    
+
     # Development
     gh
     nodejs_20
@@ -46,6 +46,7 @@ in
     luarocks
     shfmt
     vim
+    neovim
     cargo
     gcc # build-essential相当
   ];
