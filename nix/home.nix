@@ -11,7 +11,7 @@ in
 
   # 既存のインストーラースクリプトから移行したパッケージ一覧
   home.packages = with pkgs; [
-    # General CLI tools (from normal_install.sh & sudo_install.sh)
+    # General CLI tools
     bat
     fzf
     jq
@@ -32,6 +32,7 @@ in
     cheat
     glow
     usql
+    starship
 
     # Development
     gh
@@ -45,13 +46,13 @@ in
     gcc
   ];
 
-  # Git設定の移行
+  # Git設定
   programs.git = {
     enable = true;
     settings = {};
   };
 
-  # Delta設定 (git integration)
+  # Delta設定
   programs.delta = {
     enable = true;
     enableGitIntegration = true;
@@ -61,7 +62,7 @@ in
     };
   };
 
-  # Zsh設定の有効化
+  # Zsh設定
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -69,7 +70,7 @@ in
     syntaxHighlighting.enable = true;
   };
 
-  # Starship設定
+  # Starship設定 (シェル連携用)
   programs.starship = {
     enable = true;
   };
