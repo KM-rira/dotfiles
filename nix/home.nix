@@ -38,7 +38,7 @@ in
 
     # Development
     gh
-    nodejs_20
+    nodejs_22
     # npm is included in nodejs
     # aicommits はパッケージが存在しない可能性があるため一旦コメントアウト
     # aicommits
