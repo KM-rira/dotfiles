@@ -34,7 +34,7 @@ in
     usql
     # xsv # undefined variable
     # ccze # unsupported on macOS (aarch64-darwin)
-    chrony
+    # chrony # broken on macOS
 
     # Development
     gh
