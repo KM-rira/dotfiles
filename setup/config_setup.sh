@@ -15,10 +15,6 @@ echo "========================================"
 # -----------------------------------------
 echo "-> Setting up Neovim..."
 mkdir -p "$CONFIG_DIR/nvim"
-if [ -e "$CONFIG_DIR/nvim/init.lua" ]; then
-    echo "  Backing up existing Neovim init.lua to init.lua.bak"
-    mv "$CONFIG_DIR/nvim/init.lua" "$CONFIG_DIR/nvim/init.lua.bak.$(date +%Y%m%d%H%M%S)" 2>/dev/null || true
-fi
 cp "$DOTFILES_DIR/nvim/init/init.lua" "$CONFIG_DIR/nvim/init.lua"
 echo "  [OK] Neovim init.lua copied."
 
