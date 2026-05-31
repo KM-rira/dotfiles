@@ -3,40 +3,40 @@
 set -e
 
 # ドットファイルのルートディレクトリを取得
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+DOTFILES_DIR="$HOME/dotfiles"
 CONFIG_DIR="$HOME/.config"
 
 echo "========================================"
-echo "Setting up configuration files..."
+echo "Setting up configuration files (Copy Mode)..."
 echo "========================================"
 
 # -----------------------------------------
-# Neovim
+# Neovim (init.luaのみをコピー)
 # -----------------------------------------
 echo "-> Setting up Neovim..."
-mkdir -p "$CONFIG_DIR"
-if [ -L "$CONFIG_DIR/nvim" ] || [ -e "$CONFIG_DIR/nvim" ]; then
-    echo "Backing up existing Neovim config to nvim.bak"
-    mv "$CONFIG_DIR/nvim" "$CONFIG_DIR/nvim.bak.$(date +%Y%m%d%H%M%S)" 2>/dev/null || rm -rf "$CONFIG_DIR/nvim"
+mkdir -p "$CONFIG_DIR/nvim"
+if [ -e "$CONFIG_DIR/nvim/init.lua" ]; then
+    echo "  Backing up existing Neovim init.lua to init.lua.bak"
+    mv "$CONFIG_DIR/nvim/init.lua" "$CONFIG_DIR/nvim/init.lua.bak.$(date +%Y%m%d%H%M%S)" 2>/dev/null || true
 fi
-ln -sfn "$DOTFILES_DIR/nvim" "$CONFIG_DIR/nvim"
-echo "  [OK] Neovim config linked."
+cp "$DOTFILES_DIR/nvim/init/init.lua" "$CONFIG_DIR/nvim/init.lua"
+echo "  [OK] Neovim init.lua copied."
 
 # -----------------------------------------
 # WezTerm
 # -----------------------------------------
 echo "-> Setting up WezTerm..."
 mkdir -p "$CONFIG_DIR/wezterm"
-ln -sfn "$DOTFILES_DIR/terminal/wezterm.lua" "$CONFIG_DIR/wezterm/wezterm.lua"
-echo "  [OK] WezTerm config linked."
+cp "$DOTFILES_DIR/terminal/wezterm.lua" "$CONFIG_DIR/wezterm/wezterm.lua"
+echo "  [OK] WezTerm config copied."
 
 # -----------------------------------------
 # Starship
 # -----------------------------------------
 echo "-> Setting up Starship..."
 mkdir -p "$CONFIG_DIR"
-ln -sfn "$DOTFILES_DIR/starship/starship.toml" "$CONFIG_DIR/starship.toml"
-echo "  [OK] Starship config linked."
+cp "$DOTFILES_DIR/starship/starship.toml" "$CONFIG_DIR/starship.toml"
+echo "  [OK] Starship config copied."
 
 # -----------------------------------------
 # Karabiner (Mac用)
@@ -44,8 +44,8 @@ echo "  [OK] Starship config linked."
 if [ "$(uname)" = "Darwin" ]; then
     echo "-> Setting up Karabiner (Mac only)..."
     mkdir -p "$CONFIG_DIR/karabiner"
-    ln -sfn "$DOTFILES_DIR/karabiner.json" "$CONFIG_DIR/karabiner/karabiner.json"
-    echo "  [OK] Karabiner config linked."
+    cp "$DOTFILES_DIR/karabiner.json" "$CONFIG_DIR/karabiner/karabiner.json"
+    echo "  [OK] Karabiner config copied."
 fi
 
 # -----------------------------------------
@@ -53,5 +53,5 @@ fi
 # -----------------------------------------
 
 echo "========================================"
-echo "All configurations linked successfully!"
+echo "All configurations copied successfully!"
 echo "========================================"
