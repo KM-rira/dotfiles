@@ -1,10 +1,8 @@
-{ pkgs, neovim-flake, ... }:
+{ pkgs, neovim-pkg, ... }:
 
 let
   currentUsername = builtins.getEnv "USER";
   currentHomeDirectory = builtins.getEnv "HOME";
-  # Neovimのパッケージをflakeから取得
-  neovim-pkg = neovim-flake.packages.${pkgs.system}.default;
 in
 {
   home.username = currentUsername;
