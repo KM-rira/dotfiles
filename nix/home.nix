@@ -1,8 +1,12 @@
 { pkgs, ... }:
 
+let
+  currentUsername = builtins.getEnv "USER";
+  currentHomeDirectory = builtins.getEnv "HOME";
+in
 {
-  home.username = "koji";
-  home.homeDirectory = "/home/koji";
+  home.username = currentUsername;
+  home.homeDirectory = currentHomeDirectory;
   home.stateVersion = "23.11";
 
   # 既存のインストーラースクリプトから移行したパッケージ一覧
