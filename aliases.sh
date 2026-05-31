@@ -381,10 +381,11 @@ case $OS in
         ;;
 esac
 
-if [ "$SHELL" = "/bin/zsh" ] || [ "$SHELL" = "$(which zsh)" ]; then
-    alias zshplug="v $dot/zsh_plug.sh"
-    source "$dot/zsh_plug.sh"
-fi
+# zplug設定をnixに設定したためコメントアウト 2026/6/1
+# if [ "$SHELL" = "/bin/zsh" ] || [ "$SHELL" = "$(which zsh)" ]; then
+#     alias zshplug="v $dot/zsh_plug.sh"
+#     source "$dot/zsh_plug.sh"
+# fi
 
 # 終了時間を記録
 END_TIME=$(date +%s.%N)
