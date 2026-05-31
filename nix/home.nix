@@ -16,7 +16,7 @@
     zoxide
     eza
     lsd
-    du-dust # brew: dust
+    dust # brew: dust
     duf
     sd
     glances
@@ -34,7 +34,6 @@
     
     # Development
     gh
-    delta # brew: git-delta
     nodejs_20
     nodePackages.npm
     # aicommits はパッケージが存在しない可能性があるため一旦コメントアウト
@@ -50,18 +49,21 @@
   # Git設定の移行
   programs.git = {
     enable = true;
-    delta = {
-      enable = true;
-      options = {
-        navigate = true;
-        line-numbers = true;
-      };
-    };
-    extraConfig = {
+    settings = {
       core.pager = "delta";
       interactive.diffFilter = "delta --color-only";
       # wslでのエラー回避用 zdiff3
       # merge.conflictStyle = "zdiff3";
+    };
+  };
+
+  # Delta設定 (git integration)
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      line-numbers = true;
     };
   };
 
