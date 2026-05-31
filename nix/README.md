@@ -40,10 +40,10 @@ nix --version
 
     ```bash
     # macOS (Apple Silicon) の場合
-    nix run home-manager -- switch --flake .#koji-mac --impure
+    nix run home-manager -- switch --flake ".#koji-mac" --impure
 
     # Linux (WSL/Ubuntu等) の場合
-    nix run home-manager -- switch --flake .#koji-linux --impure
+    nix run home-manager -- switch --flake ".#koji-linux" --impure
     ```
 
     このコマンドは、`flake.nix` で定義された設定（`nix/home.nix` に記述されているパッケージや `git` 設定など）をビルドし、現在のユーザー環境にアクティベートします。
