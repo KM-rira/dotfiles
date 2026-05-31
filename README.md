@@ -19,6 +19,25 @@ git checkout vx.x.x
 make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local
 make install
 
+## Nix Installation (Recommended)
+This project uses Nix and Home Manager to manage Neovim and other tools. Neovim is pinned to **v0.11.5**.
+
+### First time setup
+```bash
+# Linux
+home-manager switch --flake .#koji-linux --impure
+
+# Mac
+home-manager switch --flake .#koji-mac --impure
+```
+
+### Update or Apply changes
+If you changed `flake.nix` (e.g., changing Neovim version) or want to update packages:
+```bash
+nix flake update
+home-manager switch --flake .#<config-name> --impure
+```
+
 ### 失敗時:
 rm -rf ~/repo/neovim/build
 rm -rf ~/repo/neovim/.deps
