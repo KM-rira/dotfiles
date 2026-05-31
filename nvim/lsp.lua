@@ -57,12 +57,13 @@ vim.lsp.config("pyright", {
 })
 
 require("mason").setup()
-require("mason-lspconfig").setup({
+local mason_lspconfig = require("mason-lspconfig")
+mason_lspconfig.setup({
     ensure_installed = mason_lspconfig_list, -- 必要なLSPサーバーを列挙
 })
 
 -- mason-lspconfig と vim.lsp.config の連携
-require("mason-lspconfig").setup_handlers({
+mason_lspconfig.setup_handlers({
     function(server_name)
         -- ts_ls など個別に設定しているもの以外を自動設定
         if server_name ~= "gopls" and server_name ~= "pyright" and server_name ~= "ts_ls" and server_name ~= "groovyls" then
