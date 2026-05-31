@@ -55,8 +55,6 @@ in
   programs.git = {
     enable = true;
     settings = {
-      core.pager = "delta";
-      interactive.diffFilter = "delta --color-only";
       # wslでのエラー回避用 zdiff3
       # merge.conflictStyle = "zdiff3";
     };
