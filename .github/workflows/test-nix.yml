@@ -20,7 +20,7 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
 
       - name: Check flake metadata
-        run: nix flake metadata
+        run: nix flake metadata --impure
 
       - name: Build Home Manager configuration (Linux)
-        run: nix build .#homeConfigurations.koji-linux.activationPackage -L --show-trace
+        run: nix build .#homeConfigurations.koji-linux.activationPackage -L --show-trace --impure
