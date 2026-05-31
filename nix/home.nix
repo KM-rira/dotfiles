@@ -28,7 +28,7 @@
     cheat
     glow
     usql
-    xsv
+    # xsv # undefined variable
     ccze
     chrony
     
