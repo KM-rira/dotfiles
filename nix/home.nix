@@ -1,8 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, neovim-flake, ... }:
 
 let
   currentUsername = builtins.getEnv "USER";
   currentHomeDirectory = builtins.getEnv "HOME";
+  # Neovimのパッケージをflakeから取得
+  neovim-pkg = neovim-flake.packages.${pkgs.system}.default;
 in
 {
   home.username = currentUsername;
@@ -20,7 +22,7 @@ in
     zoxide
     eza
     lsd
-    dust # brew: dust
+    dust
     duf
     sd
     glances
@@ -32,32 +34,23 @@ in
     cheat
     glow
     usql
-    # xsv # undefined variable
-    # ccze # unsupported on macOS (aarch64-darwin)
-    # chrony # broken on macOS
 
     # Development
     gh
     nodejs_22
-    # npm is included in nodejs
-    # aicommits はパッケージが存在しない可能性があるため一旦コメントアウト
-    # aicommits
     cspell
     luarocks
     shfmt
     vim
-    neovim
+    neovim-pkg
     cargo
-    gcc # build-essential相当
+    gcc
   ];
 
   # Git設定の移行
   programs.git = {
     enable = true;
-    settings = {
-      # wslでのエラー回避用 zdiff3
-      # merge.conflictStyle = "zdiff3";
-    };
+    settings = {};
   };
 
   # Delta設定 (git integration)
@@ -70,7 +63,7 @@ in
     };
   };
 
-  # Zsh設定の有効化 (sudo_install.sh で zsh を入れていたため)
+  # Zsh設定の有効化
   programs.zsh = {
     enable = true;
     enableCompletion = true;
