@@ -33,7 +33,7 @@ in
     glow
     usql
     # xsv # undefined variable
-    ccze
+    # ccze # unsupported on macOS (aarch64-darwin)
     chrony
 
     # Development
