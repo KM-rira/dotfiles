@@ -68,6 +68,58 @@ in
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "zsh-users/zsh-autosuggestions"; }
+        { name = "zsh-users/zsh-completions"; }
+        { name = "zsh-users/zsh-syntax-highlighting"; }
+        { name = "zsh-users/zsh-history-substring-search"; }
+        { name = "akarzim/zsh-docker-aliases"; }
+      ];
+    };
+
+    initExtra = ''
+      # ------------------------------------------------------------------------
+      # NOTE: zstyle
+      # ------------------------------------------------------------------------
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' auto-list true
+      zstyle ':completion:*' file-sort time
+      autoload -Uz colors; colors
+      zstyle ':completion:*:default' list-colors \
+        'di=34:fi=0:ln=36:pi=33:so=35:do=32:bd=33;40:cd=33;40:or=31;47:mi=00;41'
+      zstyle ':completion:*:*files' ignored-patterns '*?.o'
+
+      # ------------------------------------------------------------------------
+      # NOTE: setopt list
+      # ------------------------------------------------------------------------
+      setopt autocd
+      setopt no_beep
+      setopt nobeep
+      setopt nolistbeep
+      setopt share_history
+      setopt correct
+      setopt extended_glob
+      setopt noautoremoveslash
+      setopt EXTENDED_GLOB
+      setopt auto_param_slash
+      setopt auto_param_keys
+      setopt magic_equal_subst
+      setopt list_packed
+      setopt numeric_glob_sort
+      setopt HIST_IGNORE_SPACE
+      setopt HIST_IGNORE_DUPS
+      setopt HIST_FIND_NO_DUPS
+      setopt HIST_REDUCE_BLANKS
+
+      # ------------------------------------------------------------------------
+      # NOTE: bindkey
+      # ------------------------------------------------------------------------
+      bindkey '^P' history-beginning-search-backward
+      bindkey '^N' history-beginning-search-forward
+    '';
   };
 
   # Starship設定 (シェル連携用)
