@@ -39,10 +39,10 @@ in
     # Development
     gh
     nodejs_20
-    nodePackages.npm
+    # npm is included in nodejs
     # aicommits はパッケージが存在しない可能性があるため一旦コメントアウト
-    # nodePackages.aicommits
-    nodePackages.cspell
+    # aicommits
+    cspell
     luarocks
     shfmt
     vim
