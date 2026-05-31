@@ -15,94 +15,106 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { "KM-rira/myplugin" },
-    { "preservim/nerdtree", cmd = "NERDTreeToggle" }, -- NERDTree をコマンドで読み込み
+    -- pinned shared dependencies (referenced by other plugins' `dependencies`)
+    { "nvim-lua/plenary.nvim",                  commit = "b9fd5226c2f76c951fc8ed5923d85e4de065e509", lazy = true },
+    { "kyazdani42/nvim-web-devicons",           commit = "8dcb311b0c92d460fac00eac706abd43d94d68af", lazy = true },
+    { "nvim-telescope/telescope-frecency.nvim", commit = "fc6418bf663a182b72427487246b870f2ddbbbe2", lazy = true },
+    { "nvimtools/none-ls-extras.nvim",          commit = "70659cc3d38151424298ab46b0f67f2251cef231", lazy = true },
+    { "tpope/vim-repeat",                       commit = "65846025c15494983dafe5e3b46c8f88ab2e9635", lazy = true },
+    { "KM-rira/myplugin", commit = "0829bf5f1e442008899aa5d43b6725581c1b1974" },
+    { "preservim/nerdtree", commit = "690d061b591525890f1471c6675bcb5bdc8cdff9", cmd = "NERDTreeToggle" }, -- NERDTree をコマンドで読み込み
     {
         "kyazdani42/nvim-tree.lua",
         dependencies = { "kyazdani42/nvim-web-devicons" },
         tag = "v1.8.0",
         cmd = "NvimTreeToggle",
     },
-    { "vim-jp/vimdoc-ja",          event = "VeryLazy" },
-    { "nvim-lualine/lualine.nvim", event = "VeryLazy" }, -- 起動後に遅延読み込み
+    { "vim-jp/vimdoc-ja",          commit = "02f2dbf7f30c1a07e11af40f74b0ab66fddcfb27", event = "VeryLazy" },
+    { "nvim-lualine/lualine.nvim", commit = "47f91c416daef12db467145e16bed5bbfe00add8", event = "VeryLazy" }, -- 起動後に遅延読み込み
     {
         "nvim-treesitter/nvim-treesitter",
+        commit = "42fc28ba918343ebfd5565147a42a26580579482",
         build = ":TSUpdate",
         event = { "BufRead", "BufNewFile" },
     },
-    { "nvim-treesitter/nvim-treesitter-textobjects", event = { "BufRead", "BufNewFile" } },
-    { "nvim-treesitter/playground",                  cmd = "TSPlaygroundToggle" },
-    { "nvim-treesitter/nvim-treesitter-refactor",    event = { "BufRead", "BufNewFile" } },
+    { "nvim-treesitter/nvim-treesitter-textobjects", commit = "5ca4aaa6efdcc59be46b95a3e876300cfead05ef", event = { "BufRead", "BufNewFile" } },
+    { "nvim-treesitter/playground",                  commit = "ba48c6a62a280eefb7c85725b0915e021a1a0749", cmd = "TSPlaygroundToggle" },
+    { "nvim-treesitter/nvim-treesitter-refactor",    commit = "9cc0d22becf72e18808208cd0ce85032a2b19c6f", event = { "BufRead", "BufNewFile" } },
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.5",
         dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-frecency.nvim" },
     },
-    { "iamcco/markdown-preview.nvim",  build = "cd app && npx --yes yarn install", ft = "markdown" },
-    { "RRethy/vim-illuminate",         event = "BufReadPost" },
-    { "goolord/alpha-nvim",            event = "VimEnter" }, -- 起動時に表示
-    { "jsborjesson/vim-uppercase-sql", ft = "sql" },
-    { "lewis6991/gitsigns.nvim",       event = { "BufRead", "BufNewFile" } },
+    { "iamcco/markdown-preview.nvim",  commit = "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee", build = "cd app && npx --yes yarn install", ft = "markdown" },
+    { "RRethy/vim-illuminate",         commit = "0d1e93684da00ab7c057410fecfc24f434698898", event = "BufReadPost" },
+    { "goolord/alpha-nvim",            commit = "3979b01cb05734331c7873049001d3f2bb8477f4", event = "VimEnter" }, -- 起動時に表示
+    { "jsborjesson/vim-uppercase-sql", commit = "58bfde1d679a1387dabfe292b38d51d84819b267", ft = "sql" },
+    { "lewis6991/gitsigns.nvim",       commit = "5813e4878748805f1518cee7abb50fd7205a3a48", event = { "BufRead", "BufNewFile" } },
     { "akinsho/git-conflict.nvim",     tag = "v1.3.0",                             event = "BufReadPost" },
     { "klen/nvim-test",                tag = "1.4.1",                              cmd = "TestNearest" },
-    { "numToStr/Comment.nvim",         keys = { "gc", "gcc" } },
-    { "sidebar-nvim/sidebar.nvim",     cmd = "SidebarNvimToggle" },
+    { "numToStr/Comment.nvim",         commit = "e30b7f2008e52442154b66f7c519bfd2f1e32acb", keys = { "gc", "gcc" } },
+    { "sidebar-nvim/sidebar.nvim",     commit = "082e4903c1659a65e27a075b752178b0c56fffb2", cmd = "SidebarNvimToggle" },
     { "akinsho/toggleterm.nvim",       tag = "v2.11.0",                            cmd = { "ToggleTerm", "TermExec" } },
     -- { "karb94/neoscroll.nvim",         event = "WinScrolled" },
     { "akinsho/bufferline.nvim",       tag = "v4.6.1",                             event = "BufRead" },
     {
         "windwp/nvim-autopairs",
+        commit = "7a2c97cccd60abc559344042fefb1d5a85b3e33b",
         event = "InsertEnter",
         config = function()
             require("nvim-autopairs").setup({})
         end,
     },
     --{ "scottmckendry/cyberdream.nvim", lazy = false }, -- 常時ロード
-    { "ellisonleao/gruvbox.nvim", lazy = false }, -- 常時ロード
+    { "ellisonleao/gruvbox.nvim", commit = "5e0a460d8e0f7f669c158dedd5f9ae2bcac31437", lazy = false }, -- 常時ロード
     --{ "joshdick/onedark.vim", lazy = false }, -- 常時ロード
-    { "kdheepak/lazygit.nvim",    cmd = "LazyGit" },
-    { "github/copilot.vim",       event = "InsertEnter" },
-    { "hat0uma/csvview.nvim",     ft = "csv" },
+    { "kdheepak/lazygit.nvim",    commit = "2305deed25bc61b866d5d39189e9105a45cf1cfb", cmd = "LazyGit" },
+    { "github/copilot.vim",       commit = "f89e977c87180519ba3b942200e3d05b17b1e2fc", event = "InsertEnter" },
+    { "hat0uma/csvview.nvim",     commit = "688bcc7437b577de000f71a2d406271c79e2a545", ft = "csv" },
     {
         "Kasama/nvim-custom-diagnostic-highlight",
+        commit = "c126fa5b44a21df779c36eea28e73d3f89e85801",
         config = function()
             require("nvim-custom-diagnostic-highlight").setup({})
         end,
         event = "BufReadPost",
     },
-    { "LunarVim/bigfile.nvim",             event = "BufReadPre" },
-    { "kevinhwang91/nvim-hlslens",         event = "BufReadPost" },
-    { "mg979/vim-visual-multi",            keys = { "<C-n>", "<C-p>" } },
-    { "norcalli/nvim-colorizer.lua",       cmd = "ColorizerToggle" },
-    { "yamatsum/nvim-cursorline",          event = "BufReadPost" },
-    { "sindrets/diffview.nvim",            cmd = { "DiffviewOpen", "DiffviewClose" } },
-    { "neovim/nvim-lspconfig",             event = "BufReadPre" },
-    { "hrsh7th/nvim-cmp",                  event = "InsertEnter" },
-    { "hrsh7th/cmp-nvim-lsp",              event = "InsertEnter" },
-    { "L3MON4D3/LuaSnip",                  event = "InsertEnter" },
+    { "LunarVim/bigfile.nvim",             commit = "33eb067e3d7029ac77e081cfe7c45361887a311a", event = "BufReadPre" },
+    { "kevinhwang91/nvim-hlslens",         commit = "425405475300d64de07dec3af60b1f1d31d49230", event = "BufReadPost" },
+    { "mg979/vim-visual-multi",            commit = "a6975e7c1ee157615bbc80fc25e4392f71c344d4", keys = { "<C-n>", "<C-p>" } },
+    { "norcalli/nvim-colorizer.lua",       commit = "a065833f35a3a7cc3ef137ac88b5381da2ba302e", cmd = "ColorizerToggle" },
+    { "yamatsum/nvim-cursorline",          commit = "804f0023692653b2b2368462d67d2a87056947f9", event = "BufReadPost" },
+    { "sindrets/diffview.nvim",            commit = "4516612fe98ff56ae0415a259ff6361a89419b0a", cmd = { "DiffviewOpen", "DiffviewClose" } },
+    { "neovim/nvim-lspconfig",             commit = "effe4bf2e1afb881ea67291c648b68dd3dfc927a", event = "BufReadPre" },
+    { "hrsh7th/nvim-cmp",                  commit = "d97d85e01339f01b842e6ec1502f639b080cb0fc", event = "InsertEnter" },
+    { "hrsh7th/cmp-nvim-lsp",              commit = "cbc7b02bb99fae35cb42f514762b89b5126651ef", event = "InsertEnter" },
+    { "L3MON4D3/LuaSnip",                  commit = "3732756842a2f7e0e76a7b0487e9692072857277", event = "InsertEnter" },
     { "saadparwaiz1/cmp_luasnip",          event = "InsertEnter" },
-    { "rafamadriz/friendly-snippets",      leazy = true },
-    { "williamboman/mason.nvim",           cmd = "Mason" },
-    { "williamboman/mason-lspconfig.nvim", lazy = true },
+    { "rafamadriz/friendly-snippets",      commit = "572f5660cf05f8cd8834e096d7b4c921ba18e175", leazy = true },
+    { "williamboman/mason.nvim",           commit = "57e5a8addb8c71fb063ee4acda466c7cf6ad2800", cmd = "Mason" },
+    { "williamboman/mason-lspconfig.nvim", commit = "7d527c76c43f46294de9c19d39c5a86317809b4b", lazy = true },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
+        commit = "517ef5994ef9d6b738322664d5fdd948f0fdeb46",
         dependencies = { "williamboman/mason.nvim" },
         cmd = "MasonToolsInstall",
     },
     {
         "nvimtools/none-ls.nvim",
+        commit = "1917c86818b5e058f53c2ea0ad38fc57534d62fc",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvimtools/none-ls-extras.nvim",
         },
         event = { "BufReadPre", "BufNewFile" },
     },
-    { "mfussenegger/nvim-dap",        cmd = { "DapContinue", "DapToggleBreakpoint" } },
-    { "rcarriga/nvim-dap-ui",         dependencies = { "mfussenegger/nvim-dap" },    lazy = true },
-    { "mfussenegger/nvim-dap-python", ft = "python" },
-    { "nvim-neotest/nvim-nio",        lazy = true },
+    { "mfussenegger/nvim-dap",        commit = "5860c7c501eb428d3137ee22c522828d20cca0b3", cmd = { "DapContinue", "DapToggleBreakpoint" } },
+    { "rcarriga/nvim-dap-ui",         commit = "cf91d5e2d07c72903d052f5207511bf7ecdb7122", dependencies = { "mfussenegger/nvim-dap" },    lazy = true },
+    { "mfussenegger/nvim-dap-python", commit = "64652d1ae1db80870d9aac7132d76e37acd86a26", ft = "python" },
+    { "nvim-neotest/nvim-nio",        commit = "21f5324bfac14e22ba26553caf69ec76ae8a7662", lazy = true },
     {
         "KM-rira/todo-comments.nvim",
+        commit = "cd1fa7273632960bb38ebb76f9d085b4d6bb7e8b",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("todo-comments").setup({})
@@ -111,6 +123,7 @@ require("lazy").setup({
     },
     {
         "olimorris/codecompanion.nvim",
+        commit = "8ad65eef735b31bb47d76f59d878ee1bac4bdc85",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
@@ -119,11 +132,13 @@ require("lazy").setup({
     },
     {
         "aklt/plantuml-syntax",
+        commit = "9d4900aa16674bf5bb8296a72b975317d573b547",
         ft = { "plantuml" },
         event = "BufReadPost",
     },
     {
     "ggandor/leap.nvim",
+  commit = "3c49d309d49d66a9feb0dd824353f186b3ee5efa",
   dependencies = { "tpope/vim-repeat" },
   config = function()
     local leap = require("leap")
@@ -139,6 +154,7 @@ require("lazy").setup({
         event = "BufReadPost",
 {
   "tyru/open-browser.vim",
+  commit = "7d4c1d8198e889d513a030b5a83faa07606bac27",
   config = function()
     vim.keymap.set("n", "gx", "<Plug>(openbrowser-open)", { silent = true })
   end,
