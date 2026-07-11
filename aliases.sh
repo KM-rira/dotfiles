@@ -184,6 +184,7 @@ alias geminiq='go run ~/dotfiles/tools/gemini/main.go'
 alias catf='bash ~/dotfiles/tools/catf.sh'
 . ~/dotfiles/tools/vff.sh
 . ~/dotfiles/tools/bashf.sh
+. ~/dotfiles/tools/gf.sh
 alias fixupf='bash ~/dotfiles/tools/fixupf.sh'
 alias continue='git rebase --continue'
 alias abort='git rebase --abort'
