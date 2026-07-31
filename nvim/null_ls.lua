@@ -57,6 +57,10 @@ local format = {
     formatting.npm_groovy_lint,
     diagnostics.npm_groovy_lint,
 
+    -- Kotlin フォーマッタとリンタ
+    formatting.ktlint, -- ktlint
+    diagnostics.ktlint, -- ktlint
+
     cspell,
 
     -- null_ls.builtins.diagnostics.cspell.with({
@@ -89,6 +93,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         "*.scss",
         "*.html",
         "*.groovy",
+        "*.kt",
+        "*.kts",
     }, -- フォーマット対象のファイル
     callback = function()
         vim.lsp.buf.format({ async = false })
@@ -136,4 +142,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 --         vim.fn.winrestview(view)
 --     end,
 -- })
-

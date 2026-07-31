@@ -16,6 +16,7 @@ local mason_lspconfig_list = {
     "html",    -- HTML
     "cssls",   -- CSS
     "eslint",  -- JavaScript & TypeScript用Lint
+    "kotlin_language_server", -- Kotlin
 }
 
 local mason_tool_installer_list = {
@@ -25,6 +26,7 @@ local mason_tool_installer_list = {
     "shfmt",    -- シェルスクリプトフォーマッター
     "prettier", -- JS, CSS, HTMLのフォーマッター
     "eslint_d", -- JavaScript & TypeScript用のLinter（軽量版）
+    "ktlint",   -- Kotlinフォーマッター/Linter
 }
 
 -- Neovim 0.11+ 組み込みの vim.lsp.config を使った各LSPの個別設定
