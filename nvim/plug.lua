@@ -21,8 +21,8 @@ require("lazy").setup({
     { "nvim-telescope/telescope-frecency.nvim", commit = "fc6418bf663a182b72427487246b870f2ddbbbe2", lazy = true },
     { "nvimtools/none-ls-extras.nvim",          commit = "70659cc3d38151424298ab46b0f67f2251cef231", lazy = true },
     { "tpope/vim-repeat",                       commit = "65846025c15494983dafe5e3b46c8f88ab2e9635", lazy = true },
-    { "KM-rira/myplugin", commit = "0829bf5f1e442008899aa5d43b6725581c1b1974" },
-    { "preservim/nerdtree", commit = "690d061b591525890f1471c6675bcb5bdc8cdff9", cmd = "NERDTreeToggle" }, -- NERDTree をコマンドで読み込み
+    { "KM-rira/myplugin",                       commit = "0829bf5f1e442008899aa5d43b6725581c1b1974" },
+    { "preservim/nerdtree",                     commit = "690d061b591525890f1471c6675bcb5bdc8cdff9", cmd = "NERDTreeToggle" }, -- NERDTree をコマンドで読み込み
     {
         "kyazdani42/nvim-tree.lua",
         dependencies = { "kyazdani42/nvim-web-devicons" },
@@ -50,13 +50,13 @@ require("lazy").setup({
     { "goolord/alpha-nvim",            commit = "3979b01cb05734331c7873049001d3f2bb8477f4", event = "VimEnter" }, -- 起動時に表示
     { "jsborjesson/vim-uppercase-sql", commit = "58bfde1d679a1387dabfe292b38d51d84819b267", ft = "sql" },
     { "lewis6991/gitsigns.nvim",       commit = "5813e4878748805f1518cee7abb50fd7205a3a48", event = { "BufRead", "BufNewFile" } },
-    { "akinsho/git-conflict.nvim",     tag = "v1.3.0",                             event = "BufReadPost" },
-    { "klen/nvim-test",                tag = "1.4.1",                              cmd = "TestNearest" },
+    { "akinsho/git-conflict.nvim",     tag = "v1.3.0",                                      event = "BufReadPost" },
+    { "klen/nvim-test",                tag = "1.4.1",                                       cmd = "TestNearest" },
     { "numToStr/Comment.nvim",         commit = "e30b7f2008e52442154b66f7c519bfd2f1e32acb", keys = { "gc", "gcc" } },
     { "sidebar-nvim/sidebar.nvim",     commit = "082e4903c1659a65e27a075b752178b0c56fffb2", cmd = "SidebarNvimToggle" },
-    { "akinsho/toggleterm.nvim",       tag = "v2.11.0",                            cmd = { "ToggleTerm", "TermExec" } },
+    { "akinsho/toggleterm.nvim",       tag = "v2.11.0",                                     cmd = { "ToggleTerm", "TermExec" } },
     -- { "karb94/neoscroll.nvim",         event = "WinScrolled" },
-    { "akinsho/bufferline.nvim",       tag = "v4.6.1",                             event = "BufRead" },
+    { "akinsho/bufferline.nvim",       tag = "v4.6.1",                                      event = "BufRead" },
     {
         "windwp/nvim-autopairs",
         commit = "7a2c97cccd60abc559344042fefb1d5a85b3e33b",
@@ -69,7 +69,7 @@ require("lazy").setup({
     { "ellisonleao/gruvbox.nvim", commit = "5e0a460d8e0f7f669c158dedd5f9ae2bcac31437", lazy = false }, -- 常時ロード
     --{ "joshdick/onedark.vim", lazy = false }, -- 常時ロード
     { "kdheepak/lazygit.nvim",    commit = "2305deed25bc61b866d5d39189e9105a45cf1cfb", cmd = "LazyGit" },
-    { "github/copilot.vim",       commit = "f89e977c87180519ba3b942200e3d05b17b1e2fc", event = "InsertEnter" },
+    -- { "github/copilot.vim",       commit = "f89e977c87180519ba3b942200e3d05b17b1e2fc", event = "InsertEnter" },
     { "hat0uma/csvview.nvim",     commit = "688bcc7437b577de000f71a2d406271c79e2a545", ft = "csv" },
     {
         "Kasama/nvim-custom-diagnostic-highlight",
@@ -137,31 +137,31 @@ require("lazy").setup({
         event = "BufReadPost",
     },
     {
-    "ggandor/leap.nvim",
-  commit = "3c49d309d49d66a9feb0dd824353f186b3ee5efa",
-  dependencies = { "tpope/vim-repeat" },
-  config = function()
-    local leap = require("leap")
+        "ggandor/leap.nvim",
+        commit = "3c49d309d49d66a9feb0dd824353f186b3ee5efa",
+        dependencies = { "tpope/vim-repeat" },
+        config = function()
+            local leap = require("leap")
 
-    -- 推奨されるマッピング設定 (v0.11+対応)
-    vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
-    vim.keymap.set({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
-    vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
+            -- 推奨されるマッピング設定 (v0.11+対応)
+            vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap-forward)')
+            vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Plug>(leap-backward)')
+            vim.keymap.set({ 'n', 'x', 'o' }, 'gs', '<Plug>(leap-from-window)')
 
-    -- 見やすくて現代的なオプション
-    leap.opts.highlight_unlabeled_phase_one_targets = true
-    leap.opts.max_phase_one_targets = 0
-    leap.opts.labels = "arstneioqwfpbdluyghjkl"
-  end,
+            -- 見やすくて現代的なオプション
+            leap.opts.highlight_unlabeled_phase_one_targets = true
+            leap.opts.max_phase_one_targets = 0
+            leap.opts.labels = "arstneioqwfpbdluyghjkl"
+        end,
     },
-        event = "BufReadPost",
-{
-  "tyru/open-browser.vim",
-  commit = "7d4c1d8198e889d513a030b5a83faa07606bac27",
-  config = function()
-    vim.keymap.set("n", "gx", "<Plug>(openbrowser-open)", { silent = true })
-  end,
-},
+    event = "BufReadPost",
+    {
+        "tyru/open-browser.vim",
+        commit = "7d4c1d8198e889d513a030b5a83faa07606bac27",
+        config = function()
+            vim.keymap.set("n", "gx", "<Plug>(openbrowser-open)", { silent = true })
+        end,
+    },
 
 
 })
@@ -263,12 +263,12 @@ local Terminal = require("toggleterm.terminal").Terminal
 
 -- Horizontal terminal
 local horizontal_term = Terminal:new({
-  direction = "horizontal",
-  size = 20,  -- あなたの今の設定と統合
+    direction = "horizontal",
+    size = 20, -- あなたの今の設定と統合
 })
 
 vim.keymap.set("n", "<C-t>", function()
-  horizontal_term:toggle()
+    horizontal_term:toggle()
 end, { noremap = true, silent = true })
 
 -- -- Vertical terminal（幅をデフォルトより広くする）
@@ -590,8 +590,8 @@ require("telescope").setup({
             previewer = true,
             layout_strategy = "vertical",
             layout_config = {
-                preview_height = 0.45,   -- プレビュー45%、下に選択リスト55%
-                mirror = true,           -- プレビューを上側に配置
+                preview_height = 0.45, -- プレビュー45%、下に選択リスト55%
+                mirror = true,         -- プレビューを上側に配置
             },
         },
     },
@@ -762,4 +762,3 @@ vim.filetype.add({
         puml = "plantuml",
     },
 })
-
