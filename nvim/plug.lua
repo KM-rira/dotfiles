@@ -3,167 +3,215 @@ vim.opt.termguicolors = true
 -- lazy.nvim を自動インストールするコード
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- stable ブランチを使用
-        lazypath,
-    })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- stable ブランチを使用
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    -- pinned shared dependencies (referenced by other plugins' `dependencies`)
-    { "nvim-lua/plenary.nvim",                  commit = "b9fd5226c2f76c951fc8ed5923d85e4de065e509", lazy = true },
-    { "kyazdani42/nvim-web-devicons",           commit = "8dcb311b0c92d460fac00eac706abd43d94d68af", lazy = true },
-    { "nvim-telescope/telescope-frecency.nvim", commit = "fc6418bf663a182b72427487246b870f2ddbbbe2", lazy = true },
-    { "nvimtools/none-ls-extras.nvim",          commit = "70659cc3d38151424298ab46b0f67f2251cef231", lazy = true },
-    { "tpope/vim-repeat",                       commit = "65846025c15494983dafe5e3b46c8f88ab2e9635", lazy = true },
-    { "KM-rira/myplugin",                       commit = "0829bf5f1e442008899aa5d43b6725581c1b1974" },
-    { "preservim/nerdtree",                     commit = "690d061b591525890f1471c6675bcb5bdc8cdff9", cmd = "NERDTreeToggle" }, -- NERDTree をコマンドで読み込み
-    {
-        "kyazdani42/nvim-tree.lua",
-        dependencies = { "kyazdani42/nvim-web-devicons" },
-        tag = "v1.8.0",
-        cmd = "NvimTreeToggle",
-    },
-    { "vim-jp/vimdoc-ja",          commit = "02f2dbf7f30c1a07e11af40f74b0ab66fddcfb27", event = "VeryLazy" },
-    { "nvim-lualine/lualine.nvim", commit = "47f91c416daef12db467145e16bed5bbfe00add8", event = "VeryLazy" }, -- 起動後に遅延読み込み
-    {
-        "nvim-treesitter/nvim-treesitter",
-        commit = "42fc28ba918343ebfd5565147a42a26580579482",
-        build = ":TSUpdate",
-        event = { "BufRead", "BufNewFile" },
-    },
-    { "nvim-treesitter/nvim-treesitter-textobjects", commit = "5ca4aaa6efdcc59be46b95a3e876300cfead05ef", event = { "BufRead", "BufNewFile" } },
-    { "nvim-treesitter/playground",                  commit = "ba48c6a62a280eefb7c85725b0915e021a1a0749", cmd = "TSPlaygroundToggle" },
-    { "nvim-treesitter/nvim-treesitter-refactor",    commit = "9cc0d22becf72e18808208cd0ce85032a2b19c6f", event = { "BufRead", "BufNewFile" } },
-    {
-        "nvim-telescope/telescope.nvim",
-        tag = "0.1.5",
-        dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-frecency.nvim" },
-    },
-    { "iamcco/markdown-preview.nvim",  commit = "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee", build = "cd app && npx --yes yarn install", ft = "markdown" },
-    { "RRethy/vim-illuminate",         commit = "0d1e93684da00ab7c057410fecfc24f434698898", event = "BufReadPost" },
-    { "goolord/alpha-nvim",            commit = "3979b01cb05734331c7873049001d3f2bb8477f4", event = "VimEnter" }, -- 起動時に表示
-    { "jsborjesson/vim-uppercase-sql", commit = "58bfde1d679a1387dabfe292b38d51d84819b267", ft = "sql" },
-    { "lewis6991/gitsigns.nvim",       commit = "5813e4878748805f1518cee7abb50fd7205a3a48", event = { "BufRead", "BufNewFile" } },
-    { "akinsho/git-conflict.nvim",     tag = "v1.3.0",                                      event = "BufReadPost" },
-    { "klen/nvim-test",                tag = "1.4.1",                                       cmd = "TestNearest" },
-    { "numToStr/Comment.nvim",         commit = "e30b7f2008e52442154b66f7c519bfd2f1e32acb", keys = { "gc", "gcc" } },
-    { "sidebar-nvim/sidebar.nvim",     commit = "082e4903c1659a65e27a075b752178b0c56fffb2", cmd = "SidebarNvimToggle" },
-    { "akinsho/toggleterm.nvim",       tag = "v2.11.0",                                     cmd = { "ToggleTerm", "TermExec" } },
-    -- { "karb94/neoscroll.nvim",         event = "WinScrolled" },
-    { "akinsho/bufferline.nvim",       tag = "v4.6.1",                                      event = "BufRead" },
-    {
-        "windwp/nvim-autopairs",
-        commit = "7a2c97cccd60abc559344042fefb1d5a85b3e33b",
-        event = "InsertEnter",
-        config = function()
-            require("nvim-autopairs").setup({})
-        end,
-    },
-    --{ "scottmckendry/cyberdream.nvim", lazy = false }, -- 常時ロード
-    { "ellisonleao/gruvbox.nvim", commit = "5e0a460d8e0f7f669c158dedd5f9ae2bcac31437", lazy = false }, -- 常時ロード
-    --{ "joshdick/onedark.vim", lazy = false }, -- 常時ロード
-    { "kdheepak/lazygit.nvim",    commit = "2305deed25bc61b866d5d39189e9105a45cf1cfb", cmd = "LazyGit" },
-    -- { "github/copilot.vim",       commit = "f89e977c87180519ba3b942200e3d05b17b1e2fc", event = "InsertEnter" },
-    { "hat0uma/csvview.nvim",     commit = "688bcc7437b577de000f71a2d406271c79e2a545", ft = "csv" },
-    {
-        "Kasama/nvim-custom-diagnostic-highlight",
-        commit = "c126fa5b44a21df779c36eea28e73d3f89e85801",
-        config = function()
-            require("nvim-custom-diagnostic-highlight").setup({})
-        end,
-        event = "BufReadPost",
-    },
-    { "LunarVim/bigfile.nvim",             commit = "33eb067e3d7029ac77e081cfe7c45361887a311a", event = "BufReadPre" },
-    { "kevinhwang91/nvim-hlslens",         commit = "425405475300d64de07dec3af60b1f1d31d49230", event = "BufReadPost" },
-    { "mg979/vim-visual-multi",            commit = "a6975e7c1ee157615bbc80fc25e4392f71c344d4", keys = { "<C-n>", "<C-p>" } },
-    { "norcalli/nvim-colorizer.lua",       commit = "a065833f35a3a7cc3ef137ac88b5381da2ba302e", cmd = "ColorizerToggle" },
-    { "yamatsum/nvim-cursorline",          commit = "804f0023692653b2b2368462d67d2a87056947f9", event = "BufReadPost" },
-    { "sindrets/diffview.nvim",            commit = "4516612fe98ff56ae0415a259ff6361a89419b0a", cmd = { "DiffviewOpen", "DiffviewClose" } },
-    { "neovim/nvim-lspconfig",             commit = "effe4bf2e1afb881ea67291c648b68dd3dfc927a", event = "BufReadPre" },
-    { "hrsh7th/nvim-cmp",                  commit = "d97d85e01339f01b842e6ec1502f639b080cb0fc", event = "InsertEnter" },
-    { "hrsh7th/cmp-nvim-lsp",              commit = "cbc7b02bb99fae35cb42f514762b89b5126651ef", event = "InsertEnter" },
-    { "L3MON4D3/LuaSnip",                  commit = "3732756842a2f7e0e76a7b0487e9692072857277", event = "InsertEnter" },
-    { "saadparwaiz1/cmp_luasnip",          event = "InsertEnter" },
-    { "rafamadriz/friendly-snippets",      commit = "572f5660cf05f8cd8834e096d7b4c921ba18e175", leazy = true },
-    { "williamboman/mason.nvim",           commit = "57e5a8addb8c71fb063ee4acda466c7cf6ad2800", cmd = "Mason" },
-    { "williamboman/mason-lspconfig.nvim", commit = "7d527c76c43f46294de9c19d39c5a86317809b4b", lazy = true },
-    {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        commit = "517ef5994ef9d6b738322664d5fdd948f0fdeb46",
-        dependencies = { "williamboman/mason.nvim" },
-        cmd = "MasonToolsInstall",
-    },
-    {
-        "nvimtools/none-ls.nvim",
-        commit = "1917c86818b5e058f53c2ea0ad38fc57534d62fc",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvimtools/none-ls-extras.nvim",
-        },
-        event = { "BufReadPre", "BufNewFile" },
-    },
-    { "mfussenegger/nvim-dap",        commit = "5860c7c501eb428d3137ee22c522828d20cca0b3", cmd = { "DapContinue", "DapToggleBreakpoint" } },
-    { "rcarriga/nvim-dap-ui",         commit = "cf91d5e2d07c72903d052f5207511bf7ecdb7122", dependencies = { "mfussenegger/nvim-dap" },    lazy = true },
-    { "mfussenegger/nvim-dap-python", commit = "64652d1ae1db80870d9aac7132d76e37acd86a26", ft = "python" },
-    { "nvim-neotest/nvim-nio",        commit = "21f5324bfac14e22ba26553caf69ec76ae8a7662", lazy = true },
-    {
-        "KM-rira/todo-comments.nvim",
-        commit = "cd1fa7273632960bb38ebb76f9d085b4d6bb7e8b",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            require("todo-comments").setup({})
-        end,
-        event = "BufReadPost",
-    },
-    {
-        "olimorris/codecompanion.nvim",
-        commit = "8ad65eef735b31bb47d76f59d878ee1bac4bdc85",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
-        event = "BufReadPost",
-    },
-    {
-        "aklt/plantuml-syntax",
-        commit = "9d4900aa16674bf5bb8296a72b975317d573b547",
-        ft = { "plantuml" },
-        event = "BufReadPost",
-    },
-    {
-        "ggandor/leap.nvim",
-        commit = "3c49d309d49d66a9feb0dd824353f186b3ee5efa",
-        dependencies = { "tpope/vim-repeat" },
-        config = function()
-            local leap = require("leap")
+	-- pinned shared dependencies (referenced by other plugins' `dependencies`)
+	{ "nvim-lua/plenary.nvim", commit = "b9fd5226c2f76c951fc8ed5923d85e4de065e509", lazy = true },
+	{ "kyazdani42/nvim-web-devicons", commit = "8dcb311b0c92d460fac00eac706abd43d94d68af", lazy = true },
+	{ "nvim-telescope/telescope-frecency.nvim", commit = "fc6418bf663a182b72427487246b870f2ddbbbe2", lazy = true },
+	{ "nvimtools/none-ls-extras.nvim", commit = "70659cc3d38151424298ab46b0f67f2251cef231", lazy = true },
+	{ "tpope/vim-repeat", commit = "65846025c15494983dafe5e3b46c8f88ab2e9635", lazy = true },
+	{ "KM-rira/myplugin", commit = "0829bf5f1e442008899aa5d43b6725581c1b1974" },
+	{
+		"preservim/nerdtree",
+		commit = "690d061b591525890f1471c6675bcb5bdc8cdff9",
+		cmd = "NERDTreeToggle",
+	}, -- NERDTree をコマンドで読み込み
+	{
+		"kyazdani42/nvim-tree.lua",
+		dependencies = { "kyazdani42/nvim-web-devicons" },
+		tag = "v1.8.0",
+		cmd = "NvimTreeToggle",
+	},
+	{ "vim-jp/vimdoc-ja", commit = "02f2dbf7f30c1a07e11af40f74b0ab66fddcfb27", event = "VeryLazy" },
+	{ "nvim-lualine/lualine.nvim", commit = "47f91c416daef12db467145e16bed5bbfe00add8", event = "VeryLazy" }, -- 起動後に遅延読み込み
+	{
+		"nvim-treesitter/nvim-treesitter",
+		commit = "42fc28ba918343ebfd5565147a42a26580579482",
+		build = ":TSUpdate",
+		event = { "BufRead", "BufNewFile" },
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		commit = "5ca4aaa6efdcc59be46b95a3e876300cfead05ef",
+		event = { "BufRead", "BufNewFile" },
+	},
+	{
+		"nvim-treesitter/playground",
+		commit = "ba48c6a62a280eefb7c85725b0915e021a1a0749",
+		cmd = "TSPlaygroundToggle",
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-refactor",
+		commit = "9cc0d22becf72e18808208cd0ce85032a2b19c6f",
+		event = { "BufRead", "BufNewFile" },
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.5",
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-frecency.nvim" },
+	},
+	{
+		"iamcco/markdown-preview.nvim",
+		commit = "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee",
+		build = "cd app && npx --yes yarn install",
+		ft = "markdown",
+	},
+	{ "RRethy/vim-illuminate", commit = "0d1e93684da00ab7c057410fecfc24f434698898", event = "BufReadPost" },
+	{ "goolord/alpha-nvim", commit = "3979b01cb05734331c7873049001d3f2bb8477f4", event = "VimEnter" }, -- 起動時に表示
+	{ "jsborjesson/vim-uppercase-sql", commit = "58bfde1d679a1387dabfe292b38d51d84819b267", ft = "sql" },
+	{
+		"lewis6991/gitsigns.nvim",
+		commit = "5813e4878748805f1518cee7abb50fd7205a3a48",
+		event = { "BufRead", "BufNewFile" },
+	},
+	{ "akinsho/git-conflict.nvim", tag = "v1.3.0", event = "BufReadPost" },
+	{ "klen/nvim-test", tag = "1.4.1", cmd = "TestNearest" },
+	{ "numToStr/Comment.nvim", commit = "e30b7f2008e52442154b66f7c519bfd2f1e32acb", keys = { "gc", "gcc" } },
+	{ "sidebar-nvim/sidebar.nvim", commit = "082e4903c1659a65e27a075b752178b0c56fffb2", cmd = "SidebarNvimToggle" },
+	{
+		"akinsho/toggleterm.nvim",
+		tag = "v2.11.0",
+		cmd = { "ToggleTerm", "TermExec" },
+	},
+	-- { "karb94/neoscroll.nvim",         event = "WinScrolled" },
+	{ "akinsho/bufferline.nvim", tag = "v4.6.1", event = "BufRead" },
+	{
+		"windwp/nvim-autopairs",
+		commit = "7a2c97cccd60abc559344042fefb1d5a85b3e33b",
+		event = "InsertEnter",
+		config = function()
+			require("nvim-autopairs").setup({})
+		end,
+	},
+	--{ "scottmckendry/cyberdream.nvim", lazy = false }, -- 常時ロード
+	{ "ellisonleao/gruvbox.nvim", commit = "5e0a460d8e0f7f669c158dedd5f9ae2bcac31437", lazy = false }, -- 常時ロード
+	--{ "joshdick/onedark.vim", lazy = false }, -- 常時ロード
+	{ "kdheepak/lazygit.nvim", commit = "2305deed25bc61b866d5d39189e9105a45cf1cfb", cmd = "LazyGit" },
+	{ "github/copilot.vim", commit = "f89e977c87180519ba3b942200e3d05b17b1e2fc", event = "InsertEnter" },
+	{ "hat0uma/csvview.nvim", commit = "688bcc7437b577de000f71a2d406271c79e2a545", ft = "csv" },
+	{
+		"Kasama/nvim-custom-diagnostic-highlight",
+		commit = "c126fa5b44a21df779c36eea28e73d3f89e85801",
+		config = function()
+			require("nvim-custom-diagnostic-highlight").setup({})
+		end,
+		event = "BufReadPost",
+	},
+	{ "LunarVim/bigfile.nvim", commit = "33eb067e3d7029ac77e081cfe7c45361887a311a", event = "BufReadPre" },
+	{ "kevinhwang91/nvim-hlslens", commit = "425405475300d64de07dec3af60b1f1d31d49230", event = "BufReadPost" },
+	{
+		"mg979/vim-visual-multi",
+		commit = "a6975e7c1ee157615bbc80fc25e4392f71c344d4",
+		keys = { "<C-n>", "<C-p>" },
+	},
+	{
+		"norcalli/nvim-colorizer.lua",
+		commit = "a065833f35a3a7cc3ef137ac88b5381da2ba302e",
+		cmd = "ColorizerToggle",
+	},
+	{ "yamatsum/nvim-cursorline", commit = "804f0023692653b2b2368462d67d2a87056947f9", event = "BufReadPost" },
+	{
+		"sindrets/diffview.nvim",
+		commit = "4516612fe98ff56ae0415a259ff6361a89419b0a",
+		cmd = { "DiffviewOpen", "DiffviewClose" },
+	},
+	{ "neovim/nvim-lspconfig", commit = "effe4bf2e1afb881ea67291c648b68dd3dfc927a", event = "BufReadPre" },
+	{ "hrsh7th/nvim-cmp", commit = "d97d85e01339f01b842e6ec1502f639b080cb0fc", event = "InsertEnter" },
+	{ "hrsh7th/cmp-nvim-lsp", commit = "cbc7b02bb99fae35cb42f514762b89b5126651ef", event = "InsertEnter" },
+	{ "L3MON4D3/LuaSnip", commit = "3732756842a2f7e0e76a7b0487e9692072857277", event = "InsertEnter" },
+	{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
+	{ "rafamadriz/friendly-snippets", commit = "572f5660cf05f8cd8834e096d7b4c921ba18e175", leazy = true },
+	{ "williamboman/mason.nvim", commit = "57e5a8addb8c71fb063ee4acda466c7cf6ad2800", cmd = "Mason" },
+	{ "williamboman/mason-lspconfig.nvim", commit = "7d527c76c43f46294de9c19d39c5a86317809b4b", lazy = true },
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		commit = "517ef5994ef9d6b738322664d5fdd948f0fdeb46",
+		dependencies = { "williamboman/mason.nvim" },
+		cmd = "MasonToolsInstall",
+	},
+	{
+		"nvimtools/none-ls.nvim",
+		commit = "1917c86818b5e058f53c2ea0ad38fc57534d62fc",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvimtools/none-ls-extras.nvim",
+		},
+		event = { "BufReadPre", "BufNewFile" },
+	},
+	{
+		"mfussenegger/nvim-dap",
+		commit = "5860c7c501eb428d3137ee22c522828d20cca0b3",
+		cmd = { "DapContinue", "DapToggleBreakpoint" },
+	},
+	{
+		"rcarriga/nvim-dap-ui",
+		commit = "cf91d5e2d07c72903d052f5207511bf7ecdb7122",
+		dependencies = { "mfussenegger/nvim-dap" },
+		lazy = true,
+	},
+	{ "mfussenegger/nvim-dap-python", commit = "64652d1ae1db80870d9aac7132d76e37acd86a26", ft = "python" },
+	{ "nvim-neotest/nvim-nio", commit = "21f5324bfac14e22ba26553caf69ec76ae8a7662", lazy = true },
+	{
+		"KM-rira/todo-comments.nvim",
+		commit = "cd1fa7273632960bb38ebb76f9d085b4d6bb7e8b",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("todo-comments").setup({})
+		end,
+		event = "BufReadPost",
+	},
+	{
+		"olimorris/codecompanion.nvim",
+		commit = "8ad65eef735b31bb47d76f59d878ee1bac4bdc85",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		event = "BufReadPost",
+	},
+	{
+		"aklt/plantuml-syntax",
+		commit = "9d4900aa16674bf5bb8296a72b975317d573b547",
+		ft = { "plantuml" },
+		event = "BufReadPost",
+	},
+	{
+		"ggandor/leap.nvim",
+		commit = "3c49d309d49d66a9feb0dd824353f186b3ee5efa",
+		dependencies = { "tpope/vim-repeat" },
+		config = function()
+			local leap = require("leap")
 
-            -- 推奨されるマッピング設定 (v0.11+対応)
-            vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap-forward)')
-            vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Plug>(leap-backward)')
-            vim.keymap.set({ 'n', 'x', 'o' }, 'gs', '<Plug>(leap-from-window)')
+			-- 推奨されるマッピング設定 (v0.11+対応)
+			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+			vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+			vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)")
 
-            -- 見やすくて現代的なオプション
-            leap.opts.highlight_unlabeled_phase_one_targets = true
-            leap.opts.max_phase_one_targets = 0
-            leap.opts.labels = "arstneioqwfpbdluyghjkl"
-        end,
-    },
-    event = "BufReadPost",
-    {
-        "tyru/open-browser.vim",
-        commit = "7d4c1d8198e889d513a030b5a83faa07606bac27",
-        config = function()
-            vim.keymap.set("n", "gx", "<Plug>(openbrowser-open)", { silent = true })
-        end,
-    },
-
-
+			-- 見やすくて現代的なオプション
+			leap.opts.highlight_unlabeled_phase_one_targets = true
+			leap.opts.max_phase_one_targets = 0
+			leap.opts.labels = "arstneioqwfpbdluyghjkl"
+		end,
+	},
+	event = "BufReadPost",
+	{
+		"tyru/open-browser.vim",
+		commit = "7d4c1d8198e889d513a030b5a83faa07606bac27",
+		config = function()
+			vim.keymap.set("n", "gx", "<Plug>(openbrowser-open)", { silent = true })
+		end,
+	},
 })
 
 -- LuaSnipをロード
@@ -176,80 +224,80 @@ require("luasnip.loaders.from_vscode").lazy_load()
 local cmp = require("cmp")
 
 cmp.setup({
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body) -- LuaSnipを使用してスニペットを展開
-        end,
-    },
-    mapping = cmp.mapping.preset.insert({
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.abort(),
-        ["<Tab>"] = cmp.mapping.confirm({ select = true }), -- 確定
-        ["<C-j>"] = cmp.mapping.select_next_item(),         -- 次の補完候補を選択
-        ["<C-k>"] = cmp.mapping.select_prev_item(),         -- 前の補完候補を選択
-        -- LuaSnip 用のマッピング
-        ["<C-l>"] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-            elseif cmp.visible() then
-                cmp.select_next_item()
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-        ["<C-h>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-    }),
-    sources = {
-        { name = "nvim_lsp" },
-        { name = "luasnip" }, -- LuaSnipをソースとして追加
-        -- 必要に応じて他のソースを追加
-    },
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-    },
-    formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(entry, vim_item)
-            vim_item.menu = ({
-                nvim_lsp = "[LSP]",
-                luasnip = "[Snippet]",
-                buffer = "[Buffer]",
-                path = "[Path]",
-            })[entry.source.name]
-            return vim_item
-        end,
-    },
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body) -- LuaSnipを使用してスニペットを展開
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+		["<C-b>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<Tab>"] = cmp.mapping.confirm({ select = true }), -- 確定
+		["<C-j>"] = cmp.mapping.select_next_item(), -- 次の補完候補を選択
+		["<C-k>"] = cmp.mapping.select_prev_item(), -- 前の補完候補を選択
+		-- LuaSnip 用のマッピング
+		["<C-l>"] = cmp.mapping(function(fallback)
+			if luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			elseif cmp.visible() then
+				cmp.select_next_item()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<C-h>"] = cmp.mapping(function(fallback)
+			if luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+	}),
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" }, -- LuaSnipをソースとして追加
+		-- 必要に応じて他のソースを追加
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	formatting = {
+		fields = { "kind", "abbr", "menu" },
+		format = function(entry, vim_item)
+			vim_item.menu = ({
+				nvim_lsp = "[LSP]",
+				luasnip = "[Snippet]",
+				buffer = "[Buffer]",
+				path = "[Path]",
+			})[entry.source.name]
+			return vim_item
+		end,
+	},
 })
 
 -- 共通の on_attach 関数を定義
 local on_attach = function(client, bufnr)
-    -- バッファローカルのキー設定を容易にするためのショートカット
-    local opts = { noremap = true, silent = true, buffer = bufnr }
+	-- バッファローカルのキー設定を容易にするためのショートカット
+	local opts = { noremap = true, silent = true, buffer = bufnr }
 
-    --   vim.g.mapleader = ';'
-    -- -- キーマッピングの設定
-    -- vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts)
-    -- vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, opts)
-    -- vim.keymap.set('n', '<leader>gc', vim.lsp.buf.declaration, opts)
-    -- vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts)
-    -- vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, opts)
-    -- vim.keymap.set('n', '<leader>gn', vim.lsp.buf.rename, opts)
-    -- vim.keymap.set('n', '<leader>gh', vim.lsp.buf.hover, opts)
-    --
-    -- -- 追加のキーマッピング例
-    -- -- コードアクションを実行
-    -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-    -- -- シグネチャヘルプを表示
-    -- vim.keymap.set('n', '<leader>gs', vim.lsp.buf.signature_help, opts)
+	--   vim.g.mapleader = ';'
+	-- -- キーマッピングの設定
+	-- vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts)
+	-- vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, opts)
+	-- vim.keymap.set('n', '<leader>gc', vim.lsp.buf.declaration, opts)
+	-- vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts)
+	-- vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, opts)
+	-- vim.keymap.set('n', '<leader>gn', vim.lsp.buf.rename, opts)
+	-- vim.keymap.set('n', '<leader>gh', vim.lsp.buf.hover, opts)
+	--
+	-- -- 追加のキーマッピング例
+	-- -- コードアクションを実行
+	-- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+	-- -- シグネチャヘルプを表示
+	-- vim.keymap.set('n', '<leader>gs', vim.lsp.buf.signature_help, opts)
 end
 
 require("csvview").setup()
@@ -263,12 +311,12 @@ local Terminal = require("toggleterm.terminal").Terminal
 
 -- Horizontal terminal
 local horizontal_term = Terminal:new({
-    direction = "horizontal",
-    size = 20, -- あなたの今の設定と統合
+	direction = "horizontal",
+	size = 20, -- あなたの今の設定と統合
 })
 
 vim.keymap.set("n", "<C-t>", function()
-    horizontal_term:toggle()
+	horizontal_term:toggle()
 end, { noremap = true, silent = true })
 
 -- -- Vertical terminal（幅をデフォルトより広くする）
@@ -287,198 +335,197 @@ local opts = { open = false }
 sidebar.setup(opts)
 
 require("Comment").setup({
-    ---コメントと行の間にスペースを追加
-    padding = true,
-    ---カーソルがその位置に留まるべきかどうか
-    sticky = true,
-    ---コメントの追加/削除時に無視する行
-    ignore = nil,
-    ---NORMALモードでのトグルマッピングの左側
-    toggler = {
-        ---行コメントのトグルキーマップ
-        line = "gcc",
-        ---ブロックコメントのトグルキーマップ
-        block = "gbc",
-    },
-    ---NORMALおよびVISUALモードでの操作待ちマッピングの左側
-    opleader = {
-        ---行コメントのキーマップ
-        line = "gc",
-        ---ブロックコメントのキーマップ
-        block = "gb",
-    },
-    ---追加のマッピングの左側
-    extra = {
-        ---上の行にコメントを追加
-        above = "gcO",
-        ---下の行にコメントを追加
-        below = "gco",
-        ---行の末尾にコメントを追加
-        eol = "gcA",
-    },
-    ---キーバインディングを有効にする
-    ---注記: `false`を指定すると、プラグインはいかなるマッピングも作成しません
-    mappings = {
-        ---操作待ちマッピング; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
-        basic = true,
-        ---追加のマッピング; `gco`, `gcO`, `gcA`
-        extra = true,
-    },
-    ---コメントの追加/削除前に呼び出される関数
-    pre_hook = nil,
-    ---コメントの追加/削除後に呼び出される関数
-    post_hook = nil,
+	---コメントと行の間にスペースを追加
+	padding = true,
+	---カーソルがその位置に留まるべきかどうか
+	sticky = true,
+	---コメントの追加/削除時に無視する行
+	ignore = nil,
+	---NORMALモードでのトグルマッピングの左側
+	toggler = {
+		---行コメントのトグルキーマップ
+		line = "gcc",
+		---ブロックコメントのトグルキーマップ
+		block = "gbc",
+	},
+	---NORMALおよびVISUALモードでの操作待ちマッピングの左側
+	opleader = {
+		---行コメントのキーマップ
+		line = "gc",
+		---ブロックコメントのキーマップ
+		block = "gb",
+	},
+	---追加のマッピングの左側
+	extra = {
+		---上の行にコメントを追加
+		above = "gcO",
+		---下の行にコメントを追加
+		below = "gco",
+		---行の末尾にコメントを追加
+		eol = "gcA",
+	},
+	---キーバインディングを有効にする
+	---注記: `false`を指定すると、プラグインはいかなるマッピングも作成しません
+	mappings = {
+		---操作待ちマッピング; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+		basic = true,
+		---追加のマッピング; `gco`, `gcO`, `gcA`
+		extra = true,
+	},
+	---コメントの追加/削除前に呼び出される関数
+	pre_hook = nil,
+	---コメントの追加/削除後に呼び出される関数
+	post_hook = nil,
 })
 
-require("nvim-test").setup({
-})
+require("nvim-test").setup({})
 
 require("git-conflict").setup({
-    default_mappings = true,     -- disable buffer local mapping created by this plugin
-    default_commands = true,     -- disable commands created by this plugin
-    disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
-    list_opener = "copen",       -- command or function to open the conflicts list
-    highlights = {               -- They must have background color, otherwise the default color will be used
-        incoming = "DiffAdd",
-        current = "DiffText",
-    },
+	default_mappings = true, -- disable buffer local mapping created by this plugin
+	default_commands = true, -- disable commands created by this plugin
+	disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
+	list_opener = "copen", -- command or function to open the conflicts list
+	highlights = { -- They must have background color, otherwise the default color will be used
+		incoming = "DiffAdd",
+		current = "DiffText",
+	},
 })
 
 require("gitsigns").setup({
-    signs = {
-        add = { text = "│" },
-        change = { text = "│" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
-        untracked = { text = "┆" },
-    },
-    signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-    numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
-    linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
-    word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-    watch_gitdir = {
-        follow_files = true,
-    },
-    auto_attach = true,
-    attach_to_untracked = true,
-    current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-    current_line_blame_opts = {
-        virt_text = true,
-        virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-        delay = 1000,
-        ignore_whitespace = false,
-        virt_text_priority = 100,
-    },
-    current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
-    sign_priority = 6,
-    update_debounce = 100,
-    status_formatter = nil,  -- Use default
-    max_file_length = 40000, -- Disable if file is longer than this (in lines)
-    preview_config = {
-        -- Options passed to nvim_open_win
-        border = "single",
-        style = "minimal",
-        relative = "cursor",
-        row = 0,
-        col = 1,
-    },
-    -- yadm = {
-    --     enable = false,
-    -- },
-    on_attach = function(bufnr)
-        local gs = package.loaded.gitsigns
+	signs = {
+		add = { text = "│" },
+		change = { text = "│" },
+		delete = { text = "_" },
+		topdelete = { text = "‾" },
+		changedelete = { text = "~" },
+		untracked = { text = "┆" },
+	},
+	signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+	numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+	linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+	word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+	watch_gitdir = {
+		follow_files = true,
+	},
+	auto_attach = true,
+	attach_to_untracked = true,
+	current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+	current_line_blame_opts = {
+		virt_text = true,
+		virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+		delay = 1000,
+		ignore_whitespace = false,
+		virt_text_priority = 100,
+	},
+	current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+	sign_priority = 6,
+	update_debounce = 100,
+	status_formatter = nil, -- Use default
+	max_file_length = 40000, -- Disable if file is longer than this (in lines)
+	preview_config = {
+		-- Options passed to nvim_open_win
+		border = "single",
+		style = "minimal",
+		relative = "cursor",
+		row = 0,
+		col = 1,
+	},
+	-- yadm = {
+	--     enable = false,
+	-- },
+	on_attach = function(bufnr)
+		local gs = package.loaded.gitsigns
 
-        -- キーマッピングを定義するためのヘルパー関数
-        local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr -- このバッファに限定したキーマッピングにする
-            vim.keymap.set(mode, l, r, opts)
-        end
+		-- キーマッピングを定義するためのヘルパー関数
+		local function map(mode, l, r, opts)
+			opts = opts or {}
+			opts.buffer = bufnr -- このバッファに限定したキーマッピングにする
+			vim.keymap.set(mode, l, r, opts)
+		end
 
-        -- =======================================================
-        -- gitsigns start
-        -- =======================================================
+		-- =======================================================
+		-- gitsigns start
+		-- =======================================================
 
-        -- ======================================
-        -- Navigation（ナビゲーション）
-        -- ======================================
-        -- ノーマルモードで ]c を押すと、次の hunk へ移動します
-        map("n", "<leader>hn", function()
-            if vim.wo.diff then
-                -- diffモードの場合はデフォルトの動作を使う
-                return "<leader>hn"
-            end
-            -- hunk移動をスケジュール実行
-            vim.schedule(function()
-                gs.next_hunk()
-            end)
-            return "<Ignore>"
-        end, { expr = true })
+		-- ======================================
+		-- Navigation（ナビゲーション）
+		-- ======================================
+		-- ノーマルモードで ]c を押すと、次の hunk へ移動します
+		map("n", "<leader>hn", function()
+			if vim.wo.diff then
+				-- diffモードの場合はデフォルトの動作を使う
+				return "<leader>hn"
+			end
+			-- hunk移動をスケジュール実行
+			vim.schedule(function()
+				gs.next_hunk()
+			end)
+			return "<Ignore>"
+		end, { expr = true })
 
-        -- ノーマルモードで [c を押すと、前の hunk へ移動します
-        map("n", "<leader>hN", function()
-            if vim.wo.diff then
-                -- diffモードの場合はデフォルトの動作を使う
-                return "<leader>hN"
-            end
-            -- hunk移動をスケジュール実行
-            vim.schedule(function()
-                gs.prev_hunk()
-            end)
-            return "<Ignore>"
-        end, { expr = true })
+		-- ノーマルモードで [c を押すと、前の hunk へ移動します
+		map("n", "<leader>hN", function()
+			if vim.wo.diff then
+				-- diffモードの場合はデフォルトの動作を使う
+				return "<leader>hN"
+			end
+			-- hunk移動をスケジュール実行
+			vim.schedule(function()
+				gs.prev_hunk()
+			end)
+			return "<Ignore>"
+		end, { expr = true })
 
-        -- ======================================
-        -- Actions（アクション操作）
-        -- ======================================
-        -- ノーマルモードで <leader>hs を押すと、現在の hunk をステージします
-        map("n", "<leader>hs", gs.stage_hunk)
-        -- ノーマルモードで <leader>hr を押すと、現在の hunk の変更をリセット（unstage）します
-        map("n", "<leader>hr", gs.reset_hunk)
+		-- ======================================
+		-- Actions（アクション操作）
+		-- ======================================
+		-- ノーマルモードで <leader>hs を押すと、現在の hunk をステージします
+		map("n", "<leader>hs", gs.stage_hunk)
+		-- ノーマルモードで <leader>hr を押すと、現在の hunk の変更をリセット（unstage）します
+		map("n", "<leader>hr", gs.reset_hunk)
 
-        -- ビジュアルモードで <leader>hs を押すと、選択範囲内の行に対応する hunk をステージします
-        map("v", "<leader>hs", function()
-            gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-        end)
-        -- ビジュアルモードで <leader>hr を押すと、選択範囲内の行に対応する hunk の変更をリセットします
-        map("v", "<leader>hr", function()
-            gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-        end)
+		-- ビジュアルモードで <leader>hs を押すと、選択範囲内の行に対応する hunk をステージします
+		map("v", "<leader>hs", function()
+			gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+		end)
+		-- ビジュアルモードで <leader>hr を押すと、選択範囲内の行に対応する hunk の変更をリセットします
+		map("v", "<leader>hr", function()
+			gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+		end)
 
-        -- ノーマルモードで <leader>hS を押すと、現在のバッファ全体の変更をステージします
-        map("n", "<leader>hS", gs.stage_buffer)
-        -- ノーマルモードで <leader>hu を押すと、最後にステージした hunk の操作を取り消します（undo）
-        map("n", "<leader>hu", gs.undo_stage_hunk)
-        -- ノーマルモードで <leader>hR を押すと、現在のバッファ全体の変更をリセット（unstage）します
-        map("n", "<leader>hR", gs.reset_buffer)
-        -- ノーマルモードで <leader>hp を押すと、現在の hunk の差分をプレビュー表示します
-        map("n", "<leader>hp", gs.preview_hunk)
-        -- ノーマルモードで <leader>hb を押すと、現在行の blame 情報を詳細表示（full = true）で表示します
-        map("n", "<leader>hb", function()
-            gs.blame_line({ full = true })
-        end)
-        -- ノーマルモードで <leader>tb を押すと、現在行の blame 表示のオン/オフを切り替えます
-        map("n", "<leader>tb", gs.toggle_current_line_blame)
-        -- ノーマルモードで <leader>hd を押すと、現在の hunk と diff 比較を行います
-        map("n", "<leader>hd", gs.diffthis)
-        -- ノーマルモードで <leader>hD を押すと、ホームディレクトリとの diff 比較を行います
-        map("n", "<leader>hD", function()
-            gs.diffthis("~")
-        end)
-        -- ノーマルモードで <leader>td を押すと、削除された行の表示を切り替えます
-        map("n", "<leader>td", gs.toggle_deleted)
+		-- ノーマルモードで <leader>hS を押すと、現在のバッファ全体の変更をステージします
+		map("n", "<leader>hS", gs.stage_buffer)
+		-- ノーマルモードで <leader>hu を押すと、最後にステージした hunk の操作を取り消します（undo）
+		map("n", "<leader>hu", gs.undo_stage_hunk)
+		-- ノーマルモードで <leader>hR を押すと、現在のバッファ全体の変更をリセット（unstage）します
+		map("n", "<leader>hR", gs.reset_buffer)
+		-- ノーマルモードで <leader>hp を押すと、現在の hunk の差分をプレビュー表示します
+		map("n", "<leader>hp", gs.preview_hunk)
+		-- ノーマルモードで <leader>hb を押すと、現在行の blame 情報を詳細表示（full = true）で表示します
+		map("n", "<leader>hb", function()
+			gs.blame_line({ full = true })
+		end)
+		-- ノーマルモードで <leader>tb を押すと、現在行の blame 表示のオン/オフを切り替えます
+		map("n", "<leader>tb", gs.toggle_current_line_blame)
+		-- ノーマルモードで <leader>hd を押すと、現在の hunk と diff 比較を行います
+		map("n", "<leader>hd", gs.diffthis)
+		-- ノーマルモードで <leader>hD を押すと、ホームディレクトリとの diff 比較を行います
+		map("n", "<leader>hD", function()
+			gs.diffthis("~")
+		end)
+		-- ノーマルモードで <leader>td を押すと、削除された行の表示を切り替えます
+		map("n", "<leader>td", gs.toggle_deleted)
 
-        -- ======================================
-        -- Text object（テキストオブジェクト）
-        -- ======================================
-        -- オペレーター待機モード（"o" と "x"）で ih を押すと、hunk 全体を選択します
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+		-- ======================================
+		-- Text object（テキストオブジェクト）
+		-- ======================================
+		-- オペレーター待機モード（"o" と "x"）で ih を押すと、hunk 全体を選択します
+		map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 
-        -- =======================================================
-        -- gitsigns end
-        -- =======================================================
-    end,
+		-- =======================================================
+		-- gitsigns end
+		-- =======================================================
+	end,
 })
 
 -- require("gitsigns").setup({
@@ -531,116 +578,116 @@ require("alpha").setup(require("alpha.themes.startify").config)
 
 --
 local function file_path()
-    return vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
+	return vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
 end
 
 require("lualine").setup({
-    options = {
-        icons_enabled = true,
-        theme = "auto",
-        component_separators = { left = "|", right = "|" },
-        section_separators = { left = "", right = "" },
-        disabled_filetypes = {},
-        always_divide_middle = true,
-    },
-    sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { file_path }, -- カスタムコンポーネントを使用
-        lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_y = { "progress" },
-        lualine_z = { "location" },
-    },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { file_path }, -- カスタムコンポーネントを使用
-        lualine_x = { "location" },
-        lualine_y = {},
-        lualine_z = {},
-    },
-    tabline = {},
-    extensions = {},
+	options = {
+		icons_enabled = true,
+		theme = "auto",
+		component_separators = { left = "|", right = "|" },
+		section_separators = { left = "", right = "" },
+		disabled_filetypes = {},
+		always_divide_middle = true,
+	},
+	sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "branch", "diff", "diagnostics" },
+		lualine_c = { file_path }, -- カスタムコンポーネントを使用
+		lualine_x = { "encoding", "fileformat", "filetype" },
+		lualine_y = { "progress" },
+		lualine_z = { "location" },
+	},
+	inactive_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = { file_path }, -- カスタムコンポーネントを使用
+		lualine_x = { "location" },
+		lualine_y = {},
+		lualine_z = {},
+	},
+	tabline = {},
+	extensions = {},
 })
 
 local actions = require("telescope.actions")
 require("telescope").setup({
-    defaults = {
-        mappings = {
-            i = {
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-            },
-        },
+	defaults = {
+		mappings = {
+			i = {
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous,
+			},
+		},
 
-        -- デフォルトはプレビュー非表示（多くのピッカーが軽くなる）
-        preview = {
-            hide_on_startup = true,
-        },
-    },
+		-- デフォルトはプレビュー非表示（多くのピッカーが軽くなる）
+		preview = {
+			hide_on_startup = true,
+		},
+	},
 
-    pickers = {
-        -- ▼ find_files はプレビュー無し（あなたの希望）
-        find_files = {
-            previewer = false,
-        },
+	pickers = {
+		-- ▼ find_files はプレビュー無し（あなたの希望）
+		find_files = {
+			previewer = false,
+		},
 
-        -- ▼ live_grep は上下分割の UI にする
-        live_grep = {
-            previewer = true,
-            layout_strategy = "vertical",
-            layout_config = {
-                preview_height = 0.45, -- プレビュー45%、下に選択リスト55%
-                mirror = true,         -- プレビューを上側に配置
-            },
-        },
-    },
+		-- ▼ live_grep は上下分割の UI にする
+		live_grep = {
+			previewer = true,
+			layout_strategy = "vertical",
+			layout_config = {
+				preview_height = 0.45, -- プレビュー45%、下に選択リスト55%
+				mirror = true, -- プレビューを上側に配置
+			},
+		},
+	},
 })
 
 require("nvim-tree").setup({
-    -- netrw を完全に無効化
-    disable_netrw = true,
-    -- 起動時に netrw ウィンドウをハイジャック
-    hijack_netrw = true,
-    -- `DirChanged` でツリーのルートディレクトリを更新（通常は `:cd` を実行したとき）
-    update_cwd = true,
-    -- サインカラムに診断情報を表示
-    diagnostics = {
-        enable = true,
-        icons = {
-            hint = "",
-            info = "",
-            warning = "",
-            error = "",
-        },
-    },
-    -- `BufEnter` でフォーカスされたファイルを更新し、ファイルが見つかるまでフォルダーを再帰的に展開
-    update_focused_file = {
-        enable = true,
-        update_cwd = true,
-        ignore_list = {},
-    },
-    -- システムオープンコマンドの設定（デフォルトではツリー内の `s`）
-    system_open = {
-        cmd = nil,
-        args = {},
-    },
-    filters = {
-        dotfiles = false,
-        custom = {},
-    },
-    git = {
-        enable = true,
-        ignore = true,
-        timeout = 500,
-    },
-    view = {
-        -- ウィンドウの幅、数値（列）または `%` での文字列のいずれかにできる
-        width = 30,
-        -- ツリーの位置、'left' | 'right' | 'top' | 'bottom' のいずれか
-        side = "left",
-        -- マッピングの設定は個別に行う
-    },
+	-- netrw を完全に無効化
+	disable_netrw = true,
+	-- 起動時に netrw ウィンドウをハイジャック
+	hijack_netrw = true,
+	-- `DirChanged` でツリーのルートディレクトリを更新（通常は `:cd` を実行したとき）
+	update_cwd = true,
+	-- サインカラムに診断情報を表示
+	diagnostics = {
+		enable = true,
+		icons = {
+			hint = "",
+			info = "",
+			warning = "",
+			error = "",
+		},
+	},
+	-- `BufEnter` でフォーカスされたファイルを更新し、ファイルが見つかるまでフォルダーを再帰的に展開
+	update_focused_file = {
+		enable = true,
+		update_cwd = true,
+		ignore_list = {},
+	},
+	-- システムオープンコマンドの設定（デフォルトではツリー内の `s`）
+	system_open = {
+		cmd = nil,
+		args = {},
+	},
+	filters = {
+		dotfiles = false,
+		custom = {},
+	},
+	git = {
+		enable = true,
+		ignore = true,
+		timeout = 500,
+	},
+	view = {
+		-- ウィンドウの幅、数値（列）または `%` での文字列のいずれかにできる
+		width = 30,
+		-- ツリーの位置、'left' | 'right' | 'top' | 'bottom' のいずれか
+		side = "left",
+		-- マッピングの設定は個別に行う
+	},
 })
 
 --require("cyberdream").setup({
@@ -665,100 +712,100 @@ require("nvim-tree").setup({
 
 local hlslens = require("hlslens")
 if hlslens then
-    local overrideLens = function(render, posList, nearest, idx, relIdx)
-        local _ = relIdx
-        local lnum, col = unpack(posList[idx])
+	local overrideLens = function(render, posList, nearest, idx, relIdx)
+		local _ = relIdx
+		local lnum, col = unpack(posList[idx])
 
-        local text, chunks
-        if nearest then
-            text = ("[%d/%d]"):format(idx, #posList)
-            chunks = { { " ", "Ignore" }, { text, "VM_Extend" } }
-        else
-            text = ("[%d]"):format(idx)
-            chunks = { { " ", "Ignore" }, { text, "HlSearchLens" } }
-        end
-        render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
-    end
-    local lensBak
-    local config = require("hlslens.config")
-    local gid = vim.api.nvim_create_augroup("VMlens", {})
-    vim.api.nvim_create_autocmd("User", {
-        pattern = { "visual_multi_start", "visual_multi_exit" },
-        group = gid,
-        callback = function(ev)
-            if ev.match == "visual_multi_start" then
-                lensBak = config.override_lens
-                config.override_lens = overrideLens
-            else
-                config.override_lens = lensBak
-            end
-            hlslens.start()
-        end,
-    })
+		local text, chunks
+		if nearest then
+			text = ("[%d/%d]"):format(idx, #posList)
+			chunks = { { " ", "Ignore" }, { text, "VM_Extend" } }
+		else
+			text = ("[%d]"):format(idx)
+			chunks = { { " ", "Ignore" }, { text, "HlSearchLens" } }
+		end
+		render.setVirt(0, lnum - 1, col - 1, chunks, nearest)
+	end
+	local lensBak
+	local config = require("hlslens.config")
+	local gid = vim.api.nvim_create_augroup("VMlens", {})
+	vim.api.nvim_create_autocmd("User", {
+		pattern = { "visual_multi_start", "visual_multi_exit" },
+		group = gid,
+		callback = function(ev)
+			if ev.match == "visual_multi_start" then
+				lensBak = config.override_lens
+				config.override_lens = overrideLens
+			else
+				config.override_lens = lensBak
+			end
+			hlslens.start()
+		end,
+	})
 end
 
 require("bigfile").setup({
-    -- detect long python files
-    pattern = function(bufnr, filesize_mib)
-        -- you can't use `nvim_buf_line_count` because this runs on BufReadPre
-        local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
-        local file_length = #file_contents
-        if file_length >= 10000 then
-            return true
-        end
-    end,
+	-- detect long python files
+	pattern = function(bufnr, filesize_mib)
+		-- you can't use `nvim_buf_line_count` because this runs on BufReadPre
+		local file_contents = vim.fn.readfile(vim.api.nvim_buf_get_name(bufnr))
+		local file_length = #file_contents
+		if file_length >= 10000 then
+			return true
+		end
+	end,
 })
 
 -- dap setting start
 require("dap-python").setup("/home/koji/.config/nvim/venv/bin/python3")
 
 require("dapui").setup({
-    icons = { expanded = "", collapsed = "" },
-    layouts = {
-        {
-            elements = {
-                { id = "watches",     size = 0.20 },
-                { id = "stacks",      size = 0.20 },
-                { id = "breakpoints", size = 0.20 },
-                { id = "scopes",      size = 0.40 },
-            },
-            size = 64,
-            position = "right",
-        },
-        {
-            elements = {
-                "repl",
-                "console",
-            },
-            size = 0.20,
-            position = "bottom",
-        },
-    },
+	icons = { expanded = "", collapsed = "" },
+	layouts = {
+		{
+			elements = {
+				{ id = "watches", size = 0.20 },
+				{ id = "stacks", size = 0.20 },
+				{ id = "breakpoints", size = 0.20 },
+				{ id = "scopes", size = 0.40 },
+			},
+			size = 64,
+			position = "right",
+		},
+		{
+			elements = {
+				"repl",
+				"console",
+			},
+			size = 0.20,
+			position = "bottom",
+		},
+	},
 })
 
 require("codecompanion").setup({
-    strategies = {
-        chat = { adapter = "gemini" },
-        inline = { adapter = "gemini" },
-    },
-    adapters = {
-        http = {
-            gemini = function()
-                return require("codecompanion.adapters").extend("gemini", {
-                    schema = {
-                        model = { default = "gemini-1.5-flash" },
-                    },
-                    system_prompt = {
-                        default = "あなたはプロフェッショナルなソフトウェアエンジニアであり、常に日本語でわかりやすく、簡潔に説明や提案を行います。コード例も含めて丁寧に回答してください。",
-                    },
-                })
-            end,
-        },
-    },
+	strategies = {
+		chat = { adapter = "gemini" },
+		inline = { adapter = "gemini" },
+	},
+	adapters = {
+		http = {
+			gemini = function()
+				return require("codecompanion.adapters").extend("gemini", {
+					schema = {
+						model = { default = "gemini-1.5-flash" },
+					},
+					system_prompt = {
+						default = "あなたはプロフェッショナルなソフトウェアエンジニアであり、常に日本語でわかりやすく、簡潔に説明や提案を行います。コード例も含めて丁寧に回答してください。",
+					},
+				})
+			end,
+		},
+	},
 })
 
 vim.filetype.add({
-    extension = {
-        puml = "plantuml",
-    },
+	extension = {
+		puml = "plantuml",
+	},
 })
