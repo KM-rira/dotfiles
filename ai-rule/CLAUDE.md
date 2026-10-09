@@ -46,3 +46,19 @@ Check implemented code against these criteria:
 ## Investigation Flow
 - When given a PR or issue URL, always fetch information via gh CLI first
 - If MCP GitHub tools fail with authentication errors, fall back to gh CLI
+
+# Development Rules
+
+## Git Worktree
+
+- 調査・実装・テスト・リファクタリングは、原則として専用の Git worktree で行う。
+- 並列で動くエージェントには、それぞれ独立した worktree とブランチを割り当てる。
+- 作業開始前に、現在の worktree・ブランチ・未コミット変更を確認する。
+- 既存の変更や他のエージェントの作業を、許可なく変更・破棄しない。
+- worktree の作成前に既存の構成を確認し、重複を避ける。
+- 明示的な指示がない限り、コミット・プッシュ・マージ・worktree の削除は行わない。
+- 作業完了時は、変更内容とテスト結果を報告する。
+
+## Commit Messages
+
+- コミットメッセージを作成する際は、`git log -n 3 --oneline` で直近3件のコミットメッセージを確認し、リポジトリの命名規則や文体に合わせる。
