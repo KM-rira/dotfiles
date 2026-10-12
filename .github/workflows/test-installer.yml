@@ -10,21 +10,18 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     # 1. リポジトリをクローン
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # 2. Dockerイメージをビルド
-    - name: Build Docker image
-      run: |
-        cd installer
-        docker build -t test-install-script .
+    # Homebrew casks require macOS. Install the script's missing prerequisite.
+    - name: Install Cargo
+      run: brew install cargo
 
-    # 3. テスト: コンテナで `installer.sh` のテストを実行
-    - name: Run tests
+    - name: Run installer
       run: |
         cd installer
-        make test
+        bash normal_install.sh
