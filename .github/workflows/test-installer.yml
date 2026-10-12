@@ -19,7 +19,7 @@ jobs:
 
     # Homebrew casks require macOS. Install the script's missing prerequisite.
     - name: Install Cargo
-      run: brew install cargo
+      run: brew install rust
 
     - name: Run installer
       run: |
