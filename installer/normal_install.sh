@@ -38,6 +38,13 @@ for package in "${packages[@]}"; do
 	install_function "$install_cmd" "$package"
 done
 
+# brew install --cask
+install_cmd='brew install --cask'
+packages=(meetingbar rectangle clipy)
+for package in "${packages[@]}"; do
+	install_function "$install_cmd" "$package"
+done
+
 # 事後に実行
 # sudo chronyd -q 'server ntp.nict.jp iburst'
 
