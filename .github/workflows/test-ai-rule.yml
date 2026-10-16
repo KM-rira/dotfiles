@@ -1,0 +1,26 @@
+name: Test AI Rule Setup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ai-rule/**'
+      - '.github/workflows/test-ai-rule.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ai-rule/**'
+      - '.github/workflows/test-ai-rule.yml'
+
+jobs:
+  test-setup:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check shell syntax
+        run: bash -n ai-rule/setup.sh ai-rule/test_setup.sh
+
+      - name: Test AI rule distribution
+        run: bash ai-rule/test_setup.sh
