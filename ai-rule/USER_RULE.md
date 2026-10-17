@@ -1,42 +1,85 @@
-# User Rules
+# ユーザールール
 
-## Communication
-- Always lead with the conclusion, then provide the reasoning or details.
-- Use PREP (Point → Reason → Example → Point) when explaining a topic that benefits from a structured explanation.
-- Reply in Japanese unless the user requests another language.
-- Write source code comments in English.
+ここに加えて、~/ai-rule/custom.md のルールを確認すること
 
-## Changes and verification
-- Never run `git commit`; the user commits manually.
-- Do not create branches automatically.
-- Do not create or modify test code unless explicitly instructed.
-- After editing TypeScript files, run the repository's TypeScript check command.
-- After editing Go files, run `go vet`; after changing Go logic, also run `go build`.
-- Do not claim tests or checks passed unless they were run.
+## コミュニケーション
+- まず結論を述べ、その後に理由の要約、理由や詳細を説明する。
+- 構成的な説明が役立つ場合は、PREP（要点 → 理由 → 例 → 要点）を使う。
+- ユーザーから別の言語を指定されない限り、日本語で返信する。
 
-## Recommendation requests
-- When the user asks for recommendations or options, present the proposal before making changes.
-- When useful, compare options with concise pros and cons.
+## 調査時
+- 調査をする際には通常のgrep, findだと時間がかかることがあるので、rg, fdコマンドを利用すること。
 
-## Commit messages
-- Before proposing a commit message, inspect staged changes with `git diff --cached` and recent style with `git log -n 3 --oneline`.
-- Base the message on the actual staged changes.
-- Never add a `Co-Authored-By` trailer.
+## 変更と検証
+- `git commit` は実行しない。コミットはユーザーが行う。
+- ブランチを自動で作成しない。
+- 明示的に指示されない限り、テストコードを作成・変更しない。
+- TypeScript ファイルを編集した後は、リポジトリ指定の TypeScript チェックコマンドを実行する。
+- Go ファイルを編集した後は `go fmt`、`go vet`、`golangci-lint` を実行する。Go のロジックを変更した場合は、加えて `go build` を実行する。
+- 実行していないテストやチェックを、成功したと報告しない。
 
-## Pull requests and issues
-- For a PR or issue URL, use the GitHub CLI (`gh`) to fetch its details first.
-- If GitHub MCP tools fail due to authentication, fall back to `gh`.
-- For PR descriptions, inspect the diff against `master`. Keep WHAT and TESTS in Japanese, with at most three items in each section.
+## 推薦の依頼
+- ユーザーが推薦や選択肢を求めた場合は、変更を加える前に提案を示す。
+- 有用な場合は、簡潔なメリット・デメリットを添えて選択肢を比較する。
 
-## Self-review
-Review changes for correctness and edge cases, data integrity, performance, error handling, test coverage, readability, security, consistency, and maintainability.
+## コミットメッセージ
+- コミットメッセージを提案する前に、ステージ済みの変更を `git diff --cached` で確認し、直近のスタイルを `git log -n 3 --oneline` で確認する。
+- 実際にステージされた変更に基づいてメッセージを作成する。
 
-## Worktrees
-- Check the current worktree, branch, and uncommitted changes before starting.
-- Use a dedicated Git worktree for investigation, implementation, testing, and refactoring when practical.
-- Do not alter or discard existing user changes.
-- Do not commit, push, merge, or remove worktrees unless explicitly instructed.
+## プルリクエストと Issue
+- PR または Issue の URL が提示された場合は、まず GitHub CLI（`gh`）で詳細を取得する。
+- GitHub MCP ツールが認証エラーになった場合は、`gh` を使う。
+- PR の説明を作成する場合は、`master` or `main` などのbase branchとの差分を確認する。
 
-## Reports
-- Create a report only when the user explicitly requests one.
-- Follow the `report` skill for report format and storage.
+## セルフレビュー
+正確性と境界条件、データの整合性、性能、エラー処理、テスト範囲、読みやすさ、セキュリティ、一貫性、保守性の観点で変更を確認する。
+
+## Git worktree
+- 作業を始める前に、現在の worktree、ブランチ、未コミットの変更を確認する。
+- 実用的な場合は、調査、実装、テスト、リファクタリングに専用の Git worktree を使う。
+- 既存のユーザー変更を改変したり破棄したりしない。
+- 明示的に指示されない限り、コミット、push、マージ、worktree の削除を行わない。
+
+## レポート
+- ユーザーから明示的に依頼された場合のみレポートを作成する。
+- レポートの形式と保存先は `report` スキルに従う。
+
+# コマンド実行・コンテキスト節約ルール
+
+## 基本方針
+- トークン消費とコンテキスト使用量を最小限に抑える。
+- grep、sed、awk、head、tail、cut、jq、sort、uniq、wcなどで必要な情報だけを抽出する。
+- 大量の出力をAIに直接渡さず、必要に応じてファイルに保存する。
+- 正確性や原因調査に必要な情報は省略しない。
+
+## コマンド出力
+- 成功・失敗だけ必要な場合は、出力を破棄して終了ステータスを確認する。
+
+  command > /dev/null 2>&1 && echo ok || echo error
+
+- 大量の出力や後から参照する結果はファイルに保存する。
+- 作成するログ・一時ファイルのファイル名の冒頭には、必ず作成日時を `YYYYMMDD-HHMM` 形式で付ける。
+
+  例: `/tmp/work/20261017-1259-command.log`
+
+- エラー発生時は、保存したログから必要な箇所だけを確認する。
+
+  if command > /tmp/20261017-1259-command.log 2>&1; then
+    echo ok
+  else
+    echo error
+    tail -n 50 /tmp/20261017-1259-command.log
+  fi
+
+- 日時は実行時の現在日時を使用し、固定値を使い回さない。
+- 成功・失敗を厳密に判定する場合は `if` 文を使用し、元の終了ステータスを保持する。
+
+## 調査・検証
+- ファイル全体を読む前に、キーワード検索や必要な行の抽出を優先する。
+- ビルド、テスト、Lint、CIのログは必要に応じて保存し、失敗箇所を中心に調査する。
+- Gitの差分や実行結果は対象を絞って確認し、保存済みのログを再利用する。
+- 一時ファイルは `/tmp/work` に保存し、長期保存が必要な成果物は適切な場所に保存する。
+- 秘密情報を含む可能性のある出力は、無条件に保存・表示しない。
+
+## 最優先事項
+AIに渡す情報量を最小限にしつつ、正確性・安全性・終了ステータスの判定を維持する。
